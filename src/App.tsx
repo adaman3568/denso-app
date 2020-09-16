@@ -1,13 +1,12 @@
 import React from 'react';
 import SignIn from "./Components/SignIn";
 import UserIndex from "./Components/UserIndex/UserIndex";
+import ImageUploader from "./ImageUploader";
 
 function App() {
-    console.log("HelloWorld")
-    console.log("HelloWorld2")
   return (
     <div>
-        <UserIndex/>
+        <ImageUploader/>
     </div>
   );
 }
