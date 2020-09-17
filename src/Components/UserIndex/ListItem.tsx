@@ -8,7 +8,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import {DirectionsCar,PermIdentity} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
-
+import {PathList} from "../../Routing/path";
 
 
 const mainListItems = () => {
@@ -17,40 +17,11 @@ const mainListItems = () => {
 
     return (
         <div>
-            <Link to={'/'} className={classes.normalText}>
-                <ListItem button>
-                        <ListItemIcon>
-                            <HomeIcon/>
-                        </ListItemIcon>
-                    <ListItemText primary="ホーム"/>
-                </ListItem>
-            </Link>
-            <Link to={'/'} className={classes.normalText}>
-                <ListItem button>
-                    <ListItemIcon>
-                        <DashboardIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="ユーザー管理"/>
-                </ListItem>
-            </Link>
-            <ListItem button>
-                <ListItemIcon>
-                    <PermIdentity/>
-                </ListItemIcon>
-                <ListItemText primary="プロフィール"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <PeopleIcon/>
-                </ListItemIcon>
-                <ListItemText primary="得意先管理・閲覧"/>
-            </ListItem>
-            <ListItem button>
-                <ListItemIcon>
-                    <DirectionsCar/>
-                </ListItemIcon>
-                <ListItemText primary="車両管理"/>
-            </ListItem>
+            <LinkListItem path={PathList.home} name={'ホーム'} Icon={<HomeIcon/>}/>
+            <LinkListItem path={PathList.employee} name={'ユーザー管理'} Icon={<DashboardIcon/>}/>
+            <LinkListItem path={PathList.profile} name={'プロフィール'} Icon={<PermIdentity/>}/>
+            <LinkListItem path={PathList.customers} name={'得意先管理・閲覧'} Icon={<PeopleIcon/>}/>
+            <LinkListItem path={PathList.cars} name={'車両管理'} Icon={<DirectionsCar/>}/>
         </div>);
 };
 
