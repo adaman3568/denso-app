@@ -31,10 +31,10 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign : 'middle',
     }
     })
-)
+);
 
 const Tweet : React.FC<props> = (props : props) => {
-    const classes = useStyles()
+    const classes = useStyles();
     const {tweet} = props;
     return (
         <Card className={classes.tweetItem}>
@@ -78,7 +78,7 @@ const Profile : React.FC<prodfileProps> = (props : prodfileProps) => {
             </Typography>
         </div>
     )
-}
+};
 
 type parentCustomerProps = {
     customerName : string,
@@ -92,6 +92,6 @@ const ParentCustomer : React.FC<parentCustomerProps> = (props : parentCustomerPr
             <Typography>車両 : {props.carName}</Typography>
         </div>
     )
-}
+};
 
 export default Tweet;
