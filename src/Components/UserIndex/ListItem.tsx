@@ -3,13 +3,19 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
+import HomeIcon from '@material-ui/icons/Home';
 import {DirectionsCar,PermIdentity} from "@material-ui/icons";
 
 const mainListItems = () => {
     return (
     <div>
+        <ListItem button>
+            <ListItemIcon>
+                <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="ホーム" />
+        </ListItem>
         <ListItem button>
             <ListItemIcon>
                 <DashboardIcon />
