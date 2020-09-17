@@ -1,15 +1,16 @@
 import React from 'react';
-import SignIn from "./Components/SignIn";
-import UserIndex from "./Components/UserIndex/UserIndex";
 import ImageUploader from "./ImageUploader";
+import {BrowserRouter,Route,Switch} from "react-router-dom";
 
-function App() {
-  return (
-    <div>
-        <ImageUploader/>
-    </div>
-  );
-}
+const App : React.FC = () => {
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route exact component={ImageUploader} path={'/'}/>
+            </Switch>
+        </BrowserRouter>
+    );
+};
 
 export default App;
 
