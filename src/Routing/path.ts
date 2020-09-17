@@ -8,10 +8,10 @@ interface IPathList {
 
 const PathList : IPathList = {
     home : '/',
-    employee : 'employees',
-    profile : 'profile',
+    employee : '/employees',
+    profile : '/profile',
     customers : '/customers',
-    cars : 'cars'
+    cars : '/cars'
 };
 
 export {PathList}
