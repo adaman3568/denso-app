@@ -18,10 +18,14 @@ const tweetDataList : TweetDataType[] = [
     {userName :'hiroshi',body : '今日はいい天気',created:'2020/09/15 12:28',company :'タイガー株式会社', car: '1195'},
 ];
 
-const Tweets : React.FC = () => {
+type Props = {
+    ShowImg? : boolean
+}
+
+const Tweets : React.FC<Props> = ({ShowImg = true}) => {
 
     const renderItem = () => {
-        return (tweetDataList.map(item => <Tweet tweet={item}/>))
+        return (tweetDataList.map(item => <Tweet tweet={item} ShowImg={ShowImg}/>))
     };
 
     return (

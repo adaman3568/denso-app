@@ -4,7 +4,8 @@ import {TweetDataType} from "./Tweets";
 import {makeStyles} from "@material-ui/core/styles";
 
 type props = {
-    tweet : TweetDataType
+    tweet : TweetDataType,
+    ShowImg? : boolean
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -33,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
     })
 );
 
-const Tweet : React.FC<props> = (props : props) => {
+const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
     const classes = useStyles();
-    const {tweet} = props;
-    return (
-        <Card className={classes.tweetItem}>
+
+    const BodyWithImg = () => {
+        return (
             <Grid container spacing={3}>
                 <Grid item xs={2}>
                     <Profile name={tweet.userName}/>
@@ -48,6 +49,23 @@ const Tweet : React.FC<props> = (props : props) => {
                     </div>
                 </Grid>
             </Grid>
+        )
+    };
+    const BodyOnly = () => {
+        return(
+            <Grid container spacing={3}>
+                <Grid item xs={12}>
+                    <div className={classes.msgWrapper}>
+                        {tweet.body}
+                    </div>
+                </Grid>
+            </Grid>
+            )
+    }
+
+    return (
+        <Card className={classes.tweetItem}>
+            {ShowImg ? <BodyWithImg/> : <BodyOnly/>}
             <Grid container spacing={3} direction={"row"} justify={"flex-start"} alignItems={"center"}>
                 <Grid item xs={10}>
                     <div className={classes.timeStr}>
