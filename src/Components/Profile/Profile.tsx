@@ -61,7 +61,7 @@ const Profile : React.FC = () => {
                     </Grid>
                 </Grid>
             </Card>
-            <Tweets/>
+            <Tweets ShowImg={false}/>
         </Container>
 
 
