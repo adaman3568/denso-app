@@ -2,6 +2,8 @@ import React from 'react';
 import {Card, Grid, Typography} from "@material-ui/core";
 import {TweetDataType} from "./Tweets";
 import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
+import {PathList} from "../../Routing/path";
 
 type props = {
     tweet : TweetDataType,
@@ -30,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
     timeStr : {
         paddingLeft : theme.spacing(3),
         verticalAlign : 'middle',
+    },
+    NonDecorationLink : {
+        textDecoration : 'none'
     }
     })
 );
@@ -64,19 +69,22 @@ const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
     }
 
     return (
-        <Card className={classes.tweetItem}>
-            {ShowImg ? <BodyWithImg/> : <BodyOnly/>}
-            <Grid container spacing={3} direction={"row"} justify={"flex-start"} alignItems={"center"}>
-                <Grid item xs={12} sm={10}>
-                    <div className={classes.timeStr}>
-                        {tweet.created}
-                    </div>
+        <Link to={PathList.tweetsDetail} className={classes.NonDecorationLink}>
+            <Card className={classes.tweetItem}>
+                {ShowImg ? <BodyWithImg/> : <BodyOnly/>}
+                <Grid container spacing={3} direction={"row"} justify={"flex-start"} alignItems={"center"}>
+                    <Grid item xs={12} sm={10}>
+                        <div className={classes.timeStr}>
+                            {tweet.created}
+                        </div>
+                    </Grid>
+                    <Grid item xs={12} sm={2}>
+                        <ParentCustomer carName={tweet.car} customerName={tweet.company}/>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={2}>
-                    <ParentCustomer carName={tweet.car} customerName={tweet.company}/>
-                </Grid>
-            </Grid>
-        </Card>
+            </Card>
+        </Link>
+
     );
 };
 

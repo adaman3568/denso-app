@@ -23,9 +23,9 @@ const myStyle = makeStyles((theme) => ({
         alignItems : 'center',
     }
 
-}))
+}));
 
-const Profile : React.FC = () => {
+const ProfileIndex : React.FC = () => {
     const classes = myStyle();
 
     const [isEdit,setIsEdit] = useState<boolean>(false)
@@ -68,4 +68,4 @@ const Profile : React.FC = () => {
     );
 };
 
-export default Profile;
+export default ProfileIndex;
