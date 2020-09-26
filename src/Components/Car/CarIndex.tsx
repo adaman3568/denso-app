@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
-import {Card, Grid} from "@material-ui/core";
+import {Card, Grid, Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 type CarInfo = {
     id : number,
@@ -27,12 +28,34 @@ type Props = {
     Car : CarInfo
 }
 
+const myStyle = makeStyles((theme) => ({
+    card : {
+        margin : theme.spacing(3),
+        padding : theme.spacing(2)
+    },
+    carName : {
+        padding : theme.spacing(2)
+    },
+    detail : {
+        padding : theme.spacing(2)
+    }
+}))
+
 const CarItem : FC<Props> = ({Car}) => {
+    const classes = myStyle();
     return (
-        <Card>
+        <Card className={classes.card}>
             <Grid container>
-                <Grid sm={12}>{Car.CarName}</Grid>
-                <Grid sm={12}>{Car.Detail}</Grid>
+                <Grid sm={12}>
+                    <Typography variant={'h4'} className={classes.carName}>
+                        {Car.CarName}
+                    </Typography>
+                </Grid>
+                <Grid sm={12}>
+                    <Typography className={classes.detail}>
+                        {Car.Detail}
+                    </Typography>
+                </Grid>
                 <Grid sm={6}>コメント件数{Car.CommentCount}</Grid>
                 <Grid sm={6}>最終コメント日時：{Car.LastCommentDate}</Grid>
             </Grid>
