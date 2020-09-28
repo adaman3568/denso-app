@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Card, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import CardTitle from "../Common/CardTitle";
 
 type EmployeeInfo = {
     id : number,
@@ -48,9 +49,9 @@ const EmployeeItem : FC<Props> = ({Emp}) => {
         <Card className={classes.card}>
             <Grid container>
                 <Grid sm={12}>
-                    <Typography variant={'h4'} className={classes.empName}>
+                    <CardTitle>
                         {Emp.EmpName}
-                    </Typography>
+                    </CardTitle>
                 </Grid>
                 <Grid sm={12}>
                     <Typography variant={'h5'} className={classes.eMail}>
