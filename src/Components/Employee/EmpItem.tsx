@@ -15,7 +15,7 @@ const myStyle = makeStyles((theme) => ({
     eMail : {
         padding : theme.spacing(2)
     }
-}))
+}));
 
 type Props = {
     Emp : EmployeeInfo

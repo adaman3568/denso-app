@@ -25,7 +25,7 @@ const myStyle = makeStyles((theme) => ({
 
 }));
 
-const ProfileIndex : React.FC = () => {
+const ProfileIndex : FC = () => {
     const classes = myStyle();
 
     const [isEdit,setIsEdit] = useState<boolean>(false)

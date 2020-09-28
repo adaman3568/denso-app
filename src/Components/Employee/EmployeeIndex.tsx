@@ -1,7 +1,4 @@
 import React, {FC} from 'react';
-import {Card, Grid, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import CardTitle from "../Common/CardTitle";
 import EmployeeItem from "./EmpItem";
 
 export type EmployeeInfo = {

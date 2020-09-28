@@ -2,6 +2,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
 import {Card, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
+import {CustomerInfo} from "./CustomerIndex";
+
 
 type Props = {
     Customer : CustomerInfo
