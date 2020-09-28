@@ -6,7 +6,11 @@ import {makeStyles} from "@material-ui/core/styles";
 const myStyle = makeStyles((theme) => ({
     title : {
         borderBottomColor : theme.palette.primary.main,
-        paddingBottom : theme.spacing(1)
+        borderBottom : '1px solid',
+        paddingBottom : theme.spacing(1),
+        paddingLeft : theme.spacing(2),
+        paddingRight : theme.spacing(2),
+        marginBottom : theme.spacing(2)
     }
 }))
 
