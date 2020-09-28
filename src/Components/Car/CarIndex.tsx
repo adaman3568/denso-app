@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Card, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import CardTitle from "../Common/CardTitle";
 
 type CarInfo = {
     id : number,
@@ -33,9 +34,6 @@ const myStyle = makeStyles((theme) => ({
         margin : theme.spacing(3),
         padding : theme.spacing(2)
     },
-    carName : {
-        padding : theme.spacing(2)
-    },
     detail : {
         padding : theme.spacing(2)
     }
@@ -47,9 +45,9 @@ const CarItem : FC<Props> = ({Car}) => {
         <Card className={classes.card}>
             <Grid container>
                 <Grid sm={12}>
-                    <Typography variant={'h4'} className={classes.carName}>
+                    <CardTitle>
                         {Car.CarName}
-                    </Typography>
+                    </CardTitle>
                 </Grid>
                 <Grid sm={12}>
                     <Typography className={classes.detail}>
