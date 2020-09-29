@@ -3,6 +3,7 @@ import React, {FC} from "react";
 import {Card, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {CustomerInfo} from "./CustomerIndex";
+import CommentCount from "../Common/CommentCount";
 
 
 type Props = {
@@ -41,8 +42,8 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                     </Typography>
                 </Grid>
                 <Grid sm={6}>
-                    車両台数：{Customer.CarCount}<br/>
-                    コメント件数：{Customer.CommentCount}
+                    車両台数：{Customer.CarCount}
+                    <CommentCount displayCount={Customer.CommentCount}/>
                 </Grid>
                 <Grid sm={6}>
                     最終コメント日付：{Customer.LastCommentDate}
