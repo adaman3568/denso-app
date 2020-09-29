@@ -3,6 +3,7 @@ import {Card, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CardTitle from "../Common/CardTitle";
 import Title from "../Common/Title";
+import CommentCount from "../Common/CommentCount";
 
 type CarInfo = {
     id : number,
@@ -55,7 +56,9 @@ const CarItem : FC<Props> = ({Car}) => {
                         {Car.Detail}
                     </Typography>
                 </Grid>
-                <Grid sm={6}>コメント件数{Car.CommentCount}</Grid>
+                <Grid sm={6}>
+                    <CommentCount displayCount={Car.CommentCount}/>
+                </Grid>
                 <Grid sm={6}>最終コメント日時：{Car.LastCommentDate}</Grid>
             </Grid>
         </Card>

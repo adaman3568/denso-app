@@ -20,6 +20,13 @@ const myStyle = makeStyles((theme) => ({
     },
     companyAddress : {
         padding : theme.spacing(2)
+    },
+    cardInfo : {
+        display : 'flex',
+        justifyContent : 'left'
+    },
+    commentCount : {
+        marginLeft : theme.spacing(1)
     }
 }))
 
@@ -42,8 +49,10 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                     </Typography>
                 </Grid>
                 <Grid sm={6}>
-                    車両台数：{Customer.CarCount}
-                    <CommentCount displayCount={Customer.CommentCount}/>
+                    <div className={classes.cardInfo}>
+                        車両台数：{Customer.CarCount}
+                        <CommentCount displayCount={Customer.CommentCount} className={classes.commentCount}/>
+                    </div>
                 </Grid>
                 <Grid sm={6}>
                     最終コメント日付：{Customer.LastCommentDate}

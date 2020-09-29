@@ -3,6 +3,7 @@ import React, {FC} from "react";
 import {Card, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {EmployeeInfo} from "./EmployeeIndex";
+import CommentCount from "../Common/CommentCount";
 
 const myStyle = makeStyles((theme) => ({
     card : {
@@ -37,7 +38,7 @@ const EmployeeItem : FC<Props> = ({Emp}) => {
                     </Typography>
                 </Grid>
                 <Grid sm={6}>
-                    コメント件数：{Emp.CommentCount}
+                    <CommentCount displayCount={Emp.CommentCount}/>
                 </Grid>
                 <Grid sm={6}>
                     最終コメント日付：{Emp.LastCommentDate}

@@ -3,7 +3,8 @@ import CommentIcon from '@material-ui/icons/Comment';
 import {makeStyles} from "@material-ui/core/styles";
 
 type props = {
-    displayCount : number
+    displayCount : number,
+    className? : string
 }
 
 const myStyle = makeStyles((theme) => ({
@@ -16,12 +17,12 @@ const myStyle = makeStyles((theme) => ({
     }
 }));
 
-const CommentCount : FC<props> = ({displayCount}) => {
+const CommentCount : FC<props> = ({displayCount,className}) => {
 
     const classes = myStyle();
 
     return (
-        <div className={classes.iconWrapper}>
+        <div className={classes.iconWrapper + ' ' + className}>
             <CommentIcon className={classes.icon}/>
             {displayCount}件
         </div>
