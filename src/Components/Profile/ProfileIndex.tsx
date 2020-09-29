@@ -2,6 +2,7 @@ import React, {FC, useState} from 'react';
 import {Button, Card, Container, Grid, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Tweets from "../Tweets/Tweets";
+import Title from "../Common/Title";
 
 const myStyle = makeStyles((theme) => ({
     dummyImg :{
@@ -32,6 +33,7 @@ const ProfileIndex : FC = () => {
 
     return (
         <Container>
+            <Title>this is profile page.</Title>
             <Card className={classes.card}>
                 <Grid container
                       spacing={3}

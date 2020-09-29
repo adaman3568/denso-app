@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import CustomerItem from "./CustomerItem";
+import Title from "../Common/Title";
 
 export type CustomerInfo = {
     id : number
@@ -18,7 +19,7 @@ const CustomerInfoList : CustomerInfo[] = [
 const CustomerIndex : FC = () => {
     return (
         <div>
-            <h2>this is CustomerIndex page.</h2>
+            <Title>this is CustomerIndex page.</Title>
             {CustomerInfoList.map(cu => <CustomerItem key={cu.id} Customer={cu}/> )}
         </div>
     );

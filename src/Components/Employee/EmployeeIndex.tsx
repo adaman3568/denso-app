@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import EmployeeItem from "./EmpItem";
+import Title from "../Common/Title";
 
 export type EmployeeInfo = {
     id : number,
@@ -18,7 +19,7 @@ const EmpItems : EmployeeInfo[] = [
 const EmployeeIndex : FC = () => {
     return (
         <div>
-            <h2>This is Emp page.</h2>
+            <Title>This is Emp page.</Title>
             {EmpItems.map(emp => <EmployeeItem key={emp.id} Emp={emp}/>)}
         </div>
     );

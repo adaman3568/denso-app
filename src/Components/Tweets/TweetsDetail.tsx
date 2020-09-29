@@ -1,9 +1,10 @@
 import React, {FC} from 'react';
+import Title from "../Common/Title";
 
 const TweetsDetail : FC = () => {
     return (
         <div>
-            <h2>this is Tweets Detail page.</h2>
+            <Title>this is Tweets Detail page.</Title>
         </div>
     );
 };

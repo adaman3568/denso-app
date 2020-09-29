@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Card, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import CardTitle from "../Common/CardTitle";
+import Title from "../Common/Title";
 
 type CarInfo = {
     id : number,
@@ -19,7 +20,7 @@ const CarItems : CarInfo[] = [
 const CarIndex : FC = () => {
     return (
         <div>
-            <h2>This is CarIndex page.</h2>
+            <Title>This is CarIndex page.</Title>
             {CarItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>
     );
