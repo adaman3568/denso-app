@@ -18,13 +18,16 @@ const myStyle = makeStyles((theme) => ({
     },
     detail : {
         padding : theme.spacing(2)
+    },
+    CardLink : {
+        textDecoration : 'none'
     }
-}))
+}));
 
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <Link to={`${PathList.carDetail}${Car.id}`}>
+        <Link to={`${PathList.carDetail}${Car.id}`} className={classes.CardLink}>
             <Card className={classes.card}>
                 <Grid container>
                     <Grid sm={12}>
