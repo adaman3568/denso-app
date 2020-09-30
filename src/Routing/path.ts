@@ -1,6 +1,7 @@
 interface IPathList {
     home : string,
     employee : string,
+    employeeDetail : string,
     profile : string,
     customers : string,
     customerDetail : string,
@@ -12,6 +13,7 @@ interface IPathList {
 const PathList : IPathList = {
     home : '/',
     employee : '/employees',
+    employeeDetail : '/employees/detail',
     profile : '/profile',
     customers : '/customers',
     customerDetail : '/customers/detail',

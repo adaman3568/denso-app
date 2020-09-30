@@ -4,6 +4,8 @@ import {Card, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {EmployeeInfo} from "./EmployeeIndex";
 import CommentCount from "../Common/CommentCount";
+import LinkCard from "../Common/LinkCard";
+import {PathList} from "../../Routing/path";
 
 const myStyle = makeStyles((theme) => ({
     card : {
@@ -25,7 +27,7 @@ type Props = {
 const EmployeeItem : FC<Props> = ({Emp}) => {
     const classes = myStyle();
     return (
-        <Card className={classes.card}>
+        <LinkCard path={`${PathList.employeeDetail}/${Emp.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
@@ -44,7 +46,7 @@ const EmployeeItem : FC<Props> = ({Emp}) => {
                     最終コメント日付：{Emp.LastCommentDate}
                 </Grid>
             </Grid>
-        </Card>
+        </LinkCard>
     )
 };
 
