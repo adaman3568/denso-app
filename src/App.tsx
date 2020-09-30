@@ -9,6 +9,7 @@ import EmployeeIndex from "./Components/Employee/EmployeeIndex";
 import CarIndex from "./Components/Car/CarIndex";
 import CustomerIndex from "./Components/Customer/CustomerIndex";
 import TweetsDetail from "./Components/Tweets/TweetsDetail";
+import CarDetail from "./Components/Car/CarDetail";
 
 const App : React.FC = () => {
     return (
@@ -19,6 +20,7 @@ const App : React.FC = () => {
                     <Route exact path={PathList.profile} component={ProfileIndex}/>
                     <Route exact path={PathList.employee} component={EmployeeIndex}/>
                     <Route exact path={PathList.cars} component={CarIndex}/>
+                    <Route exact path={`${PathList.carDetail}:id`} component={CarDetail}/>
                     <Route exact path={PathList.customers} component={CustomerIndex}/>
                     <Route exact path={PathList.tweetsDetail} component={TweetsDetail}/>
                 </UserIndexWrapper>
