@@ -13,6 +13,7 @@ import CarDetail from "./Components/Car/CarDetail";
 import CustomerDetail from "./Components/Customer/CustomerDetail";
 import EmployeeDetail from "./Components/Employee/EmployeeDetail";
 import DataContextProvider from "./Context/DataContextProvider";
+import NotFound from "./Components/NotFound";
 
 const App : React.FC = () => {
     return (
@@ -32,6 +33,7 @@ const App : React.FC = () => {
                         <Route exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail}/>
 
                         <Route exact path={PathList.tweetsDetail} component={TweetsDetail}/>
+
                     </UserIndexWrapper>
                 </Switch>
             </DataContextProvider>
