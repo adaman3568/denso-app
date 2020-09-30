@@ -5,3 +5,11 @@ export type CarInfo = {
     CommentCount : number,
     LastCommentDate : string
 }
+
+export type EmployeeInfo = {
+    id : number,
+    EmpName : string,
+    eMail : string,
+    CommentCount : number,
+    LastCommentDate : string
+}
