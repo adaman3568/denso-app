@@ -1,6 +1,7 @@
 import React, {createContext, FC} from 'react';
 import {GetAllCarData,GetCarData} from './Functions/CarFunction'
 import {GetAllEmpData,GetEmpData} from "./Functions/EmpFunction";
+import {GetAllCustomerData,GetCustomerData} from './Functions/CustomerFunction'
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState)
 
@@ -12,6 +13,10 @@ interface IDataContextState {
     EmpFunc : {
         GetAllEmpData : typeof GetAllEmpData,
         GetEmpData : typeof GetEmpData
+    },
+    CustomerFunc : {
+        GetAllCustomerData : typeof GetAllCustomerData,
+        GetCustomerData : typeof GetCustomerData
     }
 }
 
@@ -20,13 +25,11 @@ const DataContextProvider : FC = ({children}) => {
     return (
         <DataContext.Provider value={{
             CarFunc : {
-                GetAllCarData,
-                GetCarData
-            },
+                GetAllCarData,GetCarData},
             EmpFunc : {
-                GetAllEmpData,
-                GetEmpData
-            }
+                GetAllEmpData,GetEmpData},
+            CustomerFunc : {
+                GetAllCustomerData,GetCustomerData}
         }}>
             {children}
         </DataContext.Provider>

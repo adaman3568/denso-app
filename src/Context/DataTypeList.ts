@@ -13,3 +13,12 @@ export type EmployeeInfo = {
     CommentCount : number,
     LastCommentDate : string
 }
+
+export type CustomerInfo = {
+    id : number
+    customerName : string
+    CarCount : number
+    CommentCount : number
+    LastCommentDate : string
+    Address : string
+}
