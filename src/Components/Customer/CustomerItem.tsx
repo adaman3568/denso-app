@@ -1,9 +1,11 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Card, Grid, Typography} from "@material-ui/core";
+import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {CustomerInfo} from "./CustomerIndex";
 import CommentCount from "../Common/CommentCount";
+import LinkCard from "../Common/LinkCard";
+import {PathList} from "../../Routing/path";
 
 
 type Props = {
@@ -11,10 +13,6 @@ type Props = {
 }
 
 const myStyle = makeStyles((theme) => ({
-    card : {
-        margin : theme.spacing(3),
-        padding : theme.spacing(2)
-    },
     companyName : {
         padding : theme.spacing(2)
     },
@@ -36,7 +34,7 @@ const CustomerItem : FC<Props> = ({Customer}) => {
     const classes = myStyle();
 
     return(
-        <Card className={classes.card}>
+        <LinkCard path={`${PathList.customerDetail}/${Customer.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
@@ -58,7 +56,7 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                     最終コメント日付：{Customer.LastCommentDate}
                 </Grid>
             </Grid>
-        </Card>
+        </LinkCard>
     )
 };
 

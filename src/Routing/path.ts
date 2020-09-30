@@ -3,6 +3,7 @@ interface IPathList {
     employee : string,
     profile : string,
     customers : string,
+    customerDetail : string,
     cars : string,
     carDetail : string,
     tweetsDetail : string
@@ -13,8 +14,9 @@ const PathList : IPathList = {
     employee : '/employees',
     profile : '/profile',
     customers : '/customers',
+    customerDetail : '/customers/detail',
     cars : '/cars',
-    carDetail : '/cars/detail/',
+    carDetail : '/cars/detail',
     tweetsDetail : '/tweets'
 };
 

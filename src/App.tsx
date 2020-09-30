@@ -10,6 +10,7 @@ import CarIndex from "./Components/Car/CarIndex";
 import CustomerIndex from "./Components/Customer/CustomerIndex";
 import TweetsDetail from "./Components/Tweets/TweetsDetail";
 import CarDetail from "./Components/Car/CarDetail";
+import CustomerDetail from "./Components/Customer/CustomerDetail";
 
 const App : React.FC = () => {
     return (
@@ -20,8 +21,9 @@ const App : React.FC = () => {
                     <Route exact path={PathList.profile} component={ProfileIndex}/>
                     <Route exact path={PathList.employee} component={EmployeeIndex}/>
                     <Route exact path={PathList.cars} component={CarIndex}/>
-                    <Route exact path={`${PathList.carDetail}:id`} component={CarDetail}/>
+                    <Route exact path={`${PathList.carDetail}/:id`} component={CarDetail}/>
                     <Route exact path={PathList.customers} component={CustomerIndex}/>
+                    <Route exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail}/>
                     <Route exact path={PathList.tweetsDetail} component={TweetsDetail}/>
                 </UserIndexWrapper>
             </Switch>

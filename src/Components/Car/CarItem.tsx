@@ -1,10 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Card, Grid, Typography} from "@material-ui/core";
+import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import CommentCount from "../Common/CommentCount";
 import {CarInfo} from "./CarIndex";
-import {Link} from "react-router-dom";
 import {PathList} from "../../Routing/path";
 import LinkCard from "../Common/LinkCard";
 
@@ -21,7 +20,7 @@ const myStyle = makeStyles((theme) => ({
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.carDetail}${Car.id}`}>
+        <LinkCard path={`${PathList.carDetail}/${Car.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
