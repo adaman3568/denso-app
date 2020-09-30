@@ -1,12 +1,27 @@
-import React, {FC} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router";
+import {DataContext} from "../../Context/DataContextProvider";
+import {CustomerInfo} from "../../Context/DataTypeList";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
 const CustomerDetail : FC<pageProps> = ({match}) => {
+    const {CustomerFunc} = useContext(DataContext);
+    const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
+    useEffect(() => {
+        const d = CustomerFunc.GetCustomerData(parseInt(match.params.id));
+        if(d !== undefined)setCustomer(d);
+    });
+
     return (
         <div>
             <h2>this is id:{match.params.id}'s customer detail page</h2>
+            <p>{customer.id}</p>
+            <p>{customer.LastCommentDate}</p>
+            <p>{customer.CommentCount}</p>
+            <p>{customer.CarCount}</p>
+            <p>{customer.customerName}</p>
+            <p>{customer.Address}</p>
         </div>
     );
 };
