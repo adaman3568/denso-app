@@ -18,7 +18,7 @@ export type CustomerInfo = {
     CommentCount : number
     LastCommentDate : string
     Address : string,
-    Cars : CarInfo[]
+    Cars? : CarInfo[]
 }
 
 export type CarInfo = {
