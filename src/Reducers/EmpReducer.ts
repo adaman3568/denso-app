@@ -7,9 +7,9 @@ const ReadAllEmp = () => ({
     type : 'ReadAllEmp'
 });
 
-type CustomerActions = ReturnType<typeof ReadAllEmp>
+export type EmployeeActions = ReturnType<typeof ReadAllEmp>
 
-const EmpReducer : React.Reducer<EmployeeInfo[],CustomerActions> = (status = EmpInitialState , action) : EmployeeInfo[] => {
+const EmpReducer : React.Reducer<EmployeeInfo[],EmployeeActions> = (status = EmpInitialState , action) : EmployeeInfo[] => {
     switch (action.type) {
         case 'ReadAllEmp':
             return status;

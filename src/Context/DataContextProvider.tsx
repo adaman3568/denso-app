@@ -1,9 +1,10 @@
-import React, {createContext, FC} from 'react';
+import React, {createContext, FC, useReducer} from 'react';
 import {GetAllCarData,GetCarData} from './Functions/CarFunction'
 import {GetAllEmpData,GetEmpData} from "./Functions/EmpFunction";
 import {GetAllCustomerData,GetCustomerData} from './Functions/CustomerFunction'
+import {rootInitial, rootReducer, RootReducerType} from "../Reducers/RootReducer";
 
-export const DataContext = createContext<IDataContextState>({} as IDataContextState)
+export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
 interface IDataContextState {
     CarFunc : {
@@ -20,7 +21,14 @@ interface IDataContextState {
     }
 }
 
+const [state , dispatch] = useReducer<RootReducerType>(
+    rootReducer,
+    rootInitial
+);
+
 const DataContextProvider : FC = ({children}) => {
+    console.log(state);
+    console.log(dispatch);
 
     return (
         <DataContext.Provider value={{
