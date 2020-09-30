@@ -1,9 +1,6 @@
-export type CarInfo = {
-    id : number,
-    CarName : string,
-    Detail : string,
-    CommentCount : number,
-    LastCommentDate : string
+export type RootType = {
+    Emp : EmployeeInfo[],
+    Customer : CustomerInfo[]
 }
 
 export type EmployeeInfo = {
@@ -20,5 +17,14 @@ export type CustomerInfo = {
     CarCount : number
     CommentCount : number
     LastCommentDate : string
-    Address : string
+    Address : string,
+    Cars : CarInfo[]
+}
+
+export type CarInfo = {
+    id : number,
+    CarName : string,
+    Detail : string,
+    CommentCount : number,
+    LastCommentDate : string
 }
