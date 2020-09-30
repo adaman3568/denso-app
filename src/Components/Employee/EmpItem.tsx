@@ -1,11 +1,11 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Card, Grid, Typography} from "@material-ui/core";
+import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
-import {EmployeeInfo} from "./EmployeeIndex";
 import CommentCount from "../Common/CommentCount";
 import LinkCard from "../Common/LinkCard";
 import {PathList} from "../../Routing/path";
+import {EmployeeInfo} from "../../Context/DataTypeList";
 
 const myStyle = makeStyles((theme) => ({
     card : {
