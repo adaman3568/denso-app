@@ -1,4 +1,4 @@
-import {CustomerInfo} from "../../Components/Customer/CustomerIndex";
+import {CustomerInfo} from "../DataTypeList";
 
 const CustomerInfoList : CustomerInfo[] = [
     {id : 1,customerName : "合同会社Rst.com",CarCount : 1,CommentCount : 2,LastCommentDate : '2020/09/21 12:45:22' ,Address : "東京都世田谷区1-2-3"},

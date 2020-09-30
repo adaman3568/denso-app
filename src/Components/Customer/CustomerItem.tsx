@@ -2,10 +2,10 @@ import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
-import {CustomerInfo} from "./CustomerIndex";
 import CommentCount from "../Common/CommentCount";
 import LinkCard from "../Common/LinkCard";
 import {PathList} from "../../Routing/path";
+import {CustomerInfo} from "../../Context/DataTypeList";
 
 
 type Props = {
