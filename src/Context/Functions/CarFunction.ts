@@ -9,6 +9,6 @@ export const GetAllCarData = () : CarInfo[] => {
     return CarMockItems;
 };
 
-export const GetCarData = (id : number) => {
+export const GetCarData = (id : number) : CarInfo | undefined => {
     return CarMockItems.find(item => item.id === id);
 };
