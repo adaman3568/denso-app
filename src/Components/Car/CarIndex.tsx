@@ -1,29 +1,20 @@
-import React, {FC} from 'react';
-import {Card, Grid, Typography} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-import CardTitle from "../Common/CardTitle";
+import React, {FC, useContext, useEffect, useState} from 'react';
 import Title from "../Common/Title";
-import CommentCount from "../Common/CommentCount";
 import CarItem from "./CarItem";
-
-export type CarInfo = {
-    id : number,
-    CarName : string,
-    Detail : string,
-    CommentCount : number,
-    LastCommentDate : string
-}
-
-const CarItems : CarInfo[] = [
-    {id : 1,CarName : '11-22',Detail : 'etc装着済み',CommentCount : 12 , LastCommentDate : '2020/12/11 12:34:23'},
-    {id : 1,CarName : '12-45',Detail : 'etc装着済み＆デジタコ',CommentCount : 10 , LastCommentDate : '2020/12/10 10:45:11'}
-];
+import {CarInfo, DataContext} from "../../Context/DataContextProvider";
 
 const CarIndex : FC = () => {
+    const {functions} = useContext(DataContext)
+    const [carItems ,setCarItems] = useState<CarInfo[]>([]);
+
+    useEffect(() => {
+        setCarItems(functions.GetAllCarData());
+    },[])
+
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            {CarItems.map(car => <CarItem key={car.id} Car={car} />)}
+            {carItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>
     );
 };
