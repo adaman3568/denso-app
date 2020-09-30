@@ -3,9 +3,9 @@ import React, {FC} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import CommentCount from "../Common/CommentCount";
-import {CarInfo} from "./CarIndex";
 import {PathList} from "../../Routing/path";
 import LinkCard from "../Common/LinkCard";
+import {CarInfo} from "../../Context/DataTypeList";
 
 type Props = {
     Car : CarInfo

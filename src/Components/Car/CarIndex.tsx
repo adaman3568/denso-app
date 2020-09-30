@@ -1,14 +1,15 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import Title from "../Common/Title";
 import CarItem from "./CarItem";
-import {CarInfo, DataContext} from "../../Context/DataContextProvider";
+import {DataContext} from "../../Context/DataContextProvider";
+import {CarInfo} from "../../Context/DataTypeList";
 
 const CarIndex : FC = () => {
-    const {functions} = useContext(DataContext)
+    const {CarFunc} = useContext(DataContext)
     const [carItems ,setCarItems] = useState<CarInfo[]>([]);
 
     useEffect(() => {
-        setCarItems(functions.GetAllCarData());
+        setCarItems(CarFunc.GetAllCarData());
     },[])
 
     return (
