@@ -27,9 +27,27 @@ const CustomerInitialState : CustomerInfo[] = [
 ];
 
 const EmployeeInitialState : EmployeeInfo[] = [
-    {id : 1, EmpName : '林山　浩',eMail : 'h.hayashiyama@co-rst.com', CommentCount : 10, LastCommentDate : '2020/12/10 10:10:23'},
-    {id : 2, EmpName : '池田　しんのすけ',eMail : 's.ikeda@co-rst.com', CommentCount : 12, LastCommentDate : '2020/12/8 09:08:20'},
-    {id : 3, EmpName : '浅田　和則',eMail : 'k.asada@co-rst.com', CommentCount : 1400, LastCommentDate : '2020/12/11 19:22:24'}
+    {id : 1, EmpName : '林山　浩',eMail : 'h.hayashiyama@co-rst.com', CommentCount : 10, LastCommentDate : '2020/12/10 10:10:23', Tweets :
+            [
+                {id : 1,userName :'林山　浩',body : '今日はいい天気by林山',created:'2020/09/15 11:25',company :'タイガー株式会社', car: '1195'},
+                {id : 2,userName :'林山　浩',body : '今日はいい天気by林山',created:'2020/09/15 23:38',company :'タイガー株式会社', car: '1195'},
+                {id : 3,userName :'林山　浩',body : '今日はいい天気by林山',created:'2020/09/15 18:11',company :'タイガー株式会社', car: '1195'},
+                {id : 4,userName :'林山　浩',body : '今日はいい天気by林山',created:'2020/09/15 12:28',company :'タイガー株式会社', car: '1195'},
+            ]},
+    {id : 2, EmpName : '池田　しんのすけ',eMail : 's.ikeda@co-rst.com', CommentCount : 12, LastCommentDate : '2020/12/8 09:08:20', Tweets :
+            [
+                {id : 5,userName :'池田　しんのすけ',body : '今日はいい天気by池田',created:'2020/09/15 11:25',company :'タイガー株式会社', car: '1195'},
+                {id : 6,userName :'池田　しんのすけ',body : '今日はいい天気by池田',created:'2020/09/15 23:38',company :'タイガー株式会社', car: '1195'},
+                {id : 7,userName :'池田　しんのすけ',body : '今日はいい天気by池田',created:'2020/09/15 18:11',company :'タイガー株式会社', car: '1195'},
+                {id : 8,userName :'池田　しんのすけ',body : '今日はいい天気by池田',created:'2020/09/15 12:28',company :'タイガー株式会社', car: '1195'},
+            ]},
+    {id : 3, EmpName : '浅田　和則',eMail : 'k.asada@co-rst.com', CommentCount : 1400, LastCommentDate : '2020/12/11 19:22:24', Tweets :
+            [
+                {id : 9,userName :'浅田　和則',body : '今日はいい天気by浅田',created:'2020/09/15 11:25',company :'タイガー株式会社', car: '1195'},
+                {id : 10,userName :'浅田　和則',body : '今日はいい天気by浅田',created:'2020/09/15 23:38',company :'タイガー株式会社', car: '1195'},
+                {id : 11,userName :'浅田　和則',body : '今日はいい天気by浅田',created:'2020/09/15 18:11',company :'タイガー株式会社', car: '1195'},
+                {id : 12,userName :'浅田　和則',body : '今日はいい天気by浅田',created:'2020/09/15 12:28',company :'タイガー株式会社', car: '1195'},
+            ]}
 ];
 
 export type RootReducerType = (state : RootState,action : RootAction) => RootState;

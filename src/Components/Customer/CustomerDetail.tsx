@@ -15,7 +15,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     useEffect(() => {
         const c = Customer.Data.find(item => item?.id == parseInt(match.params.id));
         if (c !== undefined)setCustomer(c);
-    });
+    },[Customer.Data]);
 
     return (
         <div>
