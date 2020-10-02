@@ -4,14 +4,16 @@ import {DataContext} from "../../Context/DataContextProvider";
 import {CustomerInfo} from "../../Context/DataTypeList";
 import CarItem from "../Car/CarItem";
 
-type pageProps = {} & RouteComponentProps<{id : string}>
+type pageProps = {} & RouteComponentProps<
+    {
+        id : string
+    }>
 
 const CustomerDetail : FC<pageProps> = ({match}) => {
     const {Customer} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     useEffect(() => {
-
-        const c = Customer.Data.find(item => item.id == parseInt(match.params.id));
+        const c = Customer.Data.find(item => item?.id == parseInt(match.params.id));
         if (c !== undefined)setCustomer(c);
     });
 
