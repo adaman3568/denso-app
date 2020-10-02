@@ -7,10 +7,10 @@ type pageProps = {} & RouteComponentProps<{id : string}>
 
 const EmployeeDetail : FC<pageProps> = ({match}) => {
 
-    const {EmpFunc} = useContext(DataContext)
+    const {Employee} = useContext(DataContext)
     const [emp,setEmp] = useState<EmployeeInfo>({} as EmployeeInfo);
     useEffect(() => {
-        const d = EmpFunc.GetEmpData(parseInt(match.params.id))
+        const d = Employee.Data.find(item => item.id === parseInt(match.params.id));
         if(d !== undefined)setEmp(d);
     },[])
     return (

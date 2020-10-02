@@ -6,11 +6,12 @@ import {CustomerInfo} from "../../Context/DataTypeList";
 type pageProps = {} & RouteComponentProps<{id : string}>
 
 const CustomerDetail : FC<pageProps> = ({match}) => {
-    const {CustomerFunc} = useContext(DataContext);
+    const {Customer} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     useEffect(() => {
-        const d = CustomerFunc.GetCustomerData(parseInt(match.params.id));
-        if(d !== undefined)setCustomer(d);
+
+        const c = Customer.Data.find(item => item.id == parseInt(match.params.id));
+        if (c !== undefined)setCustomer(c);
     });
 
     return (

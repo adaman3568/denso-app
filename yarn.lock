@@ -3729,7 +3729,7 @@ core-js-pure@^3.0.0:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.6.4.tgz#4bf1ba866e25814f149d4e9aaa08c36173506e3a"
   integrity sha512-epIhRLkXdgv32xIUFaaAry2wdxZYBi6bgM7cB136dzzXXa+dFyRLTZeLUJxnd8ShrmyVXBub63n2NHo2JAt8Cw==
 
-core-js@3.6.5:
+core-js@3, core-js@3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
@@ -9589,10 +9589,10 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
-react-combine-reducers@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-combine-reducers/-/react-combine-reducers-1.0.4.tgz#e46861ae77041d88548e34bdb3059bd810e0ebb5"
-  integrity sha512-pMY5ymvbD40tzQA+o0RrsVK6NOPf4Dg/EfVlodKoA0AQH280DEdi+q4zzUmVms/tAp+NfgUMDgF6/gnXQ/BOWg==
+react-combine-reducers@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-combine-reducers/-/react-combine-reducers-1.0.0.tgz#8299f2fd7073571ab190b2453f9800741c197201"
+  integrity sha512-1Jaz6zGyigEMF8VeYpGiSN2WhVfbZV9XCY6ZrJoif7gZtQhWashNYCQdxKS2aecy1wie96QwOnGV58VnLoewog==
   dependencies:
     "@babel/polyfill" "^7.7.0"
 
