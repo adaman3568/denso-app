@@ -2,6 +2,7 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router";
 import {DataContext} from "../../Context/DataContextProvider";
 import {CustomerInfo} from "../../Context/DataTypeList";
+import CarItem from "../Car/CarItem";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -23,6 +24,8 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
             <p>{customer.CarCount}</p>
             <p>{customer.customerName}</p>
             <p>{customer.Address}</p>
+
+            {customer.Cars?.map((item,index) => <CarItem key={index} Car={item}/>)}
         </div>
     );
 };
