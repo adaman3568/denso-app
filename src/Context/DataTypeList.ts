@@ -18,19 +18,19 @@ export type EmployeeInfo = {
 export type CommentInfo = {
     uid : string,
     Body : string,
-    ReplyCommentRef : string[]
+    ReplyCommentRef : DocumentReference[]
 }
 
 export type CustomerInfo = {
     uid : string
     Name : string,
     Address : string,
-    CarsRef : string[]
+    CarsRef : DocumentReference[]
 }
 
 export type CarInfo = {
     uid : string,
     Name : string,
     Detail : string,
-    CommentsRef : string[]
+    CommentsRef : DocumentReference[]
 }
