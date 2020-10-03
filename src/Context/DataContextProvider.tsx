@@ -1,6 +1,9 @@
-import React, {createContext, FC, useReducer} from 'react';
+import React, {createContext, FC, useEffect, useReducer} from 'react';
 import {rootInitial, rootReducer, RootReducerType} from "../Reducers/RootReducer";
 import {CustomerInfo, EmployeeInfo} from "./DataTypeList";
+import {GetAllEmp} from "./Functions/EmpFunction";
+import EmployeeDetail from "../Components/Employee/EmployeeDetail";
+import {SetAllEmp} from "../Reducers/EmpReducer";
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
@@ -15,14 +18,16 @@ interface IDataContextState {
     }
 }
 
-
-
 const DataContextProvider : FC = ({children}) => {
 
     const [state , dispatch] = useReducer<RootReducerType>(
         rootReducer,
         rootInitial
     );
+
+    useEffect(() => {
+        GetAllEmp().then(data => dispatch(SetAllEmp(data)));
+    },[]);
 
     return (
         <DataContext.Provider value={{
@@ -31,7 +36,7 @@ const DataContextProvider : FC = ({children}) => {
                 Func : {}
             },
             Employee : {
-                Data : state.Emoloyee,
+                Data : state.Employee,
                 Func : {}
             }
         }}>

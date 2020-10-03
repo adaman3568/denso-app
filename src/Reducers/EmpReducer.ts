@@ -3,16 +3,19 @@ import React from "react";
 
 const EmpInitialState : EmployeeInfo[] = [];
 
-const ReadAllEmp = () => ({
-    type : 'ReadAllEmp'
-});
+const SetAllEmployeeAction = 'SetAllEmployeeAction' as const;
 
-export type EmployeeActions = ReturnType<typeof ReadAllEmp>
+export const SetAllEmp = (data : EmployeeInfo[]) => ({
+    type : SetAllEmployeeAction,
+    payload : data,
+    });
+
+export type EmployeeActions = ReturnType<typeof SetAllEmp>
 
 const EmpReducer : React.Reducer<EmployeeInfo[],EmployeeActions> = (status = EmpInitialState , action) : EmployeeInfo[] => {
     switch (action.type) {
-        case 'ReadAllEmp':
-            return status;
+        case SetAllEmployeeAction:
+            return action.payload;
         default:
             return status;
     }

@@ -8,7 +8,7 @@ const EmployeeIndex : FC = () => {
     return (
         <div>
             <Title>This is Emp page.</Title>
-            {Employee.Data.map(emp => <EmployeeItem key={emp.id} Emp={emp}/>)}
+            {Employee.Data.map((emp,index) => <EmployeeItem key={index} Emp={emp}/>)}
         </div>
     );
 };

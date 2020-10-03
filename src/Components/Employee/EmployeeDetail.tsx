@@ -10,17 +10,15 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
     const {Employee} = useContext(DataContext)
     const [emp,setEmp] = useState<EmployeeInfo>({} as EmployeeInfo);
     useEffect(() => {
-        const d = Employee.Data.find(item => item.id === parseInt(match.params.id));
+        const d = Employee.Data.find(item => item.uid === match.params.id);
         if(d !== undefined)setEmp(d);
     },[])
     return (
         <div>
             <h2>this is id:{match.params.id}'s emp page.</h2>
-            <p>{emp.id}</p>
-            <p>{emp.CommentCount}</p>
+            <p>{emp.uid}</p>
+            <p>{emp.Name}</p>
             <p>{emp.eMail}</p>
-            <p>{emp.EmpName}</p>
-            <p>{emp.LastCommentDate}</p>
         </div>
     );
 };

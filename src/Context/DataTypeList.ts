@@ -5,12 +5,10 @@ export type RootType = {
 
 // EmployeeがTweetsの実態を持っていて、CustomerInfoとCarInfoはリファレンスを持っているイメージ
 export type EmployeeInfo = {
-    id : number,
-    EmpName : string,
+    uid : string,
+    Name : string,
     eMail : string,
-    CommentCount : number,
-    LastCommentDate : string
-    Tweets? : TweetDataType[]
+    CommentsRef? : string[]
 }
 
 export type TweetDataType = {
