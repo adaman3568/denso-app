@@ -6,14 +6,13 @@ import {CarInfo} from "../../Context/DataTypeList";
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
 const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
-    const {Customer} = useContext(DataContext);
+    const {Car} = useContext(DataContext);
     const [carData, setCarData] = useState<CarInfo>({} as CarInfo);
 
-    // useEffect(() => {
-    //     const CarList = Customer.Data.flatMap(item => item.Cars);
-    //     const d : CarInfo | undefined = CarList.find(item => item?.id === parseInt(props.match.params.id));
-    //     if(d !== undefined) setCarData(d)
-    // },[]);
+    useEffect(() => {
+        const d : CarInfo | undefined = Car.Data.find(item => item?.uid === props.match.params.id);
+        if(d !== undefined) setCarData(d)
+    },[]);
 
     return (
         <div>

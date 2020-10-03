@@ -1,19 +1,20 @@
-import {CustomerInfo} from "../Context/DataTypeList";
+import {CommentInfo, CustomerInfo} from "../Context/DataTypeList";
 import React from "react";
 export const CustomerInitialState : CustomerInfo[] = [];
 
-export const ReadAllCustomerAction = 'ReadAllCustomer' as const;
+export const SetAllCustomerAction = 'SetAllCustomerAction' as const;
 
-const ReadAllCustomer = () => ({
-    type : ReadAllCustomerAction
-    });
+export const SetAllCustomer = (data : CustomerInfo[]) => ({
+    type : SetAllCustomerAction,
+    payload : data,
+});
 
-export type CustomerActions = ReturnType<typeof ReadAllCustomer>
+export type CustomerActions = ReturnType<typeof SetAllCustomer>
 
 const CustomerReducer : React.Reducer<CustomerInfo[],CustomerActions> = (status = CustomerInitialState , action) : CustomerInfo[] => {
     switch (action.type) {
-        case ReadAllCustomerAction:
-            return status;
+        case SetAllCustomerAction:
+            return action.payload;
         default:
             return status;
     }

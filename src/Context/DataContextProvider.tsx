@@ -2,12 +2,13 @@ import React, {createContext, FC, useEffect, useReducer} from 'react';
 import {rootInitial, rootReducer, RootReducerType} from "../Reducers/RootReducer";
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
 import {GetAllEmp} from "./Functions/EmpFunction";
-import EmployeeDetail from "../Components/Employee/EmployeeDetail";
 import {SetAllEmp} from "../Reducers/EmpReducer";
 import {GetAllComment} from "./Functions/CommentFunction";
 import {SetAllComment} from "../Reducers/CommentReducer";
 import {GetAllCar} from "./Functions/CarFunction";
 import {SetAllCar} from "../Reducers/CarReducer";
+import {GetAllCustomer} from "./Functions/CustomerFunction";
+import {SetAllCustomer} from "../Reducers/CustomerReducer";
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
@@ -41,7 +42,7 @@ const DataContextProvider : FC = ({children}) => {
         GetAllComment().then(d => dispatch(SetAllComment(d)));
         GetAllEmp().then(d => dispatch(SetAllEmp(d)));
         GetAllCar().then(d => dispatch(SetAllCar(d)));
-        GetAllComment().then(d => dispatch(SetAllComment(d)));
+        GetAllCustomer().then(d => dispatch(SetAllCustomer(d)))
     },[]);
 
     return (
