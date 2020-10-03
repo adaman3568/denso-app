@@ -11,7 +11,7 @@ export type EmployeeInfo = {
     CommentsRef? : string[]
 }
 
-export type TweetDataType = {
+export type CommentInfo = {
     uid : string,
     Body : string,
     ReplyCommentRef : string[]

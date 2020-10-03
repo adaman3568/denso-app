@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Tweet from "./Tweet";
-import {TweetDataType} from "../../Context/DataTypeList";
+import {CommentInfo} from "../../Context/DataTypeList";
 import {DataContext} from "../../Context/DataContextProvider";
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
-    const [tweets, setTweets] = useState<TweetDataType[]>([]);
+    const [tweets, setTweets] = useState<CommentInfo[]>([]);
     const {Employee} = useContext(DataContext);
     // useEffect(() => {
     //     const t = Employee.Data.flatMap(item => item.Tweets);
