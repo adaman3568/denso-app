@@ -3,7 +3,7 @@ import {rootInitial, rootReducer, RootReducerType} from "../Reducers/RootReducer
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
 import {GetAllEmp} from "./Functions/EmpFunction";
 import {SetAllEmp} from "../Reducers/EmpReducer";
-import {GetAllComment} from "./Functions/CommentFunction";
+import {GetAllComment,SetEmpComment} from "./Functions/CommentFunction";
 import {SetAllComment} from "../Reducers/CommentReducer";
 import {GetAllCar} from "./Functions/CarFunction";
 import {SetAllCar} from "../Reducers/CarReducer";
@@ -27,7 +27,9 @@ interface IDataContextState {
     },
     Comment : {
         Data : CommentInfo[],
-        Func : {}
+        Func : {
+            SetEmpComment : typeof SetEmpComment
+        }
     }
 }
 
@@ -61,7 +63,7 @@ const DataContextProvider : FC = ({children}) => {
             },
             Comment : {
                 Data : state.Comment,
-                Func : {}
+                Func : {SetEmpComment}
             }
         }}>
             {children}

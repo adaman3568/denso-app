@@ -1,3 +1,7 @@
+import firebase from "firebase";
+import DocumentReference = firebase.firestore.DocumentReference;
+
+
 export type RootType = {
     Emp : EmployeeInfo[],
     Customer : CustomerInfo[]
@@ -8,7 +12,7 @@ export type EmployeeInfo = {
     uid : string,
     Name : string,
     eMail : string,
-    CommentsRef? : string[]
+    CommentsRef? : DocumentReference[]
 }
 
 export type CommentInfo = {
