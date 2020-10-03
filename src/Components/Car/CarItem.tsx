@@ -20,11 +20,11 @@ const myStyle = makeStyles((theme) => ({
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.carDetail}/${Car.id}`}>
+        <LinkCard path={`${PathList.carDetail}/${Car.uid}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
-                        {Car.CarName}
+                        {Car.Name}
                     </CardTitle>
                 </Grid>
                 <Grid sm={12}>
@@ -32,10 +32,6 @@ const CarItem : FC<Props> = ({Car}) => {
                         {Car.Detail}
                     </Typography>
                 </Grid>
-                <Grid sm={6}>
-                    <CommentCount displayCount={Car.CommentCount}/>
-                </Grid>
-                <Grid sm={6}>最終コメント日時：{Car.LastCommentDate}</Grid>
             </Grid>
         </LinkCard>
     )

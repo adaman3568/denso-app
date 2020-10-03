@@ -12,22 +12,17 @@ type pageProps = {} & RouteComponentProps<
 const CustomerDetail : FC<pageProps> = ({match}) => {
     const {Customer} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
-    useEffect(() => {
-        const c = Customer.Data.find(item => item?.id == parseInt(match.params.id));
-        if (c !== undefined)setCustomer(c);
-    },[Customer.Data]);
+    // useEffect(() => {
+    //     const c = Customer.Data.find(item => item?.id == parseInt(match.params.id));
+    //     if (c !== undefined)setCustomer(c);
+    // },[Customer.Data]);
 
     return (
         <div>
             <h2>this is id:{match.params.id}'s customer detail page</h2>
-            <p>{customer.id}</p>
-            <p>{customer.LastCommentDate}</p>
-            <p>{customer.CommentCount}</p>
-            <p>{customer.CarCount}</p>
-            <p>{customer.customerName}</p>
-            <p>{customer.Address}</p>
-
-            {customer.Cars?.map((item,index) => <CarItem key={index} Car={item}/>)}
+            <p>{customer.uid}</p>
+            <p>{customer.Name}</p>
+            {/*{customer.Cars?.map((item,index) => <CarItem key={index} Car={item}/>)}*/}
         </div>
     );
 };

@@ -12,28 +12,21 @@ export type EmployeeInfo = {
 }
 
 export type TweetDataType = {
-    id : number,
-    userName : string,
-    body : string,
-    created : string,
-    company : string,
-    car : string
+    uid : string,
+    Body : string,
+    ReplyCommentRef : string[]
 }
 
 export type CustomerInfo = {
-    id : number
-    customerName : string
-    CarCount : number
-    CommentCount : number
-    LastCommentDate : string
+    uid : string
+    Name : string,
     Address : string,
-    Cars? : CarInfo[]
+    CarsRef : string[]
 }
 
 export type CarInfo = {
-    id : number,
-    CarName : string,
+    uid : number,
+    Name : string,
     Detail : string,
-    CommentCount : number,
-    LastCommentDate : string
+    CommentsRef : string[]
 }

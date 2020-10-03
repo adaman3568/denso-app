@@ -9,7 +9,7 @@ const CustomerIndex : FC = () => {
     return (
         <div>
             <Title>this is CustomerIndex page.</Title>
-            {Customer.Data.map(cu => <CustomerItem key={cu.id} Customer={cu}/> )}
+            {Customer.Data.map((cu,index) => <CustomerItem key={index} Customer={cu}/> )}
         </div>
     );
 };

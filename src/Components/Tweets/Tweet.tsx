@@ -46,11 +46,12 @@ const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
         return (
             <Grid container spacing={3}>
                 <Grid item xs={2}>
-                    <Profile name={tweet.userName}/>
+                    TestUser
+                    {/*<Profile name={tweet.userName}/>*/}
                 </Grid>
                 <Grid item xs={10}>
                     <div className={classes.msgWrapper}>
-                        {tweet.body}
+                        {tweet.Body}
                     </div>
                 </Grid>
             </Grid>
@@ -61,7 +62,7 @@ const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
             <Grid container spacing={3}>
                 <Grid item xs={12}>
                     <div className={classes.msgWrapper}>
-                        {tweet.body}
+                        {tweet.Body}
                     </div>
                 </Grid>
             </Grid>
@@ -75,12 +76,12 @@ const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
                 <Grid container spacing={3} direction={"row"} justify={"flex-start"} alignItems={"center"}>
                     <Grid item xs={12} sm={10}>
                         <div className={classes.timeStr}>
-                            {tweet.created}
+                            {/*{tweet.created}*/}
                         </div>
                     </Grid>
-                    <Grid item xs={12} sm={2}>
-                        <ParentCustomer carName={tweet.car} customerName={tweet.company}/>
-                    </Grid>
+                    {/*<Grid item xs={12} sm={2}>*/}
+                    {/*    <ParentCustomer carName={tweet.car} customerName={tweet.company}/>*/}
+                    {/*</Grid>*/}
                 </Grid>
             </Card>
         </Link>

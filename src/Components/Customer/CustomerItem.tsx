@@ -34,11 +34,11 @@ const CustomerItem : FC<Props> = ({Customer}) => {
     const classes = myStyle();
 
     return(
-        <LinkCard path={`${PathList.customerDetail}/${Customer.id}`}>
+        <LinkCard path={`${PathList.customerDetail}/${Customer.uid}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
-                        {Customer.customerName}
+                        {Customer.Name}
                     </CardTitle>
                 </Grid>
                 <Grid sm={12}>
@@ -46,15 +46,15 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                         {Customer.Address}
                     </Typography>
                 </Grid>
-                <Grid sm={6}>
-                    <div className={classes.cardInfo}>
-                        車両台数：{Customer.CarCount}
-                        <CommentCount displayCount={Customer.CommentCount} className={classes.commentCount}/>
-                    </div>
-                </Grid>
-                <Grid sm={6}>
-                    最終コメント日付：{Customer.LastCommentDate}
-                </Grid>
+                {/*<Grid sm={6}>*/}
+                {/*    <div className={classes.cardInfo}>*/}
+                {/*        車両台数：{Customer.CarCount}*/}
+                {/*        <CommentCount displayCount={Customer.CommentCount} className={classes.commentCount}/>*/}
+                {/*    </div>*/}
+                {/*</Grid>*/}
+                {/*<Grid sm={6}>*/}
+                {/*    最終コメント日付：{Customer.LastCommentDate}*/}
+                {/*</Grid>*/}
             </Grid>
         </LinkCard>
     )
