@@ -25,7 +25,7 @@ export type CustomerInfo = {
 }
 
 export type CarInfo = {
-    uid : number,
+    uid : string,
     Name : string,
     Detail : string,
     CommentsRef : string[]
