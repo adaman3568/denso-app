@@ -8,22 +8,11 @@ type Props = {
 }
 
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
-    const [tweets, setTweets] = useState<CommentInfo[]>([]);
-    const {Employee} = useContext(DataContext);
-    // useEffect(() => {
-    //     const t = Employee.Data.flatMap(item => item.Tweets);
-    //     const Tweets = t.filter((item) : item is Exclude<typeof item,undefined> => item !== undefined);
-    //     setTweets(Tweets)
-    // },[])
-
-    // const renderItem = () => {
-    //     return (tweets.map(item => <Tweet tweet={item} ShowImg={ShowImg}/>))
-    // };
-
+    const {Comment} = useContext(DataContext);
     return (
         <div>
             <h2>Tweets</h2>
-            {/*{renderItem()}*/}
+            {Comment.Data.map((item,index) => <Tweet key={index} tweet={item} ShowImg={ShowImg}/>)}
         </div>
     );
 };

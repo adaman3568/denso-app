@@ -3,7 +3,7 @@ import React from "react";
 
 const EmpInitialState : CommentInfo[] = [];
 
-const SetAllCommentAction = 'SetAllEmployeeAction' as const;
+const SetAllCommentAction = 'SetAllCommentAction' as const;
 
 export const SetAllComment = (data : CommentInfo[]) => ({
     type : SetAllCommentAction,
