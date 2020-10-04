@@ -11,14 +11,14 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
 
     const {Employee,Comment,dispatch} = useContext(DataContext)
     const [emp,setEmp] = useState<EmployeeInfo>({} as EmployeeInfo);
+    const [comments, setComments] = useState<CommentInfo[]>([]);
+
     useEffect(() => {
         const d = Employee.Data.find(item => item.uid === match.params.id);
         if(d !== undefined)
         {
             setEmp(d);
-            Comment.Func.SetEmpComment(d.uid).then(data =>{
-                dispatch(SetDisplayComment(data))
-            });
+            Comment.Func.SetEmpComment(d.uid).then(data => setComments(data));
         }
 
     },[])
@@ -28,7 +28,7 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
             <p>{emp.uid}</p>
             <p>{emp.Name}</p>
             <p>{emp.eMail}</p>
-            {Comment.Data.map((d,index) => <Tweet key={index} tweet={d}/>)}
+            {comments.map((d,index) => <Tweet key={index} tweet={d}/>)}
         </div>
     );
 };
