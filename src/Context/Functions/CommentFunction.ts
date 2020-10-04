@@ -13,16 +13,28 @@ export const GetAllComment = async () : Promise<CommentInfo[]> => {
 };
 
 export const SetEmpComment = async (uid : string) : Promise<CommentInfo[]> => {
-    const snapshot = await firebase.firestore().collection('Employees').doc(uid).get();
-    const data = snapshot.data() as EmployeeInfo;
-    let commentData : CommentInfo[] = [];
-    data.CommentsRef?.map(item =>{
-        item.get().then(d => {
-            let cm = d.data() as CommentInfo;
-            cm.uid = d.id;
-            commentData.push(cm)}
-            )
-    });
+    const db = firebase.firestore();
+    const snapshot = await db.collection('Employees').doc(uid).get();
+    const emp : EmployeeInfo = snapshot.data() as EmployeeInfo
 
-    return commentData
-}
+    if(emp.CommentsRef !== undefined){
+        let comments : CommentInfo[] = [];
+        //refデータをまとめて取得する場合は、一旦Promiseの配列にする。
+        const data : Promise<CommentInfo>[] = emp.CommentsRef.map((item) => getComment(item));
+
+        // その後Promise.all()に配列を投げると同時に、awaitで処理を待って、返す。
+        const commentData : CommentInfo[] = await Promise.all(data);
+        return commentData;
+    }else{
+        return []
+    }
+};
+
+//　awaitを使うなら、asyncをセットで使わないといけない。=>asyncを使う時点で戻り値はPromiseになる。
+// awaitを使うなら、必然的に戻り値はPromiseになる。
+const getComment = async (comRef : firebase.firestore.DocumentReference) : Promise<CommentInfo> => {
+    const com = await comRef.get();
+    const comment : CommentInfo = com.data() as CommentInfo;
+    comment.uid = com.id;
+    return comment;
+};

@@ -5,12 +5,12 @@ const EmpInitialState : CommentInfo[] = [];
 
 const SetAllCommentAction = 'SetAllCommentAction' as const;
 
-export const SetAllComment = (data : CommentInfo[]) => ({
+export const SetDisplayComment = (data : CommentInfo[]) => ({
     type : SetAllCommentAction,
     payload : data,
 });
 
-export type CommentActions = ReturnType<typeof SetAllComment>
+export type CommentActions = ReturnType<typeof SetDisplayComment>
 
 const CommentReducer : React.Reducer<CommentInfo[],CommentActions> = (status = EmpInitialState , action) : CommentInfo[] => {
     switch (action.type) {

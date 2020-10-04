@@ -5,12 +5,12 @@ const EmpInitialState : CarInfo[] = [];
 
 const SetAllCarAction = 'SetAllCarAction' as const;
 
-export const SetAllCar = (data : CarInfo[]) => ({
+export const SetDisplayCar = (data : CarInfo[]) => ({
     type : SetAllCarAction,
     payload : data,
 });
 
-export type CarActions = ReturnType<typeof SetAllCar>
+export type CarActions = ReturnType<typeof SetDisplayCar>
 
 const CarReducer : React.Reducer<CarInfo[],CarActions> = (status = EmpInitialState , action) : CarInfo[] => {
     switch (action.type) {

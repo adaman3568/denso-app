@@ -1,20 +1,24 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router-dom";
 import {DataContext} from "../../Context/DataContextProvider";
-import {EmployeeInfo} from "../../Context/DataTypeList";
+import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
+import {SetDisplayComment} from "../../Reducers/CommentReducer";
+import Tweet from "../Tweets/Tweet";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
 const EmployeeDetail : FC<pageProps> = ({match}) => {
 
-    const {Employee,Comment} = useContext(DataContext)
+    const {Employee,Comment,dispatch} = useContext(DataContext)
     const [emp,setEmp] = useState<EmployeeInfo>({} as EmployeeInfo);
     useEffect(() => {
         const d = Employee.Data.find(item => item.uid === match.params.id);
         if(d !== undefined)
         {
             setEmp(d);
-            Comment.Func.SetEmpComment(d.uid);
+            Comment.Func.SetEmpComment(d.uid).then(data =>{
+                dispatch(SetDisplayComment(data))
+            });
         }
 
     },[])
@@ -24,6 +28,7 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
             <p>{emp.uid}</p>
             <p>{emp.Name}</p>
             <p>{emp.eMail}</p>
+            {Comment.Data.map((d,index) => <Tweet key={index} tweet={d}/>)}
         </div>
     );
 };
