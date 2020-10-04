@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter,Route,Switch} from "react-router-dom";
+import {BrowserRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import UserIndexWrapper from "./Components/UserIndex/UserIndexWrapper";
 import Tweets from "./Components/Tweets/Tweets";
 import {PathList} from "./Routing/path";
@@ -35,6 +35,7 @@ const theme = createMuiTheme({
 });
 
 const App : React.FC = () => {
+
     return (
         <BrowserRouter>
             <AuthContextProvider>

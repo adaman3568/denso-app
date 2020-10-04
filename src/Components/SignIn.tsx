@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {LoginAction} from "../Reducers/AuthReducer";
 import {AuthContext} from "../Context/AuthContextProvider";
+import {RouteComponentProps} from "react-router";
 
 const Copyright: React.FC = () => {
     return(
@@ -48,11 +49,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SignIn : React.FC = () => {
+const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     const classes = useStyles();
-    const {dispatch} = useContext(AuthContext);
+    const {func} = useContext(AuthContext);
     const [pass,setPass] = useState('');
     const [mail,setMail] = useState('');
+
+    const SignIn = async () => {
+        const res = await func.SignIn(mail,pass);
+        if(res) history.push('/')
+    };
 
     return (
         <Container component="main" maxWidth="xs">
@@ -94,12 +100,12 @@ const SignIn : React.FC = () => {
                         label="Remember me"
                     />
                     <Button
-                        type="submit"
+                        type="button"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={() => dispatch(LoginAction())}
+                        onClick={() => SignIn()}
                         // パスワードもしくはメールアドレスが空白の場合非活性にする。
                         disabled={pass === '' || mail === ''}
                     >

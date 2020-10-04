@@ -20,7 +20,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
 import {AuthContext} from "../../Context/AuthContextProvider";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {LogOutAction} from "../../Reducers/AuthReducer";
 
 function Copyright() {
     return (
@@ -114,9 +113,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const UserIndexWrapper : React.FC = (props) => {
+const UserIndexWrapper : React.FC = ({children}) => {
     const classes = useStyles();
-    const {isLogin,dispatch} = useContext(AuthContext);
+    const {isLogin,func} = useContext(AuthContext);
 
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -145,7 +144,6 @@ const UserIndexWrapper : React.FC = (props) => {
             <List>{mainListItems()}</List>
         </Drawer>)
     };
-
     const HamburgerMenu = () => {
         return(
         <IconButton
@@ -159,9 +157,15 @@ const UserIndexWrapper : React.FC = (props) => {
         </IconButton>)
     };
 
+    const SignOut = () => {
+        // SignOutして/loginに戻る
+        func.SignOut();
+        window.location.href = '/login'
+    };
+
     const ExitButton = () => {
         return (
-        <IconButton color={'inherit'} onClick={() => dispatch(LogOutAction())}>
+        <IconButton color={'inherit'} onClick={() => SignOut()}>
             <ExitToAppIcon/>
         </IconButton>)
     };
@@ -192,7 +196,7 @@ const UserIndexWrapper : React.FC = (props) => {
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
-                            {props.children}
+                            {children}
                         </Grid>
                     </Grid>
                     <Box pt={4}>
