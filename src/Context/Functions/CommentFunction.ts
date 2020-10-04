@@ -1,9 +1,9 @@
 import {CommentInfo, EmployeeInfo} from "../DataTypeList";
-import firebase from '../../Firebase';
+import firebase, {DocumentList} from '../../Firebase';
 
-export const GetAllComment = async () : Promise<CommentInfo[]> => {
+export const GetAllComments = async () : Promise<CommentInfo[]> => {
     let data : CommentInfo[] = [];
-    const snapshot = await firebase.firestore().collection('Comments').get();
+    const snapshot = await firebase.firestore().collection(DocumentList.Comments).get();
     snapshot.forEach(d => {
         let cm : CommentInfo = d.data() as CommentInfo;
         cm.uid = d.id;
@@ -12,13 +12,28 @@ export const GetAllComment = async () : Promise<CommentInfo[]> => {
     return data
 };
 
-export const SetEmpComment = async (uid : string) : Promise<CommentInfo[]> => {
+export const GetEmpComments = async (uid : string) : Promise<CommentInfo[]> => {
     const db = firebase.firestore();
-    const snapshot = await db.collection('Employees').doc(uid).get();
+    const snapshot = await db.collection(DocumentList.Employees).doc(uid).get();
     const emp : EmployeeInfo = snapshot.data() as EmployeeInfo
 
     if(emp.CommentsRef !== undefined){
-        let comments : CommentInfo[] = [];
+        //refデータをまとめて取得する場合は、一旦Promiseの配列にする。
+        const data : Promise<CommentInfo>[] = emp.CommentsRef.map((item) => getComment(item));
+        // その後Promise.all()に配列を投げると同時に、awaitで処理を待って、返す。
+        const commentData : CommentInfo[] = await Promise.all(data);
+        return commentData;
+    }else{
+        return []
+    }
+};
+
+export const GetCarComments = async (uid : string) : Promise<CommentInfo[]> => {
+    const db = firebase.firestore();
+    const snapshot = await db.collection(DocumentList.Cars).doc(uid).get();
+    const emp : EmployeeInfo = snapshot.data() as EmployeeInfo
+
+    if(emp.CommentsRef !== undefined){
         //refデータをまとめて取得する場合は、一旦Promiseの配列にする。
         const data : Promise<CommentInfo>[] = emp.CommentsRef.map((item) => getComment(item));
 

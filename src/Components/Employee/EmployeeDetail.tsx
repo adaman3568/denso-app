@@ -18,7 +18,7 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
         if(d !== undefined)
         {
             setEmp(d);
-            Comment.Func.SetEmpComment(d.uid).then(data => setComments(data));
+            Comment.Func.GetEmpComments(d.uid).then(data => setComments(data));
         }
 
     },[])

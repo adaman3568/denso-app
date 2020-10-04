@@ -16,3 +16,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 export default firebase;
+
+export const DocumentList = {
+    Customers : 'Customers',
+    Cars : 'Cars',
+    Employees : 'Employees',
+    Comments : 'Comments'
+}

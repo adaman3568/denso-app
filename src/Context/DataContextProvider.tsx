@@ -1,13 +1,13 @@
 import React, {createContext, FC, useEffect, useReducer} from 'react';
 import {rootInitial, rootReducer, RootReducerType,RootAction} from "../Reducers/RootReducer";
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
-import {GetAllEmp} from "./Functions/EmpFunction";
+import {GetAllEmployees} from "./Functions/EmpFunction";
 import {SetDisplayEmp} from "../Reducers/EmpReducer";
-import {GetAllComment,SetEmpComment} from "./Functions/CommentFunction";
+import {GetAllComments,GetEmpComments,GetCarComments} from "./Functions/CommentFunction";
 import {SetDisplayComment} from "../Reducers/CommentReducer";
-import {GetAllCar} from "./Functions/CarFunction";
+import {GetAllCar,GetCustomerCars} from "./Functions/CarFunction";
 import {SetDisplayCar} from "../Reducers/CarReducer";
-import {GetAllCustomer} from "./Functions/CustomerFunction";
+import {GetAllCustomers} from "./Functions/CustomerFunction";
 import {SetDisplayCustomer} from "../Reducers/CustomerReducer";
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
@@ -23,12 +23,15 @@ interface IDataContextState {
     },
     Car : {
         Data : CarInfo[],
-        Func : {}
+        Func : {
+            GetCustomerCars : typeof GetCustomerCars
+        }
     },
     Comment : {
         Data : CommentInfo[],
         Func : {
-            SetEmpComment : typeof SetEmpComment
+            GetEmpComments : typeof GetEmpComments,
+            GetCarComments : typeof GetCarComments
         }
     },
     dispatch : (action : RootAction) => void
@@ -42,10 +45,10 @@ const DataContextProvider : FC = ({children}) => {
     );
 
     useEffect(() => {
-        GetAllComment().then(d => dispatch(SetDisplayComment(d)));
-        GetAllEmp().then(d => dispatch(SetDisplayEmp(d)));
+        GetAllComments().then(d => dispatch(SetDisplayComment(d)));
+        GetAllEmployees().then(d => dispatch(SetDisplayEmp(d)));
         GetAllCar().then(d => dispatch(SetDisplayCar(d)));
-        GetAllCustomer().then(d => dispatch(SetDisplayCustomer(d)))
+        GetAllCustomers().then(d => dispatch(SetDisplayCustomer(d)))
     },[]);
 
     return (
@@ -60,11 +63,13 @@ const DataContextProvider : FC = ({children}) => {
             },
             Car : {
                 Data : state.Car,
-                Func : {}
+                Func : {GetCustomerCars}
             },
             Comment : {
                 Data : state.Comment,
-                Func : {SetEmpComment}
+                Func : {
+                    GetEmpComments,
+                    GetCarComments}
             },
             dispatch
         }}>
