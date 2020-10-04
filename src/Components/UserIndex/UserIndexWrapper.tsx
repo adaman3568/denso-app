@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,6 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
+import {AuthContext} from "../../Context/AuthContextProvider";
 
 function Copyright() {
     return (
@@ -113,6 +114,8 @@ const useStyles = makeStyles((theme) => ({
 
 const UserIndexWrapper : React.FC = (props) => {
     const classes = useStyles();
+    const {isLogin} = useContext(AuthContext);
+
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -121,20 +124,46 @@ const UserIndexWrapper : React.FC = (props) => {
         setOpen(false);
     };
 
+    // サイドメニュー
+    const DrawerMenu = () => {
+        return (
+        <Drawer
+            variant="permanent"
+            classes={{
+                paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+            }}
+            open={open}
+        >
+            <div className={classes.toolbarIcon}>
+                <IconButton onClick={handleDrawerClose}>
+                    <ChevronLeftIcon />
+                </IconButton>
+            </div>
+            <Divider />
+            <List>{mainListItems()}</List>
+        </Drawer>)
+    };
+
+    const HamburgerMenu = () => {
+        return(
+        <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+        >
+            <MenuIcon />
+        </IconButton>)
+    };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    {/*ログイン時にのみ表示するように*/}
+                    {isLogin && <HamburgerMenu/>}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         電装SNS
                     </Typography>
@@ -145,21 +174,8 @@ const UserIndexWrapper : React.FC = (props) => {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <Drawer
-                variant="permanent"
-                classes={{
-                    paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                }}
-                open={open}
-            >
-                <div className={classes.toolbarIcon}>
-                    <IconButton onClick={handleDrawerClose}>
-                        <ChevronLeftIcon />
-                    </IconButton>
-                </div>
-                <Divider />
-                <List>{mainListItems()}</List>
-            </Drawer>
+            {/*ログイン時にのみ表示するように*/}
+            {isLogin && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
