@@ -1,7 +1,4 @@
-import {CarInfo} from "../Context/DataTypeList";
 import React from "react";
-
-const EmpInitialState : CarInfo[] = [];
 
 const ToLogin = 'Login' as const;
 const ToLogOut = 'Login' as const;
@@ -20,7 +17,7 @@ export type AuthReducerStateType = {
 
 export type AuthActions = ReturnType<typeof LoginAction> | ReturnType<typeof LogOutAction>
 
-const CarReducer : React.Reducer<AuthReducerStateType,AuthActions> = (status , action) : AuthReducerStateType => {
+const AuthReducer : React.Reducer<AuthReducerStateType,AuthActions> = (status , action) : AuthReducerStateType => {
     switch (action.type) {
         case ToLogin:
             return {isLogin : true};
@@ -31,4 +28,4 @@ const CarReducer : React.Reducer<AuthReducerStateType,AuthActions> = (status , a
     }
 };
 
-export default CarReducer;
+export default AuthReducer;

@@ -15,7 +15,7 @@ const AuthContextProvider : FC = ({children}) => {
 
     return (
         <AuthContext.Provider value={
-            {isLogin : false,
+            {isLogin : state.isLogin,
             dispatch}
         }>
             {children}
