@@ -1,11 +1,12 @@
 import {makeStyles} from "@material-ui/core/styles";
-import React, {FC} from "react";
+import React, {FC, useContext, useEffect, useState} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import CommentCount from "../Common/CommentCount";
 import LinkCard from "../Common/LinkCard";
 import {PathList} from "../../Routing/path";
-import {CustomerInfo} from "../../Context/DataTypeList";
+import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
+import {DataContext} from "../../Context/DataContextProvider";
 
 
 type Props = {
