@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
 const SignIn : React.FC = () => {
     const classes = useStyles();
     const {dispatch} = useContext(AuthContext);
+    const [pass,setPass] = useState('');
+    const [mail,setMail] = useState('');
 
     return (
         <Container component="main" maxWidth="xs">
@@ -60,7 +62,7 @@ const SignIn : React.FC = () => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Log in
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
@@ -73,6 +75,7 @@ const SignIn : React.FC = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        onChange={(e) => setMail(e.target.value)}
                     />
                     <TextField
                         variant="outlined"
@@ -84,6 +87,7 @@ const SignIn : React.FC = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={(e) => setPass(e.target.value)}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
@@ -96,6 +100,8 @@ const SignIn : React.FC = () => {
                         color="primary"
                         className={classes.submit}
                         onClick={() => dispatch(LoginAction())}
+                        // パスワードもしくはメールアドレスが空白の場合非活性にする。
+                        disabled={pass === '' || mail === ''}
                     >
                         Log In
                     </Button>
