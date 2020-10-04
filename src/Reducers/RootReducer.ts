@@ -12,7 +12,7 @@ type RootState = {
     Car : CarInfo[]
 }
 
-type RootAction = CustomerActions | EmployeeActions | CommentActions | CarActions;
+export type RootAction = CustomerActions | EmployeeActions | CommentActions | CarActions;
 
 export type RootReducerType = (state : RootState,action : RootAction) => RootState;
 
