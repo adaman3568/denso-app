@@ -19,6 +19,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
 import {AuthContext} from "../../Context/AuthContextProvider";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {LogOutAction} from "../../Reducers/AuthReducer";
 
 function Copyright() {
     return (
@@ -114,7 +116,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UserIndexWrapper : React.FC = (props) => {
     const classes = useStyles();
-    const {isLogin} = useContext(AuthContext);
+    const {isLogin,dispatch} = useContext(AuthContext);
 
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -157,6 +159,13 @@ const UserIndexWrapper : React.FC = (props) => {
         </IconButton>)
     };
 
+    const ExitButton = () => {
+        return (
+        <IconButton color={'inherit'} onClick={() => dispatch(LogOutAction())}>
+            <ExitToAppIcon/>
+        </IconButton>)
+    };
+
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -172,6 +181,8 @@ const UserIndexWrapper : React.FC = (props) => {
                             <NotificationsIcon />
                         </Badge>
                     </IconButton>
+                    {/*ログイン時にのみサインアウトボタンを表示*/}
+                    {isLogin && <ExitButton/>}
                 </Toolbar>
             </AppBar>
             {/*ログイン時にのみ表示するように*/}
