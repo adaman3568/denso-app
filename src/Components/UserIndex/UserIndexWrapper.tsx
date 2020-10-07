@@ -115,7 +115,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UserIndexWrapper : React.FC = ({children}) => {
     const classes = useStyles();
-    const {isLogin,func} = useContext(AuthContext);
+    const {currentUser,func} = useContext(AuthContext);
 
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -176,7 +176,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     {/*ログイン時にのみ表示するように*/}
-                    {isLogin && <HamburgerMenu/>}
+                    {currentUser && <HamburgerMenu/>}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         電装SNS
                     </Typography>
@@ -186,11 +186,11 @@ const UserIndexWrapper : React.FC = ({children}) => {
                         </Badge>
                     </IconButton>
                     {/*ログイン時にのみサインアウトボタンを表示*/}
-                    {isLogin && <ExitButton/>}
+                    {currentUser && <ExitButton/>}
                 </Toolbar>
             </AppBar>
             {/*ログイン時にのみ表示するように*/}
-            {isLogin && <DrawerMenu/>}
+            {currentUser && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>

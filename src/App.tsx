@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {BrowserRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import UserIndexWrapper from "./Components/UserIndex/UserIndexWrapper";
 import Tweets from "./Components/Tweets/Tweets";
@@ -18,6 +18,11 @@ import {MuiThemeProvider} from "@material-ui/core";
 import PrivateRoute from "./Components/Common/Router/PrivateRoute";
 import SignIn from "./Components/SignIn";
 import AuthContextProvider from "./Context/AuthContextProvider";
+import CarCreate from "./Components/Car/CarCreate";
+import {useAuth} from "./CustomHooks";
+import {CircularProgress} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
     palette :{
@@ -34,7 +39,33 @@ const theme = createMuiTheme({
     }
 });
 
+const myStyle = makeStyles((theme) => ({
+    margin : {
+        marginTop : theme.spacing(4)
+    }}))
+
+const Loading : FC = () => {
+    const classes = myStyle();
+    return(
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.margin}
+        >
+            <CircularProgress/>
+        </Grid>
+    )
+};
+
 const App : React.FC = () => {
+
+    const {initializing,user} = useAuth();
+    if(initializing){
+        return <Loading/>
+
+    }
 
     return (
         <BrowserRouter>
@@ -43,20 +74,21 @@ const App : React.FC = () => {
                     <MuiThemeProvider theme={theme}>
                         <Switch>
                             <UserIndexWrapper>
-                                <PrivateRoute exact path={PathList.home} component={Tweets}/>
-                                <PrivateRoute exact path={PathList.profile} component={ProfileIndex}/>
-                                <PrivateRoute exact path={PathList.employee} component={EmployeeIndex}/>
-                                <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail}/>
+                                <PrivateRoute exact path={PathList.home} component={Tweets} user={user}/>
+                                <PrivateRoute exact path={PathList.profile} component={ProfileIndex} user={user}/>
+                                <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} user={user}/>
+                                <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} user={user}/>
 
-                                <PrivateRoute exact path={PathList.cars} component={CarIndex}/>
-                                <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail}/>
+                                <PrivateRoute exact path={PathList.cars} component={CarIndex} user={user}/>
+                                <PrivateRoute exact path={PathList.carCreate} component={CarCreate} user={user}/>
+                                <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} user={user}/>
 
-                                <PrivateRoute exact path={PathList.customers} component={CustomerIndex}/>
-                                <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail}/>
+                                <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>
+                                <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} user={user}/>
 
-                                <PrivateRoute exact path={PathList.tweetsDetail} component={TweetsDetail}/>
+                                <PrivateRoute exact path={PathList.tweetsDetail} component={TweetsDetail} user={user}/>
 
-                                <Route exact path={PathList.loginPage} component={SignIn}/>
+                                <Route exact path={PathList.loginPage} component={SignIn} user={user}/>
                             </UserIndexWrapper>
                         </Switch>
                     </MuiThemeProvider>

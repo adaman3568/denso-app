@@ -3,6 +3,8 @@ import Title from "../Common/Title";
 import CarItem from "./CarItem";
 import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo} from "../../Context/DataTypeList";
+import {Link} from 'react-router-dom'
+import {PathList} from "../../Routing/path";
 
 const CarIndex : FC = () => {
     const {Car} = useContext(DataContext)
@@ -15,6 +17,7 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
+            <Link to={PathList.carCreate}>Create Car</Link>
             {carItems.map(car => <CarItem key={car.uid} Car={car} />)}
         </div>
     );
