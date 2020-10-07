@@ -1,12 +1,15 @@
 import React, {FC, useContext} from 'react';
 import {AuthContext} from "../../../Context/AuthContextProvider";
 import {Redirect, Route, RouteProps} from "react-router-dom";
+interface IProps {
+    user : any
+}
+interface Props extends RouteProps,IProps{}
 
-const PrivateRoute : FC<RouteProps>  = (props : RouteProps) => {
+const PrivateRoute : FC<Props>  = (props : Props) => {
 
-    const {isLogin} = useContext(AuthContext);
     return (
-        (isLogin) ? <Route {...props}/> : <Redirect to={'/login'}/>
+        (props.user) ? <Route {...props}/> : <Redirect to={'/login'}/>
     );
 };
 

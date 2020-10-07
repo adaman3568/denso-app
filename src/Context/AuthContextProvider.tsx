@@ -1,7 +1,5 @@
-import React, {createContext, FC, useEffect, useReducer} from 'react';
-import AuthReducer, {AuthActions, AuthReducerStateType, LoginAction, LogOutAction} from "../Reducers/AuthReducer";
+import React, {createContext, FC, useEffect, useReducer, useState} from 'react';
 import firebase from "../Firebase";
-import {fdatasync} from "fs";
 
 export const AuthContext = createContext<IAuthContextState>({} as IAuthContextState)
 
@@ -9,24 +7,25 @@ type SignInFuncType = (mail : string,pass : string) => Promise<boolean>
 type SignOutFuncType = () => void;
 
 export interface IAuthContextState {
-    isLogin : boolean,
+    currentUser : any,
+    isLoading : boolean,
     func : {
         SignIn : SignInFuncType,
         SignOut : SignOutFuncType
     }
-    dispatch : (action : AuthActions) => void
 }
 
 const AuthContextProvider : FC = ({children}) => {
 
+    const [currentUser,setCurrentUser] = useState<any>(null);
+    const [isLoading , setIsLoading] = useState<boolean>(true)
     const SignIn : SignInFuncType = async (mail : string,pass : string) : Promise<boolean> => {
         const auth = await firebase.auth().signInWithEmailAndPassword(mail,pass)
         if(auth.user){ // ログインできたらこっち
-            console.log(auth.user);
-            dispatch(LoginAction());
+            setCurrentUser(auth.user)
             return true
         }else{
-            dispatch(LogOutAction());
+            setCurrentUser(null);
             return false;
         };
     };
@@ -36,19 +35,17 @@ const AuthContextProvider : FC = ({children}) => {
     };
 
     useEffect(() => {
-        const user = firebase.auth().currentUser;
-        if(user){
-            dispatch(LoginAction());
-        }
+        const unsub = firebase.auth().onAuthStateChanged(user =>
+        {
+            setCurrentUser(user)
+            setIsLoading(false);
+        });
     },[]);
-
-    const [state, dispatch] = useReducer<typeof AuthReducer>(AuthReducer,{isLogin : false})
 
     return (
         <AuthContext.Provider value={
-            {isLogin : state.isLogin,
-            func : {SignIn,SignOut},
-            dispatch}
+            {currentUser,isLoading,
+            func : {SignIn,SignOut}}
         }>
             {children}
         </AuthContext.Provider>
