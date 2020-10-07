@@ -36,11 +36,10 @@ const AuthContextProvider : FC = ({children}) => {
     };
 
     useEffect(() => {
-        firebase.auth().onAuthStateChanged(user => {
-            if(user){
-                dispatch(LoginAction())
-            }
-        })
+        const user = firebase.auth().currentUser;
+        if(user){
+            dispatch(LoginAction());
+        }
     },[]);
 
     const [state, dispatch] = useReducer<typeof AuthReducer>(AuthReducer,{isLogin : false})

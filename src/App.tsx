@@ -18,6 +18,7 @@ import {MuiThemeProvider} from "@material-ui/core";
 import PrivateRoute from "./Components/Common/Router/PrivateRoute";
 import SignIn from "./Components/SignIn";
 import AuthContextProvider from "./Context/AuthContextProvider";
+import CarCreate from "./Components/Car/CarCreate";
 
 const theme = createMuiTheme({
     palette :{
@@ -49,6 +50,7 @@ const App : React.FC = () => {
                                 <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail}/>
 
                                 <PrivateRoute exact path={PathList.cars} component={CarIndex}/>
+                                <PrivateRoute exact path={PathList.carCreate} component={CarCreate}/>
                                 <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail}/>
 
                                 <PrivateRoute exact path={PathList.customers} component={CustomerIndex}/>
