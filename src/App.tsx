@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {BrowserRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
 import UserIndexWrapper from "./Components/UserIndex/UserIndexWrapper";
 import Tweets from "./Components/Tweets/Tweets";
@@ -20,6 +20,9 @@ import SignIn from "./Components/SignIn";
 import AuthContextProvider from "./Context/AuthContextProvider";
 import CarCreate from "./Components/Car/CarCreate";
 import {useAuth} from "./CustomHooks";
+import {CircularProgress} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
     palette :{
@@ -36,11 +39,32 @@ const theme = createMuiTheme({
     }
 });
 
+const myStyle = makeStyles((theme) => ({
+    margin : {
+        marginTop : theme.spacing(4)
+    }}))
+
+const Loading : FC = () => {
+    const classes = myStyle();
+    return(
+        <Grid
+            container
+            direction="row"
+            justify="center"
+            alignItems="center"
+            className={classes.margin}
+        >
+            <CircularProgress/>
+        </Grid>
+    )
+};
+
 const App : React.FC = () => {
 
     const {initializing,user} = useAuth();
     if(initializing){
-        return <div>Loading</div>
+        return <Loading/>
+
     }
 
     return (
