@@ -1,6 +1,7 @@
-import React, {ChangeEvent, FC, useState} from 'react';
+import React, {ChangeEvent, FC, useContext, useEffect, useState} from 'react';
 import {Button, Grid, MenuItem, TextField} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import {DataContext} from "../../Context/DataContextProvider";
 
 const useStyle = makeStyles((theme) => ({
     center : {
@@ -10,18 +11,22 @@ const useStyle = makeStyles((theme) => ({
 }));
 
 const CarCreate : FC = () => {
-    type CustomerItem = {value : string,displayValue : string}
-    const Customers : CustomerItem[] = [
-        {value : '11111',displayValue : "タイガー株式会社"},
-        {value : '11112',displayValue : "合同会社Rst.com"},
-    ];
+    type DisplayCustomerItem = {value : string,displayValue : string}
+
+    const {Customer} = useContext(DataContext)
+
+    useEffect(() => {
+        const cus : DisplayCustomerItem[] = Customer.Data.map(item => ({value : item.uid,displayValue : item.Name}));
+        setDisplayCustomers(cus)
+    },[])
 
     const classes = useStyle();
 
-    const [customer,setCustomer] = useState<string>('');
+    const [displayCustomers,setDisplayCustomers] = useState<DisplayCustomerItem[]>([]);
+    const [selectedCustomer,setSelectedCustomer] = useState<string>('');
 
     const comboBoxHandleChange = (e : ChangeEvent<HTMLInputElement>) => {
-        setCustomer(e.target.value)
+        setSelectedCustomer(e.target.value)
     };
 
     return (
@@ -36,12 +41,12 @@ const CarCreate : FC = () => {
                         id="outlined-select-currency"
                         select
                         label="得意先選択"
-                        value={customer}
+                        value={selectedCustomer}
                         onChange={(e : ChangeEvent<HTMLInputElement>) => comboBoxHandleChange(e)}
                         helperText="車輛を紐づける得意先を選択してください。"
                         variant="outlined"
                     >
-                        {Customers.map((option) => (
+                        {displayCustomers.map((option) => (
                             <MenuItem key={option.value} value={option.value}>
                                 {option.displayValue}
                             </MenuItem>
