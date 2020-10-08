@@ -13,7 +13,7 @@ const useStyle = makeStyles((theme) => ({
 const CarCreate : FC = () => {
     type DisplayCustomerItem = {value : string,displayValue : string}
 
-    const {Customer} = useContext(DataContext)
+    const {Customer,Car} = useContext(DataContext)
 
     useEffect(() => {
         const cus : DisplayCustomerItem[] = Customer.Data.map(item => ({value : item.uid,displayValue : item.Name}));
@@ -24,9 +24,15 @@ const CarCreate : FC = () => {
 
     const [displayCustomers,setDisplayCustomers] = useState<DisplayCustomerItem[]>([]);
     const [selectedCustomer,setSelectedCustomer] = useState<string>('');
+    const [carNumber,setCarNumber] = useState<string>('');
+    const [carDetail,setCarDetail] = useState<string>('');
 
     const comboBoxHandleChange = (e : ChangeEvent<HTMLInputElement>) => {
         setSelectedCustomer(e.target.value)
+    };
+
+    const CreateCar = async () => {
+        await Car.Func.CreateCar(selectedCustomer,carNumber,carDetail)
     };
 
     return (
@@ -54,7 +60,7 @@ const CarCreate : FC = () => {
                     </TextField>
                 </Grid>
                 <Grid item sm={12} className={classes.center}>
-                    <TextField id="outlined-basic" label="車輌番号" variant="outlined" />
+                    <TextField id="outlined-basic" label="車輌番号" variant="outlined" value={carNumber} onChange={(e) => setCarNumber(e.target.value)}/>
                 </Grid>
                 <Grid item sm={12} className={classes.center}>
                     <TextField
@@ -63,10 +69,12 @@ const CarCreate : FC = () => {
                         multiline
                         rows={4}
                         variant="outlined"
+                        value={carDetail}
+                        onChange={(e) => setCarDetail(e.target.value)}
                     />
                 </Grid>
                 <Grid item sm={12} className={classes.center}>
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="primary" type={'button'} onClick={() => CreateCar()}>
                         登録
                     </Button>
                 </Grid>

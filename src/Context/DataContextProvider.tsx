@@ -5,7 +5,7 @@ import {GetAllEmployees} from "./Functions/EmpFunction";
 import {SetDisplayEmp} from "../Reducers/EmpReducer";
 import {GetAllComments,GetEmpComments,GetCarComments} from "./Functions/CommentFunction";
 import {SetDisplayComment} from "../Reducers/CommentReducer";
-import {GetAllCar,GetCustomerCars} from "./Functions/CarFunction";
+import {GetAllCar,GetCustomerCars,CreateCar} from "./Functions/CarFunction";
 import {SetDisplayCar} from "../Reducers/CarReducer";
 import {GetAllCustomers} from "./Functions/CustomerFunction";
 import {SetDisplayCustomer} from "../Reducers/CustomerReducer";
@@ -25,6 +25,7 @@ interface IDataContextState {
         Data : CarInfo[],
         Func : {
             GetCustomerCars : typeof GetCustomerCars
+            CreateCar : typeof CreateCar
         }
     },
     Comment : {
@@ -63,7 +64,7 @@ const DataContextProvider : FC = ({children}) => {
             },
             Car : {
                 Data : state.Car,
-                Func : {GetCustomerCars}
+                Func : {GetCustomerCars,CreateCar}
             },
             Comment : {
                 Data : state.Comment,

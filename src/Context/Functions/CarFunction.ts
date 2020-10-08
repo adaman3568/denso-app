@@ -1,9 +1,10 @@
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "../DataTypeList";
-import firebase, {DocumentList} from '../../Firebase';
+import {GetCustomer} from "./CustomerFunction";
+import myFirebase, {DocumentList} from '../../Firebase';
 
 export const GetAllCar = async () : Promise<CarInfo[]> => {
     let data : CarInfo[] = [];
-    const snapshot = await firebase.firestore().collection(DocumentList.Cars).get()
+    const snapshot = await myFirebase.firestore().collection(DocumentList.Cars).get()
     snapshot.forEach(d => {
         let car : CarInfo = d.data() as CarInfo;
         car.uid = d.id;
@@ -13,7 +14,7 @@ export const GetAllCar = async () : Promise<CarInfo[]> => {
 };
 
 export const GetCustomerCars = async (uid : string) : Promise<CarInfo[]> => {
-    const db = firebase.firestore();
+    const db = myFirebase.firestore();
     const snapshot = await db.collection(DocumentList.Customers).doc(uid).get();
     const customer : CustomerInfo = snapshot.data() as CustomerInfo;
 
@@ -34,4 +35,12 @@ const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarI
     const d : CarInfo = doc.data() as CarInfo;
     d.uid = doc.id;
     return d
+};
+
+export const CreateCar = async (parentCustomerId : string,CarName : string ,CarDetail : string) : Promise<void> => {
+    const db = myFirebase.firestore()
+    const carRef : firebase.firestore.DocumentReference = await db.collection(DocumentList.Cars).add({Name : CarName,Detail : CarDetail});
+    let customer : CustomerInfo = await GetCustomer(parentCustomerId);
+    customer.CarsRef?.push(carRef);
+    db.collection(DocumentList.Customers).doc(parentCustomerId).update(customer);
 };

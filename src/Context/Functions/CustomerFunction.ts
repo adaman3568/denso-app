@@ -11,3 +11,15 @@ export const GetAllCustomers = async () : Promise<CustomerInfo[]> => {
     );
     return data
 };
+
+export const GetCustomer = async (id : string) : Promise<CustomerInfo> => {
+    const snapshot = await firebase.firestore().collection(DocumentList.Customers).doc(id).get();
+    const d = snapshot.data()
+    let data = DataToCustomerInfo(snapshot.data())
+    data.uid = snapshot.id;
+    return data;
+};
+
+const DataToCustomerInfo = (data : any) : CustomerInfo => {
+    return data as CustomerInfo
+}
