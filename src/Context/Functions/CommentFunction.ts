@@ -1,10 +1,12 @@
 import {CommentInfo, EmployeeInfo} from "../DataTypeList";
 import firebase, {DocumentList} from '../../Firebase';
 
+const db = firebase.firestore();
+
 // 全てのコメントを取得する
-export const GetAllComments = async () : Promise<CommentInfo[]> => {
+export const GetAllCommentsFromDB = async () : Promise<CommentInfo[]> => {
     let data : CommentInfo[] = [];
-    const snapshot = await firebase.firestore().collection(DocumentList.Comments).get();
+    const snapshot = await db.collection(DocumentList.Comments).get();
     snapshot.forEach(d => {
         let cm : CommentInfo = d.data() as CommentInfo;
         cm.uid = d.id;
@@ -14,8 +16,7 @@ export const GetAllComments = async () : Promise<CommentInfo[]> => {
 };
 
 // 従業員に紐づくコメントを取得する
-export const GetEmpComments = async (uid : string) : Promise<CommentInfo[]> => {
-    const db = firebase.firestore();
+export const GetEmpCommentsFromDb = async (uid : string) : Promise<CommentInfo[]> => {
     const snapshot = await db.collection(DocumentList.Employees).doc(uid).get();
     const emp : EmployeeInfo = snapshot.data() as EmployeeInfo
 
@@ -31,8 +32,7 @@ export const GetEmpComments = async (uid : string) : Promise<CommentInfo[]> => {
 };
 
 // 車両に紐づくコメントを取得する。
-export const GetCarComments = async (uid : string) : Promise<CommentInfo[]> => {
-    const db = firebase.firestore();
+export const GetCarCommentsFromDB = async (uid : string) : Promise<CommentInfo[]> => {
     const snapshot = await db.collection(DocumentList.Cars).doc(uid).get();
     const emp : EmployeeInfo = snapshot.data() as EmployeeInfo
 

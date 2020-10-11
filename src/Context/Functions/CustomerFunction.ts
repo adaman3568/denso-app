@@ -1,10 +1,12 @@
 import {CustomerInfo} from "../DataTypeList";
 import firebase, {DocumentList} from '../../Firebase';
 
+const db = firebase.firestore();
+
 // 全ての顧客を取得する
-export const GetAllCustomers = async () : Promise<CustomerInfo[]> => {
+export const GetAllCustomersFromDB = async () : Promise<CustomerInfo[]> => {
     let data : CustomerInfo[] = [];
-    const snapshot = await firebase.firestore().collection(DocumentList.Customers).get();
+    const snapshot = await db.collection(DocumentList.Customers).get();
     snapshot.forEach(d => {
         let cus : CustomerInfo = d.data() as CustomerInfo;
         cus.uid = d.id;
@@ -14,8 +16,8 @@ export const GetAllCustomers = async () : Promise<CustomerInfo[]> => {
 };
 
 // 特定の顧客を取得する。
-export const GetCustomer = async (id : string) : Promise<CustomerInfo> => {
-    const snapshot = await firebase.firestore().collection(DocumentList.Customers).doc(id).get();
+export const GetCustomerFromDB = async (id : string) : Promise<CustomerInfo> => {
+    const snapshot = await db.collection(DocumentList.Customers).doc(id).get();
     const d = snapshot.data()
     let data = DataToCustomerInfo(snapshot.data())
     data.uid = snapshot.id;

@@ -12,8 +12,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import {LoginAction} from "../Reducers/AuthReducer";
-import {AuthContext} from "../Context/AuthContextProvider";
 import {RouteComponentProps} from "react-router";
 
 const Copyright: React.FC = () => {
@@ -51,13 +49,12 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     const classes = useStyles();
-    const {func} = useContext(AuthContext);
     const [pass,setPass] = useState('');
     const [mail,setMail] = useState('');
 
     const SignIn = async () => {
-        const res = await func.SignIn(mail,pass);
-        if(res) history.push('/')
+        // const res = await func.SignIn(mail,pass);
+        // if(res) history.push('/')
     };
 
     return (

@@ -1,11 +1,12 @@
-import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "../DataTypeList";
-import {GetCustomer} from "./CustomerFunction";
+import {CarInfo, CustomerInfo} from "../DataTypeList";
+import {GetCustomerFromDB} from "./CustomerFunction";
 import myFirebase, {DocumentList} from '../../Firebase';
 
+const db = myFirebase.firestore();
 // 全ての車両を取得する。
-export const GetAllCar = async () : Promise<CarInfo[]> => {
+export const GetAllCarFromDB = async () : Promise<CarInfo[]> => {
     let data : CarInfo[] = [];
-    const snapshot = await myFirebase.firestore().collection(DocumentList.Cars).get()
+    const snapshot = await db.collection(DocumentList.Cars).get()
     snapshot.forEach(d => {
         let car : CarInfo = d.data() as CarInfo;
         car.uid = d.id;
@@ -14,9 +15,12 @@ export const GetAllCar = async () : Promise<CarInfo[]> => {
     return data
 };
 
+export const DeleteCarFromDB = async (uid : string) : Promise<void> => {
+    await db.collection(DocumentList.Cars).doc(uid).delete()
+};
+
 // 顧客の車両を全て取得する。
-export const GetCustomerCars = async (uid : string) : Promise<CarInfo[]> => {
-    const db = myFirebase.firestore();
+export const GetCustomerCarsFromDB = async (uid : string) : Promise<CarInfo[]> => {
     const snapshot = await db.collection(DocumentList.Customers).doc(uid).get();
     const customer : CustomerInfo = snapshot.data() as CustomerInfo;
 
@@ -32,6 +36,14 @@ export const GetCustomerCars = async (uid : string) : Promise<CarInfo[]> => {
     }
 };
 
+// 車両を作成する。
+export const CreateCarIntoDB = async (parentCustomerId : string,CarName : string ,CarDetail : string) : Promise<void> => {
+    const carRef : firebase.firestore.DocumentReference = await db.collection(DocumentList.Cars).add({Name : CarName,Detail : CarDetail});
+    let customer : CustomerInfo = await GetCustomerFromDB(parentCustomerId);
+    customer.CarsRef?.push(carRef);
+    db.collection(DocumentList.Customers).doc(parentCustomerId).update(customer);
+};
+
 //　refから車両を全て取得する。
 const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarInfo> => {
     const doc = await ref.get();
@@ -40,11 +52,3 @@ const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarI
     return d
 };
 
-// 車両を作成する。
-export const CreateCar = async (parentCustomerId : string,CarName : string ,CarDetail : string) : Promise<void> => {
-    const db = myFirebase.firestore()
-    const carRef : firebase.firestore.DocumentReference = await db.collection(DocumentList.Cars).add({Name : CarName,Detail : CarDetail});
-    let customer : CustomerInfo = await GetCustomer(parentCustomerId);
-    customer.CarsRef?.push(carRef);
-    db.collection(DocumentList.Customers).doc(parentCustomerId).update(customer);
-};

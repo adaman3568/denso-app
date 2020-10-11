@@ -89,36 +89,36 @@ const Tweet : React.FC<props> = ({tweet,ShowImg = true}) => {
     );
 };
 
-type prodfileProps = {
-    name : string
-}
+// type prodfileProps = {
+//     name : string
+// }
 
-const Profile : React.FC<prodfileProps> = (props : prodfileProps) => {
-    const classes = useStyles();
-    return(
-        <div className={classes.profileWrapper}>
-            <div className={classes.image}>
-                img
-            </div>
-            <Typography>
-                {props.name}
-            </Typography>
-        </div>
-    )
-};
+// const Profile : React.FC<prodfileProps> = (props : prodfileProps) => {
+//     const classes = useStyles();
+//     return(
+//         <div className={classes.profileWrapper}>
+//             <div className={classes.image}>
+//                 img
+//             </div>
+//             <Typography>
+//                 {props.name}
+//             </Typography>
+//         </div>
+//     )
+// };
 
-type parentCustomerProps = {
-    customerName : string,
-    carName : string
-}
+// type parentCustomerProps = {
+//     customerName : string,
+//     carName : string
+// }
 
-const ParentCustomer : React.FC<parentCustomerProps> = (props : parentCustomerProps) => {
-    return (
-        <div>
-            <Typography>顧客 : {props.customerName}</Typography>
-            <Typography>車両 : {props.carName}</Typography>
-        </div>
-    )
-};
+// const ParentCustomer : React.FC<parentCustomerProps> = (props : parentCustomerProps) => {
+//     return (
+//         <div>
+//             <Typography>顧客 : {props.customerName}</Typography>
+//             <Typography>車両 : {props.carName}</Typography>
+//         </div>
+//     )
+// };
 
 export default Tweet;

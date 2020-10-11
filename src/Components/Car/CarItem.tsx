@@ -2,7 +2,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
-import CommentCount from "../Common/CommentCount";
 import {PathList} from "../../Routing/path";
 import LinkCard from "../Common/LinkCard";
 import {CarInfo} from "../../Context/DataTypeList";

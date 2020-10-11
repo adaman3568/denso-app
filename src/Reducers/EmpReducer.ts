@@ -5,12 +5,12 @@ const EmpInitialState : EmployeeInfo[] = [];
 
 const SetAllEmployeeAction = 'SetAllEmployeeAction' as const;
 
-export const SetDisplayEmp = (data : EmployeeInfo[]) => ({
+export const SetDisplayEmpActionCreator = (data : EmployeeInfo[]) => ({
     type : SetAllEmployeeAction,
     payload : data,
     });
 
-export type EmployeeActions = ReturnType<typeof SetDisplayEmp>
+export type EmployeeActions = ReturnType<typeof SetDisplayEmpActionCreator>
 
 const EmpReducer : React.Reducer<EmployeeInfo[],EmployeeActions> = (status = EmpInitialState , action) : EmployeeInfo[] => {
     switch (action.type) {

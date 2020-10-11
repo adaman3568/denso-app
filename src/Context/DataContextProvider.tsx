@@ -1,15 +1,26 @@
 import React, {createContext, FC, useEffect, useReducer} from 'react';
 import {rootInitial, rootReducer, RootReducerType,RootAction} from "../Reducers/RootReducer";
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
-import {GetAllEmployees} from "./Functions/EmpFunction";
-import {SetDisplayEmp} from "../Reducers/EmpReducer";
-import {GetAllComments,GetEmpComments,GetCarComments} from "./Functions/CommentFunction";
-import {SetDisplayComment} from "../Reducers/CommentReducer";
-import {GetAllCar,GetCustomerCars,CreateCar} from "./Functions/CarFunction";
-import {CarDeleteActionCreator, SetDisplayCar} from "../Reducers/CarReducer";
-import {GetAllCustomers} from "./Functions/CustomerFunction";
-import {SetDisplayCustomer} from "../Reducers/CustomerReducer";
-import firebase, {DocumentList} from '../Firebase'
+
+// region Import Employee's
+import {GetAllEmployeesFromDB} from "./Functions/EmpFunction";
+import {SetDisplayEmpActionCreator} from "../Reducers/EmpReducer";
+// endregion
+
+// region Import Comment's
+import {GetAllCommentsFromDB,GetEmpCommentsFromDb,GetCarCommentsFromDB} from "./Functions/CommentFunction";
+import {SetDisplayCommentActionCreator} from "../Reducers/CommentReducer";
+// endregion
+
+// region Import Car's
+import {GetAllCarFromDB, GetCustomerCarsFromDB, CreateCarIntoDB, DeleteCarFromDB} from "./Functions/CarFunction";
+import {CarDeleteActionCreator, SetDisplayCarActionCreator} from "../Reducers/CarReducer";
+// endregion
+
+// region Import Customer's
+import {GetAllCustomersFromDB} from "./Functions/CustomerFunction";
+import {SetDisplayCustomerActionCreator} from "../Reducers/CustomerReducer";
+// endregion
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
@@ -27,16 +38,16 @@ interface IDataContextState {
     Car : {
         Data : CarInfo[],
         Func : {
-            GetCustomerCars : typeof GetCustomerCars
-            CreateCar : typeof CreateCar
+            GetCustomerCars : typeof GetCustomerCarsFromDB
+            CreateCar : typeof CreateCarIntoDB
             DeleteCar : DeleteCarType
         }
     },
     Comment : {
         Data : CommentInfo[],
         Func : {
-            GetEmpComments : typeof GetEmpComments,
-            GetCarComments : typeof GetCarComments
+            GetEmpComments : typeof GetEmpCommentsFromDb,
+            GetCarComments : typeof GetCarCommentsFromDB
         }
     },
     dispatch : (action : RootAction) => void
@@ -55,17 +66,16 @@ const DataContextProvider : FC = ({children}) => {
     );
 
     useEffect(() => {
-        GetAllComments().then(d => dispatch(SetDisplayComment(d)));
-        GetAllEmployees().then(d => dispatch(SetDisplayEmp(d)));
-        GetAllCar().then(d => dispatch(SetDisplayCar(d)));
-        GetAllCustomers().then(d => dispatch(SetDisplayCustomer(d)))
+        GetAllCommentsFromDB().then(d => dispatch(SetDisplayCommentActionCreator(d)));
+        GetAllEmployeesFromDB().then(d => dispatch(SetDisplayEmpActionCreator(d)));
+        GetAllCarFromDB().then(d => dispatch(SetDisplayCarActionCreator(d)));
+        GetAllCustomersFromDB().then(d => dispatch(SetDisplayCustomerActionCreator(d)))
     },[]);
 
     // region CarMethod
     const DeleteCar : DeleteCarType = async (id : string) => {
-        dispatch(CarDeleteActionCreator(id))
-        const db = firebase.firestore()
-        await db.collection(DocumentList.Cars).doc(id).delete()
+        dispatch(CarDeleteActionCreator(id));
+        await DeleteCarFromDB(id);
     };
     // endregion
 
@@ -81,13 +91,16 @@ const DataContextProvider : FC = ({children}) => {
             },
             Car : {
                 Data : state.Car,
-                Func : {GetCustomerCars,CreateCar,DeleteCar}
+                Func : {
+                    GetCustomerCars : GetCustomerCarsFromDB,
+                    CreateCar : CreateCarIntoDB,
+                    DeleteCar}
             },
             Comment : {
                 Data : state.Comment,
                 Func : {
-                    GetEmpComments,
-                    GetCarComments}
+                    GetEmpComments : GetEmpCommentsFromDb,
+                    GetCarComments : GetCarCommentsFromDB}
             },
             dispatch
         }}>

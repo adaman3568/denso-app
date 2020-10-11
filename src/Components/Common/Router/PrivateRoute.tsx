@@ -1,5 +1,4 @@
-import React, {FC, useContext} from 'react';
-import {AuthContext} from "../../../Context/AuthContextProvider";
+import React, {FC} from 'react';
 import {Redirect, Route, RouteProps} from "react-router-dom";
 interface IProps {
     user : any

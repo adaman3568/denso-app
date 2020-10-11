@@ -18,7 +18,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
-import {AuthContext} from "../../Context/AuthContextProvider";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 function Copyright() {
@@ -115,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
 
 const UserIndexWrapper : React.FC = ({children}) => {
     const classes = useStyles();
-    const {currentUser,func} = useContext(AuthContext);
+    // const {currentUser,func} = useContext(AuthContext);
 
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
@@ -159,7 +158,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
 
     const SignOut = () => {
         // SignOutして/loginに戻る
-        func.SignOut();
+        // func.SignOut();
         window.location.href = '/login'
     };
 
@@ -176,7 +175,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     {/*ログイン時にのみ表示するように*/}
-                    {currentUser && <HamburgerMenu/>}
+                    {/*{currentUser && <HamburgerMenu/>}*/}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         電装SNS
                     </Typography>
@@ -186,11 +185,11 @@ const UserIndexWrapper : React.FC = ({children}) => {
                         </Badge>
                     </IconButton>
                     {/*ログイン時にのみサインアウトボタンを表示*/}
-                    {currentUser && <ExitButton/>}
+                    {/*{currentUser && <ExitButton/>}*/}
                 </Toolbar>
             </AppBar>
             {/*ログイン時にのみ表示するように*/}
-            {currentUser && <DrawerMenu/>}
+            {/*{currentUser && <DrawerMenu/>}*/}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>

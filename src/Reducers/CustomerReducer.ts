@@ -4,12 +4,12 @@ export const CustomerInitialState : CustomerInfo[] = [];
 
 export const SetAllCustomerAction = 'SetAllCustomerAction' as const;
 
-export const SetDisplayCustomer = (data : CustomerInfo[]) => ({
+export const SetDisplayCustomerActionCreator = (data : CustomerInfo[]) => ({
     type : SetAllCustomerAction,
     payload : data,
 });
 
-export type CustomerActions = ReturnType<typeof SetDisplayCustomer>
+export type CustomerActions = ReturnType<typeof SetDisplayCustomerActionCreator>
 
 const CustomerReducer : React.Reducer<CustomerInfo[],CustomerActions> = (status = CustomerInitialState , action) : CustomerInfo[] => {
     switch (action.type) {

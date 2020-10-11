@@ -2,7 +2,6 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router-dom";
 import {DataContext} from "../../Context/DataContextProvider";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
-import {SetDisplayComment} from "../../Reducers/CommentReducer";
 import Tweet from "../Tweets/Tweet";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
