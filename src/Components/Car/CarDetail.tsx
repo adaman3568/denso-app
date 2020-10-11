@@ -3,6 +3,8 @@ import {RouteComponentProps} from 'react-router-dom'
 import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
+import DeleteIcon from '@material-ui/icons/Delete';
+import {Button} from "@material-ui/core";
 
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
@@ -22,6 +24,10 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
     return (
         <div>
             <h2>this is id:{props.match.params.id} car detail page.</h2>
+            <Button size={'large'}>
+                <DeleteIcon/>
+                削除
+            </Button>
             <p>{carData.uid}</p>
             <p>{carData.Name}</p>
             {comments.map((item,index) => <Tweet key={index} tweet={item}/>)}
