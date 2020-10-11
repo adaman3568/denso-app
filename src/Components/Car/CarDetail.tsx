@@ -30,6 +30,7 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
             </Button>
             <p>{carData.uid}</p>
             <p>{carData.Name}</p>
+            <p>{carData.Detail}</p>
             {comments.map((item,index) => <Tweet key={index} tweet={item}/>)}
         </div>
     );

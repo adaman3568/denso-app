@@ -13,8 +13,14 @@ import {SetDisplayCommentActionCreator} from "../Reducers/CommentReducer";
 // endregion
 
 // region Import Car's
-import {GetAllCarFromDB, GetCustomerCarsFromDB, CreateCarIntoDB, DeleteCarFromDB} from "./Functions/CarFunction";
-import {CarDeleteActionCreator, SetDisplayCarActionCreator} from "../Reducers/CarReducer";
+import {
+    GetAllCarFromDB,
+    GetCustomerCarsFromDB,
+    CreateCarIntoDB,
+    DeleteCarFromDB,
+    UpdateCarFromDB
+} from "./Functions/CarFunction";
+import {CarDeleteActionCreator, CarUpdateActionCreator, SetDisplayCarActionCreator} from "../Reducers/CarReducer";
 // endregion
 
 // region Import Customer's
@@ -40,7 +46,8 @@ interface IDataContextState {
         Func : {
             GetCustomerCars : typeof GetCustomerCarsFromDB
             CreateCar : typeof CreateCarIntoDB
-            DeleteCar : DeleteCarType
+            DeleteCar : DeleteCarType,
+            UpdateCar : UpdateCarType
         }
     },
     Comment : {
@@ -55,6 +62,7 @@ interface IDataContextState {
 
 // region CarMethodType
 type DeleteCarType = (id : string) => void
+type UpdateCarType = (id : string,name : string,detail : string) => void
 // endregion
 
 // DataContextの本体
@@ -77,6 +85,11 @@ const DataContextProvider : FC = ({children}) => {
         dispatch(CarDeleteActionCreator(id));
         await DeleteCarFromDB(id);
     };
+
+    const UpdateCar : UpdateCarType = async (id : string,name : string,detail : string) => {
+        const newCarData = await UpdateCarFromDB(id,name,detail);
+        dispatch(CarUpdateActionCreator(id,newCarData))
+    };
     // endregion
 
         return (
@@ -94,7 +107,7 @@ const DataContextProvider : FC = ({children}) => {
                 Func : {
                     GetCustomerCars : GetCustomerCarsFromDB,
                     CreateCar : CreateCarIntoDB,
-                    DeleteCar}
+                    DeleteCar,UpdateCar}
             },
             Comment : {
                 Data : state.Comment,

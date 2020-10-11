@@ -19,6 +19,15 @@ export const DeleteCarFromDB = async (uid : string) : Promise<void> => {
     await db.collection(DocumentList.Cars).doc(uid).delete()
 };
 
+// DBをUpdateしてその結果を返す。
+export const UpdateCarFromDB = async (uid : string,name : string,detail : string) : Promise<CarInfo> => {
+    const ref = await db.collection(DocumentList.Cars).doc(uid).get()
+    const carData = ref.data() as CarInfo;
+    const newCarData = {...carData,name : name,detail : detail,id : ref.id}
+    await db.collection(DocumentList.Cars).doc(uid).update(newCarData);
+    return newCarData
+};
+
 // 顧客の車両を全て取得する。
 export const GetCustomerCarsFromDB = async (uid : string) : Promise<CarInfo[]> => {
     const snapshot = await db.collection(DocumentList.Customers).doc(uid).get();
