@@ -2,6 +2,7 @@ import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "../DataTypeList"
 import {GetCustomer} from "./CustomerFunction";
 import myFirebase, {DocumentList} from '../../Firebase';
 
+// 全ての車両を取得する。
 export const GetAllCar = async () : Promise<CarInfo[]> => {
     let data : CarInfo[] = [];
     const snapshot = await myFirebase.firestore().collection(DocumentList.Cars).get()
@@ -13,6 +14,7 @@ export const GetAllCar = async () : Promise<CarInfo[]> => {
     return data
 };
 
+// 顧客の車両を全て取得する。
 export const GetCustomerCars = async (uid : string) : Promise<CarInfo[]> => {
     const db = myFirebase.firestore();
     const snapshot = await db.collection(DocumentList.Customers).doc(uid).get();
@@ -30,6 +32,7 @@ export const GetCustomerCars = async (uid : string) : Promise<CarInfo[]> => {
     }
 };
 
+//　refから車両を全て取得する。
 const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarInfo> => {
     const doc = await ref.get();
     const d : CarInfo = doc.data() as CarInfo;
@@ -37,6 +40,7 @@ const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarI
     return d
 };
 
+// 車両を作成する。
 export const CreateCar = async (parentCustomerId : string,CarName : string ,CarDetail : string) : Promise<void> => {
     const db = myFirebase.firestore()
     const carRef : firebase.firestore.DocumentReference = await db.collection(DocumentList.Cars).add({Name : CarName,Detail : CarDetail});

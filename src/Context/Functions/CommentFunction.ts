@@ -1,6 +1,7 @@
 import {CommentInfo, EmployeeInfo} from "../DataTypeList";
 import firebase, {DocumentList} from '../../Firebase';
 
+// 全てのコメントを取得する
 export const GetAllComments = async () : Promise<CommentInfo[]> => {
     let data : CommentInfo[] = [];
     const snapshot = await firebase.firestore().collection(DocumentList.Comments).get();
@@ -12,6 +13,7 @@ export const GetAllComments = async () : Promise<CommentInfo[]> => {
     return data
 };
 
+// 従業員に紐づくコメントを取得する
 export const GetEmpComments = async (uid : string) : Promise<CommentInfo[]> => {
     const db = firebase.firestore();
     const snapshot = await db.collection(DocumentList.Employees).doc(uid).get();
@@ -28,6 +30,7 @@ export const GetEmpComments = async (uid : string) : Promise<CommentInfo[]> => {
     }
 };
 
+// 車両に紐づくコメントを取得する。
 export const GetCarComments = async (uid : string) : Promise<CommentInfo[]> => {
     const db = firebase.firestore();
     const snapshot = await db.collection(DocumentList.Cars).doc(uid).get();

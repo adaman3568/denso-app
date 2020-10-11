@@ -13,6 +13,8 @@ import firebase, {DocumentList} from '../Firebase'
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
+// DataContextのvalueのインターフェース
+// DataContextに関数を追加したり、値を保持させたりする際はここを触る。
 interface IDataContextState {
     Customer : {
         Data : CustomerInfo[],
@@ -27,7 +29,7 @@ interface IDataContextState {
         Func : {
             GetCustomerCars : typeof GetCustomerCars
             CreateCar : typeof CreateCar
-            DeleteCar : (id : string) => void
+            DeleteCar : DeleteCarType
         }
     },
     Comment : {
@@ -44,6 +46,7 @@ interface IDataContextState {
 type DeleteCarType = (id : string) => void
 // endregion
 
+// DataContextの本体
 const DataContextProvider : FC = ({children}) => {
 
     const [state , dispatch] = useReducer<RootReducerType>(
