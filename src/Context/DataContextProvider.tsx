@@ -6,9 +6,10 @@ import {SetDisplayEmp} from "../Reducers/EmpReducer";
 import {GetAllComments,GetEmpComments,GetCarComments} from "./Functions/CommentFunction";
 import {SetDisplayComment} from "../Reducers/CommentReducer";
 import {GetAllCar,GetCustomerCars,CreateCar} from "./Functions/CarFunction";
-import {SetDisplayCar} from "../Reducers/CarReducer";
+import {CarDeleteActionCreator, SetDisplayCar} from "../Reducers/CarReducer";
 import {GetAllCustomers} from "./Functions/CustomerFunction";
 import {SetDisplayCustomer} from "../Reducers/CustomerReducer";
+import firebase, {DocumentList} from '../Firebase'
 
 export const DataContext = createContext<IDataContextState>({} as IDataContextState);
 
@@ -26,6 +27,7 @@ interface IDataContextState {
         Func : {
             GetCustomerCars : typeof GetCustomerCars
             CreateCar : typeof CreateCar
+            DeleteCar : (id : string) => void
         }
     },
     Comment : {
@@ -37,6 +39,10 @@ interface IDataContextState {
     },
     dispatch : (action : RootAction) => void
 }
+
+// region CarMethodType
+type DeleteCarType = (id : string) => void
+// endregion
 
 const DataContextProvider : FC = ({children}) => {
 
@@ -52,7 +58,15 @@ const DataContextProvider : FC = ({children}) => {
         GetAllCustomers().then(d => dispatch(SetDisplayCustomer(d)))
     },[]);
 
-    return (
+    // region CarMethod
+    const DeleteCar : DeleteCarType = async (id : string) => {
+        dispatch(CarDeleteActionCreator(id))
+        const db = firebase.firestore()
+        await db.collection(DocumentList.Cars).doc(id).delete()
+    };
+    // endregion
+
+        return (
         <DataContext.Provider value={{
             Customer : {
                 Data : state.Customer,
@@ -64,7 +78,7 @@ const DataContextProvider : FC = ({children}) => {
             },
             Car : {
                 Data : state.Car,
-                Func : {GetCustomerCars,CreateCar}
+                Func : {GetCustomerCars,CreateCar,DeleteCar}
             },
             Comment : {
                 Data : state.Comment,

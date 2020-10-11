@@ -24,7 +24,7 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
     return (
         <div>
             <h2>this is id:{props.match.params.id} car detail page.</h2>
-            <Button size={'large'}>
+            <Button size={'large'} onClick={() => Car.Func.DeleteCar(props.match.params.id)}>
                 <DeleteIcon/>
                 削除
             </Button>
