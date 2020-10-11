@@ -1,12 +1,17 @@
 import React, {createContext, FC, useEffect, useState} from 'react';
 import firebase from "../Firebase";
+import {createDeflateRaw} from "zlib";
 
 type AuthContextState = {
     initializing : boolean,
-    user : any
+    user : any,
+    func : {SignIn : SignInFuncType,SignOut : SignOutFuncType}
 }
 
-export const AuthContext = createContext<AuthContextState>({initializing: true,user : null})
+type SignInFuncType = (mail : string ,pass : string) => void
+type SignOutFuncType = () => void
+
+export const AuthContext = createContext<AuthContextState>({} as AuthContextState)
 
 const AuthContextProvider : FC = ({children}) => {
 
@@ -18,6 +23,20 @@ const AuthContextProvider : FC = ({children}) => {
         }
     });
 
+    const SignIn : SignInFuncType = async (mail : string,pass : string) => {
+        const res = await firebase.auth().signInWithEmailAndPassword(mail,pass);
+        if(res.user){
+            setState({initializing: false, user :  res.user})
+        }else{
+            setState({initializing: false, user :  null})
+        }
+    };
+
+    const SignOut : SignOutFuncType = async () => {
+        await firebase.auth().signOut()
+        setState({initializing: false,user : null})
+    };
+
     const onChange = (user : any) => {
         setState({initializing: false,user})
     };
@@ -28,7 +47,7 @@ const AuthContextProvider : FC = ({children}) => {
     },[]);
 
     return (
-        <AuthContext.Provider value={{initializing : state.initializing,user : state.user}}>
+        <AuthContext.Provider value={{initializing : state.initializing,user : state.user,func : {SignIn,SignOut}}}>
             {children}
         </AuthContext.Provider>
     );

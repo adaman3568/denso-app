@@ -125,7 +125,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
         setOpen(false);
     };
 
-    const {user} = useContext(AuthContext);
+    const {user,func} = useContext(AuthContext);
 
     // サイドメニュー
     const DrawerMenu = () => {
@@ -159,15 +159,9 @@ const UserIndexWrapper : React.FC = ({children}) => {
         </IconButton>)
     };
 
-    const SignOut = () => {
-        // SignOutして/loginに戻る
-        // func.SignOut();
-        window.location.href = '/login'
-    };
-
     const ExitButton = () => {
         return (
-        <IconButton color={'inherit'} onClick={() => SignOut()}>
+        <IconButton color={'inherit'} onClick={() => func.SignOut()}>
             <ExitToAppIcon/>
         </IconButton>)
     };

@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {RouteComponentProps} from "react-router";
+import {AuthContext} from "../Context/AuthContextProvider";
 
 const Copyright: React.FC = () => {
     return(
@@ -51,10 +52,11 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     const classes = useStyles();
     const [pass,setPass] = useState('');
     const [mail,setMail] = useState('');
+    const {func} = useContext(AuthContext);
 
     const SignIn = async () => {
-        // const res = await func.SignIn(mail,pass);
-        // if(res) history.push('/')
+        await func.SignIn(mail,pass);
+        history.push('/')
     };
 
     return (
