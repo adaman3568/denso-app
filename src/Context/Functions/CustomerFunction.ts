@@ -9,7 +9,7 @@ export const GetAllCustomersFromDB = async () : Promise<CustomerInfo[]> => {
     const snapshot = await db.collection(DocumentList.Customers).get();
     snapshot.forEach(d => {
         let cus : CustomerInfo = d.data() as CustomerInfo;
-        cus.uid = d.id;
+        cus.id = d.id;
         data.push(cus)}
     );
     return data
@@ -20,7 +20,7 @@ export const GetCustomerFromDB = async (id : string) : Promise<CustomerInfo> => 
     const snapshot = await db.collection(DocumentList.Customers).doc(id).get();
     const d = snapshot.data()
     let data = DataToCustomerInfo(snapshot.data())
-    data.uid = snapshot.id;
+    data.id = snapshot.id;
     return data;
 };
 

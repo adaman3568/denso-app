@@ -19,7 +19,7 @@ const myStyle = makeStyles((theme) => ({
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.carDetail}/${Car.uid}`}>
+        <LinkCard path={`${PathList.carDetail}/${Car.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>

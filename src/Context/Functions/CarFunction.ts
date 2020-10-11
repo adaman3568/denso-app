@@ -9,7 +9,7 @@ export const GetAllCarFromDB = async () : Promise<CarInfo[]> => {
     const snapshot = await db.collection(DocumentList.Cars).get()
     snapshot.forEach(d => {
         let car : CarInfo = d.data() as CarInfo;
-        car.uid = d.id;
+        car.id = d.id;
         data.push(car)}
     );
     return data
@@ -39,7 +39,7 @@ export const GetCustomerCarsFromDB = async (uid : string) : Promise<CarInfo[]> =
 
         // その後Promise.all()に配列を投げると同時に、awaitで処理を待って、返す。
         const commentData : CarInfo[] = await Promise.all(data);
-        return commentData;
+        return commentData.filter(item => item !== null);
     }else{
         return []
     }
@@ -56,8 +56,8 @@ export const CreateCarIntoDB = async (parentCustomerId : string,CarName : string
 //　refから車両を全て取得する。
 const getCar = async (ref : firebase.firestore.DocumentReference) : Promise<CarInfo> => {
     const doc = await ref.get();
-    const d : CarInfo = doc.data() as CarInfo;
-    d.uid = doc.id;
+    let d : CarInfo = doc.data() as CarInfo;
+    d.id = doc.id;
     return d
 };
 

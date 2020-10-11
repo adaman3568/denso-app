@@ -1,11 +1,11 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
-import {RouteComponentProps} from 'react-router-dom'
+import {Link, RouteComponentProps} from 'react-router-dom'
 import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {Button} from "@material-ui/core";
-import ParaInputChanger from "../Common/ParaInputChanger";
+import {Button, Typography} from "@material-ui/core";
+import {PathList} from "../../Routing/path";
 
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
@@ -13,11 +13,11 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
     const {Car,Comment} = useContext(DataContext);
     const [carData, setCarData] = useState<CarInfo>({} as CarInfo);
     const [comments, setComments] = useState<CommentInfo[]>([]);
-    const [carName, setCarName] = useState<string>('');
+    const [carName, setCarName] = useState<string>(carData.Name);
     const [carDetail, setCarDetail] = useState<string>(carData.Detail);
 
     useEffect(() => {
-        const d : CarInfo | undefined = Car.Data.find(item => item?.uid === props.match.params.id);
+        const d : CarInfo | undefined = Car.Data.find(item => item?.id === props.match.params.id);
         if(d !== undefined) {
             setCarData(d);
             setCarName(d.Name);
@@ -33,9 +33,12 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
                 <DeleteIcon/>
                 削除
             </Button>
-            <p>{carData.uid}</p>
-            <ParaInputChanger value={carName} setValueFunc={setCarName} TextBoxName={"車両番号"}/>
-            <ParaInputChanger value={carDetail} setValueFunc={setCarDetail} TextBoxName={"車両詳細"}/>
+            <p>{carData.id}</p>
+            <Typography>{carData.Name}</Typography>
+            <Typography>{carData.Detail}</Typography>
+            <Link to={`${PathList.carEdit}/${carData.id}`}>
+                <Button>編集</Button>
+            </Link>
             {comments.map((item,index) => <Tweet key={index} tweet={item}/>)}
         </div>
     );

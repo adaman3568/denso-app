@@ -14,8 +14,8 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     const [cars , setCars] = useState<CarInfo[]>([]);
     useEffect(() => {
-        const c = Customer.Data.find(item => item.uid == match.params.id);
-        if (c !== undefined){
+        const c = Customer.Data.find(item => item.id == match.params.id);
+        if (c){
             setCustomer(c);
             Car.Func.GetCustomerCars(match.params.id).then(d => setCars(d))
         }
@@ -24,7 +24,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     return (
         <div>
             <h2>this is id:{match.params.id}'s customer detail page</h2>
-            <p>{customer.uid}</p>
+            <p>{customer.id}</p>
             <p>{customer.Name}</p>
             {cars?.map((item,index) => <CarItem key={index} Car={item}/>)}
         </div>

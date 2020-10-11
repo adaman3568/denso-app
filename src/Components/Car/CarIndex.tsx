@@ -18,7 +18,7 @@ const CarIndex : FC = () => {
         <div>
             <Title>This is CarIndex page.</Title>
             <Link to={PathList.carCreate}>Create Car</Link>
-            {carItems.map(car => <CarItem key={car.uid} Car={car} />)}
+            {carItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>
     );
 };

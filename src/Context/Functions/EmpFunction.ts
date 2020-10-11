@@ -9,7 +9,7 @@ export const GetAllEmployeesFromDB = async () : Promise<EmployeeInfo[]> => {
     const snapshot = await db.collection(DocumentList.Employees).get()
     snapshot.forEach(d => {
         let em : EmployeeInfo = d.data() as EmployeeInfo;
-        em.uid = d.id;
+        em.id = d.id;
         data.push(em)}
         );
     return data

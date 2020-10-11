@@ -13,18 +13,18 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
     const [comments, setComments] = useState<CommentInfo[]>([]);
 
     useEffect(() => {
-        const d = Employee.Data.find(item => item.uid === match.params.id);
+        const d = Employee.Data.find(item => item.id === match.params.id);
         if(d !== undefined)
         {
             setEmp(d);
-            Comment.Func.GetEmpComments(d.uid).then(data => setComments(data));
+            Comment.Func.GetEmpComments(d.id).then(data => setComments(data));
         }
 
     },[])
     return (
         <div>
             <h2>this is id:{match.params.id}'s emp page.</h2>
-            <p>{emp.uid}</p>
+            <p>{emp.id}</p>
             <p>{emp.Name}</p>
             <p>{emp.eMail}</p>
             {comments.map((d,index) => <Tweet key={index} tweet={d}/>)}

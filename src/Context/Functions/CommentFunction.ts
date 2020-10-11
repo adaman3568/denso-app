@@ -9,7 +9,7 @@ export const GetAllCommentsFromDB = async () : Promise<CommentInfo[]> => {
     const snapshot = await db.collection(DocumentList.Comments).get();
     snapshot.forEach(d => {
         let cm : CommentInfo = d.data() as CommentInfo;
-        cm.uid = d.id;
+        cm.id = d.id;
         data.push(cm)}
     );
     return data
@@ -53,6 +53,6 @@ export const GetCarCommentsFromDB = async (uid : string) : Promise<CommentInfo[]
 const getComment = async (comRef : firebase.firestore.DocumentReference) : Promise<CommentInfo> => {
     const com = await comRef.get();
     const comment : CommentInfo = com.data() as CommentInfo;
-    comment.uid = com.id;
+    comment.id = com.id;
     return comment;
 };

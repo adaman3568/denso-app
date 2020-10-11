@@ -35,9 +35,9 @@ const CarReducer : React.Reducer<CarInfo[],CarActions> = (status = EmpInitialSta
         case SetAllCarAction:
             return action.payload.data;
         case CarDeleteAction:
-            return status.filter(item => item.uid !== action.payload.id);
+            return status.filter(item => item.id !== action.payload.id);
         case CarUpdateAction:
-            let filterdStatus = status.filter(item => item.uid !== action.payload.id);
+            let filterdStatus = status.filter(item => item.id !== action.payload.id);
             filterdStatus.push(action.payload.newData);
             return filterdStatus;
 

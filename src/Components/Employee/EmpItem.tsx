@@ -27,7 +27,7 @@ type Props = {
 const EmployeeItem : FC<Props> = ({Emp}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.employeeDetail}/${Emp.uid}`}>
+        <LinkCard path={`${PathList.employeeDetail}/${Emp.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>

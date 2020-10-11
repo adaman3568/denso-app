@@ -81,6 +81,7 @@ const App : React.FC = () => {
 
                                 <PrivateRoute exact path={PathList.cars} component={CarIndex} user={user}/>
                                 <PrivateRoute exact path={PathList.carCreate} component={CarCreate} user={user}/>
+                                <PrivateRoute exact path={`${PathList.carEdit}/:id`} component={CarCreate} user={user}/>
                                 <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} user={user}/>
 
                                 <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>

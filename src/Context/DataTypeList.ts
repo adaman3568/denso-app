@@ -9,27 +9,27 @@ export type RootType = {
 
 // EmployeeがTweetsの実態を持っていて、CustomerInfoとCarInfoはリファレンスを持っているイメージ
 export type EmployeeInfo = {
-    uid : string,
+    id : string,
     Name : string,
     eMail : string,
     CommentsRef? : DocumentReference[]
 }
 
 export type CommentInfo = {
-    uid : string,
+    id : string,
     Body : string,
     ReplyCommentRef? : DocumentReference[]
 }
 
 export type CustomerInfo = {
-    uid : string
+    id : string
     Name : string,
     Address : string,
     CarsRef? : DocumentReference[]
 }
 
 export type CarInfo = {
-    uid : string,
+    id : string,
     Name : string,
     Detail : string,
     CommentsRef? : DocumentReference[]

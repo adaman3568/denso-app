@@ -35,7 +35,7 @@ const CustomerItem : FC<Props> = ({Customer}) => {
     const classes = myStyle();
 
     return(
-        <LinkCard path={`${PathList.customerDetail}/${Customer.uid}`}>
+        <LinkCard path={`${PathList.customerDetail}/${Customer.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
