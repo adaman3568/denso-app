@@ -8,7 +8,7 @@ export const useAuth = () => {
             initializing: !user,
             user,
         }
-    })
+    });
 
     function onChange(user : any) {
         setState({ initializing: false, user })

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import UserIndexWrapper from "./Components/UserIndex/UserIndexWrapper";
 import Tweets from "./Components/Tweets/Tweets";
@@ -22,6 +22,7 @@ import {useAuth} from "./CustomHooks/useAuth";
 import {CircularProgress} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import AuthContextProvider, {AuthContext} from "./Context/AuthContextProvider";
 
 const theme = createMuiTheme({
     palette :{
@@ -60,7 +61,7 @@ const Loading : FC = () => {
 
 const App : React.FC = () => {
 
-    const {initializing,user} = useAuth();
+    const {initializing,user} = useContext(AuthContext);
     if(initializing){
         return <Loading/>
 
