@@ -19,6 +19,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {AuthContext} from "../../Context/AuthContextProvider";
 
 function Copyright() {
     return (
@@ -124,6 +125,8 @@ const UserIndexWrapper : React.FC = ({children}) => {
         setOpen(false);
     };
 
+    const {user} = useContext(AuthContext);
+
     // サイドメニュー
     const DrawerMenu = () => {
         return (
@@ -175,7 +178,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     {/*ログイン時にのみ表示するように*/}
-                    {/*{currentUser && <HamburgerMenu/>}*/}
+                    {user && <HamburgerMenu/>}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         電装SNS
                     </Typography>
@@ -185,11 +188,11 @@ const UserIndexWrapper : React.FC = ({children}) => {
                         </Badge>
                     </IconButton>
                     {/*ログイン時にのみサインアウトボタンを表示*/}
-                    {/*{currentUser && <ExitButton/>}*/}
+                    {user && <ExitButton/>}
                 </Toolbar>
             </AppBar>
             {/*ログイン時にのみ表示するように*/}
-            {/*{currentUser && <DrawerMenu/>}*/}
+            {user && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
