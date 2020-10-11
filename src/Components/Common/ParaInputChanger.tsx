@@ -23,7 +23,7 @@ const ParaInputChanger : FC<Props> = ({value,TextBoxName,setValueFunc}) => {
                 onChange={(e) => setValueFunc(e.target.value)}/>
                 <Button onClick={() => setIsInput(false)}>更新</Button>
                 </div>:
-                <Typography onClick={() => setIsInput(true)}>{value}</Typography>}
+                <Typography onClick={() => setIsInput(true)}>{TextBoxName} : {value}</Typography>}
         </div>
     );
 };
