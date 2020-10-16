@@ -5,6 +5,7 @@ import CardTitle from "../Common/CardTitle";
 import {PathList} from "../../Routing/path";
 import LinkCard from "../Common/LinkCard";
 import {CarInfo} from "../../Context/DataTypeList";
+import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 
 type Props = {
     Car : CarInfo
@@ -31,6 +32,7 @@ const CarItem : FC<Props> = ({Car}) => {
                         {Car.Detail}
                     </Typography>
                 </Grid>
+                <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
             </Grid>
         </LinkCard>
     )

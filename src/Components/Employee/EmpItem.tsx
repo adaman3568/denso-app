@@ -6,6 +6,7 @@ import CommentCount from "../Common/CommentCount";
 import LinkCard from "../Common/LinkCard";
 import {PathList} from "../../Routing/path";
 import {EmployeeInfo} from "../../Context/DataTypeList";
+import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 
 const myStyle = makeStyles((theme) => ({
     card : {
@@ -39,6 +40,7 @@ const EmployeeItem : FC<Props> = ({Emp}) => {
                         {Emp.eMail}
                     </Typography>
                 </Grid>
+                <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
             </Grid>
         </LinkCard>
     )

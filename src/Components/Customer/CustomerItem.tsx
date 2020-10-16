@@ -7,6 +7,7 @@ import LinkCard from "../Common/LinkCard";
 import {PathList} from "../../Routing/path";
 import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
 import {DataContext} from "../../Context/DataContextProvider";
+import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 
 
 type Props = {
@@ -47,6 +48,7 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                         {Customer.Address}
                     </Typography>
                 </Grid>
+                <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
                 {/*<Grid sm={6}>*/}
                 {/*    <div className={classes.cardInfo}>*/}
                 {/*        車両台数：{Customer.CarCount}*/}
