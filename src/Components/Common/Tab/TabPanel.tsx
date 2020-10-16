@@ -1,27 +1,27 @@
-import React, {FC} from 'react';
+import React, {FC, useContext} from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import {TabContext} from "./TabContext";
 
 interface TabPanelProps {
     children?: React.ReactNode;
     index: any;
-    value: any;
 }
 
-const TabPanel : FC<TabPanelProps> = ({ children, value, index, ...other }) => {
+const TabPanel : FC<TabPanelProps> = ({ children, index, ...other }) => {
+
+    const context = useContext(TabContext);
 
     return (
         <div
             role="tabpanel"
-            hidden={value !== index}
+            hidden={context.currentIndex !== index}
             id={`scrollable-auto-tabpanel-${index}`}
             aria-labelledby={`scrollable-auto-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={3}>
-                    <Typography>{children}</Typography>
-                </Box>
+            {context.currentIndex === index && (
+                <Box p={3}>{children}</Box>
             )}
         </div>
     );

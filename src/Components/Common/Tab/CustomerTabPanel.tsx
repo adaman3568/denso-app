@@ -13,10 +13,9 @@ type Props = {
 const CustomerTabPanel : FC<Props> = ({customer,index}) => {
 
     const [tweets,setTweets] = useState<CommentInfo[]>([]);
-    const context = useContext(DataContext);
 
     return (
-        <TabPanel index={index} value={customer.Name}>
+        <TabPanel index={index}>
             <Typography>{customer.Name}</Typography>
             {tweets.map((item,index) => <Tweet key={index} tweet={item}/>)}
         </TabPanel>

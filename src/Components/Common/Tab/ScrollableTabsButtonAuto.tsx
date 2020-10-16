@@ -7,6 +7,7 @@ import TabPanel from "./TabPanel";
 import CustomerTabPanel from "./CustomerTabPanel";
 import {CustomerInfo} from "../../../Context/DataTypeList";
 import {DataContext} from "../../../Context/DataContextProvider";
+import {TabContext} from "./TabContext";
 
 function a11yProps(index: any) {
     return {
@@ -25,24 +26,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ScrollableTabsButtonAuto : FC = () => {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+
+    const {currentIndex,setCurrentIndex} = useContext(TabContext);
+    const context = useContext(DataContext);
 
     const [customers,setCustomers] = useState<CustomerInfo[]>([]);
-    const context = useContext(DataContext);
+
     useEffect(() => {
         setCustomers(context.Customer.Data)
     });
-
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setValue(newValue);
-    };
 
     return (
         <div className={classes.root}>
             <AppBar position="static" color="default">
                 <Tabs
-                    value={value}
-                    onChange={handleChange}
+                    value={currentIndex}
+                    onChange={setCurrentIndex}
                     indicatorColor="primary"
                     textColor="primary"
                     variant="scrollable"
