@@ -1,8 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Tweet from "./Tweet";
-import {CommentInfo} from "../../Context/DataTypeList";
 import {DataContext} from "../../Context/DataContextProvider";
-import ScrollableTabsButtonAuto from "../Common/Tab/TabPanel";
+import ScrollableTabsButtonAuto from "../Common/Tab/ScrollableTabsButtonAuto";
 
 type Props = {
     ShowImg? : boolean
