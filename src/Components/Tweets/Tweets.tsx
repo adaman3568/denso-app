@@ -9,14 +9,11 @@ type Props = {
 }
 
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
-    const {Comment} = useContext(DataContext);
     return (
         <div>
             <TabContextProvider>
                 <ScrollableTabsButtonAuto/>
             </TabContextProvider>
-            <h2>Tweets</h2>
-            {Comment.Data.map((item,index) => <Tweet key={index} tweet={item} ShowImg={ShowImg}/>)}
         </div>
     );
 };

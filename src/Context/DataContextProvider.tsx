@@ -8,7 +8,7 @@ import {SetDisplayEmpActionCreator} from "../Reducers/EmpReducer";
 // endregion
 
 // region Import Comment's
-import {GetAllCommentsFromDB,GetEmpCommentsFromDb,GetCarCommentsFromDB} from "./Functions/CommentFunction";
+import {GetAllCommentsFromDB,GetEmpCommentsFromDb,GetCarCommentsFromDB,GetCustomerCommentsFromDB} from "./Functions/CommentFunction";
 import {SetDisplayCommentActionCreator} from "../Reducers/CommentReducer";
 // endregion
 
@@ -54,7 +54,8 @@ interface IDataContextState {
         Data : CommentInfo[],
         Func : {
             GetEmpComments : typeof GetEmpCommentsFromDb,
-            GetCarComments : typeof GetCarCommentsFromDB
+            GetCarComments : typeof GetCarCommentsFromDB,
+            GetCustomerCommentsFromDB : typeof GetCustomerCommentsFromDB,
         }
     },
     dispatch : (action : RootAction) => void
@@ -113,7 +114,8 @@ const DataContextProvider : FC = ({children}) => {
                 Data : state.Comment,
                 Func : {
                     GetEmpComments : GetEmpCommentsFromDb,
-                    GetCarComments : GetCarCommentsFromDB}
+                    GetCarComments : GetCarCommentsFromDB,
+                    GetCustomerCommentsFromDB}
             },
             dispatch
         }}>

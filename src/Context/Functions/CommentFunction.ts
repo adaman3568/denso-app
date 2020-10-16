@@ -1,5 +1,6 @@
-import {CommentInfo, EmployeeInfo} from "../DataTypeList";
+import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "../DataTypeList";
 import firebase, {DocumentList} from '../../Firebase';
+import {GetCustomerCarsFromDB} from "./CarFunction";
 
 const db = firebase.firestore();
 
@@ -29,6 +30,13 @@ export const GetEmpCommentsFromDb = async (uid : string) : Promise<CommentInfo[]
     }else{
         return []
     }
+};
+
+export const GetCustomerCommentsFromDB = async (uid : string) : Promise<CommentInfo[]> => {
+    const carData = await GetCustomerCarsFromDB(uid);
+    const comments : Promise<CommentInfo[]>[] = await carData.flatMap(item => GetCarCommentsFromDB(item.id));
+    const com : CommentInfo[][] = await Promise.all(comments);
+    return com.flatMap(item => (item))
 };
 
 // 車両に紐づくコメントを取得する。

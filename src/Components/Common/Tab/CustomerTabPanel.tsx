@@ -1,4 +1,4 @@
-import React, {FC, useContext, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {CommentInfo, CustomerInfo} from "../../../Context/DataTypeList";
 import TabPanel from "./TabPanel";
 import Tweet from "../../Tweets/Tweet";
@@ -13,6 +13,11 @@ type Props = {
 const CustomerTabPanel : FC<Props> = ({customer,index}) => {
 
     const [tweets,setTweets] = useState<CommentInfo[]>([]);
+    const context = useContext(DataContext);
+
+    useEffect(() => {
+        context.Comment.Func.GetCustomerCommentsFromDB(customer.id).then(res => setTweets(res));
+    },[]);
 
     return (
         <TabPanel index={index}>
