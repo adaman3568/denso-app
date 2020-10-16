@@ -1,9 +1,12 @@
 import {makeStyles, Theme} from "@material-ui/core/styles";
-import React, {FC} from "react";
+import React, {FC, useContext, useEffect, useState} from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
+import CustomerTabPanel from "./CustomerTabPanel";
+import {CustomerInfo} from "../../../Context/DataTypeList";
+import {DataContext} from "../../../Context/DataContextProvider";
 
 function a11yProps(index: any) {
     return {
@@ -24,6 +27,12 @@ const ScrollableTabsButtonAuto : FC = () => {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
 
+    const [customers,setCustomers] = useState<CustomerInfo[]>([]);
+    const context = useContext(DataContext);
+    useEffect(() => {
+        setCustomers(context.Customer.Data)
+    });
+
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setValue(newValue);
     };
@@ -40,36 +49,10 @@ const ScrollableTabsButtonAuto : FC = () => {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
-                    <Tab label="Item Four" {...a11yProps(3)} />
-                    <Tab label="Item Five" {...a11yProps(4)} />
-                    <Tab label="Item Six" {...a11yProps(5)} />
-                    <Tab label="Item Seven" {...a11yProps(6)} />
+                    {customers.map((item,index) => <Tab label={item.Name} {...a11yProps(index)}/>)}
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-                Item One
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                Item Two
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
-            <TabPanel value={value} index={3}>
-                Item Four
-            </TabPanel>
-            <TabPanel value={value} index={4}>
-                Item Five
-            </TabPanel>
-            <TabPanel value={value} index={5}>
-                Item Six
-            </TabPanel>
-            <TabPanel value={value} index={6}>
-                Item Seven
-            </TabPanel>
+            {customers.map((item,index) => <CustomerTabPanel customer={item} index={index} key={index} />)}
         </div>
     );
 }
