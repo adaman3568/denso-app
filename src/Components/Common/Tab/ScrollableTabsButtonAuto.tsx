@@ -48,7 +48,7 @@ const ScrollableTabsButtonAuto : FC = () => {
                     scrollButtons="auto"
                     aria-label="scrollable auto tabs example"
                 >
-                    {customers.map((item,index) => <Tab label={item.Name} {...a11yProps(index)}/>)}
+                    {customers.map((item,index) => <Tab key={index} label={item.Name} {...a11yProps(index)}/>)}
                 </Tabs>
             </AppBar>
             {customers.map((item,index) => <CustomerTabPanel customer={item} index={index} key={index} />)}
