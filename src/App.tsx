@@ -1,6 +1,6 @@
 import React, {FC, useContext} from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
-import UserIndexWrapper from "./Components/UserIndex/UserIndexWrapper";
+import UserIndexWrapper from "./Components/UserIndexWrapper/UserIndexWrapper";
 import Tweets from "./Components/Tweets/Tweets";
 import {PathList} from "./Routing/path";
 import ProfileIndex from "./Components/Profile/ProfileIndex";
