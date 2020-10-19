@@ -27,15 +27,12 @@ import AuthContextProvider, {AuthContext} from "./Context/AuthContextProvider";
 const theme = createMuiTheme({
     palette :{
         primary : {
-            dark : teal[700],
-            main : teal[500],
-            light : teal[300]
+            main : '#005999'
         },
         secondary :{
-            dark : '#ffa000',
-            main : '#ffc107',
-            light : '#ffd54f'
-        }
+            main : '#E6B745'
+        },
+
     }
 });
 
