@@ -1,11 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Tweet from "./Tweet";
 import {DataContext} from "../../Context/DataContextProvider";
-import ScrollableTabsButtonAuto from "../Common/Tab/ScrollableTabsButtonAuto";
-import TabContextProvider from "../Common/Tab/TabContext";
 import {Grid} from "@material-ui/core";
 import {CommentInfo} from "../../Context/DataTypeList";
-import Loading from "../Common/Loading";
 
 type Props = {
     ShowImg? : boolean

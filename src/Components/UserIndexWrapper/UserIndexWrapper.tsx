@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
+import {Container} from "@material-ui/core";
 
 
 function Copyright() {
@@ -190,7 +191,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
             {user && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                {/*<Container maxWidth="lg" className={classes.container}>*/}
+                <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3} className={classes.container}>
                         <Grid item xs={12}>
                             {children}
@@ -199,7 +200,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
                     <Box pt={4}>
                         <Copyright />
                     </Box>
-                {/*</Container>*/}
+                </Container>
             </main>
         </div>
     );

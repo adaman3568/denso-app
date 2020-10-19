@@ -6,7 +6,8 @@ const useClass = makeStyles((theme) => ({
     avatarImg : {
         width: theme.spacing(7),
         height: theme.spacing(7),
-        margin: theme.spacing(0,'auto')
+        margin: theme.spacing(0,'auto'),
+        backgroundColor : theme.palette.secondary.main,
     },
     userName : {
         marginTop : theme.spacing(1),
