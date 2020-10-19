@@ -135,7 +135,7 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
                 {displayCars.map((item,index) => <CarItem key={index} Car={item}/>)}
             </TabPanel1>
             <TabPanel1 value={value} index={1}>
-                {displayComments.map((item,index) => <Tweet key={index} tweet={item} ShowImg={false}/>)}
+                {displayComments.map((item,index) => <Tweet key={index} tweet={item}/>)}
             </TabPanel1>
         </div>
     );
