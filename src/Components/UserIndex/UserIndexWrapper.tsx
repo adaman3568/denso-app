@@ -11,7 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -20,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './ListItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
+
 
 function Copyright() {
     return (
@@ -99,8 +99,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'auto',
     },
     container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
+        padding : theme.spacing(4)
     },
     paper: {
         padding: theme.spacing(2),
@@ -174,7 +173,9 @@ const UserIndexWrapper : React.FC = ({children}) => {
                     {/*ログイン時にのみ表示するように*/}
                     {user && <HamburgerMenu/>}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        電装SNS
+                        <Link color="inherit" href="/">
+                            電装SNS
+                        </Link>
                     </Typography>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
@@ -189,8 +190,8 @@ const UserIndexWrapper : React.FC = ({children}) => {
             {user && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    <Grid container spacing={3}>
+                {/*<Container maxWidth="lg" className={classes.container}>*/}
+                    <Grid container spacing={3} className={classes.container}>
                         <Grid item xs={12}>
                             {children}
                         </Grid>
@@ -198,7 +199,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
                     <Box pt={4}>
                         <Copyright />
                     </Box>
-                </Container>
+                {/*</Container>*/}
             </main>
         </div>
     );
