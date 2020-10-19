@@ -1,4 +1,4 @@
-import React, {createContext, FC, useEffect, useReducer} from 'react';
+import React, {createContext, FC, useEffect, useReducer, useState} from 'react';
 import {rootInitial, rootReducer, RootReducerType,RootAction} from "../Reducers/RootReducer";
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
 
@@ -58,6 +58,7 @@ interface IDataContextState {
             GetCustomerCommentsFromDB : typeof GetCustomerCommentsFromDB,
         }
     },
+    loading : boolean,
     dispatch : (action : RootAction) => void
 }
 
@@ -69,16 +70,22 @@ type UpdateCarType = (id : string,name : string,detail : string) => void
 // DataContextの本体
 const DataContextProvider : FC = ({children}) => {
 
+    const [loading,setLoading] = useState<boolean>(true);
+
     const [state , dispatch] = useReducer<RootReducerType>(
         rootReducer,
         rootInitial
     );
 
     useEffect(() => {
+        setLoading(true)
         GetAllCommentsFromDB().then(d => dispatch(SetDisplayCommentActionCreator(d)));
         GetAllEmployeesFromDB().then(d => dispatch(SetDisplayEmpActionCreator(d)));
         GetAllCarFromDB().then(d => dispatch(SetDisplayCarActionCreator(d)));
-        GetAllCustomersFromDB().then(d => dispatch(SetDisplayCustomerActionCreator(d)))
+        GetAllCustomersFromDB().then(d => {
+            dispatch(SetDisplayCustomerActionCreator(d))
+            setLoading(false)
+        })
     },[]);
 
     // region CarMethod
@@ -117,6 +124,7 @@ const DataContextProvider : FC = ({children}) => {
                     GetCarComments : GetCarCommentsFromDB,
                     GetCustomerCommentsFromDB}
             },
+            loading,
             dispatch
         }}>
             {children}

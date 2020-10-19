@@ -9,7 +9,7 @@ import CustomerIndex from "./Components/Customer/CustomerIndex";
 import TweetsDetail from "./Components/Tweets/TweetsDetail";
 import CustomerDetail from "./Components/Customer/CustomerDetail";
 import EmployeeDetail from "./Components/Employee/EmployeeDetail";
-import DataContextProvider from "./Context/DataContextProvider";
+import DataContextProvider, {DataContext} from "./Context/DataContextProvider";
 import CarIndex from "./Components/Car/CarIndex";
 import CarDetail from "./Components/Car/CarDetail";
 import {createMuiTheme} from "@material-ui/core";
@@ -24,6 +24,7 @@ import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AuthContextProvider, {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
+import Loading from "./Components/Common/Loading";
 
 const theme = createMuiTheme({
     palette :{
@@ -37,32 +38,11 @@ const theme = createMuiTheme({
     }
 });
 
-const myStyle = makeStyles((theme) => ({
-    margin : {
-        marginTop : theme.spacing(4)
-    }}))
-
-const Loading : FC = () => {
-    const classes = myStyle();
-    return(
-        <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-            className={classes.margin}
-        >
-            <CircularProgress/>
-        </Grid>
-    )
-};
-
 const App : React.FC = () => {
 
     const {initializing,user} = useContext(AuthContext);
     if(initializing){
         return <Loading/>
-
     }
 
     return (
