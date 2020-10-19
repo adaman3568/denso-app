@@ -23,6 +23,7 @@ import {CircularProgress} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import AuthContextProvider, {AuthContext} from "./Context/AuthContextProvider";
+import IndexPage from "./Components/Index/IndexPage";
 
 const theme = createMuiTheme({
     palette :{
@@ -70,7 +71,7 @@ const App : React.FC = () => {
                     <MuiThemeProvider theme={theme}>
                         <Switch>
                             <UserIndexWrapper>
-                                <PrivateRoute exact path={PathList.home} component={Tweets} user={user}/>
+                                <PrivateRoute exact path={PathList.home} component={IndexPage} user={user}/>
                                 <PrivateRoute exact path={PathList.profile} component={ProfileIndex} user={user}/>
 
                                 <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} user={user}/>
