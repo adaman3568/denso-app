@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import {Checkbox, Grid, TextField} from "@material-ui/core";
+import {Checkbox, Fab, Grid, TextField} from "@material-ui/core";
 import Tweets from "../Tweets/Tweets";
 import {DataContext} from "../../Context/DataContextProvider";
 import Loading from "../Common/Loading";
@@ -7,6 +7,7 @@ import {Autocomplete} from "@material-ui/lab";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {makeStyles} from "@material-ui/core/styles";
+import AddIcon from '@material-ui/icons/Add';
 
 const customer = [
     {id : 1, name : '合同会社Rst.com'},
@@ -29,6 +30,11 @@ const useStyle = makeStyles((theme) => ({
     },
     tweetsArea : {
         marginTop : theme.spacing(4)
+    },
+    floatingButton : {
+        position : 'absolute',
+        bottom : '10%',
+        right : '10%'
     }
 }))
 
@@ -45,6 +51,9 @@ const IndexPage : FC = () => {
 
     return (
         <Grid container>
+            <Fab color="primary" aria-label="add" className={classes.floatingButton}>
+                <AddIcon />
+            </Fab>
             <div className={classes.topSearch}>
             <Autocomplete
                 multiple
