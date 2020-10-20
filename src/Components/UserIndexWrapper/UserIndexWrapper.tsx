@@ -13,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import {Link as ReactRouterLink} from 'react-router-dom'
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -20,6 +21,9 @@ import { mainListItems } from './ListItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
 import {Container} from "@material-ui/core";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import {PathList} from "../../Routing/path";
+import ProfileIconButton from "./ChildComponents/ProfileIconButton";
 
 
 function Copyright() {
@@ -178,6 +182,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
                             電装SNS
                         </Link>
                     </Typography>
+                    <ProfileIconButton/>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">
                             <NotificationsIcon />

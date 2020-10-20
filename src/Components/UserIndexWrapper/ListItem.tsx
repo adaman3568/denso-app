@@ -2,13 +2,14 @@ import React, {ReactNode} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
 import {DirectionsCar,PermIdentity} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import {PathList} from "../../Routing/path";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import BusinessIcon from '@material-ui/icons/Business';
 
 
 const mainListItems = () => {
@@ -18,9 +19,9 @@ const mainListItems = () => {
     return (
         <div>
             <LinkListItem path={PathList.home} name={'ホーム'} Icon={<HomeIcon/>}/>
-            <LinkListItem path={PathList.employee} name={'ユーザー管理'} Icon={<DashboardIcon/>}/>
-            <LinkListItem path={PathList.profile} name={'プロフィール'} Icon={<PermIdentity/>}/>
-            <LinkListItem path={PathList.customers} name={'得意先管理・閲覧'} Icon={<PeopleIcon/>}/>
+            <LinkListItem path={PathList.employee} name={'ユーザー管理'} Icon={<PeopleIcon/>}/>
+            <LinkListItem path={PathList.employee} name={'ユーザー登録'} Icon={<PersonAddIcon/>}/>
+            <LinkListItem path={PathList.customers} name={'得意先管理・閲覧'} Icon={<BusinessIcon/>}/>
             <LinkListItem path={PathList.cars} name={'車両管理'} Icon={<DirectionsCar/>}/>
         </div>);
 };
