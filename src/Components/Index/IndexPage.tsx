@@ -6,6 +6,7 @@ import Loading from "../Common/Loading";
 import {Autocomplete} from "@material-ui/lab";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import {makeStyles} from "@material-ui/core/styles";
 
 const customer = [
     {id : 1, name : '合同会社Rst.com'},
@@ -18,10 +19,21 @@ const car = [
     {id : 2,name : "11-23"},
     {id : 3,name : "11-44"}
 ]
+
+const useStyle = makeStyles((theme) => ({
+    topSearch : {
+        display : 'flex',
+        justifyContent : 'space-between',
+        padding : theme.spacing(1,2),
+        width : '100%'
+    }
+}))
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const IndexPage : FC = () => {
 
+    const classes = useStyle();
     const {loading} = useContext(DataContext);
 
     if(loading){
@@ -30,7 +42,7 @@ const IndexPage : FC = () => {
 
     return (
         <Grid container>
-            <>
+            <div className={classes.topSearch}>
             <Autocomplete
                 multiple
                 id="customer-selector"
@@ -75,7 +87,7 @@ const IndexPage : FC = () => {
                     <TextField {...params} variant="outlined" label="車両検索" placeholder="車両検索" />
                 )}
             />
-            </>
+            </div>
             <Grid item lg={12} sm={12}>
                 <Tweets/>
             </Grid>
