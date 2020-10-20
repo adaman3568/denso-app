@@ -9,6 +9,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import Backdrop from '@material-ui/core/Backdrop';
+import PostTweet from "../PostTweet";
 
 const customer = [
     {id : 1, name : '合同会社Rst.com'},
@@ -139,8 +140,7 @@ const IndexPage : FC = () => {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <h2 id="transition-modal-title">Transition modal</h2>
-                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                        <PostTweet/>
                     </div>
                 </Fade>
             </Modal>
