@@ -22,10 +22,10 @@ const CustomerAndCar : FC<Props> = ({Customer,Car}) => {
     return (
         <div>
                 <Link to={`${PathList.customerDetail}/${Customer.id}`} className={classes.cardLink}>
-                    <Button size={'small'} color={"primary"} variant="contained" >顧客名 : {Customer.Name}</Button>
+                    <Button size={'small'} color={"primary"} variant="contained" >{Customer.Name}</Button>
                 </Link>
                 <Link to={`${PathList.carDetail}/${Car.id}`} className={classes.cardLink}>
-                    <Button  size={'small'} color={"primary"} variant="contained" >車両名 : {Car.Name}</Button>
+                    <Button  size={'small'} color={"primary"} variant="contained" >{Car.Name}</Button>
                 </Link>
         </div>
     );
