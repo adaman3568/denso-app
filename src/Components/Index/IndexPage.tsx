@@ -26,6 +26,9 @@ const useStyle = makeStyles((theme) => ({
         justifyContent : 'space-between',
         padding : theme.spacing(1,2),
         width : '100%'
+    },
+    tweetsArea : {
+        marginTop : theme.spacing(4)
     }
 }))
 
@@ -88,7 +91,7 @@ const IndexPage : FC = () => {
                 )}
             />
             </div>
-            <Grid item lg={12} sm={12}>
+            <Grid item sm={12} className={classes.tweetsArea}>
                 <Tweets/>
             </Grid>
         </Grid>
