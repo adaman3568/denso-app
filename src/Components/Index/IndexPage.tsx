@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import {Checkbox, Fab, Grid, TextField} from "@material-ui/core";
+import {Checkbox, Fab, Fade, Grid, Modal, TextField} from "@material-ui/core";
 import Tweets from "../Tweets/Tweets";
 import {DataContext} from "../../Context/DataContextProvider";
 import Loading from "../Common/Loading";
@@ -8,6 +8,7 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
+import Backdrop from '@material-ui/core/Backdrop';
 
 const customer = [
     {id : 1, name : '合同会社Rst.com'},
@@ -35,7 +36,18 @@ const useStyle = makeStyles((theme) => ({
         position : 'absolute',
         bottom : '10%',
         right : '10%'
-    }
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
 }))
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -43,6 +55,16 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const IndexPage : FC = () => {
 
     const classes = useStyle();
+    const [open, setOpen] = React.useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const {loading} = useContext(DataContext);
 
     if(loading){
@@ -51,7 +73,7 @@ const IndexPage : FC = () => {
 
     return (
         <Grid container>
-            <Fab color="primary" aria-label="add" className={classes.floatingButton}>
+            <Fab color="primary" aria-label="add" className={classes.floatingButton} onClick={handleOpen}>
                 <AddIcon />
             </Fab>
             <div className={classes.topSearch}>
@@ -103,6 +125,25 @@ const IndexPage : FC = () => {
             <Grid item sm={12} className={classes.tweetsArea}>
                 <Tweets/>
             </Grid>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                    <div className={classes.paper}>
+                        <h2 id="transition-modal-title">Transition modal</h2>
+                        <p id="transition-modal-description">react-transition-group animates me.</p>
+                    </div>
+                </Fade>
+            </Modal>
         </Grid>
     );
 };
