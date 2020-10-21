@@ -15,19 +15,6 @@ import Container from '@material-ui/core/Container';
 import {Redirect, RouteComponentProps} from "react-router";
 import {AuthContext} from "../Context/AuthContextProvider";
 
-const Copyright: React.FC = () => {
-    return(
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    )
-}
-
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -122,9 +109,6 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
                         </Grid>
                     </form>
                 </div>
-                <Box mt={8}>
-                    <Copyright />
-                </Box>
             </Container>)
         }
     }

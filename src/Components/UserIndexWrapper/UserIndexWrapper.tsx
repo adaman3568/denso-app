@@ -182,13 +182,8 @@ const UserIndexWrapper : React.FC = ({children}) => {
                             電装SNS
                         </Link>
                     </Typography>
-                    <ProfileIconButton/>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
                     {/*ログイン時にのみサインアウトボタンを表示*/}
+                    {user && <ProfileIconButton/>}
                     {user && <ExitButton/>}
                 </Toolbar>
             </AppBar>
