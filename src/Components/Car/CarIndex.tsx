@@ -17,6 +17,7 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
+            // todo Car追加ボタンをちゃんとする
             <Link to={PathList.carCreate}>Create Car</Link>
             {carItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>

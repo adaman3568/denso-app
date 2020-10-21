@@ -126,6 +126,7 @@ const IndexPage : FC = () => {
             <Grid item sm={12} className={classes.tweetsArea}>
                 <Tweets/>
             </Grid>
+            {/*todo モーダルを別画面に分けたい*/}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
