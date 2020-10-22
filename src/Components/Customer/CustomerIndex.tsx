@@ -2,6 +2,8 @@ import React, {FC, useContext} from 'react';
 import CustomerItem from "./CustomerItem";
 import Title from "../Common/Title";
 import {DataContext} from "../../Context/DataContextProvider";
+import LinkButton from "../Common/LinkButton";
+import {PathList} from "../../Routing/path";
 
 const CustomerIndex : FC = () => {
 
@@ -9,7 +11,7 @@ const CustomerIndex : FC = () => {
     return (
         <div>
             <Title>this is CustomerIndex page.</Title>
-            // todo 顧客追加ボタンを作成
+            <LinkButton path={PathList.customerCreate} value={'顧客追加'}/>
             {Customer.Data.map((cu,index) => <CustomerItem key={index} Customer={cu}/> )}
         </div>
     );

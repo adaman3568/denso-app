@@ -6,6 +6,7 @@ import {CarInfo} from "../../Context/DataTypeList";
 import {Link} from 'react-router-dom'
 import {PathList} from "../../Routing/path";
 import {Button} from "@material-ui/core";
+import LinkButton from "../Common/LinkButton";
 
 const CarIndex : FC = () => {
     const {Car} = useContext(DataContext)
@@ -18,8 +19,7 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            <Button color={'primary'}>車両追加</Button>
-            <Link to={PathList.carCreate}>Create Car</Link>
+            <LinkButton path={PathList.carCreate} value={'車両追加'}/>
             {carItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>
     );
