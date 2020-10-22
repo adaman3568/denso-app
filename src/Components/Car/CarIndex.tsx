@@ -5,6 +5,7 @@ import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo} from "../../Context/DataTypeList";
 import {Link} from 'react-router-dom'
 import {PathList} from "../../Routing/path";
+import {Button} from "@material-ui/core";
 
 const CarIndex : FC = () => {
     const {Car} = useContext(DataContext)
@@ -17,7 +18,7 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            // todo Car追加ボタンをちゃんとする
+            <Button color={'primary'}>車両追加</Button>
             <Link to={PathList.carCreate}>Create Car</Link>
             {carItems.map(car => <CarItem key={car.id} Car={car} />)}
         </div>

@@ -4,6 +4,7 @@ import {Typography,Button,CardActions} from "@material-ui/core";
 import {Link} from 'react-router-dom'
 import {PathList} from "../../../Routing/path";
 import {makeStyles} from "@material-ui/core/styles";
+import LinkButton from "../../Common/LinkButton";
 
 const useStyle = makeStyles((theme) => ({
     cardLink : {
@@ -21,12 +22,8 @@ const CustomerAndCar : FC<Props> = ({Customer,Car}) => {
     const classes = useStyle();
     return (
         <div>
-                <Link to={`${PathList.customerDetail}/${Customer.id}`} className={classes.cardLink}>
-                    <Button size={'small'} color={"primary"} variant="contained" >{Customer.Name}</Button>
-                </Link>
-                <Link to={`${PathList.carDetail}/${Car.id}`} className={classes.cardLink}>
-                    <Button  size={'small'} color={"primary"} variant="contained" >{Car.Name}</Button>
-                </Link>
+            <LinkButton path={`${PathList.customerDetail}/${Customer.id}`} value={Customer.Name}/>
+            <LinkButton path={`${PathList.carDetail}/${Car.id}`} value={Car.Name}/>
         </div>
     );
 };
