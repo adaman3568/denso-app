@@ -25,6 +25,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import AuthContextProvider, {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
+import AddCustomer from "./Components/Customer/AddCustomer";
 
 const theme = createMuiTheme({
     palette :{
@@ -64,6 +65,7 @@ const App : React.FC = () => {
 
                                 <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>
                                 <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} user={user}/>
+                                <PrivateRoute exact path={PathList.customerCreate} component={AddCustomer} user={user}/>
 
                                 <PrivateRoute exact path={PathList.tweetsDetail} component={TweetsDetail} user={user}/>
 
