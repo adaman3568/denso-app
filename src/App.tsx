@@ -59,13 +59,11 @@ const App : React.FC = () => {
                                 <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} user={user}/>
 
                                 <PrivateRoute exact path={PathList.cars} component={CarIndex} user={user}/>
-                                <PrivateRoute exact path={PathList.carCreate} component={CarCreate} user={user}/>
                                 <PrivateRoute exact path={`${PathList.carEdit}/:id`} component={CarCreate} user={user}/>
                                 <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} user={user}/>
 
                                 <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>
                                 <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} user={user}/>
-                                <PrivateRoute exact path={PathList.customerCreate} component={AddCustomer} user={user}/>
 
                                 <PrivateRoute exact path={PathList.tweetsDetail} component={TweetsDetail} user={user}/>
 
