@@ -40,8 +40,6 @@ const CarCreate : FC<Props> = ({match}) => {
 
     const classes = useStyle();
 
-
-
     const comboBoxHandleChange = (e : ChangeEvent<HTMLInputElement>) => {
         setSelectedCustomer(e.target.value)
     };
