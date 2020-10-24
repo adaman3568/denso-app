@@ -10,6 +10,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import Backdrop from '@material-ui/core/Backdrop';
 import PostTweet from "../PostTweet";
+import ModalWindow from "../Common/ModalWindow";
 
 const customer = [
     {id : 1, name : '合同会社Rst.com'},
@@ -37,18 +38,7 @@ const useStyle = makeStyles((theme) => ({
         position : 'absolute',
         bottom : '10%',
         right : '10%'
-    },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    paper: {
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
+    }
 }))
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
@@ -126,25 +116,7 @@ const IndexPage : FC = () => {
             <Grid item sm={12} className={classes.tweetsArea}>
                 <Tweets/>
             </Grid>
-            {/*todo モーダルを別画面に分けたい*/}
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                    <div className={classes.paper}>
-                        <PostTweet/>
-                    </div>
-                </Fade>
-            </Modal>
+            <ModalWindow IsOpen={open} handleClose={() => setOpen(false)} ChildComponent={<PostTweet/>}/>
         </Grid>
     );
 };
