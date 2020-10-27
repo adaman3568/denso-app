@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC, useContext, useEffect, useState} from "react";
-import {Grid, Typography} from "@material-ui/core";
+import {Button, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import CommentCount from "../Common/CommentCount";
 import LinkCard from "../Common/LinkCard";
@@ -11,7 +11,8 @@ import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 
 
 type Props = {
-    Customer : CustomerInfo
+    Customer : CustomerInfo,
+    EditBtnAction : (cus : CustomerInfo) => void;
 }
 
 const myStyle = makeStyles((theme) => ({
@@ -31,7 +32,7 @@ const myStyle = makeStyles((theme) => ({
 }))
 
 
-const CustomerItem : FC<Props> = ({Customer}) => {
+const CustomerItem : FC<Props> = ({Customer,EditBtnAction}) => {
 
     const classes = myStyle();
 
@@ -49,15 +50,7 @@ const CustomerItem : FC<Props> = ({Customer}) => {
                     </Typography>
                 </Grid>
                 <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
-                {/*<Grid sm={6}>*/}
-                {/*    <div className={classes.cardInfo}>*/}
-                {/*        車両台数：{Customer.CarCount}*/}
-                {/*        <CommentCount displayCount={Customer.CommentCount} className={classes.commentCount}/>*/}
-                {/*    </div>*/}
-                {/*</Grid>*/}
-                {/*<Grid sm={6}>*/}
-                {/*    最終コメント日付：{Customer.LastCommentDate}*/}
-                {/*</Grid>*/}
+                <Button variant={'contained'} color={'primary'} onClick={() => EditBtnAction(Customer)}>編集</Button>
             </Grid>
         </LinkCard>
     )
