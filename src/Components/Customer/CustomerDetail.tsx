@@ -15,6 +15,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import Tweet from "../Tweets/Tweet";
 import ModalWindow from "../Common/ModalWindow";
 import CarCreate from "../Car/CarCreate";
+import CarCreateFromCustomer from "./CarCreateFromCustomer";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -81,7 +82,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
                 </Grid>
             </Grid>
             <NavTabs displayCars={cars} displayComments={comments}/>
-            <ModalWindow IsOpen={modalOpen} handleClose={() => setModalOpen(false)} ChildComponent={<h1>this is car create modal</h1>}/>
+            <ModalWindow IsOpen={modalOpen} handleClose={() => setModalOpen(false)} ChildComponent={<CarCreateFromCustomer/>}/>
         </div>
     );
 };
