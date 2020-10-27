@@ -5,7 +5,7 @@ import {CarInfo, CommentInfo, CustomerInfo} from "../../Context/DataTypeList";
 import CarItem from "../Car/CarItem";
 import {
     AppBar,
-    Box,
+    Box, Button, Grid,
     Tab,
     Tabs,
     Theme,
@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Tweet from "../Tweets/Tweet";
+import ModalWindow from "../Common/ModalWindow";
+import CarCreate from "../Car/CarCreate";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -33,6 +35,14 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
         width : '100%'
+    },
+    map : {
+        width : '90%'
+    },
+    customerContent : {
+        display : 'flex',
+        justifyContent : 'center',
+        marginBottom : theme.spacing(3)
     }
 }));
 
@@ -40,7 +50,8 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     const {Customer,Car,Comment} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     const [cars , setCars] = useState<CarInfo[]>([]);
-    const [comments , setComments] = useState<CommentInfo[]>([]);
+    const [comments , setComments] = useState<CommentInfo[]>([])
+    const [modalOpen , setModalOpen] = useState<boolean>(false)
     const classes = useStyles();
 
     useEffect(() => {
@@ -54,11 +65,23 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
 
     return (
         <div>
-            <h2>{customer.Name}</h2>
-            <p>住所：{customer.Address}</p>
-            <iframe src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.2308567825557!2d139.75543315077263!3d35.69593623667565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c115d3f353b%3A0xbbe47de65abe4872!2z56We5L-d55S66aeF!5e0!3m2!1sja!2sjp!4v1602851875701!5m2!1sja!2sjp"}
-                width={"600"} height={"450"} frameBorder={"0"} aria-hidden={"false"}/>
+            <Grid container>
+                <Grid item xs={12} className={classes.customerContent}>
+                    <h2>{customer.Name}</h2>
+                </Grid>
+                <Grid item xs={12} className={classes.customerContent}>
+                    <p>住所：{customer.Address}</p>
+                </Grid>
+                <Grid item xs={12} className={classes.customerContent}>
+                    <iframe className={classes.map} src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.2308567825557!2d139.75543315077263!3d35.69593623667565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c115d3f353b%3A0xbbe47de65abe4872!2z56We5L-d55S66aeF!5e0!3m2!1sja!2sjp!4v1602851875701!5m2!1sja!2sjp"}
+                            height={"450"} frameBorder={"0"} aria-hidden={"false"}/>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button onClick={() => setModalOpen(true)} variant={'contained'} color={'primary'}>車両追加</Button>
+                </Grid>
+            </Grid>
             <NavTabs displayCars={cars} displayComments={comments}/>
+            <ModalWindow IsOpen={modalOpen} handleClose={() => setModalOpen(false)} ChildComponent={<h1>this is car create modal</h1>}/>
         </div>
     );
 };
