@@ -5,11 +5,6 @@ import {makeStyles} from "@material-ui/core/styles";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-type Props = {
-    editUrl : string,
-    deleteUrl : string
-}
-
 const useStyle = makeStyles((theme) => ({
     link : {
         textDecoration : 'none',
@@ -17,23 +12,23 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
+type props = {
+    EditAction? : () => void;
+    DeleteAction? : () => void
+}
 
-const DeleteUpdateButton : FC<Props> = ({editUrl,deleteUrl}) => {
+const DeleteUpdateButton : FC<props> = ({EditAction,DeleteAction}) => {
     const classes = useStyle();
 
     return (
         <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-            <Button>
-                <Link to={editUrl} className={classes.link}>
+            <Button onClick={EditAction}>
                     <EditIcon/>
                     編集
-                </Link>
             </Button>
-            <Button>
-                <Link to={deleteUrl} className={classes.link}>
+            <Button onClick={DeleteAction}>
                     <DeleteIcon/>
                     削除
-                </Link>
             </Button>
         </ButtonGroup>
     );

@@ -1,9 +1,8 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Grid, Typography} from "@material-ui/core";
+import {Button, ButtonGroup, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
-import CommentCount from "../Common/CommentCount";
-import LinkCard from "../Common/LinkCard";
+import LinkCardContent from "../Common/LinkCardContent";
 import {PathList} from "../../Routing/path";
 import {EmployeeInfo} from "../../Context/DataTypeList";
 import DeleteUpdateButton from "../Common/DeleteUpdateButton";
@@ -28,7 +27,7 @@ type Props = {
 const EmployeeItem : FC<Props> = ({Emp}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.employeeDetail}/${Emp.id}`}>
+        <LinkCardContent path={`${PathList.employeeDetail}/${Emp.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
@@ -40,9 +39,9 @@ const EmployeeItem : FC<Props> = ({Emp}) => {
                         {Emp.eMail}
                     </Typography>
                 </Grid>
-                <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
+                <DeleteUpdateButton/>
             </Grid>
-        </LinkCard>
+        </LinkCardContent>
     )
 };
 

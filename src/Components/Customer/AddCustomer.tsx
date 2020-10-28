@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TextField,Button,Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {CustomerInfo} from "../../Context/DataTypeList";
@@ -21,20 +21,29 @@ const useStyle = makeStyles((theme) => ({
 }))
 
 type Props = {
-    editCustomer : CustomerInfo
+    editCustomer? : CustomerInfo
 }
 
 const AddCustomer : FC<Props> = ({editCustomer}) => {
     const classes = useStyle();
 
+    const [cusName,setCusName] = useState<string>('');
+    const [address,setAddress] = useState<string>('');
+    useEffect(() => {
+        if(editCustomer){
+            setCusName(editCustomer.Name);
+            setAddress(editCustomer.Address);
+        }
+    },[]);
+
     return (
         <div>
             <Grid container className={classes.addWindow}>
                 <Grid item xs={12} className={classes.btnCenter}>
-                    <TextField label={'得意先名'} className={classes.tokuisakiTextField} value={editCustomer.Name}/>
+                    <TextField label={'得意先名'} className={classes.tokuisakiTextField} value={cusName} onChange={(e) => setCusName(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} className={classes.btnCenter}>
-                    <TextField label={'住所'} className={classes.tokuisakiTextField} value={editCustomer.Address}/>
+                    <TextField label={'住所'} className={classes.tokuisakiTextField} value={address} onChange={(e) => setAddress(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} className={classes.btnCenter}>
                     <Button className={classes.submitBtn} variant={'contained'} color={'primary'}>登録</Button>

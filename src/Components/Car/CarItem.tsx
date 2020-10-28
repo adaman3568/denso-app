@@ -1,11 +1,13 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Grid, Typography} from "@material-ui/core";
+import {Button, ButtonGroup, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {PathList} from "../../Routing/path";
-import LinkCard from "../Common/LinkCard";
+import LinkCardContent from "../Common/LinkCardContent";
 import {CarInfo} from "../../Context/DataTypeList";
 import DeleteUpdateButton from "../Common/DeleteUpdateButton";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 type Props = {
     Car : CarInfo
@@ -20,7 +22,7 @@ const myStyle = makeStyles((theme) => ({
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <LinkCard path={`${PathList.carDetail}/${Car.id}`}>
+        <LinkCardContent path={`${PathList.carDetail}/${Car.id}`}>
             <Grid container>
                 <Grid sm={12}>
                     <CardTitle>
@@ -32,9 +34,9 @@ const CarItem : FC<Props> = ({Car}) => {
                         {Car.Detail}
                     </Typography>
                 </Grid>
-                <DeleteUpdateButton editUrl={'test'} deleteUrl={'test'}/>
+                <DeleteUpdateButton/>
             </Grid>
-        </LinkCard>
+        </LinkCardContent>
     )
 };
 
