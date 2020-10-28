@@ -34,9 +34,6 @@ const myStyle = makeStyles((theme) => ({
     card : {
         padding : theme.spacing(2),
         margin : theme.spacing(3)
-    },
-    cardContent : {
-        backgroundColor : 'gray'
     }
 }));
 

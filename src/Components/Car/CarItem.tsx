@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Button, ButtonGroup, Grid, Typography} from "@material-ui/core";
+import {Button, ButtonGroup, Card, CardActions, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import {PathList} from "../../Routing/path";
 import LinkCardContent from "../Common/LinkCardContent";
@@ -17,26 +17,34 @@ const myStyle = makeStyles((theme) => ({
     detail : {
         padding : theme.spacing(2)
     },
+    card : {
+    padding : theme.spacing(2),
+        margin : theme.spacing(3)
+}
 }));
 
 const CarItem : FC<Props> = ({Car}) => {
     const classes = myStyle();
     return (
-        <LinkCardContent path={`${PathList.carDetail}/${Car.id}`}>
-            <Grid container>
-                <Grid sm={12}>
-                    <CardTitle>
-                        {Car.Name}
-                    </CardTitle>
+        <Card className={classes.card}>
+            <LinkCardContent path={`${PathList.carDetail}/${Car.id}`}>
+                <Grid container>
+                    <Grid sm={12}>
+                        <CardTitle>
+                            {Car.Name}
+                        </CardTitle>
+                    </Grid>
+                    <Grid sm={12}>
+                        <Typography className={classes.detail}>
+                            {Car.Detail}
+                        </Typography>
+                    </Grid>
                 </Grid>
-                <Grid sm={12}>
-                    <Typography className={classes.detail}>
-                        {Car.Detail}
-                    </Typography>
-                </Grid>
+            </LinkCardContent>
+            <CardActions>
                 <DeleteUpdateButton/>
-            </Grid>
-        </LinkCardContent>
+            </CardActions>
+        </Card>
     )
 };
 
