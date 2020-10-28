@@ -15,6 +15,7 @@ import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 type Props = {
     Customer : CustomerInfo,
     EditEvent : (cus : CustomerInfo) => void;
+    DeleteEvent : (cus : CustomerInfo) => void;
 }
 
 const myStyle = makeStyles((theme) => ({
@@ -37,7 +38,7 @@ const myStyle = makeStyles((theme) => ({
     }
 }));
 
-const CustomerItem : FC<Props> = ({Customer,EditEvent}) => {
+const CustomerItem : FC<Props> = ({Customer,EditEvent,DeleteEvent}) => {
 
     const classes = myStyle();
     return(
@@ -57,7 +58,7 @@ const CustomerItem : FC<Props> = ({Customer,EditEvent}) => {
                 </Grid>
             </LinkCardContent>
             <CardActions>
-                <DeleteUpdateButton EditAction={() => {EditEvent(Customer)}}/>
+                <DeleteUpdateButton EditAction={() => {EditEvent(Customer)}} DeleteAction={() => {DeleteEvent(Customer)}}/>
             </CardActions>
         </Card>
     )

@@ -22,9 +22,10 @@ const useStyle = makeStyles((theme) => ({
 
 type Props = {
     editCustomer? : CustomerInfo
+    successOpenEvent : () => void
 }
 
-const AddCustomer : FC<Props> = ({editCustomer}) => {
+const AddCustomer : FC<Props> = ({editCustomer,successOpenEvent}) => {
     const classes = useStyle();
 
     const [cusName,setCusName] = useState<string>('');
@@ -46,7 +47,7 @@ const AddCustomer : FC<Props> = ({editCustomer}) => {
                     <TextField label={'住所'} className={classes.tokuisakiTextField} value={address} onChange={(e) => setAddress(e.target.value)}/>
                 </Grid>
                 <Grid item xs={12} className={classes.btnCenter}>
-                    <Button className={classes.submitBtn} variant={'contained'} color={'primary'}>登録</Button>
+                    <Button className={classes.submitBtn} variant={'contained'} color={'primary'} onClick={() => successOpenEvent()}>登録</Button>
                 </Grid>
             </Grid>
         </div>
