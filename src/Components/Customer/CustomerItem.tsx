@@ -1,22 +1,12 @@
 import {makeStyles} from "@material-ui/core/styles";
-import React, {FC, useContext, useEffect, useState} from "react";
-import {Button, ButtonGroup, Card, CardActions, Grid, Typography} from "@material-ui/core";
+import React, {FC} from "react";
+import {Card, CardActions, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import LinkCardContent from "../Common/LinkCardContent";
 import {PathList} from "../../Routing/path";
-import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ModalWindow from "../Common/ModalWindow";
-import CustomerCreateEdit from "./CustomerCreateEdit";
 import DeleteUpdateButton from "../Common/DeleteUpdateButton";
-
-
-type Props = {
-    Customer : CustomerInfo,
-    EditEvent : (cus : CustomerInfo) => void;
-    DeleteEvent : (cus : CustomerInfo) => void;
-}
+import {CustomerInfo} from "../../Context/DataTypeList";
+import {DataItemProps} from "../../PropsList";
 
 const myStyle = makeStyles((theme) => ({
     companyName : {
@@ -38,27 +28,27 @@ const myStyle = makeStyles((theme) => ({
     }
 }));
 
-const CustomerItem : FC<Props> = ({Customer,EditEvent,DeleteEvent}) => {
+const CustomerItem : FC<DataItemProps<CustomerInfo>> = ({Data, DeleteModalOpen,EditModalOpen}) => {
 
     const classes = myStyle();
     return(
         <Card className={classes.card}>
-            <LinkCardContent path={`${PathList.customerDetail}/${Customer.id}`}>
+            <LinkCardContent path={`${PathList.customerDetail}/${Data.id}`}>
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>
-                            {Customer.Name}
+                            {Data.Name}
                         </CardTitle>
                     </Grid>
                     <Grid sm={12}>
                         <Typography variant={"h5"} className={classes.companyAddress}>
-                            {Customer.Address}
+                            {Data.Address}
                         </Typography>
                     </Grid>
                 </Grid>
             </LinkCardContent>
             <CardActions>
-                <DeleteUpdateButton EditAction={() => {EditEvent(Customer)}} DeleteAction={() => {DeleteEvent(Customer)}}/>
+                <DeleteUpdateButton EditAction={() => {EditModalOpen(Data)}} DeleteAction={() => {DeleteModalOpen(Data)}}/>
             </CardActions>
         </Card>
     )

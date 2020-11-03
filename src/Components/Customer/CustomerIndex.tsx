@@ -22,7 +22,7 @@ const CustomerIndex : FC = () => {
         <div>
             <Title>this is CustomerIndex page.</Title>
             <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>顧客追加</Button>
-            {Customer.Data.map((cu,index) => <CustomerItem key={index} Customer={cu} EditEvent={editModal.OpenModal} DeleteEvent={deleteModal.OpenModal}/> )}
+            {Customer.Data.map((cu,index) => <CustomerItem key={index} Data={cu} EditModalOpen={editModal.OpenModal} DeleteModalOpen={deleteModal.OpenModal}/> )}
 
             {editModal.Modal()}
             {insertModal.Modal()}

@@ -23,7 +23,7 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            {carItems.map(car => <CarItem key={car.id} Car={car} deleteModalOpen={carDeleteModal.OpenModal} editModalOpen={carEditModal.OpenModal}/>)}
+            {carItems.map(car => <CarItem key={car.id} Data={car} DeleteModalOpen={carDeleteModal.OpenModal} EditModalOpen={carEditModal.OpenModal}/>)}
             {carEditModal.Modal()}
             {carDeleteModal.Modal()}
         </div>

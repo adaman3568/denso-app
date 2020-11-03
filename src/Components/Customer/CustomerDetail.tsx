@@ -162,7 +162,7 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
                 </Tabs>
             </AppBar>
             <TabPanel1 value={value} index={0}>
-                {displayCars.map((item,index) => <CarItem key={index} Car={item} editModalOpen={carEditModal.OpenModal} deleteModalOpen={carDeleteModal.OpenModal}/>)}
+                {displayCars.map((item,index) => <CarItem key={index} Data={item} EditModalOpen={carEditModal.OpenModal} DeleteModalOpen={carDeleteModal.OpenModal}/>)}
                 {carEditModal.Modal()}
                 {carDeleteModal.Modal()}
             </TabPanel1>

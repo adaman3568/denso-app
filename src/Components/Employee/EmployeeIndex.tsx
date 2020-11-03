@@ -21,7 +21,7 @@ const EmployeeIndex : FC = () => {
         <div>
             <Title>This is Emp page.</Title>
             <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>従業員登録</Button>
-            {Employee.Data.map((emp,index) => <EmployeeItem key={index} Emp={emp} deleteModalOpen={deleteModal.OpenModal} editModalOpen={editModal.OpenModal}/>)}
+            {Employee.Data.map((emp,index) => <EmployeeItem key={index} Data={emp} DeleteModalOpen={deleteModal.OpenModal} EditModalOpen={editModal.OpenModal}/>)}
             {editModal.Modal()}
             {deleteModal.Modal()}
             {insertModal.Modal()}

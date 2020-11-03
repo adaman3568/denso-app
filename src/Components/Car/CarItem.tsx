@@ -6,14 +6,7 @@ import {PathList} from "../../Routing/path";
 import LinkCardContent from "../Common/LinkCardContent";
 import {CarInfo} from "../../Context/DataTypeList";
 import DeleteUpdateButton from "../Common/DeleteUpdateButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-
-type Props = {
-    Car : CarInfo,
-    editModalOpen : (car : CarInfo) => void;
-    deleteModalOpen : (car : CarInfo) => void
-}
+import {DataItemProps} from "../../PropsList";
 
 const myStyle = makeStyles((theme) => ({
     detail : {
@@ -25,35 +18,27 @@ const myStyle = makeStyles((theme) => ({
 }
 }));
 
-const CarItem : FC<Props> = ({Car,editModalOpen,deleteModalOpen}) => {
-
-    const editAction = () => {
-        editModalOpen(Car)
-    };
-
-    const deleteAction = () => {
-        deleteModalOpen(Car)
-    };
+const CarItem : FC<DataItemProps<CarInfo>> = ({Data,EditModalOpen,DeleteModalOpen}) => {
 
     const classes = myStyle();
     return (
         <Card className={classes.card}>
-            <LinkCardContent path={`${PathList.carDetail}/${Car.id}`}>
+            <LinkCardContent path={`${PathList.carDetail}/${Data.id}`}>
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>
-                            {Car.Name}
+                            {Data.Name}
                         </CardTitle>
                     </Grid>
                     <Grid sm={12}>
                         <Typography className={classes.detail}>
-                            {Car.Detail}
+                            {Data.Detail}
                         </Typography>
                     </Grid>
                 </Grid>
             </LinkCardContent>
             <CardActions>
-                <DeleteUpdateButton EditAction={editAction} DeleteAction={deleteAction}/>
+                <DeleteUpdateButton EditAction={() => EditModalOpen(Data)} DeleteAction={() => DeleteModalOpen(Data)}/>
             </CardActions>
         </Card>
     )
