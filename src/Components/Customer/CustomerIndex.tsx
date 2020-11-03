@@ -18,24 +18,14 @@ const CustomerIndex : FC = () => {
 
     const {Customer} = useContext(DataContext);
 
-    const editEvent = (cus : CustomerInfo) => {
-        editModal.setData(cus);
-        editModal.editModalOpen();
-    };
-
-    const deleteEvent = (cus : CustomerInfo) => {
-        deleteModal.setData(cus);
-        deleteModal.modalOpen();
-    };
-
     return (
         <div>
             <Title>this is CustomerIndex page.</Title>
-            <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.insertModalOpen}>顧客追加</Button>
-            {Customer.Data.map((cu,index) => <CustomerItem key={index} Customer={cu} EditEvent={editEvent} DeleteEvent={deleteEvent}/> )}
+            <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>顧客追加</Button>
+            {Customer.Data.map((cu,index) => <CustomerItem key={index} Customer={cu} EditEvent={editModal.OpenModal} DeleteEvent={deleteModal.OpenModal}/> )}
 
-            {editModal.EditModal()}
-            {insertModal.InsertModal()}
+            {editModal.Modal()}
+            {insertModal.Modal()}
             {deleteModal.Modal()}
         </div>
     );

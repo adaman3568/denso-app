@@ -81,11 +81,11 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
                             height={"450"} frameBorder={"0"} aria-hidden={"false"}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button onClick={insertModal.insertModalOpen} variant={'contained'} color={'primary'}>車両追加</Button>
+                    <Button onClick={insertModal.OpenModal} variant={'contained'} color={'primary'}>車両追加</Button>
                 </Grid>
             </Grid>
             <NavTabs displayCars={cars} displayComments={comments}/>
-            {insertModal.InsertModal()}
+            {insertModal.Modal()}
         </div>
     );
 };
@@ -143,18 +143,7 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
     };
 
     const carEditModal = useEditModal<CarInfo>(CarEdit);
-    const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar)
-
-    const editEvent = (Car : CarInfo) => {
-        carEditModal.setData(Car)
-        carEditModal.editModalOpen();
-    };
-
-    const deleteEvent = (Car : CarInfo) => {
-        carDeleteModal.setData(Car)
-        carDeleteModal.modalOpen();
-    };
-
+    const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar);
 
     return (
         <div className={classes.tabRoot}>
@@ -173,8 +162,8 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
                 </Tabs>
             </AppBar>
             <TabPanel1 value={value} index={0}>
-                {displayCars.map((item,index) => <CarItem key={index} Car={item} editModalOpen={editEvent} deleteModalOpen={deleteEvent}/>)}
-                {carEditModal.EditModal()}
+                {displayCars.map((item,index) => <CarItem key={index} Car={item} editModalOpen={carEditModal.OpenModal} deleteModalOpen={carDeleteModal.OpenModal}/>)}
+                {carEditModal.Modal()}
                 {carDeleteModal.Modal()}
             </TabPanel1>
             <TabPanel1 value={value} index={1}>

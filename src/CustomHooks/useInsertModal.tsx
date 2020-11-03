@@ -11,10 +11,11 @@ const useInsertModal = (ChildNode : (func : () => void) => ReactNode) => {
         setOpen(false)
         setSuccessOpen(true)
     };
-    const insertModalOpen = () => {
+
+    const OpenModal = () => {
         setOpen(true)
-    };
-    const InsertModal = () => {
+    }
+    const Modal = () => {
         return (
             <>
                 <ModalWindow IsOpen={open} handleClose={() => setOpen(false)} ChildComponent={ChildNode(SuccessOpen)}/>
@@ -26,7 +27,7 @@ const useInsertModal = (ChildNode : (func : () => void) => ReactNode) => {
             </>
         )
     };
-    return {insertModalOpen,InsertModal}
+    return {OpenModal,Modal}
 };
 
 export default useInsertModal

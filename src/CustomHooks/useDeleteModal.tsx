@@ -7,14 +7,14 @@ function useDeleteModal<T>(ChildNode : (func : () => void,Data : T) => ReactNode
     const [customer,setCustomer] = useState<T>({} as T);
     const [open,setOpen] = useState(false);
     const [deleteOpen,setDeleteOpen] = useState<boolean>(false);
-    const setData = setCustomer;
 
     const DeleteOpen = () => {
         setOpen(false);
         setDeleteOpen(true)
     };
 
-    const modalOpen = () => {
+    const OpenModal = (Data : T) => {
+        setCustomer(Data)
         setOpen(true)
     };
 
@@ -30,7 +30,7 @@ function useDeleteModal<T>(ChildNode : (func : () => void,Data : T) => ReactNode
             </>
         )
     };
-    return {modalOpen,Modal,setData}
+    return {OpenModal,Modal}
 };
 
 export default useDeleteModal

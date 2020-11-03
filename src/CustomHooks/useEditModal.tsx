@@ -14,11 +14,12 @@ function useEditModal<T>(ChildNode : (Data : T, func : () => void) => ReactNode)
         setSuccessOpen(true)
     };
 
-    const editModalOpen = () => {
+    const OpenModal = (Data : T) => {
+        setCustomer(Data);
         setOpen(true)
-    };
+    }
 
-    const EditModal = () => {
+    const Modal = () => {
         return (
             <>
                 <ModalWindow IsOpen={open} handleClose={() => setOpen(false)} ChildComponent={ChildNode(customer,SuccessOpen)}/>
@@ -30,7 +31,7 @@ function useEditModal<T>(ChildNode : (Data : T, func : () => void) => ReactNode)
             </>
         )
     };
-    return {editModalOpen,EditModal,setData}
+    return {Modal,OpenModal}
 };
 
 export default useEditModal

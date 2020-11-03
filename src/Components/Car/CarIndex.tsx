@@ -13,17 +13,6 @@ const CarIndex : FC = () => {
     const carEditModal = useEditModal<CarInfo>(CarEdit);
     const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar)
 
-    const editEvent = (Car : CarInfo) => {
-        carEditModal.setData(Car)
-        carEditModal.editModalOpen();
-    };
-
-    const deleteEvent = (Car : CarInfo) => {
-        carDeleteModal.setData(Car)
-        carDeleteModal.modalOpen();
-    };
-
-
     const {Car} = useContext(DataContext)
     const [carItems,setCarItems] = useState<CarInfo[]>([]);
     useEffect(() => {
@@ -34,8 +23,8 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            {carItems.map(car => <CarItem key={car.id} Car={car} deleteModalOpen={deleteEvent} editModalOpen={editEvent} />)}
-            {carEditModal.EditModal()}
+            {carItems.map(car => <CarItem key={car.id} Car={car} deleteModalOpen={carDeleteModal.OpenModal} editModalOpen={carEditModal.OpenModal}/>)}
+            {carEditModal.Modal()}
             {carDeleteModal.Modal()}
         </div>
     );
