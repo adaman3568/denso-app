@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Tweet from "../Tweets/Tweet";
-import {CarCreate, CarEdit} from "../Car/CarCreateFromCustomer";
+import {CarCreate, CarEdit} from "../Car/CarCreateEdit";
 import useInsertModal from "../../CustomHooks/useInsertModal";
 import useEditModal from "../../CustomHooks/useEditModal";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";

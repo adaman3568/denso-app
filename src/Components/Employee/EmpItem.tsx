@@ -1,6 +1,6 @@
 import {makeStyles} from "@material-ui/core/styles";
 import React, {FC} from "react";
-import {Button, ButtonGroup, Grid, Typography} from "@material-ui/core";
+import {Button, ButtonGroup, Card, CardActions, Grid, Typography} from "@material-ui/core";
 import CardTitle from "../Common/CardTitle";
 import LinkCardContent from "../Common/LinkCardContent";
 import {PathList} from "../../Routing/path";
@@ -22,26 +22,42 @@ const myStyle = makeStyles((theme) => ({
 
 type Props = {
     Emp : EmployeeInfo
+    editModalOpen : (emp : EmployeeInfo) => void,
+    deleteModalOpen : (emp : EmployeeInfo) => void
 }
 
-const EmployeeItem : FC<Props> = ({Emp}) => {
+const EmployeeItem : FC<Props> = ({Emp,editModalOpen,deleteModalOpen}) => {
+
+    const editAction = () => {
+        editModalOpen(Emp)
+    };
+
+    const deleteAction = () => {
+        deleteModalOpen(Emp)
+    };
+
     const classes = myStyle();
     return (
-        <LinkCardContent path={`${PathList.employeeDetail}/${Emp.id}`}>
-            <Grid container>
-                <Grid sm={12}>
-                    <CardTitle>
-                        {Emp.Name}
-                    </CardTitle>
+        <Card className={classes.card}>
+            <LinkCardContent path={`${PathList.employeeDetail}/${Emp.id}`}>
+                <Grid container>
+                    <Grid sm={12}>
+                        <CardTitle>
+                            {Emp.Name}
+                        </CardTitle>
+                    </Grid>
+                    <Grid sm={12}>
+                        <Typography variant={'h5'} className={classes.eMail}>
+                            {Emp.eMail}
+                        </Typography>
+                    </Grid>
                 </Grid>
-                <Grid sm={12}>
-                    <Typography variant={'h5'} className={classes.eMail}>
-                        {Emp.eMail}
-                    </Typography>
-                </Grid>
-                <DeleteUpdateButton/>
-            </Grid>
-        </LinkCardContent>
+            </LinkCardContent>
+            <CardActions>
+                <DeleteUpdateButton EditAction={editAction} DeleteAction={deleteAction}/>
+            </CardActions>
+        </Card>
+
     )
 };
 

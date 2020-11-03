@@ -8,7 +8,7 @@ import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import useEditModal from "../../CustomHooks/useEditModal";
 import useInsertModal from "../../CustomHooks/useInsertModal";
 import {DeleteCustomer} from "./ComfirmDeleteCustomer";
-import {EditCustomer, InsertCustomer} from "./AddCustomer";
+import {EditCustomer, InsertCustomer} from "./CustomerCreateEdit";
 
 const CustomerIndex : FC = () => {
 

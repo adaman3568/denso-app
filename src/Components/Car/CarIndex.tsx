@@ -5,7 +5,7 @@ import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo} from "../../Context/DataTypeList";
 import ModalWindow from "../Common/ModalWindow";
 import useEditModal from "../../CustomHooks/useEditModal";
-import {CarEdit} from "./CarCreateFromCustomer";
+import {CarEdit} from "./CarCreateEdit";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {DeleteCar} from "./CarDelete";
 

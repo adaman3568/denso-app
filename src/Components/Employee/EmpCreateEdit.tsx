@@ -1,7 +1,7 @@
 import React, {FC, ReactNode, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {Button, Grid, TextField} from "@material-ui/core";
-import {CarInfo} from "../../Context/DataTypeList";
+import {CarInfo, EmployeeInfo} from "../../Context/DataTypeList";
 
 const useStyle = makeStyles((theme) => ({
     carCreateModalWrapper : {
@@ -19,21 +19,21 @@ const useStyle = makeStyles((theme) => ({
 
 type props = {
     successOpen : () => void,
-    car? : CarInfo
+    emp? : EmployeeInfo
 }
 
-const CarCreateFromCustomer : FC<props> = ({successOpen,car}) => {
+const EmpCreateEdit : FC<props> = ({successOpen,emp}) => {
     const classes = useStyle();
-    const [carName , setCarName] = useState<string>(car?.Name ?? '');
-    const [carDetail , setCarDetail] = useState<string>(car?.Detail ?? '');
+    const [name , setName] = useState<string>(emp?.Name ?? '');
+    const [address , setAddress] = useState<string>(emp?.eMail ?? '');
 
     return (
         <Grid container className={classes.carCreateModalWrapper}>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'車両番号'} className={classes.addElement} value={carName} onChange={e => setCarName(e.target.value)}/>
+                <TextField label={'従業員名'} className={classes.addElement} value={name} onChange={e => setName(e.target.value)}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField multiline rows={3} label={'備考'} className={classes.addElement} value={carDetail} onChange={e => setCarDetail(e.target.value)}/>
+                <TextField label={'メールアドレス'} className={classes.addElement} value={address} onChange={e => setAddress(e.target.value)}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
                 <Button variant={'contained'} color={'primary'} className={classes.addElement} onClick={successOpen}>登録</Button>
@@ -42,12 +42,12 @@ const CarCreateFromCustomer : FC<props> = ({successOpen,car}) => {
     );
 };
 
-export const CarCreate = (success : () => void) : ReactNode => {
-    return <CarCreateFromCustomer successOpen={success}/>
+export const EmpCreate = (success : () => void) : ReactNode => {
+    return <EmpCreateEdit successOpen={success}/>
 };
 
-export const CarEdit = (Data : CarInfo,success : () => void) : ReactNode => {
-    return <CarCreateFromCustomer successOpen={success} car={Data}/>
+export const EmpEdit = (Data : EmployeeInfo,success : () => void) : ReactNode => {
+    return <EmpCreateEdit successOpen={success} emp={Data}/>
 };
 
-export default CarCreateFromCustomer;
+export default EmpCreateEdit;

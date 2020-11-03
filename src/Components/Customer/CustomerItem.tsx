@@ -8,7 +8,7 @@ import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ModalWindow from "../Common/ModalWindow";
-import AddCustomer from "./AddCustomer";
+import CustomerCreateEdit from "./CustomerCreateEdit";
 import DeleteUpdateButton from "../Common/DeleteUpdateButton";
 
 

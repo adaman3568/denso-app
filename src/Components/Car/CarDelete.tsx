@@ -35,6 +35,6 @@ const CarDelete : FC<props> = ({Car,deleteConfirmOpen}) => {
     )
 };
 
-export const DeleteCar = (deleteOpenEvent : () => void, Data : CarInfo) => {
+export const DeleteCar = (Data : CarInfo,deleteOpenEvent : () => void) => {
     return <CarDelete Car={Data} deleteConfirmOpen={deleteOpenEvent}/>
 };

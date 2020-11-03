@@ -1,10 +1,10 @@
-import {CustomerInfo} from "../../Context/DataTypeList";
+import {EmployeeInfo} from "../../Context/DataTypeList";
 import React, {FC} from "react";
 import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 
 type props = {
-    cus : CustomerInfo,
+    emp : EmployeeInfo,
     deleteConfirmOpen : () => void
 }
 
@@ -14,19 +14,19 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
+const EmpDelete : FC<props> = ({emp,deleteConfirmOpen}) => {
     const classes = useStyle();
 
     return (
         <div className={classes.textCenter}>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>顧客名：{cus.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>顧客名：{emp.Name}</Typography>
             </div>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>住所：{cus.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>メールアドレス：{emp.eMail}</Typography>
             </div>
             <div className={classes.textCenter}>
-                上記顧客を本当に削除しますか？
+                上記従業員を本当に削除しますか？
             </div>
             <div className={classes.textCenter}>
                 <Button variant={'contained'} color={'primary'} onClick={deleteConfirmOpen}>削除</Button>
@@ -35,6 +35,6 @@ const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
     )
 };
 
-export const DeleteCustomer = (Data : CustomerInfo,deleteOpenEvent : () => void) => {
-    return <DeleteConfirmCustomer cus={Data} deleteConfirmOpen={deleteOpenEvent}/>
+export const DeleteEmployee = (Data : EmployeeInfo,deleteOpenEvent : () => void) => {
+    return <EmpDelete emp={Data} deleteConfirmOpen={deleteOpenEvent}/>
 };

@@ -25,7 +25,7 @@ type Props = {
     successOpenEvent : () => void
 }
 
-const AddCustomer : FC<Props> = ({editCustomer,successOpenEvent}) => {
+const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
     const classes = useStyle();
 
     const [cusName,setCusName] = useState<string>('');
@@ -55,11 +55,11 @@ const AddCustomer : FC<Props> = ({editCustomer,successOpenEvent}) => {
 };
 
 export const InsertCustomer = (successOpenEvent : () => void) => {
-    return <AddCustomer successOpenEvent={successOpenEvent}/>
+    return <CustomerCreateEdit successOpenEvent={successOpenEvent}/>
 };
 
 export const EditCustomer = (Data : CustomerInfo ,successOpenEvent : () => void) => {
-    return <AddCustomer editCustomer={Data} successOpenEvent={successOpenEvent}/>
+    return <CustomerCreateEdit editCustomer={Data} successOpenEvent={successOpenEvent}/>
 };
 
-export default AddCustomer
+export default CustomerCreateEdit
