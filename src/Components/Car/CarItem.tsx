@@ -10,7 +10,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 type Props = {
-    Car : CarInfo
+    Car : CarInfo,
+    editModalOpen : (car : CarInfo) => void;
+    deleteModalOpen : (car : CarInfo) => void
 }
 
 const myStyle = makeStyles((theme) => ({
@@ -23,7 +25,16 @@ const myStyle = makeStyles((theme) => ({
 }
 }));
 
-const CarItem : FC<Props> = ({Car}) => {
+const CarItem : FC<Props> = ({Car,editModalOpen,deleteModalOpen}) => {
+
+    const editAction = () => {
+        editModalOpen(Car)
+    };
+
+    const deleteAction = () => {
+        deleteModalOpen(Car)
+    };
+
     const classes = myStyle();
     return (
         <Card className={classes.card}>
@@ -42,7 +53,7 @@ const CarItem : FC<Props> = ({Car}) => {
                 </Grid>
             </LinkCardContent>
             <CardActions>
-                <DeleteUpdateButton/>
+                <DeleteUpdateButton EditAction={editAction} DeleteAction={deleteAction}/>
             </CardActions>
         </Card>
     )

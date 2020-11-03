@@ -8,14 +8,15 @@ import {
     Box, Button, Grid,
     Tab,
     Tabs,
-    Theme,
     Typography
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Tweet from "../Tweets/Tweet";
-import ModalWindow from "../Common/ModalWindow";
-import CarCreate from "../Car/CarCreate";
-import CarCreateFromCustomer from "./CarCreateFromCustomer";
+import {CarCreate, CarEdit} from "../Car/CarCreateFromCustomer";
+import useInsertModal from "../../CustomHooks/useInsertModal";
+import useEditModal from "../../CustomHooks/useEditModal";
+import useDeleteModal from "../../CustomHooks/useDeleteModal";
+import {DeleteCar} from "../Car/CarDelete";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -51,8 +52,10 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     const {Customer,Car,Comment} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     const [cars , setCars] = useState<CarInfo[]>([]);
-    const [comments , setComments] = useState<CommentInfo[]>([])
-    const [modalOpen , setModalOpen] = useState<boolean>(false)
+    const [comments , setComments] = useState<CommentInfo[]>([]);
+
+    const insertModal = useInsertModal(CarCreate);
+
     const classes = useStyles();
 
     useEffect(() => {
@@ -78,11 +81,11 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
                             height={"450"} frameBorder={"0"} aria-hidden={"false"}/>
                 </Grid>
                 <Grid item xs={12}>
-                    <Button onClick={() => setModalOpen(true)} variant={'contained'} color={'primary'}>車両追加</Button>
+                    <Button onClick={insertModal.insertModalOpen} variant={'contained'} color={'primary'}>車両追加</Button>
                 </Grid>
             </Grid>
             <NavTabs displayCars={cars} displayComments={comments}/>
-            <ModalWindow IsOpen={modalOpen} handleClose={() => setModalOpen(false)} ChildComponent={<CarCreateFromCustomer/>}/>
+            {insertModal.InsertModal()}
         </div>
     );
 };
@@ -139,6 +142,20 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
         setValue(newValue);
     };
 
+    const carEditModal = useEditModal<CarInfo>(CarEdit);
+    const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar)
+
+    const editEvent = (Car : CarInfo) => {
+        carEditModal.setData(Car)
+        carEditModal.editModalOpen();
+    };
+
+    const deleteEvent = (Car : CarInfo) => {
+        carDeleteModal.setData(Car)
+        carDeleteModal.modalOpen();
+    };
+
+
     return (
         <div className={classes.tabRoot}>
             <AppBar position="static" color={"default"}>
@@ -156,7 +173,9 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
                 </Tabs>
             </AppBar>
             <TabPanel1 value={value} index={0}>
-                {displayCars.map((item,index) => <CarItem key={index} Car={item}/>)}
+                {displayCars.map((item,index) => <CarItem key={index} Car={item} editModalOpen={editEvent} deleteModalOpen={deleteEvent}/>)}
+                {carEditModal.EditModal()}
+                {carDeleteModal.Modal()}
             </TabPanel1>
             <TabPanel1 value={value} index={1}>
                 {displayComments.map((item,index) => <Tweet key={index} tweet={item}/>)}
