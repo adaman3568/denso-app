@@ -54,4 +54,12 @@ const AddCustomer : FC<Props> = ({editCustomer,successOpenEvent}) => {
     );
 };
 
-export default AddCustomer;
+export const InsertCustomer = (successOpenEvent : () => void) => {
+    return <AddCustomer successOpenEvent={successOpenEvent}/>
+};
+
+export const EditCustomer = (Data : CustomerInfo ,successOpenEvent : () => void) => {
+    return <AddCustomer editCustomer={Data} successOpenEvent={successOpenEvent}/>
+};
+
+export default AddCustomer
