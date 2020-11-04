@@ -1,10 +1,19 @@
 import React, {FC} from 'react';
 import Title from "../Common/Title";
+import {CommentInfo} from "../../Context/DataTypeList";
+import Tweet from "./Tweet";
+import {RouteComponentProps} from "react-router-dom";
 
-const TweetsDetail : FC = () => {
+type pageProps = {} & RouteComponentProps<{id : string}>
+
+const TweetsDetail : FC<pageProps> = ({match}) => {
+
+    // この辺でcustomHooks使ってデータ取得して表示するようにする。
+
     return (
         <div>
-            <Title>this is Tweets Detail page.</Title>
+            {console.log(match.params.id)}
+            <p>{match.params.id}</p>
         </div>
     );
 };

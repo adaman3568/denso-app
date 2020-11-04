@@ -56,7 +56,7 @@ const Tweet : React.FC<props> = ({tweet}) => {
     const classes = useStyles();
 
     return (
-        <Link to={PathList.tweetsDetail} className={classes.NonDecorationLink}>
+        <Link to={`${PathList.tweetsDetail}/${tweet?.id}`} className={classes.NonDecorationLink}>
             <Card className={classes.tweetItem}>
                 <CardActionArea>
                     <Grid container spacing={3}>
@@ -68,7 +68,7 @@ const Tweet : React.FC<props> = ({tweet}) => {
                                 <PostDateTime value={'2020/10/19 22:50'}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <CommentBody body={tweet.Body}/>
+                                <CommentBody body={tweet?.Body}/>
                             </Grid>
                         </Grid>
                     </Grid>

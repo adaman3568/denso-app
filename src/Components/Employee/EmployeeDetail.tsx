@@ -10,7 +10,7 @@ type pageProps = {} & RouteComponentProps<{id : string}>
 
 const EmployeeDetail : FC<pageProps> = ({match}) => {
 
-    const {Employee,Comment,dispatch} = useContext(DataContext)
+    const {Employee,Comment,dispatch} = useContext(DataContext);
     const [emp,setEmp] = useState<EmployeeInfo>({} as EmployeeInfo);
     const [comments, setComments] = useState<CommentInfo[]>([]);
 

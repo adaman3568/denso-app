@@ -56,7 +56,7 @@ const App : React.FC = () => {
                                 <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>
                                 <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} user={user}/>
 
-                                <PrivateRoute exact path={PathList.tweetsDetail} component={TweetsDetail} user={user}/>
+                                <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} user={user}/>
 
                                 <Route exact path={PathList.loginPage} component={SignIn} user={user}/>
                             </UserIndexWrapper>
