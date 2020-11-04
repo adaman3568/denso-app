@@ -3,6 +3,8 @@ import {RouteComponentProps} from "react-router-dom";
 import {DataContext} from "../../Context/DataContextProvider";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
+import {Grid} from "@material-ui/core";
+import EmpProfile from "./EmpProfile";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -20,13 +22,11 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
             Comment.Func.GetEmpComments(d.id).then(data => setComments(data));
         }
 
-    },[])
+    },[]);
+
     return (
         <div>
-            <h2>this is id:{match.params.id}'s emp page.</h2>
-            <p>{emp.id}</p>
-            <p>{emp.Name}</p>
-            <p>{emp.eMail}</p>
+            <EmpProfile data={emp}/>
             {comments.map((d,index) => <Tweet key={index} tweet={d}/>)}
         </div>
     );
