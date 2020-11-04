@@ -6,6 +6,7 @@ import Tweet from "../Tweets/Tweet";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {Button, Typography} from "@material-ui/core";
 import {PathList} from "../../Routing/path";
+import CarProfile from "./CarProfile";
 
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
@@ -28,17 +29,7 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
 
     return (
         <div>
-            <h2>this is id:{props.match.params.id} car detail page.</h2>
-            <Button size={'large'} onClick={() => Car.Func.DeleteCar(props.match.params.id)}>
-                <DeleteIcon/>
-                削除
-            </Button>
-            <p>{carData.id}</p>
-            <Typography>{carData.Name}</Typography>
-            <Typography>{carData.Detail}</Typography>
-            <Link to={`${PathList.carEdit}/${carData.id}`}>
-                <Button>編集</Button>
-            </Link>
+            <CarProfile data={carData}/>
             {comments.map((item,index) => <Tweet key={index} tweet={item}/>)}
         </div>
     );
