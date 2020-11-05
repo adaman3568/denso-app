@@ -58,9 +58,10 @@ export const GetCarCommentsFromDB = async (uid : string) : Promise<CommentInfo[]
 
 //　awaitを使うなら、asyncをセットで使わないといけない。=>asyncを使う時点で戻り値はPromiseになる。
 // awaitを使うなら、必然的に戻り値はPromiseになる。
-const getComment = async (comRef : firebase.firestore.DocumentReference) : Promise<CommentInfo> => {
+export const getComment = async (comRef : firebase.firestore.DocumentReference) : Promise<CommentInfo> => {
     const com = await comRef.get();
     const comment : CommentInfo = com.data() as CommentInfo;
+    console.log('execute getting firestore method:getComment');
     comment.id = com.id;
     return comment;
 };
