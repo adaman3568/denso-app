@@ -1,5 +1,5 @@
 import React, {FC, useContext} from 'react';
-import {Checkbox, Fab, Fade, Grid, Modal, TextField} from "@material-ui/core";
+import {Checkbox, Fab, Grid, TextField} from "@material-ui/core";
 import Tweets from "../Tweets/Tweets";
 import {DataContext} from "../../Context/DataContextProvider";
 import Loading from "../Common/Loading";
@@ -8,7 +8,6 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
-import Backdrop from '@material-ui/core/Backdrop';
 import PostTweet from "../PostTweet";
 import ModalWindow from "../Common/ModalWindow";
 

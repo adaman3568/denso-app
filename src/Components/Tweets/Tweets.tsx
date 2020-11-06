@@ -15,7 +15,7 @@ const Tweets : React.FC<Props> = ({ShowImg = true}) => {
 
     useEffect(() => {
         setTweets(Comment.Data);
-    },[]);
+    },[tweets]);
 
     return (
             <Grid item xs={12}>

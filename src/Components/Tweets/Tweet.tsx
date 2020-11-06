@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Card, CardActionArea, CardActions, Grid, Typography} from "@material-ui/core";
+import {Card, CardActionArea, CardActions, Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import {PathList} from "../../Routing/path";
@@ -52,7 +52,7 @@ const testCar : CarInfo = {
     Detail : 'デジタコ・ETC装着'
 }
 
-const Tweet : React.FC<props> = ({tweet}) => {
+const Tweet : FC<props> = ({tweet}) => {
     const classes = useStyles();
 
     return (

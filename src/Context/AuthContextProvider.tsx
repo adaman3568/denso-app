@@ -1,6 +1,5 @@
 import React, {createContext, FC, useEffect, useState} from 'react';
 import firebase from "../Firebase";
-import {createDeflateRaw} from "zlib";
 
 type AuthContextState = {
     initializing : boolean,

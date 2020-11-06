@@ -1,4 +1,4 @@
-import {CommentInfo, CustomerInfo} from "../Context/DataTypeList";
+import {CustomerInfo} from "../Context/DataTypeList";
 import React from "react";
 export const CustomerInitialState : CustomerInfo[] = [];
 

@@ -7,7 +7,6 @@ function useEditModal<T>(ChildNode : (Data : T, func : () => void) => ReactNode)
     const [open,setOpen] = useState(false);
     const [customer, setCustomer] = useState<T>({} as T);
     const [successOpen,setSuccessOpen] = useState<boolean>(false);
-    const setData = setCustomer;
 
     const SuccessOpen = () => {
         setOpen(false)

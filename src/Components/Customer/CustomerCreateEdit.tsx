@@ -35,7 +35,7 @@ const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
             setCusName(editCustomer.Name);
             setAddress(editCustomer.Address);
         }
-    },[]);
+    },[editCustomer]);
 
     return (
         <div>

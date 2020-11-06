@@ -1,4 +1,4 @@
-import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "../DataTypeList";
+import {CommentInfo, EmployeeInfo} from "../DataTypeList";
 import firebase, {DocumentList} from '../../Firebase';
 import {GetCustomerCarsFromDB} from "./CarFunction";
 

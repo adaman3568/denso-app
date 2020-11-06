@@ -18,7 +18,6 @@ export const GetAllCustomersFromDB = async () : Promise<CustomerInfo[]> => {
 // 特定の顧客を取得する。
 export const GetCustomerFromDB = async (id : string) : Promise<CustomerInfo> => {
     const snapshot = await db.collection(DocumentList.Customers).doc(id).get();
-    const d = snapshot.data()
     let data = DataToCustomerInfo(snapshot.data())
     data.id = snapshot.id;
     return data;

@@ -11,13 +11,8 @@ export const useComment = (id : string) => {
             const snapshot = await db.collection(DocumentList.Comments).doc(id).get();
             console.log('execute getting firestore');
             const data = snapshot.data();
-            const documentData : CommentInfo = data as CommentInfo;
-            const res : CommentInfo = {
-                id : snapshot.id,
-                Body : documentData.Body,
-                ReplyCommentRef : [...documentData.ReplyCommentRef]
-            };
-            return res
+
+            return data as CommentInfo;
         };
 
         setCommentItem().then(res => {

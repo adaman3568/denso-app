@@ -1,9 +1,7 @@
-import React, {FC, ReactNode, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {CommentInfo} from "../../Context/DataTypeList";
 import {RouteComponentProps} from "react-router-dom";
-import firebase, {DocumentList} from '../../Firebase';
 import {getComment} from "../../Context/Functions/CommentFunction";
-import {match} from "react-router";
 import Loading from "../Common/Loading";
 import {useComment} from "../../CustomHooks/useComment";
 
@@ -35,7 +33,7 @@ const RepComment : FC<Props> = ({Comment}) => {
     useEffect(() => {
         console.log(Comment);
         const setRepCommentItems = async (): Promise<CommentInfo[]> => {
-            if (Comment.ReplyCommentRef != null && Comment.ReplyCommentRef != undefined) {
+            if (Comment.ReplyCommentRef !== null && Comment.ReplyCommentRef !== undefined) {
                 const res: Promise<CommentInfo>[] = Comment.ReplyCommentRef.map(item => getComment(item))
                 return await Promise.all(res)
             }
