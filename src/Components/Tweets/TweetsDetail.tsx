@@ -31,15 +31,16 @@ const RepComment : FC<Props> = ({Comment}) => {
     const [repComments, setRepComments] = useState<CommentInfo[]>([]);
 
     useEffect(() => {
-        console.log(Comment);
-        const setRepCommentItems = async (): Promise<CommentInfo[]> => {
-            if (Comment.ReplyCommentRef !== null && Comment.ReplyCommentRef !== undefined) {
-                const res: Promise<CommentInfo>[] = Comment.ReplyCommentRef.map(item => getComment(item))
-                return await Promise.all(res)
-            }
-            return []
+        const setRepCommentItems = async (com : CommentInfo): Promise<CommentInfo[]> => {
+            console.log(com);
+            const res: Promise<CommentInfo>[] | undefined = com.ReplyCommentRef?.map(item => getComment(item));
+            if(res === undefined)
+                return [];
+
+            return await Promise.all(res)
         };
-        setRepCommentItems().then(res => setRepComments(res))
+
+        setRepCommentItems(Comment).then(res => setRepComments(res))
     },[])
 
     return <div>
