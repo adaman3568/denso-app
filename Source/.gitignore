@@ -5,3 +5,5 @@
 bin/
 obj/
 *.cache
+
+firebase-admin.json

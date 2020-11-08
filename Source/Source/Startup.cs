@@ -1,8 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +17,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Source.Models;
 
 namespace Source
@@ -38,6 +43,19 @@ namespace Source
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DensoContext>(opt => opt.UseSqlServer(sqlConStrBuilder.ToString()));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.Authority = $@"https://securetoken.google.com/rst-denso-app";
+                    opt.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = $@"https://securetoken.google.com/rst-denso-app",
+                        ValidateAudience = true,
+                        ValidAudience = "rst-denso-app",
+                        ValidateLifetime = true
+                    };
+                });
             services.AddControllers();
         }
 
@@ -52,6 +70,8 @@ namespace Source
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -18,6 +18,7 @@ import SignIn from "./Components/SignIn";
 import {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
+import AspTestCom from "./Components/AspTestCom";
 
 const theme = createMuiTheme({
     palette :{
@@ -44,6 +45,7 @@ const App : React.FC = () => {
                     <MuiThemeProvider theme={theme}>
                         <Switch>
                             <UserIndexWrapper>
+                                <Route exact path={"/test"} component={AspTestCom}/>
                                 <PrivateRoute exact path={PathList.home} component={IndexPage} user={user}/>
                                 <PrivateRoute exact path={PathList.profile} component={ProfileIndex} user={user}/>
 

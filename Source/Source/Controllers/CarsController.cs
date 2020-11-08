@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CarsController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -24,6 +26,13 @@ namespace Source.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
+            var res= User.Identity;
+
+            var userClams = User.Claims.FirstOrDefault(item => item.Type == "user_id");
+            if (userClams != null)
+            {
+                var uid = userClams.Value;
+            }
             return await _context.Cars.ToListAsync();
         }
 
