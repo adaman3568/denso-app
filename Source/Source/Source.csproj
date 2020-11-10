@@ -5,6 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20201110122934_add-rerationid.cs" />
+    <Compile Remove="Migrations\20201110122934_add-rerationid.Designer.cs" />
+    <Compile Remove="Migrations\20201110123729_add-rerationid2.cs" />
+    <Compile Remove="Migrations\20201110123729_add-rerationid2.Designer.cs" />
+    <Compile Remove="Migrations\20201110124213_add-rerationid.cs" />
+    <Compile Remove="Migrations\20201110124213_add-rerationid.Designer.cs" />
+    <Compile Remove="Migrations\20201110124859_add-rerationid.cs" />
+    <Compile Remove="Migrations\20201110124859_add-rerationid.Designer.cs" />
+    <Compile Remove="Migrations\20201110125208_add-rerationid.cs" />
+    <Compile Remove="Migrations\20201110125208_add-rerationid.Designer.cs" />
+    <Compile Remove="Migrations\20201110130942_add-seed3.cs" />
+    <Compile Remove="Migrations\20201110130942_add-seed3.Designer.cs" />
+    <Compile Remove="Migrations\20201110132446_add-seed3.cs" />
+    <Compile Remove="Migrations\20201110132446_add-seed3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FirebaseAdmin" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />

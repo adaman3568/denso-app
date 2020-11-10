@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Source.Models;
 
 namespace Source.Migrations
 {
     [DbContext(typeof(DensoContext))]
-    partial class DensoContextModelSnapshot : ModelSnapshot
+    [Migration("20201110125748_add-seed2")]
+    partial class addseed2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,40 +48,6 @@ namespace Source.Migrations
                     b.HasIndex("ParentCustomerId");
 
                     b.ToTable("Cars");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            CarNo = "11-11",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ParentCustomerId = 1,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 2,
-                            CarNo = "22-22",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ParentCustomerId = 1,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 3,
-                            CarNo = "33-33",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ParentCustomerId = 2,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            ID = 4,
-                            CarNo = "44-44",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ParentCustomerId = 2,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("Source.Models.Comment", b =>
@@ -95,92 +63,27 @@ namespace Source.Migrations
                     b.Property<string>("Detail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentCarId")
+                    b.Property<int?>("ParentCarID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ParentCommentId")
+                    b.Property<int?>("ParentCommentID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ParentCarId");
+                    b.HasIndex("ParentCarID");
 
-                    b.HasIndex("ParentCommentId");
+                    b.HasIndex("ParentCommentID");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test1",
-                            ParentCarId = 1,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test2",
-                            ParentCarId = 2,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test3",
-                            ParentCarId = 3,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test4",
-                            ParentCarId = 4,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test5",
-                            ParentCarId = 1,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 6,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test6",
-                            ParentCarId = 2,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        },
-                        new
-                        {
-                            ID = 7,
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "test7",
-                            ParentCarId = 3,
-                            Updated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("Source.Models.Company", b =>
@@ -243,26 +146,6 @@ namespace Source.Migrations
                     b.HasIndex("ParentCompanyId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Address = "東京都千代田区",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "良い会社",
-                            Name = "株式会社タイガー",
-                            ParentCompanyId = 1
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Address = "福岡県福岡市",
-                            Created = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Detail = "良い会社",
-                            Name = "株式会社Rejoist.",
-                            ParentCompanyId = 1
-                        });
                 });
 
             modelBuilder.Entity("Source.Models.User", b =>
@@ -293,12 +176,6 @@ namespace Source.Migrations
                             ID = 1,
                             Name = "Hiroshi",
                             ParentCompanyId = 1
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "杉山　隆",
-                            ParentCompanyId = 1
                         });
                 });
 
@@ -315,17 +192,17 @@ namespace Source.Migrations
                 {
                     b.HasOne("Source.Models.Car", "ParentCar")
                         .WithMany("Comments")
-                        .HasForeignKey("ParentCarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ParentCarID");
 
                     b.HasOne("Source.Models.Comment", "ParentComment")
                         .WithMany()
-                        .HasForeignKey("ParentCommentId");
+                        .HasForeignKey("ParentCommentID");
 
                     b.HasOne("Source.Models.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Source.Models.Customer", b =>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization.Infrastructure;
 
 namespace Source.Models
 {
     public class Company
     {
+        [Key]
         public int ID { get; set; }
         public string AccountCode { get; set; }
         public string Name { get; set; }

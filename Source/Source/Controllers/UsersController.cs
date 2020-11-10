@@ -45,6 +45,7 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetUserComments(int id)
         {
+            
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)
@@ -52,7 +53,9 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            return user.Comments.ToList();
+            var comment = _context.Comments.Where(com => com.UserId == id);
+
+            return comment.ToList();
         }
 
         // PUT: api/Users/5
