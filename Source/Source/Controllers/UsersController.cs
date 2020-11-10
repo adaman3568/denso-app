@@ -45,7 +45,6 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetUserComments(int id)
         {
-            
             var user = await _context.Users.FindAsync(id);
 
             if (user == null)

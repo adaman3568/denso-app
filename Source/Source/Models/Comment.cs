@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Source.Models
 {
@@ -14,14 +15,20 @@ namespace Source.Models
 
         [ForeignKey("ParentCar")]
         public int ParentCarId { get; set; }
+
+        [JsonIgnore]
         public Car ParentCar { get; set; }
 
         [ForeignKey("User")]
         public int? UserId { get; set; }
-        public User User { get; set; }
+
+        [JsonIgnore]
+        public virtual User User { get; set; }
 
         [ForeignKey("ParentComment")]
         public int? ParentCommentId { get; set; }
-        public Comment ParentComment { get; set; }
+
+        [JsonIgnore]
+        public virtual Comment ParentComment { get; set; }
     }
 }

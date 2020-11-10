@@ -15,9 +15,9 @@ namespace Source.Models
         public DateTime Updated { get; set; }
 
         [ForeignKey("ParentCustomer")]
-        public int ParentCustomerId { get; set; }
-        public Customer ParentCustomer { get; set; }
+        public virtual int ParentCustomerId { get; set; }
+        public virtual Customer ParentCustomer { get; set; }
 
-        public IEnumerable<Comment> Comments { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

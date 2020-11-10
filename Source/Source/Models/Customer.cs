@@ -18,9 +18,9 @@ namespace Source.Models
 
         [ForeignKey("ParentCompany")]
         public int ParentCompanyId { get; set; }
-        public Company ParentCompany { get; set; }
+        public virtual Company ParentCompany { get; set; }
 
-        public IEnumerable<Car> Cars { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
 
     }
 }

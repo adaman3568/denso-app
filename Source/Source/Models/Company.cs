@@ -13,7 +13,7 @@ namespace Source.Models
         public string Name { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
-        public IEnumerable<Customer> Customers { get; set; }
-        public IEnumerable<User> Users { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
