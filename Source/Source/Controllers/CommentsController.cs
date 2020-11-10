@@ -41,6 +41,14 @@ namespace Source.Controllers
             return comment;
         }
 
+        // GET: api/Comments/5/repcomments
+        [HttpGet("{id}/repcomments")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetRepComment(int id)
+        {
+            var repComments = _context.Comments.Where(com => com.ParentComment.ID == id);
+            return await repComments.ToListAsync();
+        }
+
         // PUT: api/Comments/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -76,10 +84,39 @@ namespace Source.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Comment>> PostComment(Comment comment)
+        [HttpPost("{carId}")]
+        public async Task<ActionResult<Comment>> PostComment(int carId, Comment comment)
         {
-            _context.Comments.Add(comment);
+            var car = await _context.Cars.FindAsync(carId);
+            if (car == null)
+            {
+                return BadRequest();
+            }
+
+            comment.ParentCar = car;
+
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetComment", new { id = comment.ID }, comment);
+        }
+
+        // POST: api/Comments
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost("{parentComId}")]
+        public async Task<ActionResult<Comment>> PostRepComment(int parentComId, Comment comment)
+        {
+            var parentComment = await _context.Comments.FindAsync(parentComId);
+            if (parentComment == null)
+            {
+                return BadRequest();
+            }
+
+            comment.ParentComment = parentComment;
+            comment.ParentCar = parentComment.ParentCar;
+
+            await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetComment", new { id = comment.ID }, comment);

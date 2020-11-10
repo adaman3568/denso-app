@@ -9,6 +9,7 @@ namespace Source.Models
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public Car ParentCar { get; set; }
+        public User User { get; set; }
         public Comment ParentComment { get; set; }
     }
 }

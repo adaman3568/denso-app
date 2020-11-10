@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Source.Models
 {
@@ -10,5 +11,6 @@ namespace Source.Models
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public Customer ParentCustomer { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

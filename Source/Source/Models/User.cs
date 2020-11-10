@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Source.Models
 {
@@ -8,5 +9,6 @@ namespace Source.Models
         public string Email { get; set; }
         public string Name { get; set; }
         public Company ParentCompany { get; set; }
+        public IEnumerable<Comment> Comments { get; set; }
     }
 }

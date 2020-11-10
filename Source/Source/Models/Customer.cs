@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Source.Models
@@ -10,5 +11,7 @@ namespace Source.Models
         public string Detail { get; set; }
         public DateTime Created { get; set; }
         public Company ParentCompany { get; set; }
+        public IEnumerable<Car> Cars { get; set; }
+
     }
 }

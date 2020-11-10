@@ -41,6 +41,43 @@ namespace Source.Controllers
             return customer;
         }
 
+        // GET: api/Customers/5/comments
+        [HttpGet("{id}/comments")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCustomerComments(int id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            var cars = customer.Cars;
+            var comList = new List<Comment>();
+            foreach (var car in cars)
+            {
+                comList.AddRange(car.Comments);
+            }
+
+            return comList;
+        }
+
+        // GET: api/Customers/5/comments
+        [HttpGet("{id}/cars")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetCustomerCars(int id)
+        {
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            return customer.Cars.ToList();
+        }
+
+
+
         // PUT: api/Customers/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.

@@ -7,12 +7,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Source.Models;
+using SQLitePCL;
 
 namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CarsController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -50,6 +50,22 @@ namespace Source.Controllers
             return car;
         }
 
+        // GET: api/Cars/5/comments
+        [HttpGet("{id}/comments")]
+        public async Task<ActionResult<IEnumerable<Comment>>> GetCarComments(int id)
+        {
+            var car = await _context.Cars.FindAsync(id);
+
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+            var comment = _context.Comments.Where(com => com.ParentCar.ID == id);
+            return await comment.ToListAsync() ;
+
+        }
+
         // PUT: api/Cars/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -85,9 +101,16 @@ namespace Source.Controllers
         // POST: api/Cars
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Car>> PostCar(Car car)
+        [HttpPost("{parentCustomerId}")]
+        public async Task<ActionResult<Car>> PostCar(int parentCustomerId, Car car)
         {
+            var parentCustomer = await _context.Customers.FindAsync(parentCustomerId);
+            if (parentCustomer == null)
+            {
+                return BadRequest();
+            }
+
+            car.ParentCustomer = parentCustomer;
             _context.Cars.Add(car);
             await _context.SaveChangesAsync();
 
