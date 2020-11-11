@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Source.Models
 {
@@ -16,8 +17,11 @@ namespace Source.Models
 
         [ForeignKey("ParentCustomer")]
         public virtual int ParentCustomerId { get; set; }
+
+        [JsonIgnore]
         public virtual Customer ParentCustomer { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -84,7 +84,7 @@ namespace Source.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost("{carId}")]
+        [HttpPost("{carId:int}")]
         public async Task<ActionResult<Comment>> PostComment(int carId, Comment comment)
         {
             var car = await _context.Cars.FindAsync(carId);
@@ -104,10 +104,10 @@ namespace Source.Controllers
         // POST: api/Comments
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost("{parentComId}")]
+        [HttpPost("rep/{parentComId:int}")]
         public async Task<ActionResult<Comment>> PostRepComment(int parentComId, Comment comment)
         {
-            var parentComment = await _context.Comments.FindAsync(parentComId);
+            var parentComment = await _context.Comments.Include(com => com.ParentCar).FirstOrDefaultAsync(com => com.ID == parentComId);
             if (parentComment == null)
             {
                 return BadRequest();

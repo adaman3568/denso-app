@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Source.Models
 {
@@ -18,8 +19,11 @@ namespace Source.Models
 
         [ForeignKey("ParentCompany")]
         public int ParentCompanyId { get; set; }
+
+        [JsonIgnore]
         public virtual Company ParentCompany { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Car> Cars { get; set; }
 
     }

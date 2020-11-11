@@ -54,15 +54,14 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCarComments(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
+            var car = await _context.Cars.Include(car => car.Comments).FirstOrDefaultAsync(car => car.ID == id);
 
             if (car == null)
             {
                 return NotFound();
             }
 
-            var comment = _context.Comments.Where(com => com.ParentCar.ID == id);
-            return await comment.ToListAsync() ;
+            return car.Comments.ToList();
 
         }
 

@@ -45,19 +45,14 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCustomerComments(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments).FirstOrDefaultAsync(cus => cus.ID == id);
 
             if (customer == null)
             {
                 return NotFound();
             }
-
-            var cars = customer.Cars;
             var comList = new List<Comment>();
-            foreach (var car in cars)
-            {
-                comList.AddRange(car.Comments);
-            }
+            customer.Cars.ToList().ForEach(car => comList.AddRange(car.Comments));
 
             return comList;
         }
@@ -66,7 +61,7 @@ namespace Source.Controllers
         [HttpGet("{id}/cars")]
         public async Task<ActionResult<IEnumerable<Car>>> GetCustomerCars(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.Include(cus => cus.Cars).FirstOrDefaultAsync(cus => cus.ID == id);
 
             if (customer == null)
             {
