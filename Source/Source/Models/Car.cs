@@ -13,7 +13,11 @@ namespace Source.Models
         public int ID { get; set; }
         public string CarNo { get; set; }
         public string Detail { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime? Updated { get; set; }
 
         [ForeignKey("ParentCustomer")]
