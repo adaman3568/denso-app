@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Source.Extentions;
 using Source.Models;
 
 namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -24,14 +27,16 @@ namespace Source.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            var loginUser = User.GetUser(_context);
+            return await _context.Users.Where(u => u.ParentCompanyId == loginUser.ParentCompanyId).ToListAsync();
         }
 
         // GET: api/Users/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var loginUser = User.GetUser(_context);
+            var user = await _context.Users.FirstOrDefaultAsync(user => user.ID == id && user.ParentCompanyId == loginUser.ParentCompanyId);
 
             if (user == null)
             {
@@ -45,14 +50,17 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetUserComments(int id)
         {
-            var user = await _context.Users.FindAsync(id);
+            var loginUser = User.GetUser(_context);
+
+            var user = await _context.Users.Include(user => user.Comments).FirstOrDefaultAsync(user =>
+                user.ID == id && user.ParentCompanyId == loginUser.ParentCompanyId);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            var comment = _context.Comments.Where(com => com.UserId == id);
+            var comment = user.Comments;
 
             return comment.ToList();
         }

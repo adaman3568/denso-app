@@ -13,7 +13,7 @@ namespace Source.Models
         public string AccountCode { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
+        public DateTime? Updated { get; set; }
 
         [JsonIgnore]
         public virtual ICollection<Customer> Customers { get; set; }

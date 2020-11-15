@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Source.Models;
 
 namespace Source.Migrations
 {
     [DbContext(typeof(DensoContext))]
-    partial class DensoContextModelSnapshot : ModelSnapshot
+    [Migration("20201114101711_add-updated")]
+    partial class addupdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -266,6 +268,9 @@ namespace Source.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -274,9 +279,6 @@ namespace Source.Migrations
 
                     b.Property<DateTime?>("Updated")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("uid")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -319,7 +321,7 @@ namespace Source.Migrations
                         .IsRequired();
 
                     b.HasOne("Source.Models.Comment", "ParentComment")
-                        .WithMany("RepComment")
+                        .WithMany()
                         .HasForeignKey("ParentCommentId");
 
                     b.HasOne("Source.Models.User", "User")

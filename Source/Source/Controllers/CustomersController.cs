@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Source.Extentions;
 using Source.Models;
 
 namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CustomersController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -24,14 +27,19 @@ namespace Source.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
         {
-            return await _context.Customers.ToListAsync();
+            var user = User.GetUser(_context);
+            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments)
+                .Where(cus => cus.ParentCompanyId == user.ParentCompanyId).ToListAsync();
+            return customer;
         }
 
         // GET: api/Customers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Customer>> GetCustomer(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var user = User.GetUser(_context);
+            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments)
+                .FirstOrDefaultAsync(cus => cus.ParentCompanyId == user.ParentCompanyId && cus.ID == id);
 
             if (customer == null)
             {
@@ -45,23 +53,25 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCustomerComments(int id)
         {
-            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments).FirstOrDefaultAsync(cus => cus.ID == id);
+            var user = User.GetUser(_context);
+            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments).FirstOrDefaultAsync(cus => cus.ID == id && cus.ParentCompanyId == user.ParentCompanyId);
 
             if (customer == null)
             {
                 return NotFound();
             }
-            var comList = new List<Comment>();
-            customer.Cars.ToList().ForEach(car => comList.AddRange(car.Comments));
 
-            return comList;
+            var comments = customer.Cars.SelectMany(car => car.Comments).ToList();
+
+            return comments;
         }
 
         // GET: api/Customers/5/comments
         [HttpGet("{id}/cars")]
         public async Task<ActionResult<IEnumerable<Car>>> GetCustomerCars(int id)
         {
-            var customer = await _context.Customers.Include(cus => cus.Cars).FirstOrDefaultAsync(cus => cus.ID == id);
+            var user = User.GetUser(_context);
+            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments).FirstOrDefaultAsync(cus => cus.ID == id && cus.ParentCompanyId == user.ParentCompanyId);
 
             if (customer == null)
             {
@@ -84,6 +94,7 @@ namespace Source.Controllers
                 return BadRequest();
             }
 
+            customer.Updated = DateTime.Now;
             _context.Entry(customer).State = EntityState.Modified;
 
             try
@@ -111,6 +122,7 @@ namespace Source.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
+            customer.Created = DateTime.Now;
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();
 

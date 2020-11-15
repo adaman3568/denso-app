@@ -1,1 +1,7 @@
 https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDEtN-LacDnJynV1oR2G71QAIPbHdwWyD4
+
+{
+  "email": "adaman3568@gmail.com",
+  "password": "adshiro3568",
+  "returnSecureToken": "true"
+}

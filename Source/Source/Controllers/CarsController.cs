@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Source.Extentions;
 using Source.Models;
 using SQLitePCL;
 
@@ -13,6 +14,7 @@ namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CarsController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -26,21 +28,19 @@ namespace Source.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Car>>> GetCars()
         {
-            var res= User.Identity;
+            var loginUser = User.GetUser(_context);
+            var car = await _context.Cars.Include(c => c.Comments)
+                .Where(car => car.ParentCustomer.ParentCompanyId == loginUser.ParentCompanyId).ToListAsync();
 
-            var userClams = User.Claims.FirstOrDefault(item => item.Type == "user_id");
-            if (userClams != null)
-            {
-                var uid = userClams.Value;
-            }
-            return await _context.Cars.ToListAsync();
+            return car;
         }
 
         // GET: api/Cars/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCar(int id)
         {
-            var car = await _context.Cars.FindAsync(id);
+            var loginUser = User.GetUser(_context);
+            var car = await _context.Cars.Include(c => c.Comments).FirstOrDefaultAsync(c => c.ID == id && c.ParentCustomer.ParentCompanyId == loginUser.ParentCompanyId);
 
             if (car == null)
             {
@@ -54,7 +54,8 @@ namespace Source.Controllers
         [HttpGet("{id}/comments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetCarComments(int id)
         {
-            var car = await _context.Cars.Include(car => car.Comments).FirstOrDefaultAsync(car => car.ID == id);
+            var loginUser = User.GetUser(_context);
+            var car = await _context.Cars.Include(car => car.Comments).FirstOrDefaultAsync(car => car.ID == id && car.ParentCustomer.ParentCompanyId == loginUser.ParentCompanyId);
 
             if (car == null)
             {
@@ -75,7 +76,8 @@ namespace Source.Controllers
             {
                 return BadRequest();
             }
-
+            // 更新時間を入れる
+            car.Updated = DateTime.Now;
             _context.Entry(car).State = EntityState.Modified;
 
             try
@@ -110,7 +112,9 @@ namespace Source.Controllers
             }
 
             car.ParentCustomer = parentCustomer;
-            _context.Cars.Add(car);
+            car.Created = DateTime.Now;
+
+            await _context.Cars.AddAsync(car);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCar", new { id = car.ID }, car);

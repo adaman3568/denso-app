@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Source.Models
@@ -13,7 +14,7 @@ namespace Source.Models
         public string CarNo { get; set; }
         public string Detail { get; set; }
         public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
+        public DateTime? Updated { get; set; }
 
         [ForeignKey("ParentCustomer")]
         public virtual int ParentCustomerId { get; set; }
@@ -23,5 +24,11 @@ namespace Source.Models
 
         [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; }
+
+        [NotMapped] public int? CommentCnt => Comments?.Count;
+
+        [NotMapped] public DateTime? LastCommentDate => Comments?.Max(com => com?.Created);
     }
+
+
 }

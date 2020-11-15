@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Source.Extentions;
 using Source.Models;
+using SQLitePCL;
 
 namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CommentsController : ControllerBase
     {
         private readonly DensoContext _context;
@@ -24,29 +29,64 @@ namespace Source.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
         {
-            return await _context.Comments.ToListAsync();
+            var loginUser = User.GetUser(_context);
+            // 上記親会社に紐づくコメントを取得
+            var com = await _context.Companies
+                                    .Include(com => com.Customers)
+                                        .ThenInclude(cus => cus.Cars)
+                                            .ThenInclude(car => car.Comments)
+                                    .Include(com => com.Users)
+                                    .FirstOrDefaultAsync(com => com.ID == loginUser.ParentCompanyId);
+
+            var res = com.Customers.SelectMany(cus => cus.Cars).SelectMany(car => car.Comments).OrderBy(com => com.ID);
+
+            return res.ToList();
         }
 
         // GET: api/Comments/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Comment>> GetComment(int id)
         {
-            var comment = await _context.Comments.FindAsync(id);
-
-            if (comment == null)
+            var loginUser = User.GetUser(_context);
+            // ログインユーザーの所属している会社のコメントのIDなら取得する。
+            var com = await _context.Comments.Include(com => com.User).ThenInclude(u => u.ParentCompany).FirstOrDefaultAsync(com => com.ID == id);
+            if (com == null)
             {
                 return NotFound();
             }
 
-            return comment;
+            if (com.User.ParentCompanyId == loginUser.ParentCompanyId)
+            {
+                return com;
+            }
+
+            return NotFound();
         }
 
         // GET: api/Comments/5/repcomments
         [HttpGet("{id}/repcomments")]
         public async Task<ActionResult<IEnumerable<Comment>>> GetRepComment(int id)
         {
-            var repComments = _context.Comments.Where(com => com.ParentComment.ID == id);
-            return await repComments.ToListAsync();
+            var com = await _context
+                .Comments
+                .Include(com => com.User)
+                .ThenInclude(u => u.ParentCompany)
+                .Include(com => com.RepComment)
+                .FirstOrDefaultAsync(com => com.ID == id);
+
+            if (com == null)
+            {
+                return NotFound();
+            }
+
+            var loginUser = User.GetUser(_context);
+            if (com.User.ParentCompanyId == loginUser.ParentCompanyId)
+            {
+                return com.RepComment.ToList();
+            }
+
+            return NotFound();
+
         }
 
         // PUT: api/Comments/5
@@ -55,11 +95,14 @@ namespace Source.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutComment(int id, Comment comment)
         {
-            if (id != comment.ID)
+            var loginUser = User.GetUser(_context);
+            // ログインユーザーのコメントでなければ更新させない
+            if (id != comment.ID && loginUser.Comments.All(com => com.ID != id))
             {
                 return BadRequest();
             }
 
+            comment.Updated = DateTime.Now;
             _context.Entry(comment).State = EntityState.Modified;
 
             try
@@ -87,12 +130,18 @@ namespace Source.Controllers
         [HttpPost("{carId:int}")]
         public async Task<ActionResult<Comment>> PostComment(int carId, Comment comment)
         {
-            var car = await _context.Cars.FindAsync(carId);
+            var loginUser = User.GetUser(_context);
+            // 受け取ったCarIdの車両がログインユーザーの所属している会社で登録している車両なら処理をする。
+            var car = await _context.Cars
+                .Include(car => car.ParentCustomer)
+                .ThenInclude(cus => cus.ParentCompany)
+                .FirstOrDefaultAsync(car => car.ID == carId && car.ParentCustomer.ParentCompanyId == loginUser.ParentCompanyId);
+
             if (car == null)
             {
                 return BadRequest();
             }
-
+            comment.Created = DateTime.Now;
             comment.ParentCar = car;
 
             await _context.Comments.AddAsync(comment);
@@ -115,6 +164,7 @@ namespace Source.Controllers
 
             comment.ParentComment = parentComment;
             comment.ParentCar = parentComment.ParentCar;
+            comment.Created = DateTime.Now;
 
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();

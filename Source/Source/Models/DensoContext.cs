@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net.NetworkInformation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Source.Models
 {
@@ -8,7 +11,6 @@ namespace Source.Models
     {
         public DensoContext(DbContextOptions<DensoContext> opt) : base(opt)
         {
-            
         }
 
         public DbSet<Car> Cars { get; set; }
@@ -19,7 +21,6 @@ namespace Source.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
 
             #region Company
             var company = new Company()
