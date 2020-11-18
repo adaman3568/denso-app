@@ -1,10 +1,13 @@
 ﻿using System.Net;
+using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Source;
+using Source.Models;
 using Xunit;
 
 namespace DensoSourceTest
@@ -12,10 +15,20 @@ namespace DensoSourceTest
     public class UsersControllerTest : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
-
+        private HttpClient _client;
         public UsersControllerTest(CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
+            _client = _factory.WithWebHostBuilder(b =>
+                b.ConfigureTestServices(services =>
+                {
+                    services.AddAuthentication("Test")
+                        .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>
+                            ("Test", options => { });
+                })).CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false,
+            });
         }
 
         [Fact]
@@ -32,19 +45,12 @@ namespace DensoSourceTest
         [Fact]
         public async Task GetMyProfile()
         {
-            var client = _factory.WithWebHostBuilder(b =>
-                b.ConfigureTestServices(services =>
-                {
-                    services.AddAuthentication("test")
-                        .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>
-                            ("Test", options => { });
-                })).CreateClient(new WebApplicationFactoryClientOptions
-            {
-                AllowAutoRedirect = false,
-            });
-
-            var forecasts = await client.GetAsync("/api/profile/myprofile");
-            Assert.Equal(HttpStatusCode.OK, forecasts.StatusCode);
+            var res = await _client.GetAsync("/api/users");
+            res.StatusCode.Is(HttpStatusCode.OK);
+            var responseContent2 = await JsonSerializer.DeserializeAsync<User[]>(
+                await res.Content.ReadAsStreamAsync(),
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            responseContent2.Length.Is(2);
         }
     }
 }
