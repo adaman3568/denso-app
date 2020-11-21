@@ -11,7 +11,7 @@ using Xunit;
 
 namespace DensoSourceTest
 {
-    public class ControllerTestOfCustomers
+    public class ControllerTestOfCustomers : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
         private HttpClient _client;

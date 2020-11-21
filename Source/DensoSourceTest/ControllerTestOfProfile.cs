@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -11,7 +12,7 @@ using Xunit;
 
 namespace DensoSourceTest
 {
-    public class ControllerTestOfProfile
+    public class ControllerTestOfProfile : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
         private HttpClient _client;
@@ -31,7 +32,7 @@ namespace DensoSourceTest
         }
 
         [Fact]
-        public async void 自分のProfileを取得できるか()
+        public async Task 自分のProfileを取得できるか()
         {
             var res = await _client.GetAsync("/api/profile/myprofile");
             res.StatusCode.Is(HttpStatusCode.OK);

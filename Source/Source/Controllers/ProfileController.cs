@@ -15,7 +15,6 @@ namespace Source.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ProfileController : ControllerBase
     {
         private readonly DensoContext _context;

@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Source;
+using Xunit;
 
 namespace DensoSourceTest
 {
-    public class ControllerTestOfComments
+    public class ControllerTestOfComments : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
         private HttpClient _client;
@@ -25,5 +26,6 @@ namespace DensoSourceTest
                 AllowAutoRedirect = false,
             });
         }
+
     }
 }

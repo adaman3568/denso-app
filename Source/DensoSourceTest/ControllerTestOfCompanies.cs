@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Source;
+using Xunit;
 
 namespace DensoSourceTest
 {
-    public class ControllerTestOfCompanies
+    public class ControllerTestOfCompanies : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly CustomWebApplicationFactory<Startup> _factory;
         private HttpClient _client;

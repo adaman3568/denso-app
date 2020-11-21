@@ -59,11 +59,19 @@ namespace Source
             services.AddControllers();
             services.AddControllers().AddNewtonsoftJson(settings =>
                 settings.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            services.AddCors(opt => opt.AddDefaultPolicy(
+                builder =>
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader().WithOrigins(new []{ "http://localhost:3000" });
+                }));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -72,6 +80,8 @@ namespace Source
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthentication();
 
