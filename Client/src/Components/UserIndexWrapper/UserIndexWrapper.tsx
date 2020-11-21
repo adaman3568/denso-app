@@ -124,7 +124,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
         setOpen(false);
     };
 
-    const {user,func} = useContext(AuthContext);
+    const {isLogined,func} = useContext(AuthContext);
 
     // サイドメニュー
     const DrawerMenu = () => {
@@ -171,19 +171,19 @@ const UserIndexWrapper : React.FC = ({children}) => {
             <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     {/*ログイン時にのみ表示するように*/}
-                    {user && <HamburgerMenu/>}
+                    {isLogined && <HamburgerMenu/>}
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
                         <Link color="inherit" href="/">
                             電装SNS
                         </Link>
                     </Typography>
                     {/*ログイン時にのみサインアウトボタンを表示*/}
-                    {user && <ProfileIconButton/>}
-                    {user && <ExitButton/>}
+                    {isLogined && <ProfileIconButton/>}
+                    {isLogined && <ExitButton/>}
                 </Toolbar>
             </AppBar>
             {/*ログイン時にのみ表示するように*/}
-            {user && <DrawerMenu/>}
+            {isLogined && <DrawerMenu/>}
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>

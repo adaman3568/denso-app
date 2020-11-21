@@ -13,6 +13,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect, RouteComponentProps} from "react-router";
 import {AuthContext} from "../Context/AuthContextProvider";
+import {apiEndPointBase, firebaseAuthPath} from "../Firebase";
+import axios from 'axios';
+import Cookies from "js-cookie";
+import {log} from "util";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -46,7 +50,7 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     };
 
     const renderItem = () => {
-        if(authContext.user){
+        if(authContext.isLogined){
             return (<Redirect to={'/'}/>)
         }else{
             return(<Container component="main" maxWidth="xs">

@@ -1,9 +1,11 @@
 import React, {createContext, FC, useEffect, useState} from 'react';
-import firebase from "../Firebase";
+import firebase, {apiEndPointBase, firebaseAuthPath} from "../Firebase";
+import axios from 'axios'
+import Cookies from "js-cookie";
 
 type AuthContextState = {
     initializing : boolean,
-    user : any,
+    isLogined : boolean,
     func : {SignIn : SignInFuncType,SignOut : SignOutFuncType}
 }
 
@@ -15,38 +17,67 @@ export const AuthContext = createContext<AuthContextState>({} as AuthContextStat
 const AuthContextProvider : FC = ({children}) => {
 
     const [state ,setState] = useState(() => {
-        const user = firebase.auth().currentUser
         return {
-            initializing: !user,
-            user,
+            initializing: true,
+            isLogined : false,
         }
     });
 
     const SignIn : SignInFuncType = async (mail : string,pass : string) => {
-        const res = await firebase.auth().signInWithEmailAndPassword(mail,pass);
-        if(res.user){
-            setState({initializing: false, user :  res.user})
+        const res = await axios.post(firebaseAuthPath,
+            {"email" : mail,
+                "password" : pass,
+                "returnSecureToken": "true"},{headers: {
+                    'Content-Type': 'application/json'
+                }});
+
+        console.log(res)
+        type getDataType = {
+            idToken : string
+        }
+        if(res.status === 200){
+            const d = res.data as getDataType;
+            Cookies.set("denso-app-jwt-token",d.idToken);
+            setState({initializing: false,isLogined: true})
         }else{
-            setState({initializing: false, user :  null})
+            setState({initializing: false,isLogined: false})
         }
     };
 
     const SignOut : SignOutFuncType = async () => {
         await firebase.auth().signOut()
-        setState({initializing: false,user : null})
+        setState({initializing: false,isLogined : false})
     };
 
-    const onChange = (user : any) => {
-        setState({initializing: false,user})
+    const LoginCheck = () => {
+        const jwtToken = Cookies.get("denso-app-jwt-token");
+        // クッキーの情報にdenso-app-jwt-tokenがあればそのトークンが使えるか否かのチェックをする。
+        // 使えればsetStateに値を入れる
+
+        if(jwtToken){
+            const apiPath = `${apiEndPointBase}profile/myprofile`;
+                axios.get(apiPath,{
+                headers :
+                    {'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${jwtToken}`
+                    }}).then(res => {
+                    setState({initializing: false,isLogined: true})
+                    console.log(res)
+            }).catch(res => {
+                    setState({initializing: false,isLogined: false})
+                    console.log(res)
+            })
+        }else{
+            setState({initializing: false,isLogined: false})
+        }
     };
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged(onChange)
-        return () => unsubscribe()
+        LoginCheck();
     },[]);
 
     return (
-        <AuthContext.Provider value={{initializing : state.initializing,user : state.user,func : {SignIn,SignOut}}}>
+        <AuthContext.Provider value={{initializing : state.initializing, isLogined : state.isLogined,func : {SignIn,SignOut}}}>
             {children}
         </AuthContext.Provider>
     );

@@ -18,7 +18,6 @@ import SignIn from "./Components/SignIn";
 import {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
-import AspTestCom from "./Components/AspTestCom";
 
 const theme = createMuiTheme({
     palette :{
@@ -34,7 +33,7 @@ const theme = createMuiTheme({
 
 const App : React.FC = () => {
 
-    const {initializing,user} = useContext(AuthContext);
+    const {initializing,isLogined} = useContext(AuthContext);
     if(initializing){
         return <Loading/>
     }
@@ -45,22 +44,21 @@ const App : React.FC = () => {
                     <MuiThemeProvider theme={theme}>
                         <Switch>
                             <UserIndexWrapper>
-                                <Route exact path={"/test"} component={AspTestCom}/>
-                                <PrivateRoute exact path={PathList.home} component={IndexPage} user={user}/>
-                                <PrivateRoute exact path={PathList.profile} component={ProfileIndex} user={user}/>
+                                <PrivateRoute exact path={PathList.home} component={IndexPage} isLogin={isLogined}/>
+                                <PrivateRoute exact path={PathList.profile} component={ProfileIndex} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} user={user}/>
-                                <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} user={user}/>
+                                <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} isLogin={isLogined}/>
+                                <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.cars} component={CarIndex} user={user}/>
-                                <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} user={user}/>
+                                <PrivateRoute exact path={PathList.cars} component={CarIndex} isLogin={isLogined}/>
+                                <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.customers} component={CustomerIndex} user={user}/>
-                                <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} user={user}/>
+                                <PrivateRoute exact path={PathList.customers} component={CustomerIndex} isLogin={isLogined}/>
+                                <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} user={user}/>
+                                <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} isLogin={isLogined}/>
 
-                                <Route exact path={PathList.loginPage} component={SignIn} user={user}/>
+                                <Route exact path={PathList.loginPage} component={SignIn} isLogin={isLogined}/>
                             </UserIndexWrapper>
                         </Switch>
                     </MuiThemeProvider>
