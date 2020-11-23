@@ -1,7 +1,8 @@
-import {CommentInfo} from "../Context/DataTypeList";
+export const decoi = {}
+// import {CommentInfo} from "../Context/DataTypeList";
 // import React from "react";
 //
-export const EmpInitialState : CommentInfo[] = [];
+// export const EmpInitialState : CommentInfo[] = [];
 //
 // const SetAllCommentAction = 'SetAllCommentAction' as const;
 //

@@ -1,6 +1,7 @@
-import {CustomerInfo} from "../Context/DataTypeList";
+export const decoi = {}
+// import {CustomerInfo} from "../Context/DataTypeList";
 // import React from "react";
-export const CustomerInitialState : CustomerInfo[] = [];
+// export const CustomerInitialState : CustomerInfo[] = [];
 //
 // export const SetAllCustomerAction = 'SetAllCustomerAction' as const;
 //

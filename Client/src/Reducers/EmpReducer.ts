@@ -1,7 +1,8 @@
-import {EmployeeInfo} from "../Context/DataTypeList";
+export const decoi = {}
+// import {EmployeeInfo} from "../Context/DataTypeList";
 // import React from "react";
 //
-const EmpInitialState : EmployeeInfo[] = [];
+// const EmpInitialState : EmployeeInfo[] = [];
 //
 // const SetAllEmployeeAction = 'SetAllEmployeeAction' as const;
 //

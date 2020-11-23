@@ -1,7 +1,8 @@
-import {CarInfo} from "../Context/DataTypeList";
+export const decoi = {}
+// import {CarInfo} from "../Context/DataTypeList";
 // import React from "react";
 //
-export const EmpInitialState : CarInfo[] = [];
+// export const EmpInitialState : CarInfo[] = [];
 //
 // const SetAllCarAction = 'SetAllCarAction' as const;
 // const CarDeleteAction = 'CarDeleteAction' as const;

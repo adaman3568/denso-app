@@ -6,7 +6,7 @@
 // import CarReducer, {CarActions} from "./CarReducer";
 //
 
-export type decoi = {}
+export const decoi = {}
 // export type RootState = {
 //     Customer : CustomerInfo[],
 //     Employee : EmployeeInfo[],
