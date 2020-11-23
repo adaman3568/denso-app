@@ -20,10 +20,10 @@ const CarDelete : FC<props> = ({Car,deleteConfirmOpen}) => {
     return (
         <div className={classes.textCenter}>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>車両名：{Car.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>車両名：{Car.carNo}</Typography>
             </div>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>詳細：{Car.Detail}</Typography>
+                <Typography display={'inline'} variant={'h3'}>詳細：{Car.detail}</Typography>
             </div>
             <div className={classes.textCenter}>
                 上記車両を本当に削除しますか？

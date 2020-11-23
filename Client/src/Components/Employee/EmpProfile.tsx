@@ -33,10 +33,10 @@ const EmpProfile : FC<props> = ({data}) => {
                 <div className={classes.img}>Img</div>
             </Grid>
             <Grid item xs={12} className={classes.center+ ' ' + classes.profileItem}>
-                <Typography variant={'body1'}>登録名：{data.Name}</Typography>
+                <Typography variant={'body1'}>登録名：{data.name}</Typography>
             </Grid>
             <Grid item xs={12} className={classes.center+ ' ' + classes.profileItem}>
-                <Typography variant={'body1'}>eMail：{data.eMail}</Typography>
+                <Typography variant={'body1'}>eMail：{data.mail}</Typography>
             </Grid>
             <Grid xs={12} className={classes.center+ ' ' + classes.profileItem}>
                 <Typography variant={'body2'}>コメント数：19件</Typography>

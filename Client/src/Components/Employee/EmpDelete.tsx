@@ -20,10 +20,10 @@ const EmpDelete : FC<props> = ({emp,deleteConfirmOpen}) => {
     return (
         <div className={classes.textCenter}>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>顧客名：{emp.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>顧客名：{emp.name}</Typography>
             </div>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>メールアドレス：{emp.eMail}</Typography>
+                <Typography display={'inline'} variant={'h3'}>メールアドレス：{emp.mail}</Typography>
             </div>
             <div className={classes.textCenter}>
                 上記従業員を本当に削除しますか？

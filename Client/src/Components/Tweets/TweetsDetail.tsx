@@ -3,7 +3,6 @@ import {CommentInfo} from "../../Context/DataTypeList";
 import {RouteComponentProps} from "react-router-dom";
 import Loading from "../Common/Loading";
 import {useComment} from "../../CustomHooks/useComment";
-import {newCommentInfo} from "./Tweets";
 import Cookies from "js-cookie";
 import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
@@ -28,10 +27,10 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
 };
 
 type Props = {
-    Comment : newCommentInfo
+    Comment : CommentInfo
 }
 const RepComment : FC<Props> = ({Comment}) => {
-    const [repComments, setRepComments] = useState<newCommentInfo[]>([]);
+    const [repComments, setRepComments] = useState<CommentInfo[]>([]);
 
     useEffect(() => {
         const jwtToken = Cookies.get("denso-app-jwt-token");
@@ -41,7 +40,7 @@ const RepComment : FC<Props> = ({Comment}) => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${jwtToken}`
                 }}).then(res => {
-         const data = res.data as newCommentInfo[]
+         const data = res.data as CommentInfo[]
             setRepComments(data)
         })
     },[]);

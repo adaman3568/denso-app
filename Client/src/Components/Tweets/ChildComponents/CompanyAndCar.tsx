@@ -11,8 +11,8 @@ type Props = {
 const CustomerAndCar : FC<Props> = ({Customer,Car}) => {
     return (
         <div>
-            <LinkButton path={`${PathList.customerDetail}/${Customer.id}`} value={Customer.Name}/>
-            <LinkButton path={`${PathList.carDetail}/${Car.id}`} value={Car.Name}/>
+            <LinkButton path={`${PathList.customerDetail}/${Customer.id}`} value={Customer.name}/>
+            <LinkButton path={`${PathList.carDetail}/${Car.id}`} value={Car.carNo}/>
         </div>
     );
 };

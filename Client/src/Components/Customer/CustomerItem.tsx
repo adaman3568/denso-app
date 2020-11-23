@@ -37,12 +37,12 @@ const CustomerItem : FC<DataItemProps<CustomerInfo>> = ({Data, DeleteModalOpen,E
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>
-                            {Data.Name}
+                            {Data.name}
                         </CardTitle>
                     </Grid>
                     <Grid sm={12}>
                         <Typography variant={"h5"} className={classes.companyAddress}>
-                            {Data.Address}
+                            {Data.address}
                         </Typography>
                     </Grid>
                 </Grid>

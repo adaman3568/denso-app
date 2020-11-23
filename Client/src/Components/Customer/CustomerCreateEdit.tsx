@@ -32,8 +32,8 @@ const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
     const [address,setAddress] = useState<string>('');
     useEffect(() => {
         if(editCustomer){
-            setCusName(editCustomer.Name);
-            setAddress(editCustomer.Address);
+            setCusName(editCustomer.name);
+            setAddress(editCustomer.address);
         }
     },[editCustomer]);
 

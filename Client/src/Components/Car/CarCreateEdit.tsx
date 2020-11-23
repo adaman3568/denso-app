@@ -24,8 +24,8 @@ type props = {
 
 const CarCreateEdit : FC<props> = ({successOpen,car}) => {
     const classes = useStyle();
-    const [carName , setCarName] = useState<string>(car?.Name ?? '');
-    const [carDetail , setCarDetail] = useState<string>(car?.Detail ?? '');
+    const [carName , setCarName] = useState<string>(car?.carNo ?? '');
+    const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
 
     return (
         <Grid container className={classes.carCreateModalWrapper}>

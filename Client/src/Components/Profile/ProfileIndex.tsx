@@ -1,13 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Button, Card, Container, Grid, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Tweets, {newCommentInfo} from "../Tweets/Tweets";
 import Title from "../Common/Title";
 import Cookies from "js-cookie";
 import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
+import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
-import NewTweet from "../Tweets/NewTweet";
 
 const myStyle = makeStyles((theme) => ({
     dummyImg :{
@@ -31,21 +30,11 @@ const myStyle = makeStyles((theme) => ({
 
 }));
 
-type profile = {
-    iD : number,
-    uid : string,
-    name : string,
-    created : Date,
-    updated : Date,
-    commentCnt : number,
-    lastCommentDate : Date
-}
-
 const ProfileIndex : FC = () => {
     const classes = myStyle();
 
-    const [profile,setProfile] = useState<profile>({} as profile);
-    const [comments,setComments] = useState<newCommentInfo[]>([]);
+    const [profile,setProfile] = useState<EmployeeInfo>({} as EmployeeInfo);
+    const [comments,setComments] = useState<CommentInfo[]>([]);
 
     useEffect(() => {
         const jwtToken = Cookies.get("denso-app-jwt-token");
@@ -55,7 +44,7 @@ const ProfileIndex : FC = () => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${jwtToken}`
                 }}).then(res => {
-                    const prof = res.data as profile;
+                    const prof = res.data as EmployeeInfo;
                     console.log(prof);
                     setProfile(prof);
         });
@@ -66,7 +55,7 @@ const ProfileIndex : FC = () => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${jwtToken}`
                 }}).then(res => {
-            const com = res.data as newCommentInfo[];
+            const com = res.data as CommentInfo[];
             setComments(com);
         });
     },[]);
@@ -106,7 +95,7 @@ const ProfileIndex : FC = () => {
                     </Grid>
                 </Grid>
             </Card>
-            {comments.map(com => <NewTweet tweet={com}/>)}
+            {comments.map(com => <Tweet tweet={com}/>)}
         </Container>
     );
 };

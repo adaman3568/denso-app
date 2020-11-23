@@ -8,7 +8,6 @@ import AvatarWithName from "./ChildComponents/AvatarWithName";
 import CommentBody from "./ChildComponents/CommentBody";
 import CustomerAndCar from "./ChildComponents/CompanyAndCar";
 import PostDateTime from "./ChildComponents/PostDateTime";
-import {newCommentInfo} from "./Tweets";
 
 type props = {
     tweet : CommentInfo,
@@ -39,20 +38,6 @@ const useStyles = makeStyles((theme) => ({
     }})
 );
 
-const testCustomer : CustomerInfo = {
-    id : 'test',
-    Name : '合同会社Rst.com',
-    Address : '東京都',
-    CarsRef : []
-}
-
-const testCar : CarInfo = {
-    id : 'text',
-    Name : '11-69',
-    CommentsRef : [],
-    Detail : 'デジタコ・ETC装着'
-}
-
 const Tweet : FC<props> = ({tweet}) => {
     const classes = useStyles();
 
@@ -69,13 +54,13 @@ const Tweet : FC<props> = ({tweet}) => {
                                 <PostDateTime value={'2020/10/19 22:50'}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <CommentBody body={tweet?.Body}/>
+                                <CommentBody body={tweet?.detail}/>
                             </Grid>
                         </Grid>
                     </Grid>
                 </CardActionArea>
                 <CardActions>
-                    <CustomerAndCar Customer={testCustomer} Car={testCar}/>
+                    {/*<CustomerAndCar Customer={testCustomer} Car={testCar}/>*/}
                 </CardActions>
             </Card>
         </Link>

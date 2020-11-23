@@ -20,10 +20,10 @@ const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
     return (
         <div className={classes.textCenter}>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>顧客名：{cus.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>顧客名：{cus.name}</Typography>
             </div>
             <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>住所：{cus.Name}</Typography>
+                <Typography display={'inline'} variant={'h3'}>住所：{cus.address}</Typography>
             </div>
             <div className={classes.textCenter}>
                 上記顧客を本当に削除しますか？

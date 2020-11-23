@@ -27,12 +27,12 @@ const CarItem : FC<DataItemProps<CarInfo>> = ({Data,EditModalOpen,DeleteModalOpe
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>
-                            {Data.Name}
+                            {Data.carNo}
                         </CardTitle>
                     </Grid>
                     <Grid sm={12}>
                         <Typography className={classes.detail}>
-                            {Data.Detail}
+                            {Data.detail}
                         </Typography>
                     </Grid>
                 </Grid>

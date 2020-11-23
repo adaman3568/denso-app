@@ -1,31 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Tweet from "./Tweet";
 import {Grid} from "@material-ui/core";
 import {CommentInfo} from "../../Context/DataTypeList";
 import Cookies from "js-cookie";
 import axios from 'axios'
 import {apiEndPointBase} from "../../Firebase";
-import NewTweet from "./NewTweet";
+import Tweet from "./Tweet";
 
 type Props = {
     ShowImg? : boolean
 }
 
-export type newCommentInfo = {
-    id: number,
-    detail: string,
-    created: Date,
-    updated?: Date,
-    parentCarId: number,
-    userId: number,
-    parentCommentId?: number,
-    repCommentCnt: number,
-    lastRepCommentDate :Date
-}
-
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
 
-    const [tweets,setTweets] = useState<newCommentInfo[]>([]);
+    const [tweets,setTweets] = useState<CommentInfo[]>([]);
 
     const getDisplayComments = () => {
         const token = Cookies.get("denso-app-jwt-token");
@@ -33,7 +20,7 @@ const Tweets : React.FC<Props> = ({ShowImg = true}) => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res => {
-            const d = res.data as newCommentInfo[];
+            const d = res.data as CommentInfo[];
             setTweets(d)
             }
         );
@@ -45,7 +32,7 @@ const Tweets : React.FC<Props> = ({ShowImg = true}) => {
 
     return (
             <Grid item xs={12}>
-                {tweets.map((item,index) => <NewTweet key={index} tweet={item}/>)}
+                {tweets.map((item,index) => <Tweet key={index} tweet={item}/>)}
             </Grid>
     );
 };

@@ -26,16 +26,16 @@ const EmployeeItem : FC<DataItemProps<EmployeeInfo>> = ({Data,EditModalOpen,Dele
     const classes = myStyle();
     return (
         <Card className={classes.card}>
-            <LinkCardContent path={`${PathList.employeeDetail}/${Data.id}`}>
+            <LinkCardContent path={`${PathList.employeeDetail}/${Data.iD}`}>
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>
-                            {Data.Name}
+                            {Data.name}
                         </CardTitle>
                     </Grid>
                     <Grid sm={12}>
                         <Typography variant={'h5'} className={classes.eMail}>
-                            {Data.eMail}
+                            {Data.mail}
                         </Typography>
                     </Grid>
                 </Grid>

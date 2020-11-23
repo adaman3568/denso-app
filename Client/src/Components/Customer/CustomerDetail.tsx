@@ -60,10 +60,10 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
         <div>
             <Grid container>
                 <Grid item xs={12} className={classes.customerContent}>
-                    <h2>{customer.Name}</h2>
+                    <h2>{customer.name}</h2>
                 </Grid>
                 <Grid item xs={12} className={classes.customerContent}>
-                    <p>住所：{customer.Address}</p>
+                    <p>住所：{customer.address}</p>
                 </Grid>
                 <Grid item xs={12} className={classes.customerContent}>
                     <iframe className={classes.map} src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.2308567825557!2d139.75543315077263!3d35.69593623667565!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188c115d3f353b%3A0xbbe47de65abe4872!2z56We5L-d55S66aeF!5e0!3m2!1sja!2sjp!4v1602851875701!5m2!1sja!2sjp"}

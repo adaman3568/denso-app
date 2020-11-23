@@ -22,10 +22,10 @@ const CarProfile : FC<Props> = ({data}) => {
     return (
         <Grid container>
             <Grid item xs={12} className={classes.profileItem}>
-                <Typography variant={'h4'}>車両番号：{data.Name}</Typography>
+                <Typography variant={'h4'}>車両番号：{data.carNo}</Typography>
             </Grid>
             <Grid item xs={12} className={classes.profileItem}>
-                <Typography variant={'body1'}>詳細：{data.Detail}</Typography>
+                <Typography variant={'body1'}>詳細：{data.detail}</Typography>
             </Grid>
         </Grid>
     );
