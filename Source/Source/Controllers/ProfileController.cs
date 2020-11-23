@@ -52,7 +52,11 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.Include(u => u.Comments).ThenInclude(com => com.RepComment)
+            var user = await _context.Users
+                .Include(u => u.Comments)
+                .ThenInclude(com => com.RepComment)
+                .ThenInclude(com => com.ParentCar)
+                .ThenInclude(car => car.ParentCustomer)
                 .FirstOrDefaultAsync(u => u.uid == uid);
 
             if (user == null)

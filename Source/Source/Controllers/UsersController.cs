@@ -52,7 +52,11 @@ namespace Source.Controllers
         {
             var loginUser = User.GetUser(_context);
 
-            var user = await _context.Users.Include(user => user.Comments).FirstOrDefaultAsync(user =>
+            var user = await _context.Users
+                .Include(user => user.Comments)
+                .ThenInclude(com => com.ParentCar)
+                .ThenInclude(car => car.ParentCustomer)
+                .FirstOrDefaultAsync(user =>
                 user.ID == id && user.ParentCompanyId == loginUser.ParentCompanyId);
 
             if (user == null)

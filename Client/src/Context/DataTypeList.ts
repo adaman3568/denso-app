@@ -21,7 +21,10 @@ export type CommentInfo = {
     parentCommentId?: number,
     repCommentCnt: number,
     lastRepCommentDate :Date,
-    parentUserName : string
+    parentUserName : string,
+    parentCarName : string
+    parentCustomerId : number
+    parentCustomerName : string
 }
 
 export type CustomerInfo = {

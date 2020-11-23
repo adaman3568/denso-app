@@ -37,5 +37,12 @@ namespace Source.Models
 
         [NotMapped] public string ParentUserName => User.Name;
 
+        [NotMapped] public string ParentCarName => ParentCar?.CarNo ?? "";
+
+        [NotMapped] public int ParentCustomerId => ParentCar?.ParentCustomerId ?? 0;
+
+        [NotMapped] public string ParentCustomerName => ParentCar?.ParentCustomer?.Name ?? "";
+
+
     }
 }

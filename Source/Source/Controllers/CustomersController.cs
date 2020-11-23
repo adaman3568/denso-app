@@ -54,7 +54,13 @@ namespace Source.Controllers
         public async Task<ActionResult<IEnumerable<Comment>>> GetCustomerComments(int id)
         {
             var user = User.GetUser(_context);
-            var customer = await _context.Customers.Include(cus => cus.Cars).ThenInclude(car => car.Comments).FirstOrDefaultAsync(cus => cus.ID == id && cus.ParentCompanyId == user.ParentCompanyId);
+            var customer = await _context
+                .Customers
+                .Include(cus => cus.Cars)
+                .ThenInclude(car => car.Comments)
+                .ThenInclude(comment => comment.ParentCar)
+                .ThenInclude(com => com.ParentCustomer)
+                .FirstOrDefaultAsync(cus => cus.ID == id && cus.ParentCompanyId == user.ParentCompanyId);
 
             if (customer == null)
             {

@@ -62,7 +62,11 @@ const Tweet : FC<props> = ({tweet}) => {
                     </Grid>
                 </CardActionArea>
                 <CardActions>
-                    {/*<CustomerAndCar Customer={testCustomer} Car={testCar}/>*/}
+                    <CustomerAndCar
+                        CustomerId={tweet.parentCustomerId}
+                        CustomerName={tweet.parentCustomerName}
+                        CarId={tweet.parentCarId}
+                        CarName={tweet.parentCarName}/>
                 </CardActions>
             </Card>
         </Link>
