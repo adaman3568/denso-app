@@ -1,6 +1,6 @@
 // EmployeeがTweetsの実態を持っていて、CustomerInfoとCarInfoはリファレンスを持っているイメージ
 export type EmployeeInfo = {
-    iD : number,
+    id : number,
     uid : string,
     name : string,
     created : Date,

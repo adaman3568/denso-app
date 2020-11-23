@@ -30,7 +30,7 @@ const EmployeeIndex : FC = () => {
                 setEmployees(d)
             }
         );
-    });
+    },[]);
 
     return (
         <div>
