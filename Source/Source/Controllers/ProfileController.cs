@@ -33,7 +33,7 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.uid == uid);
+            var user = await _context.Users.Include(u => u.Comments).FirstOrDefaultAsync(u => u.uid == uid);
             if (user == null)
             {
                 return NotFound();
