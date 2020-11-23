@@ -16,6 +16,9 @@ import useInsertModal from "../../CustomHooks/useInsertModal";
 import useEditModal from "../../CustomHooks/useEditModal";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {DeleteCar} from "../Car/CarDelete";
+import Cookies from "js-cookie";
+import axios from "axios";
+import {apiEndPointBase} from "../../Firebase";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -51,6 +54,36 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     const [cars , setCars] = useState<CarInfo[]>([]);
     const [comments , setComments] = useState<CommentInfo[]>([]);
+
+    useEffect(() => {
+        const token = Cookies.get("denso-app-jwt-token");
+        axios.get(`${apiEndPointBase}customers/${match.params.id}`,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CustomerInfo;
+                setCustomer(d)
+            }
+        );
+
+        axios.get(`${apiEndPointBase}customers/${match.params.id}/comments`,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CommentInfo[];
+                setComments(d);
+            }
+        );
+
+        axios.get(`${apiEndPointBase}customers/${match.params.id}/cars`,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CarInfo[];
+                setCars(d);
+            }
+        );
+    })
 
     const insertModal = useInsertModal(CarCreate);
 
