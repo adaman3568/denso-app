@@ -4,6 +4,10 @@ import {RouteComponentProps} from "react-router-dom";
 import {getComment} from "../../Context/Functions/CommentFunction";
 import Loading from "../Common/Loading";
 import {useComment} from "../../CustomHooks/useComment";
+import {newCommentInfo} from "./Tweets";
+import Cookies from "js-cookie";
+import {apiEndPointBase} from "../../Firebase";
+import axios from "axios";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -15,7 +19,7 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
             <div>
                 <p>{match.params.id}</p>
                 <p>{comment.id}</p>
-                <p>{comment.Body}</p>
+                <p>{comment?.detail}</p>
                 <RepComment Comment={comment}/>
             </div>
         )
@@ -25,26 +29,26 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
 };
 
 type Props = {
-    Comment : CommentInfo
+    Comment : newCommentInfo
 }
 const RepComment : FC<Props> = ({Comment}) => {
-    const [repComments, setRepComments] = useState<CommentInfo[]>([]);
+    const [repComments, setRepComments] = useState<newCommentInfo[]>([]);
 
     useEffect(() => {
-        const setRepCommentItems = async (com : CommentInfo): Promise<CommentInfo[]> => {
-            console.log(com);
-            const res: Promise<CommentInfo>[] | undefined = com.ReplyCommentRef?.map(item => getComment(item));
-            if(res === undefined)
-                return [];
-
-            return await Promise.all(res)
-        };
-
-        setRepCommentItems(Comment).then(res => setRepComments(res))
-    },[])
+        const jwtToken = Cookies.get("denso-app-jwt-token");
+        const apiPath = `${apiEndPointBase}comments/${Comment.id}/repcomments`;
+        axios.get(apiPath,{
+            headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${jwtToken}`
+                }}).then(res => {
+         const data = res.data as newCommentInfo[]
+            setRepComments(data)
+        })
+    },[]);
 
     return <div>
-        {repComments.map(item => <div><p>{item.id}</p><p>{item.Body}</p></div>)}
+        {repComments.map(item => <div><p>{item.id}</p><p>{item.detail}</p></div>)}
         </div>
 }
 

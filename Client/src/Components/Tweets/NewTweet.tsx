@@ -11,7 +11,7 @@ import PostDateTime from "./ChildComponents/PostDateTime";
 import {newCommentInfo} from "./Tweets";
 
 type props = {
-    tweet : CommentInfo,
+    tweet : newCommentInfo,
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -53,7 +53,7 @@ const testCar : CarInfo = {
     Detail : 'デジタコ・ETC装着'
 }
 
-const Tweet : FC<props> = ({tweet}) => {
+const NewTweet : FC<props> = ({tweet}) => {
     const classes = useStyles();
 
     return (
@@ -69,7 +69,7 @@ const Tweet : FC<props> = ({tweet}) => {
                                 <PostDateTime value={'2020/10/19 22:50'}/>
                             </Grid>
                             <Grid item xs={12}>
-                                <CommentBody body={tweet?.Body}/>
+                                <CommentBody body={tweet?.detail}/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -83,4 +83,4 @@ const Tweet : FC<props> = ({tweet}) => {
     );
 };
 
-export default Tweet;
+export default NewTweet;
