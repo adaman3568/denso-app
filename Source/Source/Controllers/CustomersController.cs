@@ -128,6 +128,8 @@ namespace Source.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
+            var user = User.GetUser(_context);
+            customer.ParentCompany = user.ParentCompany;
             customer.Created = DateTime.Now;
             _context.Customers.Add(customer);
             await _context.SaveChangesAsync();

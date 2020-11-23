@@ -43,7 +43,7 @@ const PostTweet = () => {
                 }
                 ).catch(err =>
                 {
-                    alert("コメントを追加しました。");
+                    alert("コメントを追加できませんでした。");
                     console.log(err)
                 });
     };

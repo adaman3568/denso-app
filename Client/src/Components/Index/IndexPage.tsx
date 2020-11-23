@@ -50,10 +50,6 @@ const IndexPage : FC = () => {
         setOpen(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
         <Grid container>
             <Fab color="primary" aria-label="add" className={classes.floatingButton} onClick={handleOpen}>
