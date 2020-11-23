@@ -1,4 +1,4 @@
-import React, {FC, useContext} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {Checkbox, Fab, Grid, TextField} from "@material-ui/core";
 import Tweets from "../Tweets/Tweets";
 import Loading from "../Common/Loading";
@@ -9,18 +9,10 @@ import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
 import PostTweet from "../PostTweet";
 import ModalWindow from "../Common/ModalWindow";
-
-const customer = [
-    {id : 1, name : '合同会社Rst.com'},
-    {id : 2, name : '株式会社タイガー'},
-    {id : 3, name : '株式会社Rejoist.'},
-    ]
-
-const car = [
-    {id : 1,name : "11-22"},
-    {id : 2,name : "11-23"},
-    {id : 3,name : "11-44"}
-]
+import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
+import Cookies from "js-cookie";
+import axios from "axios";
+import {apiEndPointBase} from "../../Firebase";
 
 const useStyle = makeStyles((theme) => ({
     topSearch : {
@@ -42,6 +34,31 @@ const useStyle = makeStyles((theme) => ({
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 const IndexPage : FC = () => {
+    const [cars,setCars] = useState<CarInfo[]>([]);
+    const [selectedCar,setSelectedCar] = useState<CarInfo | null | undefined>(null);
+    const [customers,setCustomer] = useState<CustomerInfo[]>([]);
+    const [selectedCustomer,setSelectedCustomer] = useState<CustomerInfo | null | undefined>(null);
+
+    useEffect(() => {
+        const token = Cookies.get("denso-app-jwt-token");
+        axios.get(`${apiEndPointBase}cars`,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CarInfo[];
+                setCars(d)
+            }
+        );
+
+        axios.get(`${apiEndPointBase}customers`,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CustomerInfo[];
+                setCustomer(d)
+            }
+        );
+    },[]);
 
     const classes = useStyle();
     const [open, setOpen] = React.useState(false);
@@ -59,7 +76,7 @@ const IndexPage : FC = () => {
             <Autocomplete
                 multiple
                 id="customer-selector"
-                options={customer}
+                options={customers}
                 disableCloseOnSelect
                 getOptionLabel={(option) => option.name}
                 renderOption={(option, { selected }) => (
@@ -81,9 +98,9 @@ const IndexPage : FC = () => {
             <Autocomplete
                 multiple
                 id="car-selector"
-                options={car}
+                options={cars}
                 disableCloseOnSelect
-                getOptionLabel={(option) => option.name}
+                getOptionLabel={(option) => option.carNo}
                 renderOption={(option, { selected }) => (
                     <React.Fragment>
                         <Checkbox
@@ -92,7 +109,7 @@ const IndexPage : FC = () => {
                             style={{ marginRight: 8 }}
                             checked={selected}
                         />
-                        {option.name}
+                        {option.carNo}
                     </React.Fragment>
                 )}
                 style={{ width: 500 }}
