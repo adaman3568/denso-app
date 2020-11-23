@@ -23,10 +23,11 @@ const useStyle = makeStyles((theme) => ({
 
 type props = {
     successOpen : () => void,
+    parentCustomerId? : number
     car? : CarInfo
 }
 
-const CarCreateEdit : FC<props> = ({successOpen,car}) => {
+const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
     const classes = useStyle();
     const [carName , setCarName] = useState<string>(car?.carNo ?? '');
     const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
@@ -35,9 +36,9 @@ const CarCreateEdit : FC<props> = ({successOpen,car}) => {
     const btnEvent = () => {
 
         if(isEdit){
-            PostCar()
-        }else{
             PutCar();
+        }else{
+            PostCar();
         }
 
         successOpen();
@@ -47,7 +48,7 @@ const CarCreateEdit : FC<props> = ({successOpen,car}) => {
     const PostCar = () => {
         const token = Cookies.get("denso-app-jwt-token");
         const newCar = {carNo : carName ,detail : carDetail};
-        axios.post(`${apiEndPointBase}cars${'ここに親顧客のidを入れる'}`,newCar ,{headers :
+        axios.post(`${apiEndPointBase}cars/${parentCustomerId}`,newCar ,{headers :
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res =>
@@ -92,7 +93,7 @@ const CarCreateEdit : FC<props> = ({successOpen,car}) => {
                 <TextField multiline rows={3} label={'備考'} className={classes.addElement} value={carDetail} onChange={e => setCarDetail(e.target.value)}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <Button variant={'contained'} color={'primary'} className={classes.addElement} onClick={successOpen}>登録</Button>
+                <Button variant={'contained'} color={'primary'} className={classes.addElement} onClick={btnEvent}>登録</Button>
             </Grid>
         </Grid>
     );

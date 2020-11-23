@@ -103,6 +103,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
                             height={"450"} frameBorder={"0"} aria-hidden={"false"}/>
                 </Grid>
                 <Grid item xs={12}>
+                    {/*この辺で顧客コードの投げ方を考えないといけない。。。*/}
                     <Button onClick={insertModal.OpenModal} variant={'contained'} color={'primary'}>車両追加</Button>
                 </Grid>
             </Grid>
