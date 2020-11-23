@@ -143,6 +143,7 @@ namespace Source.Controllers
             }
             comment.Created = DateTime.Now;
             comment.ParentCar = car;
+            comment.UserId = loginUser.ID;
 
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();
