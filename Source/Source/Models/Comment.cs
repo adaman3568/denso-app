@@ -35,5 +35,7 @@ namespace Source.Models
         [NotMapped]
         public DateTime? LastRepCommentDate => RepComment?.Max(com => com?.Created);
 
+        [NotMapped] public string ParentUserName => User.Name;
+
     }
 }

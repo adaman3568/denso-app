@@ -41,17 +41,19 @@ const useStyles = makeStyles((theme) => ({
 const Tweet : FC<props> = ({tweet}) => {
     const classes = useStyles();
 
+    console.log(tweet)
+
     return (
         <Link to={`${PathList.tweetsDetail}/${tweet?.id}`} className={classes.NonDecorationLink}>
             <Card className={classes.tweetItem}>
                 <CardActionArea>
                     <Grid container spacing={3}>
                         <Grid item xs={1}>
-                            <AvatarWithName name={"TestUser"}/>
+                            <AvatarWithName name={tweet.parentUserName}/>
                         </Grid>
                         <Grid item xs={11}>
                             <Grid item xs={12}>
-                                <PostDateTime value={'2020/10/19 22:50'}/>
+                                <PostDateTime postDate={tweet.created}/>
                             </Grid>
                             <Grid item xs={12}>
                                 <CommentBody body={tweet?.detail}/>
