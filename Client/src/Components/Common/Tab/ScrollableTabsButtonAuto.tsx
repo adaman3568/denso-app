@@ -6,7 +6,6 @@ import Tab from "@material-ui/core/Tab";
 import TabPanel from "./TabPanel";
 import CustomerTabPanel from "./CustomerTabPanel";
 import {CustomerInfo} from "../../../Context/DataTypeList";
-import {DataContext} from "../../../Context/DataContextProvider";
 import {TabContext} from "./TabContext";
 
 function a11yProps(index: any) {
@@ -28,13 +27,8 @@ const ScrollableTabsButtonAuto : FC = () => {
     const classes = useStyles();
 
     const {currentIndex,setCurrentIndex} = useContext(TabContext);
-    const context = useContext(DataContext);
 
     const [customers,setCustomers] = useState<CustomerInfo[]>([]);
-
-    useEffect(() => {
-        setCustomers(context.Customer.Data)
-    });
 
     return (
         <div className={classes.root}>

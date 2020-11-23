@@ -8,7 +8,6 @@ import CustomerIndex from "./Components/Customer/CustomerIndex";
 import TweetsDetail from "./Components/Tweets/TweetsDetail";
 import CustomerDetail from "./Components/Customer/CustomerDetail";
 import EmployeeDetail from "./Components/Employee/EmployeeDetail";
-import DataContextProvider from "./Context/DataContextProvider";
 import CarIndex from "./Components/Car/CarIndex";
 import CarDetail from "./Components/Car/CarDetail";
 import {createMuiTheme} from "@material-ui/core";
@@ -40,29 +39,27 @@ const App : React.FC = () => {
 
     return (
         <BrowserRouter>
-                <DataContextProvider>
-                    <MuiThemeProvider theme={theme}>
-                        <Switch>
-                            <UserIndexWrapper>
-                                <PrivateRoute exact path={PathList.home} component={IndexPage} isLogin={isLogined}/>
-                                <PrivateRoute exact path={PathList.profile} component={ProfileIndex} isLogin={isLogined}/>
+            <MuiThemeProvider theme={theme}>
+                <Switch>
+                    <UserIndexWrapper>
+                        <PrivateRoute exact path={PathList.home} component={IndexPage} isLogin={isLogined}/>
+                        <PrivateRoute exact path={PathList.profile} component={ProfileIndex} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} isLogin={isLogined}/>
-                                <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} isLogin={isLogined}/>
+                        <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} isLogin={isLogined}/>
+                        <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.cars} component={CarIndex} isLogin={isLogined}/>
-                                <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} isLogin={isLogined}/>
+                        <PrivateRoute exact path={PathList.cars} component={CarIndex} isLogin={isLogined}/>
+                        <PrivateRoute exact path={`${PathList.carDetail}/:id`} component={CarDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={PathList.customers} component={CustomerIndex} isLogin={isLogined}/>
-                                <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} isLogin={isLogined}/>
+                        <PrivateRoute exact path={PathList.customers} component={CustomerIndex} isLogin={isLogined}/>
+                        <PrivateRoute exact path={`${PathList.customerDetail}/:id`} component={CustomerDetail} isLogin={isLogined}/>
 
-                                <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} isLogin={isLogined}/>
+                        <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} isLogin={isLogined}/>
 
-                                <Route exact path={PathList.loginPage} component={SignIn} isLogin={isLogined}/>
-                            </UserIndexWrapper>
-                        </Switch>
-                    </MuiThemeProvider>
-                </DataContextProvider>
+                        <Route exact path={PathList.loginPage} component={SignIn} isLogin={isLogined}/>
+                    </UserIndexWrapper>
+                </Switch>
+            </MuiThemeProvider>
         </BrowserRouter>
     );
 };

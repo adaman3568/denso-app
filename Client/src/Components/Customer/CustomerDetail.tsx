@@ -1,6 +1,5 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router";
-import {DataContext} from "../../Context/DataContextProvider";
 import {CarInfo, CommentInfo, CustomerInfo} from "../../Context/DataTypeList";
 import CarItem from "../Car/CarItem";
 import {
@@ -49,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CustomerDetail : FC<pageProps> = ({match}) => {
-    const {Customer,Car,Comment} = useContext(DataContext);
     const [customer , setCustomer] = useState<CustomerInfo>({} as CustomerInfo);
     const [cars , setCars] = useState<CarInfo[]>([]);
     const [comments , setComments] = useState<CommentInfo[]>([]);
@@ -57,15 +55,6 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
     const insertModal = useInsertModal(CarCreate);
 
     const classes = useStyles();
-
-    useEffect(() => {
-        const c = Customer.Data.find(item => item.id === match.params.id);
-        if (c){
-            setCustomer(c);
-            Car.Func.GetCustomerCars(c.id).then(d => setCars(d))
-            Comment.Func.GetCustomerCommentsFromDB(c.id).then(res => setComments(res))
-        }
-    },[]);
 
     return (
         <div>

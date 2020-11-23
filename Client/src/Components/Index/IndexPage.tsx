@@ -1,7 +1,6 @@
 import React, {FC, useContext} from 'react';
 import {Checkbox, Fab, Grid, TextField} from "@material-ui/core";
 import Tweets from "../Tweets/Tweets";
-import {DataContext} from "../../Context/DataContextProvider";
 import Loading from "../Common/Loading";
 import {Autocomplete} from "@material-ui/lab";
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
@@ -54,12 +53,6 @@ const IndexPage : FC = () => {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const {loading} = useContext(DataContext);
-
-    if(loading){
-        return <Loading/>
-    }
 
     return (
         <Grid container>

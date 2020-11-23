@@ -2,7 +2,6 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import {CommentInfo, CustomerInfo} from "../../../Context/DataTypeList";
 import TabPanel from "./TabPanel";
 import Tweet from "../../Tweets/Tweet";
-import {DataContext} from "../../../Context/DataContextProvider";
 import {Grid, TextField, Typography} from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
@@ -16,11 +15,6 @@ const Carlist : string[] = ["全選択","11-22","11-33","11-44"]
 const CustomerTabPanel : FC<Props> = ({customer,index}) => {
 
     const [tweets,setTweets] = useState<CommentInfo[]>([]);
-    const context = useContext(DataContext);
-
-    useEffect(() => {
-        context.Comment.Func.GetCustomerCommentsFromDB(customer.id).then(res => setTweets(res));
-    },[]);
 
     const [value, setValue] = React.useState<string | null>(Carlist[0]);
 

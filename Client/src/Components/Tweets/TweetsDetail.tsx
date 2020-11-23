@@ -1,7 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {CommentInfo} from "../../Context/DataTypeList";
 import {RouteComponentProps} from "react-router-dom";
-import {getComment} from "../../Context/Functions/CommentFunction";
 import Loading from "../Common/Loading";
 import {useComment} from "../../CustomHooks/useComment";
 import {newCommentInfo} from "./Tweets";

@@ -1,7 +1,6 @@
 import React, {FC, useContext} from 'react';
 import EmployeeItem from "./EmpItem";
 import Title from "../Common/Title";
-import {DataContext} from "../../Context/DataContextProvider";
 import useEditModal from "../../CustomHooks/useEditModal";
 import {EmployeeInfo} from "../../Context/DataTypeList";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
@@ -16,12 +15,11 @@ const EmployeeIndex : FC = () => {
     const deleteModal = useDeleteModal<EmployeeInfo>(DeleteEmployee);
     const insertModal = useInsertModal(EmpCreate)
 
-    const {Employee} = useContext(DataContext);
     return (
         <div>
             <Title>This is Emp page.</Title>
             <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>従業員登録</Button>
-            {Employee.Data.map((emp,index) => <EmployeeItem key={index} Data={emp} DeleteModalOpen={deleteModal.OpenModal} EditModalOpen={editModal.OpenModal}/>)}
+            {/*{Employee.Data.map((emp,index) => <EmployeeItem key={index} Data={emp} DeleteModalOpen={deleteModal.OpenModal} EditModalOpen={editModal.OpenModal}/>)}*/}
             {editModal.Modal()}
             {deleteModal.Modal()}
             {insertModal.Modal()}
