@@ -27,7 +27,7 @@ const CarIndex : FC = () => {
                 setCarItems(d)
             }
         );
-    })
+    },[])
 
     return (
         <div>

@@ -83,7 +83,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
                 setCars(d);
             }
         );
-    })
+    },[])
 
     const insertModal = useInsertModal(CarCreate);
 

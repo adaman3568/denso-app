@@ -24,9 +24,12 @@ const myStyle = makeStyles((theme) => ({
 const EmployeeItem : FC<DataItemProps<EmployeeInfo>> = ({Data,EditModalOpen,DeleteModalOpen}) => {
 
     const classes = myStyle();
+
+    console.log(Data);
+
     return (
         <Card className={classes.card}>
-            <LinkCardContent path={`${PathList.employeeDetail}/${Data.iD}`}>
+            <LinkCardContent path={`${PathList.employeeDetail}/${Data.id}`}>
                 <Grid container>
                     <Grid sm={12}>
                         <CardTitle>

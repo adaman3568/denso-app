@@ -32,7 +32,7 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
                 setComments(d)
             }
         );
-    })
+    },[])
 
     return (
         <div>

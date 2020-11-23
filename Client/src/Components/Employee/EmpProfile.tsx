@@ -39,10 +39,10 @@ const EmpProfile : FC<props> = ({data}) => {
                 <Typography variant={'body1'}>eMail：{data.mail}</Typography>
             </Grid>
             <Grid xs={12} className={classes.center+ ' ' + classes.profileItem}>
-                <Typography variant={'body2'}>コメント数：19件</Typography>
+                <Typography variant={'body2'}>コメント数： {data.commentCnt}</Typography>
             </Grid>
             <Grid xs={12} className={classes.center+ ' ' + classes.profileItem}>
-                <Typography variant={'body2'}>最終コメント日時：2020年10月16日</Typography>
+                <Typography variant={'body2'}>最終コメント日時： {new Date(data.lastCommentDate).toLocaleString("ja")}</Typography>
             </Grid>
         </Grid>
     );

@@ -30,7 +30,7 @@ const CustomerIndex : FC = () => {
                 setCustomer(d)
             }
         );
-    })
+    },[])
 
     return (
         <div>
