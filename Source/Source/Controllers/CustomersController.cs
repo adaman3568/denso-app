@@ -67,7 +67,10 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            var comments = customer.Cars.SelectMany(car => car.Comments).ToList();
+            var comments = customer.Cars
+                .SelectMany(car => car.Comments)
+                .OrderByDescending(com => com.Created)
+                .ToList();
 
             return comments;
         }

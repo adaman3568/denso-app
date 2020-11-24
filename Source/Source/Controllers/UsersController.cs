@@ -66,7 +66,7 @@ namespace Source.Controllers
 
             var comment = user.Comments;
 
-            return comment.ToList();
+            return comment.OrderByDescending(com => com.Created).ToList();
         }
 
         // PUT: api/Users/5

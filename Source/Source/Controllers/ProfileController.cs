@@ -59,7 +59,7 @@ namespace Source.Controllers
                 .Include(com => com.User)
                 .Where(com => com.User.uid == uid);
 
-            return coms.ToList();
+            return coms.OrderByDescending(com => com.Created).ToList();
         }
     }
 }

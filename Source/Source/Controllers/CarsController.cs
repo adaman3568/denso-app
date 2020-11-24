@@ -66,7 +66,7 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            return car.Comments.ToList();
+            return car.Comments.OrderByDescending(com => com.Created).ToList();
 
         }
 

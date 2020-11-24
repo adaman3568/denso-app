@@ -40,7 +40,7 @@ namespace Source.Controllers
 
             var res = com.Customers.SelectMany(cus => cus.Cars).SelectMany(car => car.Comments).OrderBy(com => com.ID);
 
-            return res.ToList();
+            return res.OrderByDescending(com => com.Created).ToList();
         }
 
         // GET: api/Comments/5
