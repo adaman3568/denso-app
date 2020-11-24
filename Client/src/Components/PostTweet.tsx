@@ -48,6 +48,26 @@ const PostTweet = () => {
                 });
     };
 
+    const setCarList = (cus : CustomerInfo | null | undefined) => {
+        let carGetPath = '';
+        if(cus){
+            carGetPath = `${apiEndPointBase}customers/${cus.id}/cars`
+        }else{
+            carGetPath = `${apiEndPointBase}cars`
+        }
+
+        const token = Cookies.get("denso-app-jwt-token");
+        axios.get(carGetPath,{headers :
+                {'Content-Type' : 'application/json',
+                    'Authorization' : `Bearer ${token}`
+                }}).then(res => {
+                const d = res.data as CarInfo[];
+                setCars(d)
+                setSelectedCar(null)
+            }
+        );
+    };
+
     useEffect(() => {
         const token = Cookies.get("denso-app-jwt-token");
         axios.get(`${apiEndPointBase}cars`,{headers :
@@ -79,7 +99,7 @@ const PostTweet = () => {
                         value={selectedCustomer}
                         onChange={(event: any, newValue: CustomerInfo | null | undefined) => {
                             setSelectedCustomer(newValue);
-
+                            setCarList(newValue);
                         }}
                         options={customers}
                         getOptionLabel={(option) => option.name}
