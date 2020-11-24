@@ -69,8 +69,6 @@ const PostTweet = () => {
         );
     },[])
 
-    //todo 顧客追加ボタンを作る
-    //todo 車両追加ボタンを作る
     return (
         <div>
             <Grid container spacing={2}>
@@ -81,9 +79,9 @@ const PostTweet = () => {
                         value={selectedCustomer}
                         onChange={(event: any, newValue: CustomerInfo | null | undefined) => {
                             setSelectedCustomer(newValue);
+
                         }}
                         options={customers}
-                        disableCloseOnSelect
                         getOptionLabel={(option) => option.name}
                         renderOption={(option, { selected }) => (
                                 <p>{option.name}</p>
@@ -99,7 +97,6 @@ const PostTweet = () => {
                     <Autocomplete
                         id="tweet-car-selector"
                         options={cars}
-                        disableCloseOnSelect
                         value={selectedCar}
                         onChange={(event: any, newValue: CarInfo | null | undefined) => {
                             setSelectedCar(newValue);
