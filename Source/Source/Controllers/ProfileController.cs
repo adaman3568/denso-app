@@ -52,19 +52,14 @@ namespace Source.Controllers
                 return NotFound();
             }
 
-            var user = await _context.Users
-                .Include(u => u.Comments)
-                .ThenInclude(com => com.RepComment)
-                .ThenInclude(com => com.ParentCar)
+
+            var coms = _context.Comments
+                .Include(com => com.ParentCar)
                 .ThenInclude(car => car.ParentCustomer)
-                .FirstOrDefaultAsync(u => u.uid == uid);
+                .Include(com => com.User)
+                .Where(com => com.User.uid == uid);
 
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return user.Comments.ToList();
+            return coms.ToList();
         }
     }
 }
