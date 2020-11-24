@@ -48,17 +48,18 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
     const PostCar = () => {
         const token = Cookies.get("denso-app-jwt-token");
         const newCar = {carNo : carName ,detail : carDetail};
-        axios.post(`${apiEndPointBase}cars/${parentCustomerId}`,newCar ,{headers :
+        const postPath = `${apiEndPointBase}cars/${parentCustomerId}`
+        axios.post(postPath,newCar ,{headers :
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res =>
             {
-                alert("顧客を追加しました。");
+                alert("車両を追加しました。");
                 console.log(res)
             }
         ).catch(err =>
         {
-            alert("顧客を追加できませんでした。");
+            alert("車両を追加できませんでした。");
             console.log(err)
         });
     }
@@ -99,8 +100,8 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
     );
 };
 
-export const CarCreate = (success : () => void) : ReactNode => {
-    return <CarCreateEdit successOpen={success}/>
+export const CarCreate = (success : () => void,parentCustomerId : number | undefined) : ReactNode => {
+    return <CarCreateEdit successOpen={success} parentCustomerId={parentCustomerId}/>
 };
 
 export const CarEdit = (Data : CarInfo,success : () => void) : ReactNode => {

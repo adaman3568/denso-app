@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Tweet from "../Tweets/Tweet";
-import {CarCreate, CarEdit} from "../Car/CarCreateEdit";
+import CarCreateEdit, {CarCreate, CarEdit} from "../Car/CarCreateEdit";
 import useInsertModal from "../../CustomHooks/useInsertModal";
 import useEditModal from "../../CustomHooks/useEditModal";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
@@ -19,6 +19,7 @@ import {DeleteCar} from "../Car/CarDelete";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
+import useCarInsertModal from "../../CustomHooks/useCarInsertModal";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -85,7 +86,7 @@ const CustomerDetail : FC<pageProps> = ({match}) => {
         );
     },[])
 
-    const insertModal = useInsertModal(CarCreate);
+    const insertModal = useCarInsertModal(CarCreate,parseInt(match.params.id));
 
     const classes = useStyles();
 
