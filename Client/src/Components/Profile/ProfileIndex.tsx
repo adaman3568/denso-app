@@ -26,6 +26,7 @@ const myStyle = makeStyles((theme) => ({
         display : 'flex',
         justifyContent : 'center',
         alignItems : 'center',
+        margin: 0
     }
 
 }));
@@ -78,7 +79,7 @@ const ProfileIndex : FC = () => {
                           direction="row"
                           className={classes.flexCenter}>
                         {!isEdit ?
-                            <Typography onClick={() => setIsEdit(true)}>登録名 : {profile.name}</Typography> :
+                            <Typography variant={"h6"} onClick={() => setIsEdit(true)}>登録名 : {profile.name}</Typography> :
                             <div className={classes.flexCenter}>
                                 <TextField
                                     required
@@ -90,8 +91,17 @@ const ProfileIndex : FC = () => {
                                 <Button onClick={() => setIsEdit(false)}>登録</Button>
                             </div>
                         }
-                        <p>コメント数：{profile.commentCnt}</p>
-                        <p>最終コメント日付：{profile.lastCommentDate}</p>
+
+                    </Grid>
+                    <Grid item xs={12}
+                          direction={"row"}
+                          className={classes.flexCenter}>
+                        <Typography>コメント数：{profile.commentCnt}件</Typography>
+                    </Grid>
+                    <Grid item xs={12}
+                          direction={"row"}
+                          className={classes.flexCenter}>
+                        <Typography>最終コメント日付：{new Date(profile.lastCommentDate).toLocaleString("ja")}</Typography>
                     </Grid>
                 </Grid>
             </Card>
