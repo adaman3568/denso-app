@@ -23,11 +23,12 @@ const useStyle = makeStyles((theme) => ({
 
 type props = {
     successOpen : () => void,
+    failedOpen : () => void,
     parentCustomerId? : number
     car? : CarInfo
 }
 
-const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
+const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}) => {
     const classes = useStyle();
     const [carName , setCarName] = useState<string>(car?.carNo ?? '');
     const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
@@ -40,8 +41,6 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
         }else{
             PostCar();
         }
-
-        successOpen();
     };
 
 
@@ -52,17 +51,13 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
         axios.post(postPath,newCar ,{headers :
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
-                }}).then(res =>
-            {
-                alert("車両を追加しました。");
-                console.log(res)
-            }
-        ).catch(err =>
-        {
-            alert("車両を追加できませんでした。");
-            console.log(err)
-        });
-    }
+                }}).then(res => {
+                            successOpen();
+                        }).catch(err =>
+                        {
+                            failedOpen();
+                        });
+    };
 
     const PutCar = () => {
         const token = Cookies.get("denso-app-jwt-token");
@@ -70,17 +65,13 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
         axios.put(`${apiEndPointBase}cars/${car?.id}`,newCar,{headers :
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
-                }}).then(res =>
-            {
-                alert("車両を更新しました。");
-                console.log(res)
-            }
-        ).catch(err =>
-        {
-            alert("車両を更新できませんでした。");
-            console.log(err)
-        });
-    }
+                }}).then(res => {
+                            successOpen();
+                        }).catch(err =>
+                        {
+                            failedOpen();
+                        });
+    };
 
     return (
         <Grid container className={classes.carCreateModalWrapper}>
@@ -100,12 +91,12 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId}) => {
     );
 };
 
-export const CarCreate = (success : () => void,parentCustomerId : number | undefined) : ReactNode => {
-    return <CarCreateEdit successOpen={success} parentCustomerId={parentCustomerId}/>
+export const CarCreate = (success : () => void,failed : () => void,parentCustomerId : number | undefined) : ReactNode => {
+    return <CarCreateEdit successOpen={success} parentCustomerId={parentCustomerId} failedOpen={failed}/>
 };
 
-export const CarEdit = (Data : CarInfo,success : () => void) : ReactNode => {
-    return <CarCreateEdit successOpen={success} car={Data}/>
+export const CarEdit = (Data : CarInfo,success : () => void,failed : () => void) : ReactNode => {
+    return <CarCreateEdit successOpen={success} car={Data} failedOpen={failed}/>
 };
 
 export default CarCreateEdit;

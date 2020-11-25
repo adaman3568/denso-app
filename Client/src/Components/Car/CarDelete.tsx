@@ -8,7 +8,8 @@ import Cookies from "js-cookie";
 
 type props = {
     Car : CarInfo,
-    deleteConfirmOpen : () => void
+    successOpen : () => void
+    failedOpen : () => void
 }
 
 const useStyle = makeStyles((theme) => ({
@@ -17,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const CarDelete : FC<props> = ({Car,deleteConfirmOpen}) => {
+const CarDelete : FC<props> = ({Car,successOpen,failedOpen}) => {
     const classes = useStyle();
 
     const deleteCar = () => {
@@ -26,14 +27,10 @@ const CarDelete : FC<props> = ({Car,deleteConfirmOpen}) => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res => {
-                    alert("車両を削除しました。")
-                    console.log(res)
-            }
-        ).catch(err => {
-            alert("車両を削除しました。")
-            console.log(err)
-        });
-        deleteConfirmOpen();
+                        successOpen();
+                    }).catch(err => {
+                        failedOpen();
+                    });
     }
 
     return (
@@ -55,6 +52,6 @@ const CarDelete : FC<props> = ({Car,deleteConfirmOpen}) => {
     )
 };
 
-export const DeleteCar = (Data : CarInfo,deleteOpenEvent : () => void) => {
-    return <CarDelete Car={Data} deleteConfirmOpen={deleteOpenEvent}/>
+export const DeleteCar = (Data : CarInfo,deleteOpenEvent : () => void,failedOpenEvent : () => void) => {
+    return <CarDelete Car={Data} failedOpen={failedOpenEvent} successOpen={deleteOpenEvent}/>
 };

@@ -14,9 +14,9 @@ import {apiEndPointBase} from "../../Firebase";
 
 const EmployeeIndex : FC = () => {
 
-    const editModal = useEditModal<EmployeeInfo>(EmpEdit)
+    const editModal = useEditModal<EmployeeInfo>(EmpEdit);
     const deleteModal = useDeleteModal<EmployeeInfo>(DeleteEmployee);
-    const insertModal = useInsertModal(EmpCreate)
+    const insertModal = useInsertModal(EmpCreate);
 
     const [employees,setEmployees] = useState<EmployeeInfo[]>([])
 

@@ -8,7 +8,8 @@ import {apiEndPointBase} from "../../Firebase";
 
 type props = {
     cus : CustomerInfo,
-    deleteConfirmOpen : () => void
+    successOpen : () => void
+    failedOpen : () => void
 }
 
 const useStyle = makeStyles((theme) => ({
@@ -17,7 +18,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
+const DeleteConfirmCustomer : FC<props> = ({cus,successOpen,failedOpen}) => {
     const classes = useStyle();
 
     const customerDelete = () => {
@@ -26,14 +27,10 @@ const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res => {
-                alert("顧客を削除しました。")
-                console.log(res)
-            }
-        ).catch(err => {
-            alert("顧客を削除しました。")
-            console.log(err)
-        });
-        deleteConfirmOpen();
+                    successOpen();
+                }).catch(err => {
+                    failedOpen();
+                });
     }
 
     return (
@@ -55,6 +52,6 @@ const DeleteConfirmCustomer : FC<props> = ({cus,deleteConfirmOpen}) => {
     )
 };
 
-export const DeleteCustomer = (Data : CustomerInfo,deleteOpenEvent : () => void) => {
-    return <DeleteConfirmCustomer cus={Data} deleteConfirmOpen={deleteOpenEvent}/>
+export const DeleteCustomer = (Data : CustomerInfo,deleteOpenEvent : () => void,failedOpenEvent : () => void) => {
+    return <DeleteConfirmCustomer cus={Data} successOpen={deleteOpenEvent} failedOpen={failedOpenEvent}/>
 };

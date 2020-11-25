@@ -25,10 +25,11 @@ const useStyle = makeStyles((theme) => ({
 
 type Props = {
     editCustomer? : CustomerInfo
-    successOpenEvent : () => void
+    successOpenEvent : () => void,
+    failedOpenEvent : () => void
 }
 
-const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
+const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent,failedOpenEvent}) => {
     const classes = useStyle();
 
     const [isEdit , setIsEdit] = useState<boolean>(editCustomer !== undefined)
@@ -59,16 +60,12 @@ const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
         axios.post(`${apiEndPointBase}customers`,newCustomer,{headers :
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
-                }}).then(res =>
-            {
-                alert("顧客を追加しました。");
-                console.log(res)
-            }
-        ).catch(err =>
-        {
-            alert("顧客を追加できませんでした。");
-            console.log(err)
-        });
+                }}).then(res => {
+                            successOpenEvent();
+                        }).catch(err =>
+                        {
+                            failedOpenEvent();
+                        });
     }
 
     const PutCustomer = () => {
@@ -78,16 +75,13 @@ const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
                 {'Content-Type' : 'application/json',
                     'Authorization' : `Bearer ${token}`
                 }}).then(res =>
-            {
-                alert("顧客を追加しました。");
-                console.log(res)
-            }
-        ).catch(err =>
-        {
-            alert("顧客を追加できませんでした。");
-            console.log(err)
-        });
-    }
+                        {
+                            successOpenEvent();
+                        }).catch(err =>
+                        {
+                            failedOpenEvent();
+                        });
+    };
 
     return (
         <div>
@@ -106,12 +100,12 @@ const CustomerCreateEdit : FC<Props> = ({editCustomer,successOpenEvent}) => {
     );
 };
 
-export const InsertCustomer = (successOpenEvent : () => void) => {
-    return <CustomerCreateEdit successOpenEvent={successOpenEvent}/>
+export const InsertCustomer = (successOpenEvent : () => void,failedOpenEvent : () => void) => {
+    return <CustomerCreateEdit successOpenEvent={successOpenEvent} failedOpenEvent={failedOpenEvent}/>
 };
 
-export const EditCustomer = (Data : CustomerInfo ,successOpenEvent : () => void) => {
-    return <CustomerCreateEdit editCustomer={Data} successOpenEvent={successOpenEvent}/>
+export const EditCustomer = (Data : CustomerInfo ,successOpenEvent : () => void,failedOpenEvent : () => void) => {
+    return <CustomerCreateEdit editCustomer={Data} successOpenEvent={successOpenEvent} failedOpenEvent={failedOpenEvent}/>
 };
 
 export default CustomerCreateEdit

@@ -19,10 +19,11 @@ const useStyle = makeStyles((theme) => ({
 
 type props = {
     successOpen : () => void,
+    failedOpen : () => void,
     emp? : EmployeeInfo
 }
 
-const EmpCreateEdit : FC<props> = ({successOpen,emp}) => {
+const EmpCreateEdit : FC<props> = ({successOpen,failedOpen, emp}) => {
     const classes = useStyle();
     const [name , setName] = useState<string>(emp?.name ?? '');
     const [address , setAddress] = useState<string>(emp?.mail ?? '');
@@ -42,12 +43,12 @@ const EmpCreateEdit : FC<props> = ({successOpen,emp}) => {
     );
 };
 
-export const EmpCreate = (success : () => void) : ReactNode => {
-    return <EmpCreateEdit successOpen={success}/>
+export const EmpCreate = (success : () => void,failed : () => void) : ReactNode => {
+    return <EmpCreateEdit successOpen={success} failedOpen={failed}/>
 };
 
-export const EmpEdit = (Data : EmployeeInfo,success : () => void) : ReactNode => {
-    return <EmpCreateEdit successOpen={success} emp={Data}/>
+export const EmpEdit = (Data : EmployeeInfo,success : () => void,failed : () => void) : ReactNode => {
+    return <EmpCreateEdit successOpen={success} emp={Data} failedOpen={failed}/>
 };
 
 export default EmpCreateEdit;
