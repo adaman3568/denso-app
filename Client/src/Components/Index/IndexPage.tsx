@@ -7,12 +7,13 @@ import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {makeStyles} from "@material-ui/core/styles";
 import AddIcon from '@material-ui/icons/Add';
-import PostTweet from "../PostTweet";
+import PostTweet from "../Tweets/PostTweet";
 import ModalWindow from "../Common/ModalWindow";
 import {CarInfo, CustomerInfo} from "../../Context/DataTypeList";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
+import useInsertModal from "../../CustomHooks/useInsertModal";
 
 const useStyle = makeStyles((theme) => ({
     topSearch : {
@@ -38,6 +39,8 @@ const IndexPage : FC = () => {
     const [selectedCar,setSelectedCar] = useState<CarInfo | null | undefined>(null);
     const [customers,setCustomer] = useState<CustomerInfo[]>([]);
     const [selectedCustomer,setSelectedCustomer] = useState<CustomerInfo | null | undefined>(null);
+
+    const insertModal = useInsertModal(PostTweet)
 
     useEffect(() => {
         const token = Cookies.get("denso-app-jwt-token");
@@ -69,7 +72,7 @@ const IndexPage : FC = () => {
 
     return (
         <Grid container>
-            <Fab color="primary" aria-label="add" className={classes.floatingButton} onClick={handleOpen}>
+            <Fab color="primary" aria-label="add" className={classes.floatingButton} onClick={insertModal.OpenModal}>
                 <AddIcon />
             </Fab>
             <div className={classes.topSearch}>
@@ -121,7 +124,7 @@ const IndexPage : FC = () => {
             <Grid item sm={12} className={classes.tweetsArea}>
                 <Tweets/>
             </Grid>
-            <ModalWindow IsOpen={open} handleClose={() => setOpen(false)} ChildComponent={<PostTweet/>}/>
+            {insertModal.Modal()}
         </Grid>
     );
 };

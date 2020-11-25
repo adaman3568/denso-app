@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Button, Grid, TextField} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
 import {makeStyles} from "@material-ui/core/styles";
-import {CarInfo, CommentInfo, CustomerInfo} from "../Context/DataTypeList";
+import {CarInfo, CommentInfo, CustomerInfo} from "../../Context/DataTypeList";
 import Cookies from "js-cookie";
 import axios from "axios";
-import {apiEndPointBase} from "../Firebase";
+import {apiEndPointBase} from "../../Firebase";
 
 const useStyle = makeStyles((theme) => ({
     textBox : {
@@ -21,7 +21,12 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-const PostTweet = () => {
+type Props = {
+    successOpenEvent : () => void,
+    failedOpenEvent : () => void
+}
+
+const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
     const classes = useStyle();
 
     const [cars,setCars] = useState<CarInfo[]>([]);
@@ -38,13 +43,11 @@ const PostTweet = () => {
                     'Authorization' : `Bearer ${token}`
                 }}).then(res =>
                 {
-                    alert("コメントを追加しました。");
-                    console.log(res)
+                    successOpenEvent();
                 }
                 ).catch(err =>
                 {
-                    alert("コメントを追加できませんでした。");
-                    console.log(err)
+                    failedOpenEvent();
                 });
     };
 
@@ -156,5 +159,9 @@ const PostTweet = () => {
         </div>
     );
 };
+
+const PostTweet = (successOpen : () => void,failedOpen : () => void) => {
+    return <PostTweetInner successOpenEvent={successOpen} failedOpenEvent={failedOpen}/>
+}
 
 export default PostTweet;
