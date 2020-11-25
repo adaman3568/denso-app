@@ -1,10 +1,11 @@
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
 import React, {FC} from "react";
-import {Button, Typography} from "@material-ui/core";
+import {Button, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
 import Cookies from "js-cookie";
+import CenteringGridItem from "../Common/CenteringGridItem";
 
 type props = {
     Car : CarInfo,
@@ -35,19 +36,24 @@ const CarDelete : FC<props> = ({Car,successOpen,failedOpen}) => {
 
     return (
         <div className={classes.textCenter}>
-            <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>車両名：{Car.carNo}</Typography>
-            </div>
-            <div className={classes.textCenter}>
-                <Typography display={'inline'} variant={'h3'}>詳細：{Car.detail}</Typography>
-            </div>
-            <div className={classes.textCenter}>
-                上記車両を本当に削除しますか？<br/>
-                付随するコメントも全て削除されます。
-            </div>
-            <div className={classes.textCenter}>
-                <Button variant={'contained'} color={'primary'} onClick={deleteCar}>削除</Button>
-            </div>
+            <CenteringGridItem xs={12}>
+                <Typography display={'inline'} variant={'h4'}>削除確認</Typography>
+            </CenteringGridItem>
+            <CenteringGridItem xs={12}>
+                <Typography display={'inline'} variant={'body1'}>
+                    上記車両を本当に削除しますか？<br/>
+                    付随するコメントも全て削除されます。
+                </Typography>
+            </CenteringGridItem>
+            <CenteringGridItem xs={12}>
+                <Typography display={'inline'} variant={'body1'}>車両名：{Car.carNo}</Typography>
+            </CenteringGridItem>
+            <CenteringGridItem xs={12}>
+                <Typography display={'inline'} variant={'body1'}>詳細：{Car.detail}</Typography>
+            </CenteringGridItem>
+            <CenteringGridItem xs={12}>
+                <Button variant={'contained'} color={'secondary'} onClick={deleteCar}>削除</Button>
+            </CenteringGridItem>
         </div>
     )
 };
