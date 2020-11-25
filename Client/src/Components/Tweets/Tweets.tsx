@@ -28,7 +28,7 @@ const Tweets : React.FC<Props> = ({ShowImg = true}) => {
 
     useEffect(() => {
         getDisplayComments();
-    },[tweets]);
+    },[]);
 
     return (
             <Grid item xs={12}>
