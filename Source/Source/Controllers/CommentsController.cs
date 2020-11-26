@@ -39,7 +39,7 @@ namespace Source.Controllers
                                     .FirstOrDefaultAsync(com => com.ID == loginUser.ParentCompanyId);
 
             var res = com.Customers.SelectMany(cus => cus.Cars).SelectMany(car => car.Comments).OrderBy(com => com.ID);
-
+            var cookie = Response.Cookies;
             return res.OrderByDescending(com => com.Created).ToList();
         }
 
@@ -49,7 +49,12 @@ namespace Source.Controllers
         {
             var loginUser = User.GetUser(_context);
             // ログインユーザーの所属している会社のコメントのIDなら取得する。
-            var com = await _context.Comments.Include(com => com.User).ThenInclude(u => u.ParentCompany).FirstOrDefaultAsync(com => com.ID == id);
+            var com = await _context.Comments
+                .Include(com => com.User)
+                .ThenInclude(u => u.ParentCompany)
+                .Include(com => com.ParentCar)
+                .ThenInclude(car => car.ParentCustomer)
+                .FirstOrDefaultAsync(com => com.ID == id);
             if (com == null)
             {
                 return NotFound();

@@ -64,11 +64,6 @@ const IndexPage : FC = () => {
     },[]);
 
     const classes = useStyle();
-    const [open, setOpen] = React.useState(false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
     return (
         <Grid container>

@@ -11,6 +11,7 @@ import PostDateTime from "./ChildComponents/PostDateTime";
 
 type props = {
     tweet : CommentInfo,
+    showAction? : boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     }})
 );
 
-const Tweet : FC<props> = ({tweet}) => {
+const Tweet : FC<props> = ({tweet,showAction = true}) => {
     const classes = useStyles();
 
     console.log(tweet)
@@ -61,13 +62,17 @@ const Tweet : FC<props> = ({tweet}) => {
                         </Grid>
                     </Grid>
                 </CardActionArea>
+
+                {/*会社名とか車両番号とか表示する*/}
+                {showAction &&
                 <CardActions>
                     <CustomerAndCar
                         CustomerId={tweet.parentCustomerId}
                         CustomerName={tweet.parentCustomerName}
                         CarId={tweet.parentCarId}
                         CarName={tweet.parentCarName}/>
-                </CardActions>
+                </CardActions>}
+
             </Card>
         </Link>
 

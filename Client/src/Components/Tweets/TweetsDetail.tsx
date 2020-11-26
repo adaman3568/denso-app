@@ -6,6 +6,8 @@ import {useComment} from "../../CustomHooks/useComment";
 import Cookies from "js-cookie";
 import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
+import Tweet from "./Tweet";
+import {makeStyles} from "@material-ui/core/styles";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -14,12 +16,10 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
 
     if (comment){
         return (
-            <div>
-                <p>{match.params.id}</p>
-                <p>{comment.id}</p>
-                <p>{comment?.detail}</p>
-                <RepComment Comment={comment}/>
-            </div>
+            <>
+            <Tweet tweet={comment}/>
+            <RepComment Comment={comment}/>
+            </>
         )
     }else{
         return <Loading/>;
@@ -29,7 +29,16 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
 type Props = {
     Comment : CommentInfo
 }
+
+const useStyle = makeStyles((theme) => ({
+    repCommentWrapper : {
+        marginLeft : theme.spacing(5)
+    }
+}));
+
 const RepComment : FC<Props> = ({Comment}) => {
+    const classes = useStyle();
+
     const [repComments, setRepComments] = useState<CommentInfo[]>([]);
 
     useEffect(() => {
@@ -45,10 +54,10 @@ const RepComment : FC<Props> = ({Comment}) => {
         })
     },[]);
 
-    return <div>
-        {repComments.map(item => <div><p>{item.id}</p><p>{item.detail}</p></div>)}
-        </div>
-}
-
+    return (
+            <div className={classes.repCommentWrapper}>
+                {repComments.map((item,index) => <Tweet key={index} tweet={item} showAction={false}/>)}
+            </div>
+    )};
 
 export default TweetsDetail;
