@@ -8,6 +8,8 @@ import AvatarWithName from "./ChildComponents/AvatarWithName";
 import CommentBody from "./ChildComponents/CommentBody";
 import CustomerAndCar from "./ChildComponents/CompanyAndCar";
 import PostDateTime from "./ChildComponents/PostDateTime";
+import CommentIcon from '@material-ui/icons/Comment';
+import RepCommentCnt from "./RepCommentCnt";
 
 type props = {
     tweet : CommentInfo,
@@ -63,15 +65,25 @@ const Tweet : FC<props> = ({tweet,showAction = true}) => {
                     </Grid>
                 </CardActionArea>
 
-                {/*会社名とか車両番号とか表示する*/}
-                {showAction &&
+
+
                 <CardActions>
-                    <CustomerAndCar
-                        CustomerId={tweet.parentCustomerId}
-                        CustomerName={tweet.parentCustomerName}
-                        CarId={tweet.parentCarId}
-                        CarName={tweet.parentCarName}/>
-                </CardActions>}
+                    <Grid container>
+                        <Grid item xs={3}>
+                            {/*会社名とか車両番号とか表示する*/}
+                            {showAction &&
+                            <CustomerAndCar
+                                CustomerId={tweet.parentCustomerId}
+                                CustomerName={tweet.parentCustomerName}
+                                CarId={tweet.parentCarId}
+                                CarName={tweet.parentCarName}/>
+                            }
+                        </Grid>
+                        <Grid item xs={9}>
+                            <RepCommentCnt CommentCnt={tweet.repCommentCnt}/>
+                        </Grid>
+                    </Grid>
+                </CardActions>
 
             </Card>
         </Link>
