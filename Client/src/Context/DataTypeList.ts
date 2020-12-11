@@ -43,6 +43,9 @@ export type CarInfo = {
     id : number
     carNo : string
     detail : string
+    carType? : string
+    maker? : string
+    releaseYear : number
     created : Date
     updated : Date
     parentCustomerId : number
