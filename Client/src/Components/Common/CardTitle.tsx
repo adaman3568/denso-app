@@ -12,7 +12,7 @@ const myStyle = makeStyles((theme) => ({
         paddingRight : theme.spacing(2),
         marginBottom : theme.spacing(2)
     }
-}))
+}));
 
 const CardTitle : FC = ({children}) => {
     const classes = myStyle();
