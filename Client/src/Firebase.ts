@@ -16,6 +16,7 @@ const firebaseConfig = {
 const projectId : string | undefined = process.env.REACT_APP_FIREBASE_PROJECT_ID;
 console.log(projectId);
 export const firebaseAuthPath = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${projectId}`;
+export const firebaseRefreshAuthPath = `https://securetoken.googleapis.com/v1/token?key=${projectId}`;
 export const apiEndPointBase = "https://localhost:44394/api/"
 
 firebase.initializeApp(firebaseConfig);
