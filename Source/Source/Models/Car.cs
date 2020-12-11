@@ -14,6 +14,21 @@ namespace Source.Models
         public string CarNo { get; set; }
         public string Detail { get; set; }
 
+        /// <summary>
+        /// 型式
+        /// </summary>
+        public string CarType { get; set; }
+
+        /// <summary>
+        /// 年式
+        /// </summary>
+        public int ReleaseYear { get; set; }
+
+        /// <summary>
+        /// メーカー
+        /// </summary>
+        public string Maker { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
 
