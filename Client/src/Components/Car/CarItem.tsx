@@ -32,7 +32,22 @@ const CarItem : FC<DataItemProps<CarInfo>> = ({Data,EditModalOpen,DeleteModalOpe
                     </Grid>
                     <Grid sm={12}>
                         <Typography className={classes.detail}>
-                            {Data.detail}
+                            型式：{Data.carType}
+                        </Typography>
+                    </Grid>
+                    <Grid sm={12}>
+                        <Typography className={classes.detail}>
+                            年式：{Data.releaseYear}
+                        </Typography>
+                    </Grid>
+                    <Grid sm={12}>
+                        <Typography className={classes.detail}>
+                            メーカー：{Data.maker}
+                        </Typography>
+                    </Grid>
+                    <Grid sm={12}>
+                        <Typography className={classes.detail}>
+                            詳細：{Data.detail}
                         </Typography>
                     </Grid>
                 </Grid>
