@@ -1,34 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Grid} from "@material-ui/core";
 import {CommentInfo} from "../../Context/DataTypeList";
-import Cookies from "js-cookie";
-import axios from 'axios'
-import {apiEndPointBase} from "../../Firebase";
 import Tweet from "./Tweet";
+import {DataContext} from "../../Context/DataContext";
+import Loading from "../Common/Loading";
 
 type Props = {
     ShowImg? : boolean
 }
 
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
+    const {Comments,isLoading} = useContext(DataContext)
+    const [tweets,setTweets] = useState<CommentInfo[]>(Comments.Data);
 
-    const [tweets,setTweets] = useState<CommentInfo[]>([]);
-
-    const getDisplayComments = () => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}comments`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-            const d = res.data as CommentInfo[];
-            setTweets(d)
-            }
-        );
-    };
-
-    useEffect(() => {
-        getDisplayComments();
-    },[]);
+    if(isLoading)
+        return <Loading/>
 
     return (
             <Grid item xs={12}>

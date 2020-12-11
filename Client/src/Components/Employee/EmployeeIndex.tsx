@@ -8,9 +8,8 @@ import {EmpCreate, EmpEdit} from "./EmpCreateEdit";
 import {DeleteEmployee} from "./EmpDelete";
 import {Button} from "@material-ui/core";
 import useInsertModal from "../../CustomHooks/useInsertModal";
-import Cookies from "js-cookie";
-import axios from "axios";
-import {apiEndPointBase} from "../../Firebase";
+import {DataContext} from "../../Context/DataContext";
+import Loading from "../Common/Loading";
 
 const EmployeeIndex : FC = () => {
 
@@ -18,19 +17,12 @@ const EmployeeIndex : FC = () => {
     const deleteModal = useDeleteModal<EmployeeInfo>(DeleteEmployee);
     const insertModal = useInsertModal(EmpCreate);
 
-    const [employees,setEmployees] = useState<EmployeeInfo[]>([])
+    const {Emp,isLoading} = useContext(DataContext)
 
-    useEffect(() => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}users`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as EmployeeInfo[];
-                setEmployees(d)
-            }
-        );
-    },[]);
+    const [employees,setEmployees] = useState<EmployeeInfo[]>(Emp.Data)
+
+    if(isLoading)
+        return <Loading/>
 
     return (
         <div>

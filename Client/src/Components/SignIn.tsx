@@ -17,6 +17,7 @@ import {apiEndPointBase, firebaseAuthPath} from "../Firebase";
 import axios from 'axios';
 import Cookies from "js-cookie";
 import {log} from "util";
+import {DataContext} from "../Context/DataContext";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -44,9 +45,14 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     const [mail,setMail] = useState('');
     const {func} = useContext(AuthContext);
     const authContext = useContext(AuthContext);
+    const {dataInit} = useContext(DataContext)
     const SignIn = async () => {
-        await func.SignIn(mail,pass);
-        history.push('/')
+
+            func.SignIn(mail,pass)
+                .then(() => {
+                dataInit();
+                history.push('/')
+            }).catch((e) => console.log(e));
     };
 
     const renderItem = () => {

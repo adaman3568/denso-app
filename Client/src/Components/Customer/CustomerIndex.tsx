@@ -8,29 +8,19 @@ import useEditModal from "../../CustomHooks/useEditModal";
 import useInsertModal from "../../CustomHooks/useInsertModal";
 import {DeleteCustomer} from "./ComfirmDeleteCustomer";
 import {EditCustomer, InsertCustomer} from "./CustomerCreateEdit";
-import Cookies from "js-cookie";
-import axios from "axios";
-import {apiEndPointBase} from "../../Firebase";
+import {DataContext} from "../../Context/DataContext";
+import Loading from "../Common/Loading";
 
 const CustomerIndex : FC = () => {
 
     const editModal = useEditModal<CustomerInfo>(EditCustomer);
     const insertModal = useInsertModal(InsertCustomer);
     const deleteModal = useDeleteModal<CustomerInfo>(DeleteCustomer);
+    const {Customer,isLoading} = useContext(DataContext)
+    const [customer,setCustomer] = useState<CustomerInfo[]>(Customer.Data);
 
-    const [customer,setCustomer] = useState<CustomerInfo[]>([]);
-
-    useEffect(() => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}customers`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CustomerInfo[];
-                setCustomer(d)
-            }
-        );
-    },[])
+    if(isLoading)
+        return <Loading/>
 
     return (
         <div>

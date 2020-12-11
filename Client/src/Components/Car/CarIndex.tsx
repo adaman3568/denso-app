@@ -2,32 +2,22 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import Title from "../Common/Title";
 import CarItem from "./CarItem";
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
-import ModalWindow from "../Common/ModalWindow";
 import useEditModal from "../../CustomHooks/useEditModal";
 import {CarEdit} from "./CarCreateEdit";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {DeleteCar} from "./CarDelete";
-import Cookies from "js-cookie";
-import axios from "axios";
-import {apiEndPointBase} from "../../Firebase";
+import {DataContext} from "../../Context/DataContext";
+import Loading from "../Common/Loading";
 
 const CarIndex : FC = () => {
     const carEditModal = useEditModal<CarInfo>(CarEdit);
     const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar)
+    const {Car,isLoading} = useContext(DataContext)
 
-    const [carItems,setCarItems] = useState<CarInfo[]>([]);
+    const [carItems,setCarItems] = useState<CarInfo[]>(Car.Data);
 
-    useEffect(() => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}cars`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CarInfo[];
-                setCarItems(d)
-            }
-        );
-    },[])
+    if(isLoading)
+        return <Loading/>
 
     return (
         <div>

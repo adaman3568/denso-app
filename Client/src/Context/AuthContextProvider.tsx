@@ -9,7 +9,7 @@ type AuthContextState = {
     func : {SignIn : SignInFuncType,SignOut : SignOutFuncType}
 }
 
-type SignInFuncType = (mail : string ,pass : string) => void
+type SignInFuncType = (mail : string ,pass : string) => Promise<void>
 type SignOutFuncType = () => void
 
 export const AuthContext = createContext<AuthContextState>({} as AuthContextState)
@@ -23,7 +23,7 @@ const AuthContextProvider : FC = ({children}) => {
         }
     });
 
-    const SignIn : SignInFuncType = async (mail : string,pass : string) => {
+    const SignIn : SignInFuncType = async (mail : string,pass : string) : Promise<void> => {
         const res = await axios.post(firebaseAuthPath,
             {"email" : mail,
                 "password" : pass,
@@ -36,13 +36,14 @@ const AuthContextProvider : FC = ({children}) => {
             idToken : string
             refreshToken : string
         }
+
         if(res.status === 200){
             const d = res.data as getDataType;
             Cookies.set("denso-app-jwt-token",d.idToken);
             Cookies.set("denso-app-refresh-token",d.refreshToken);
-            setState({initializing: false,isLogined: true})
+            setState({initializing: false,isLogined: true});
         }else{
-            setState({initializing: false,isLogined: false})
+            setState({initializing: false,isLogined: false});
         }
     };
 
