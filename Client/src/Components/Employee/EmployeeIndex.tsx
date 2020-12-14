@@ -19,7 +19,11 @@ const EmployeeIndex : FC = () => {
 
     const {Emp,isLoading} = useContext(DataContext)
 
-    const [employees,setEmployees] = useState<EmployeeInfo[]>(Emp.Data)
+    const [employees,setEmployees] = useState<EmployeeInfo[]>(Emp.Data);
+
+    useEffect(() => {
+        setEmployees(Emp.Data)
+    },[Emp.Data])
 
     if(isLoading)
         return <Loading/>

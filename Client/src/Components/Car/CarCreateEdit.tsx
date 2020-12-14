@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useState} from 'react';
+import React, {FC, ReactNode, useContext, useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {Button, Checkbox, Grid, TextField} from "@material-ui/core";
 import {CarInfo} from "../../Context/DataTypeList";
@@ -7,6 +7,7 @@ import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
 import {Autocomplete} from "@material-ui/lab";
 import NumberInput from "../Common/Control/NumberInput";
+import {DataContext} from "../../Context/DataContext";
 
 const useStyle = makeStyles((theme) => ({
     carCreateModalWrapper : {
@@ -38,6 +39,8 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
     const isEdit = car !== undefined;
 
+    const {Car} = useContext(DataContext);
+
     const btnEvent = () => {
 
         if(isEdit){
@@ -48,32 +51,13 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PostCar = () => {
-        const token = Cookies.get("denso-app-jwt-token");
-        const newCar = {carNo : carName ,detail : carDetail, releaseYear : releaseYear, maker : maker,carType : carType};
-        const postPath = `${apiEndPointBase}cars/${parentCustomerId}`
-        axios.post(postPath,newCar ,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                            successOpen();
-                        }).catch(err =>
-                        {
-                            failedOpen();
-                        });
+        const newCar : CarInfo = {carNo : carName ,detail : carDetail, releaseYear : parseInt(releaseYear), maker : maker,carType : carType};
+        Car.Func.PostData(newCar,parentCustomerId ?? 0).then(res => successOpen()).catch(err => failedOpen());
     };
 
     const PutCar = () => {
-        const token = Cookies.get("denso-app-jwt-token");
-        const newCar = {...car,carNo : carName ,detail : carDetail,releaseYear : releaseYear, maker : maker,carType : carType};
-        axios.put(`${apiEndPointBase}cars/${car?.id}`,newCar,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                            successOpen();
-                        }).catch(err =>
-                        {
-                            failedOpen();
-                        });
+        const newCar : CarInfo = {...car,carNo : carName ,detail : carDetail,releaseYear : parseInt(releaseYear), maker : maker,carType : carType};
+        Car.Func.PutData(car?.id ?? 0,newCar).then(res => successOpen()).catch(err => failedOpen());
     };
 
     return (

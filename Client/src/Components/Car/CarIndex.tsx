@@ -15,6 +15,9 @@ const CarIndex : FC = () => {
     const {Car,isLoading} = useContext(DataContext)
 
     const [carItems,setCarItems] = useState<CarInfo[]>(Car.Data);
+    useEffect(() => {
+        setCarItems(Car.Data)
+    },[Car.Data])
 
     if(isLoading)
         return <Loading/>

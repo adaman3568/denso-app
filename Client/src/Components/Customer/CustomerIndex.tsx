@@ -19,6 +19,10 @@ const CustomerIndex : FC = () => {
     const {Customer,isLoading} = useContext(DataContext)
     const [customer,setCustomer] = useState<CustomerInfo[]>(Customer.Data);
 
+    useEffect(() => {
+        setCustomer(Customer.Data)
+    },[Customer.Data])
+
     if(isLoading)
         return <Loading/>
 
