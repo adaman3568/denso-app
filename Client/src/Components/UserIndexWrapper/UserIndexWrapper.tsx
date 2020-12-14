@@ -116,11 +116,13 @@ const useStyles = makeStyles((theme) => ({
 const UserIndexWrapper : React.FC = ({children}) => {
     const dataContext = useContext(DataContext);
     const classes = useStyles();
-    // const {currentUser,func} = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
 
     useEffect(() => {
-        dataContext.dataInit()}
-    ,[])
+        if(authContext.isLogined){
+            dataContext.dataInit()}
+        }
+    ,[authContext.isLogined])
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
