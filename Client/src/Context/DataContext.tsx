@@ -1,9 +1,10 @@
 import {createContext, FC, useEffect, useState} from "react";
 import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
-import Cookies from "js-cookie";
-import axios from 'axios'
-import {apiEndPointBase} from "../Firebase";
 import React from 'react'
+import {CommentApiDataManager} from "./ApiFunctions/CommentApiDataManager";
+import {EmpApiDataManager} from "./ApiFunctions/EmpApiDataManager";
+import {CarApiDataManager} from "./ApiFunctions/CarApiDataManager";
+import {CustomerApiDataManager} from "./ApiFunctions/CustomerApiDataManager";
 
 type DataContextState = {
     isLoading : boolean,
@@ -31,45 +32,16 @@ const DataContextProvider : FC = ({children}) => {
     const [comments,setComments] = useState<CommentInfo[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const getRequestHeader = () => {
-        const token = Cookies.get("denso-app-jwt-token");
-        return ({headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }})
-    };
-
-    // region 初期データ取得メソッド
-    const getCarArray = async () : Promise<CarInfo[]> => {
-        const path = `${apiEndPointBase}cars`;
-        const res = await axios.get(path,getRequestHeader());
-        console.log(res);
-        return res.data as CarInfo[]
-    };
-    const getEmpArray = async () : Promise<EmployeeInfo[]> => {
-        const path = `${apiEndPointBase}users`;
-        const res = await axios.get(path,getRequestHeader());
-        console.log(res);
-        return res.data as EmployeeInfo[]
-    };
-    const getCommentArray = async () : Promise<CommentInfo[]> => {
-        const path = `${apiEndPointBase}comments`;
-        const res = await axios.get(path,getRequestHeader());
-        console.log(res);
-        return res.data as CommentInfo[]
-    };
-    const getCustomerArray = async () : Promise<CustomerInfo[]> => {
-        const path = `${apiEndPointBase}customers`;
-        const res = await axios.get(path,getRequestHeader());
-        console.log(res);
-        return res.data as CustomerInfo[]
-    };
+    const commentDataManager = new CommentApiDataManager();
+    const carDataManager = new CarApiDataManager();
+    const customerDataManager = new CustomerApiDataManager();
+    const empDataManager = new EmpApiDataManager();
 
     const getAllData = async () => {
-        getCarArray().then(res => setCars(res));
-        getEmpArray().then(res => setEmployees(res));
-        getCommentArray().then(res => setComments(res));
-        getCustomerArray().then(res => setCustomers(res));
+        commentDataManager.GetData().then(res => setComments(res));
+        carDataManager.GetData().then(res => setCars(res));
+        empDataManager.GetData().then(res => setEmployees(res));
+        customerDataManager.GetData().then(res => setCustomers(res));
     };
     // endregion
 
