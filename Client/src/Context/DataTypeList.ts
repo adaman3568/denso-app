@@ -40,15 +40,15 @@ export type CustomerInfo = {
 }
 
 export type CarInfo = {
-    id : number
+    id? : number
     carNo : string
     detail : string
     carType? : string
     maker? : string
     releaseYear : number
-    created : Date
-    updated : Date
-    parentCustomerId : number
-    commentCnt : number
-    lastCommentDate : Date
+    created? : Date
+    updated? : Date
+    parentCustomerId? : number
+    commentCnt? : number
+    lastCommentDate? : Date
 }
