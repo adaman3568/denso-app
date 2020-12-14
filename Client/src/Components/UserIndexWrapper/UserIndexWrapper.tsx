@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +19,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
 import {Container} from "@material-ui/core";
 import ProfileIconButton from "./ChildComponents/ProfileIconButton";
+import {DataContext} from "../../Context/DataContext";
 
 
 function Copyright() {
@@ -113,9 +114,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserIndexWrapper : React.FC = ({children}) => {
+    const dataContext = useContext(DataContext);
     const classes = useStyles();
     // const {currentUser,func} = useContext(AuthContext);
 
+    useEffect(() => {
+        dataContext.dataInit()}
+    ,[])
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);

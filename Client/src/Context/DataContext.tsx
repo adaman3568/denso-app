@@ -25,7 +25,10 @@ type dataContextInnerStateType = {
 
 const DataContextProvider : FC = ({children}) => {
 
-    const [dataContextInnerState, setDataContextInnerState]  = useState<dataContextInnerStateType>({CarArray : [],EmpArray : [],CustomerArray : [],CommentArray : []});
+    const [cars,setCars] = useState<CarInfo[]>([]);
+    const [employees,setEmployees] = useState<EmployeeInfo[]>([]);
+    const [customers,setCustomers] = useState<CustomerInfo[]>([]);
+    const [comments,setComments] = useState<CommentInfo[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const getRequestHeader = () => {
@@ -62,30 +65,30 @@ const DataContextProvider : FC = ({children}) => {
         return res.data as CustomerInfo[]
     };
 
-    const getAllData = () => {
-        getCarArray().then(res => setDataContextInnerState({...dataContextInnerState,CarArray : res}));
-        getEmpArray().then(res => setDataContextInnerState({...dataContextInnerState,EmpArray : res}));
-        getCommentArray().then(res => setDataContextInnerState({...dataContextInnerState,CommentArray : res}));
-        getCustomerArray().then(res => setDataContextInnerState({...dataContextInnerState,CustomerArray : res}));
-    }
+    const getAllData = async () => {
+        getCarArray().then(res => setCars(res));
+        getEmpArray().then(res => setEmployees(res));
+        getCommentArray().then(res => setComments(res));
+        getCustomerArray().then(res => setCustomers(res));
+    };
     // endregion
 
-    const dataInit = () => {
+    const dataInit = async () => {
         setIsLoading(true);
-        getAllData();
+        await getAllData();
         setIsLoading(false)
     };
 
     return(
         <DataContext.Provider value={{
                 Car :
-                    {Data : dataContextInnerState.CarArray, Func : {}},
+                    {Data : cars, Func : {}},
                 Emp :
-                    {Data : dataContextInnerState.EmpArray , Func : {}},
+                    {Data : employees , Func : {}},
                 Customer :
-                    {Data : dataContextInnerState.CustomerArray,Func : {}},
+                    {Data : customers,Func : {}},
                 Comments :
-                    {Data : dataContextInnerState.CommentArray,Func : {}},
+                    {Data :comments,Func : {}},
             isLoading,
             dataInit
         }}>

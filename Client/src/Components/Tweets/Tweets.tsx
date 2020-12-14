@@ -12,6 +12,9 @@ type Props = {
 const Tweets : React.FC<Props> = ({ShowImg = true}) => {
     const {Comments,isLoading} = useContext(DataContext)
     const [tweets,setTweets] = useState<CommentInfo[]>(Comments.Data);
+    useEffect(() => {
+        setTweets(Comments.Data)
+    },[Comments.Data])
 
     if(isLoading)
         return <Loading/>
