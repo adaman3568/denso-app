@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {CommentInfo} from "../../Context/DataTypeList";
 import {RouteComponentProps} from "react-router-dom";
 import Loading from "../Common/Loading";
@@ -8,6 +8,7 @@ import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import Tweet from "./Tweet";
 import {makeStyles} from "@material-ui/core/styles";
+import {CommentDataContext} from "../../Context/CommentDataContext";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 

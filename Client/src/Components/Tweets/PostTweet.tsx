@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useContext, useEffect, useState} from 'react';
 import {Button, Grid, TextField} from "@material-ui/core";
 import {Autocomplete} from "@material-ui/lab";
 import {makeStyles} from "@material-ui/core/styles";
@@ -6,6 +6,7 @@ import {CarInfo, CommentInfo, CustomerInfo} from "../../Context/DataTypeList";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
+import {CommentDataContext} from "../../Context/CommentDataContext";
 
 const useStyle = makeStyles((theme) => ({
     textBox : {
@@ -35,20 +36,16 @@ const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
     const [selectedCustomer,setSelectedCustomer] = useState<CustomerInfo | null | undefined>(null);
     const [commentBody , setCommentBody] = useState<string>('')
 
+    const context = useContext(CommentDataContext);
+
     const postTweet = () => {
-        const tweet = {detail : commentBody}
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.post(`${apiEndPointBase}comments/${selectedCar?.id}`,tweet,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res =>
-                {
-                    successOpenEvent();
-                }
-                ).catch(err =>
-                {
-                    failedOpenEvent();
-                });
+        const tweet = {detail : commentBody} as CommentInfo
+        try {
+            context.Func.PostData(tweet);
+            successOpenEvent();
+        }catch (err){
+            failedOpenEvent();
+        }
     };
 
     const setCarList = (cus : CustomerInfo | null | undefined) => {
