@@ -17,10 +17,10 @@ import SignIn from "./Components/SignIn";
 import {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
-import DataContextProvider from "./Context/DataContext";
 import {CommentDataContextProvider} from "./Context/CommentDataContext";
 import {CustomerDataContextProvider} from "./Context/CustomerDataContext";
-import {CarDataContext, CarDataContextProvider} from "./Context/CarDataContext";
+import {CarDataContextProvider} from "./Context/CarDataContext";
+import {EmpDataContextProvider} from "./Context/EmpDataContext";
 
 const theme = createMuiTheme({
     palette :{
@@ -30,7 +30,6 @@ const theme = createMuiTheme({
         secondary :{
             main : '#E6B745'
         },
-
     }
 });
 
@@ -44,7 +43,7 @@ const App : React.FC = () => {
     const DataContextWrapper : React.FC = ({children}) => {
         return (
             <MuiThemeProvider theme={theme}>
-                <DataContextProvider>
+                <EmpDataContextProvider>
                     <CustomerDataContextProvider>
                         <CommentDataContextProvider>
                             <CarDataContextProvider>
@@ -52,7 +51,7 @@ const App : React.FC = () => {
                             </CarDataContextProvider>
                         </CommentDataContextProvider>
                     </CustomerDataContextProvider>
-                </DataContextProvider>
+                </EmpDataContextProvider>
             </MuiThemeProvider>
         )
     }
