@@ -1,50 +1,52 @@
-export const decoi = {}
-// import {CarInfo} from "../Context/DataTypeList";
-// import React from "react";
-//
-// export const EmpInitialState : CarInfo[] = [];
-//
-// const SetAllCarAction = 'SetAllCarAction' as const;
-// const CarDeleteAction = 'CarDeleteAction' as const;
-// const CarUpdateAction = 'CarUpdateAction' as const;
-//
-// export const SetDisplayCarActionCreator = (data : CarInfo[]) => ({
-//     type : SetAllCarAction,
-//     payload : {
-//         data
-//     },
-// });
-//
-// export const CarDeleteActionCreator = (id : string) => ({
-//     type : CarDeleteAction,
-//     payload : {
-//         id
-//     }
-// });
-//
-// export const CarUpdateActionCreator = (id : string ,newData : CarInfo) => ({
-//     type : CarUpdateAction,
-//     payload : {
-//         id,newData
-//     }
-// });
-//
-// export type CarActions = ReturnType<typeof SetDisplayCarActionCreator> | ReturnType<typeof CarDeleteActionCreator> | ReturnType<typeof CarUpdateActionCreator>
-//
-// const CarReducer : React.Reducer<CarInfo[],CarActions> = (status = EmpInitialState , action) : CarInfo[] => {
-//     switch (action.type) {
-//         case SetAllCarAction:
-//             return action.payload.data;
-//         case CarDeleteAction:
-//             return status.filter(item => item.id !== action.payload.id);
-//         case CarUpdateAction:
-//             let filterdStatus = status.filter(item => item.id !== action.payload.id);
-//             filterdStatus.push(action.payload.newData);
-//             return filterdStatus;
-//
-//         default:
-//             return status;
-//     }
-// };
-//
-// export default CarReducer;
+import {CarInfo} from "../Context/DataTypeList";
+import React from "react";
+export const CarInitialState : CarInfo[] = [];
+
+export const CarReadAllAction = 'craa' as const;
+export const CarUpdateAction = 'cua' as const;
+export const CarInsertAction = 'cia' as const;
+export const CarDeleteAction = 'cda' as const;
+
+export const CarReadAllActionCreator = (data : CarInfo[]) => ({
+    type : CarReadAllAction,
+    payload : {data},
+});
+export const CarUpdateActionCreator = (id : number,data : CarInfo) => ({
+    type : CarUpdateAction,
+    payload : {id,data},
+});
+export const CarInsertActionCreator = (data : CarInfo) => ({
+    type : CarInsertAction,
+    payload : {data},
+});
+export const CarDeleteActionCreator = (id : number) => ({
+    type : CarDeleteAction,
+    payload : {id},
+});
+
+
+export type CarActions =
+    ReturnType<typeof CarReadAllActionCreator> |
+    ReturnType<typeof CarInsertActionCreator> |
+    ReturnType<typeof CarUpdateActionCreator> |
+    ReturnType<typeof CarDeleteActionCreator>
+
+const CustomerReducer : React.Reducer<CarInfo[],CarActions> = (status = CarInitialState , action) : CarInfo[] => {
+    switch (action.type) {
+        case CarReadAllAction:
+            return action.payload.data;
+        case CarDeleteAction:
+            return status.filter(item => item.id !== action.payload.id)
+        case CarInsertAction:
+            return [action.payload.data,...status]
+        case CarUpdateAction:
+            const filterdData = status.filter(item => item.id !== action.payload.id);
+            return [action.payload.data,...filterdData]
+        default:
+            return status;
+    }
+};
+
+export default CustomerReducer;
+
+
