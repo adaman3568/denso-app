@@ -1,4 +1,4 @@
-import {CarInfo} from "../DataTypeList";
+import {CarInfo, CommentInfo} from "../DataTypeList";
 import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import {IApiDataManager} from "./IApiDataManager";
@@ -27,5 +27,10 @@ export class CarApiDataManager implements IApiDataManager<CarInfo>{
     PutData = async (id: number, data: CarInfo): Promise<CarInfo> => {
         const res = await axios.put(`${this.path}/${id}`,data,this.requestHelper.getHeader());
         return res.data as CarInfo
+    }
+
+    GetChildComment = async (carId : number) : Promise<CommentInfo[]> => {
+        const res = await axios.get(`${apiEndPointBase}cars/${carId}/comments`,this.requestHelper.getHeader())
+        return res.data as CommentInfo[];
     }
 }

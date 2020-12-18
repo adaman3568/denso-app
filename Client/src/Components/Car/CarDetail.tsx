@@ -3,35 +3,21 @@ import {RouteComponentProps} from 'react-router-dom'
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
 import CarProfile from "./CarProfile";
-import axios from "axios";
-import {apiEndPointBase} from "../../Firebase";
-import Cookies from "js-cookie";
+import {CarDataContext} from "../../Context/CarDataContext";
 
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
 const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
     const [carData, setCarData] = useState<CarInfo>({} as CarInfo);
     const [comments, setComments] = useState<CommentInfo[]>([]);
+    const {Data,Func} = useContext(CarDataContext);
 
     useEffect(() => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}cars/${props.match.params.id}`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CarInfo;
-                setCarData(d)
-            }
-        );
-
-        axios.get(`${apiEndPointBase}cars/${props.match.params.id}/comments`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CommentInfo[];
-                setComments(d)
-            }
-        );
+        const car = Data.find(item => item.id === parseInt(props.match.params.id));
+        if(car){
+            setCarData(car);
+        };
+        Func.GetChildComments(parseInt(props.match.params.id)).then(res => setComments(res)).catch(err => console.log(err));
     },[])
 
     return (

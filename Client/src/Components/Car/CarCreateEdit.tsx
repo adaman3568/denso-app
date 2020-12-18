@@ -2,12 +2,8 @@ import React, {FC, ReactNode, useContext, useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import {Button, Checkbox, Grid, TextField} from "@material-ui/core";
 import {CarInfo} from "../../Context/DataTypeList";
-import Cookies from "js-cookie";
-import axios from "axios";
-import {apiEndPointBase} from "../../Firebase";
-import {Autocomplete} from "@material-ui/lab";
 import NumberInput from "../Common/Control/NumberInput";
-import {DataContext} from "../../Context/DataContext";
+import {CarDataContext} from "../../Context/CarDataContext";
 
 const useStyle = makeStyles((theme) => ({
     carCreateModalWrapper : {
@@ -39,7 +35,7 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
     const isEdit = car !== undefined;
 
-    const {Car} = useContext(DataContext);
+    const {Func} = useContext(CarDataContext);
 
     const btnEvent = () => {
 
@@ -52,12 +48,24 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
 
     const PostCar = () => {
         const newCar : CarInfo = {carNo : carName ,detail : carDetail, releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
-        Car.Func.PostData(newCar,parentCustomerId ?? 0).then(res => successOpen()).catch(err => failedOpen());
+        try {
+            Func.PostData(newCar,parentCustomerId ?? 0)
+            successOpen()
+        }catch (e){
+            failedOpen();
+        }
+
     };
 
     const PutCar = () => {
         const newCar : CarInfo = {...car,carNo : carName ,detail : carDetail,releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
-        Car.Func.PutData(car?.id ?? 0,newCar).then(res => successOpen()).catch(err => failedOpen());
+        try {
+            Func.PutData(car?.id ?? 0,newCar);
+            successOpen();
+        }catch (e){
+            failedOpen();
+        }
+
     };
 
     return (

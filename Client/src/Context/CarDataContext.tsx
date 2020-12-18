@@ -1,4 +1,4 @@
-import {CarInfo} from "./DataTypeList";
+import {CarInfo, CommentInfo} from "./DataTypeList";
 import {createContext, useEffect, useReducer, useState} from "react";
 import React from "react";
 import CarReducer, {
@@ -15,7 +15,9 @@ type DataContextState = {
             GetData : () => void,
             PostData : (data : CarInfo,parentCustomerId : number) => void,
             PutData : (id : number, data:CarInfo) => void,
-            DeleteData : (id : number) => void}
+            DeleteData : (id : number) => void,
+            GetChildComments : (carId : number) => Promise<CommentInfo[]>;
+    }
 }
 
 export const CarDataContext = createContext<DataContextState>({} as DataContextState);
@@ -64,7 +66,8 @@ export const CarDataContextProvider : React.FC = ({children}) => {
                 GetData : getData,
                 PostData : insertData,
                 PutData : updateData,
-                DeleteData : deleteData
+                DeleteData : deleteData,
+                GetChildComments: new CarApiDataManager().GetChildComment
             }
         }}>
             {children}

@@ -1,11 +1,12 @@
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
-import React, {FC} from "react";
+import React, {FC, useContext, useReducer} from "react";
 import {Button, Grid, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
 import Cookies from "js-cookie";
 import CenteringGridItem from "../Common/CenteringGridItem";
+import {CarDataContext} from "../../Context/CarDataContext";
 
 type props = {
     Car : CarInfo,
@@ -21,17 +22,15 @@ const useStyle = makeStyles((theme) => ({
 
 const CarDelete : FC<props> = ({Car,successOpen,failedOpen}) => {
     const classes = useStyle();
+    const {Func} = useContext(CarDataContext)
 
     const deleteCar = () => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.delete(`${apiEndPointBase}cars/${Car.id}`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                        successOpen();
-                    }).catch(err => {
-                        failedOpen();
-                    });
+        try {
+            Func.DeleteData(Car.id);
+            successOpen();
+        }catch (e){
+            failedOpen();
+        }
     }
 
     return (
