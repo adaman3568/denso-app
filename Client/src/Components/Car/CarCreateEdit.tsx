@@ -51,12 +51,12 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PostCar = () => {
-        const newCar : CarInfo = {carNo : carName ,detail : carDetail, releaseYear : parseInt(releaseYear), maker : maker,carType : carType};
+        const newCar : CarInfo = {carNo : carName ,detail : carDetail, releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
         Car.Func.PostData(newCar,parentCustomerId ?? 0).then(res => successOpen()).catch(err => failedOpen());
     };
 
     const PutCar = () => {
-        const newCar : CarInfo = {...car,carNo : carName ,detail : carDetail,releaseYear : parseInt(releaseYear), maker : maker,carType : carType};
+        const newCar : CarInfo = {...car,carNo : carName ,detail : carDetail,releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
         Car.Func.PutData(car?.id ?? 0,newCar).then(res => successOpen()).catch(err => failedOpen());
     };
 
