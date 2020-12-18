@@ -31,7 +31,7 @@ export type CarActions =
     ReturnType<typeof CarUpdateActionCreator> |
     ReturnType<typeof CarDeleteActionCreator>
 
-const CustomerReducer : React.Reducer<CarInfo[],CarActions> = (status = CarInitialState , action) : CarInfo[] => {
+const CarReducer : React.Reducer<CarInfo[],CarActions> = (status = CarInitialState , action) : CarInfo[] => {
     switch (action.type) {
         case CarReadAllAction:
             return action.payload.data;
@@ -47,6 +47,6 @@ const CustomerReducer : React.Reducer<CarInfo[],CarActions> = (status = CarIniti
     }
 };
 
-export default CustomerReducer;
+export default CarReducer;
 
 
