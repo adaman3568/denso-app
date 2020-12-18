@@ -13,11 +13,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect, RouteComponentProps} from "react-router";
 import {AuthContext} from "../Context/AuthContextProvider";
-import {apiEndPointBase, firebaseAuthPath} from "../Firebase";
-import axios from 'axios';
-import Cookies from "js-cookie";
-import {log} from "util";
-import {DataContext} from "../Context/DataContext";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,12 +40,10 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
     const [mail,setMail] = useState('');
     const {func} = useContext(AuthContext);
     const authContext = useContext(AuthContext);
-    const {dataInit} = useContext(DataContext)
     const SignIn = async () => {
 
             func.SignIn(mail,pass)
                 .then(() => {
-                dataInit();
                 history.push('/')
             }).catch((e) => console.log(e));
     };

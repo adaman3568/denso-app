@@ -19,7 +19,6 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
 import {Container} from "@material-ui/core";
 import ProfileIconButton from "./ChildComponents/ProfileIconButton";
-import {DataContext} from "../../Context/DataContext";
 
 
 function Copyright() {

@@ -1,8 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Grid} from "@material-ui/core";
-import {CommentInfo} from "../../Context/DataTypeList";
 import Tweet from "./Tweet";
-import {DataContext} from "../../Context/DataContext";
 import Loading from "../Common/Loading";
 import {CommentDataContext} from "../../Context/CommentDataContext";
 
