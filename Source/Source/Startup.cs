@@ -63,7 +63,8 @@ namespace Source
             services.AddCors(opt => opt.AddDefaultPolicy(
                 builder =>
                 {
-                    builder.AllowAnyMethod().AllowAnyHeader().WithOrigins(new []{ "http://localhost:3000" });
+                    builder.AllowAnyMethod().AllowAnyHeader().WithOrigins(new []{ "http://localhost:3000", "http://localhost:3000/", "https://localhost:3000", "https://localhost:3000/" });
+                    
                 }));
 
         }
