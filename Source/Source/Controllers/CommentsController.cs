@@ -126,7 +126,7 @@ namespace Source.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetComment",new {id = comment.ID},comment);
         }
 
         // POST: api/Comments
