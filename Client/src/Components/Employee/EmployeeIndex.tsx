@@ -2,14 +2,14 @@ import React, {FC, useContext, useEffect, useState} from 'react';
 import EmployeeItem from "./EmpItem";
 import Title from "../Common/Title";
 import useEditModal from "../../CustomHooks/useEditModal";
-import {CarInfo, EmployeeInfo} from "../../Context/DataTypeList";
+import {EmployeeInfo} from "../../Context/DataTypeList";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {EmpCreate, EmpEdit} from "./EmpCreateEdit";
 import {DeleteEmployee} from "./EmpDelete";
 import {Button} from "@material-ui/core";
 import useInsertModal from "../../CustomHooks/useInsertModal";
-import {DataContext} from "../../Context/DataContext";
 import Loading from "../Common/Loading";
+import {EmpDataContext} from "../../Context/EmpDataContext";
 
 const EmployeeIndex : FC = () => {
 
@@ -17,13 +17,7 @@ const EmployeeIndex : FC = () => {
     const deleteModal = useDeleteModal<EmployeeInfo>(DeleteEmployee);
     const insertModal = useInsertModal(EmpCreate);
 
-    const {Emp,isLoading} = useContext(DataContext)
-
-    const [employees,setEmployees] = useState<EmployeeInfo[]>(Emp.Data);
-
-    useEffect(() => {
-        setEmployees(Emp.Data)
-    },[Emp.Data])
+    const {Data,isLoading} = useContext(EmpDataContext)
 
     if(isLoading)
         return <Loading/>
@@ -32,7 +26,7 @@ const EmployeeIndex : FC = () => {
         <div>
             <Title>This is Emp page.</Title>
             <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>従業員登録</Button>
-            {employees.map((emp,index) => <EmployeeItem key={index} Data={emp} DeleteModalOpen={deleteModal.OpenModal} EditModalOpen={editModal.OpenModal}/>)}
+            {Data.map((emp,index) => <EmployeeItem key={index} Data={emp} DeleteModalOpen={deleteModal.OpenModal} EditModalOpen={editModal.OpenModal}/>)}
             {editModal.Modal()}
             {deleteModal.Modal()}
             {insertModal.Modal()}
