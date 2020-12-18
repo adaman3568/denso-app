@@ -23,7 +23,10 @@ type DataContextState = {
             GetData : () => void,
             PostData : (data : CustomerInfo) => void,
             PutData : (id : number, data:CustomerInfo) => void,
-            DeleteData : (id : number) => void}
+            DeleteData : (id : number) => void,
+            GetChildCars : (customerId : number) => Promise<CarInfo[]>,
+            GetChildComments : (customerId : number) => Promise<CommentInfo[]>
+    }
 }
 
 export const CustomerDataContext = createContext<DataContextState>({} as DataContextState);
@@ -72,7 +75,9 @@ export const CustomerDataContextProvider : React.FC = ({children}) => {
                 GetData : getData,
                 PostData : insertData,
                 PutData : updateData,
-                DeleteData : deleteData
+                DeleteData : deleteData,
+                GetChildComments : new CustomerApiDataManager().GetChildComments,
+                GetChildCars : new CustomerApiDataManager().GetChildCars
             }
         }}>
             {children}
