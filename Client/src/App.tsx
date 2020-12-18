@@ -18,6 +18,8 @@ import {AuthContext} from "./Context/AuthContextProvider";
 import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
 import DataContextProvider from "./Context/DataContext";
+import {CommentDataContextProvider} from "./Context/CommentDataContext";
+import {Simulate} from "react-dom/test-utils";
 
 const theme = createMuiTheme({
     palette :{
@@ -38,10 +40,21 @@ const App : React.FC = () => {
         return <Loading/>
     }
 
-    return (
-        <BrowserRouter>
+    const DataContextWrapper : React.FC = ({children}) => {
+        return (
             <MuiThemeProvider theme={theme}>
                 <DataContextProvider>
+                    <CommentDataContextProvider>
+                        {children}
+                    </CommentDataContextProvider>
+                </DataContextProvider>
+            </MuiThemeProvider>
+        )
+    }
+
+    return (
+        <BrowserRouter>
+            <DataContextWrapper>
                     <Switch>
                         <UserIndexWrapper>
                             <PrivateRoute exact path={PathList.home} component={IndexPage} isLogin={isLogined}/>
@@ -61,8 +74,7 @@ const App : React.FC = () => {
                             <Route exact path={PathList.loginPage} component={SignIn} isLogin={isLogined}/>
                         </UserIndexWrapper>
                     </Switch>
-                </DataContextProvider>
-            </MuiThemeProvider>
+            </DataContextWrapper>
         </BrowserRouter>
     );
 };
