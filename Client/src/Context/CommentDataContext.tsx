@@ -30,6 +30,7 @@ export const CommentDataContextProvider : React.FC = ({children}) => {
 
     // region Valueで渡すメソッド
     const getData = () => {
+        setIsLoading(true)
         new CommentApiDataManager().GetData().then(res => {
             dispatch(CommentsReadActionCreator(res))
             setIsLoading(false)
