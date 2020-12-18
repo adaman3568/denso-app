@@ -20,6 +20,7 @@ import Loading from "./Components/Common/Loading";
 import DataContextProvider from "./Context/DataContext";
 import {CommentDataContextProvider} from "./Context/CommentDataContext";
 import {CustomerDataContextProvider} from "./Context/CustomerDataContext";
+import {CarDataContext, CarDataContextProvider} from "./Context/CarDataContext";
 
 const theme = createMuiTheme({
     palette :{
@@ -46,7 +47,9 @@ const App : React.FC = () => {
                 <DataContextProvider>
                     <CustomerDataContextProvider>
                         <CommentDataContextProvider>
-                            {children}
+                            <CarDataContextProvider>
+                                {children}
+                            </CarDataContextProvider>
                         </CommentDataContextProvider>
                     </CustomerDataContextProvider>
                 </DataContextProvider>
