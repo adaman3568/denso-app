@@ -27,7 +27,6 @@ const CarIndex : FC = () => {
     );
 };
 
-
 export default CarIndex;
 
 export {}

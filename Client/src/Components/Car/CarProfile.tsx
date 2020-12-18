@@ -15,7 +15,6 @@ const useStyle = makeStyles((theme) => ({
     }
 }));
 
-
 const CarProfile : FC<Props> = ({data}) => {
     const classes = useStyle();
 
