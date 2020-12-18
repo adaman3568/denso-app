@@ -19,7 +19,7 @@ import IndexPage from "./Components/Index/IndexPage";
 import Loading from "./Components/Common/Loading";
 import DataContextProvider from "./Context/DataContext";
 import {CommentDataContextProvider} from "./Context/CommentDataContext";
-import {Simulate} from "react-dom/test-utils";
+import {CustomerDataContextProvider} from "./Context/CustomerDataContext";
 
 const theme = createMuiTheme({
     palette :{
@@ -44,9 +44,11 @@ const App : React.FC = () => {
         return (
             <MuiThemeProvider theme={theme}>
                 <DataContextProvider>
-                    <CommentDataContextProvider>
-                        {children}
-                    </CommentDataContextProvider>
+                    <CustomerDataContextProvider>
+                        <CommentDataContextProvider>
+                            {children}
+                        </CommentDataContextProvider>
+                    </CustomerDataContextProvider>
                 </DataContextProvider>
             </MuiThemeProvider>
         )
