@@ -17,12 +17,12 @@ export class CommentApiDataManager implements IApiDataManager<CommentInfo>{
 
     DeleteData = async (id: number): Promise<void> => {
         await axios.delete(`${this.path}/${id}` ,this.requestHelper.getHeader());
-    }
+    };
 
-    PostData = async (data: CommentInfo): Promise<CommentInfo> => {
-        const res = await axios.post(`${this.path}`,data ,this.requestHelper.getHeader());
+    PostData = async (parentCarId : number,data: CommentInfo): Promise<CommentInfo> => {
+        const res = await axios.post(`${this.path}/${parentCarId}`,data ,this.requestHelper.getHeader());
         return res.data as CommentInfo
-    }
+    };
 
     PutData = async (id: number, data: CommentInfo): Promise<CommentInfo> => {
         const res = await axios.put(`${this.path}/${id}`,data ,this.requestHelper.getHeader());

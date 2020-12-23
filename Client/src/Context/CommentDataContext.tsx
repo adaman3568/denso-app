@@ -14,7 +14,7 @@ type DataContextState = {
     Data : CommentInfo[] ,
     Func: {
             GetData : () => void,
-            PostData : (data : CommentInfo) => void,
+            PostData : (parentCarId : number, data : CommentInfo) => void,
             PutData : (id : number, data:CommentInfo) => void,
             DeleteData : (id : number) => void}
 }
@@ -37,9 +37,9 @@ export const CommentDataContextProvider : React.FC = ({children}) => {
         }).catch(err => console.log(err));
     }
 
-    const insertData = (data : CommentInfo) => {
+    const insertData = (parentCarId : number, data : CommentInfo) => {
         new CommentApiDataManager()
-            .PostData(data)
+            .PostData(parentCarId,data)
             .then(res => dispatch(CommentInsertActionCreator(res)))
             .catch(err => console.log(err));
     }

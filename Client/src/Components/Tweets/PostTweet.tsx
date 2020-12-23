@@ -41,7 +41,7 @@ const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
     const postTweet = () => {
         const tweet = {detail : commentBody} as CommentInfo
         try {
-            context.Func.PostData(tweet);
+            context.Func.PostData(selectedCar?.id ?? 0 ,tweet);
             successOpenEvent();
         }catch (err){
             failedOpenEvent();
