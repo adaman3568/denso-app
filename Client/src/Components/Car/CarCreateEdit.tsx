@@ -26,14 +26,23 @@ type props = {
     car? : CarInfo
 }
 
+type carUpsertProps = {
+    carNo : string,
+    detail : string,
+    releaseYear : number,
+    maker : string,
+    carType : string
+}
+
 const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}) => {
     const classes = useStyle();
-    const [carName , setCarName] = useState<string>(car?.carNo ?? '');
-    const [releaseYear , setReleaseYear] = useState<string>(car?.releaseYear.toString() ?? '');
-    const [carType , setCarType] = useState<string>(car?.carType ?? '');
-    const [maker , setMaker] = useState<string>(car?.maker ?? '');
-    const [carDetail , setCarDetail] = useState<string>(car?.detail ?? '');
     const isEdit = car !== undefined;
+    const [carData,setCarData] = useState<carUpsertProps>(
+                    {carNo : car?.carNo ?? ''
+                    ,releaseYear : parseInt(car?.releaseYear.toString() ?? '0')
+                    ,carType : car?.carType ?? ''
+                    ,maker : car?.maker ?? ''
+                    ,detail : car?.detail ?? ''})
 
     const {Func} = useContext(CarDataContext);
 
@@ -47,7 +56,7 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PostCar = () => {
-        const newCar : CarInfo = {carNo : carName ,detail : carDetail, releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
+        const newCar : CarInfo = carData as CarInfo;
         try {
             Func.PostData(newCar,parentCustomerId ?? 0)
             successOpen()
@@ -58,7 +67,7 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PutCar = () => {
-        const newCar : CarInfo = {...car,carNo : carName ,detail : carDetail,releaseYear : parseInt(releaseYear), maker : maker,carType : carType} as CarInfo;
+        const newCar : CarInfo = {...car,...carData} as CarInfo;
         try {
             Func.PutData(car?.id ?? 0,newCar);
             successOpen();
@@ -73,19 +82,19 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
             {!isEdit && <Grid item xs={12} className={classes.addElementWrapper}>
             </Grid>}
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'車両番号'} className={classes.addElement} value={carName} onChange={e => setCarName(e.target.value)}/>
+                <TextField label={'車両番号'} className={classes.addElement} value={carData.carNo} onChange={e => setCarData({...carData,carNo: e.target.value})}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'型式'} className={classes.addElement} value={carType} onChange={e => setCarType(e.target.value)}/>
+                <TextField label={'型式'} className={classes.addElement} value={carData.carType} onChange={e => setCarData({...carData,carType: e.target.value})}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <NumberInput label={'年式'} className={classes.addElement} value={releaseYear} handleChange={setReleaseYear}/>
+                <NumberInput label={'年式'} className={classes.addElement} value={carData.releaseYear.toString()} handleChange={e => setCarData({...carData,releaseYear: parseInt(e.toString())})}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'メーカー'} className={classes.addElement} value={maker} onChange={e => setMaker(e.target.value)}/>
+                <TextField label={'メーカー'} className={classes.addElement} value={carData.maker} onChange={e => setCarData({...carData,maker: e.target.value})}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField multiline rows={3} label={'備考'} className={classes.addElement} value={carDetail} onChange={e => setCarDetail(e.target.value)}/>
+                <TextField multiline rows={3} label={'備考'} className={classes.addElement} value={carData.detail} onChange={e => setCarData({...carData, detail: e.target.value})}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
                 <Button variant={'contained'} color={'primary'} className={classes.addElement} onClick={btnEvent}>登録</Button>
