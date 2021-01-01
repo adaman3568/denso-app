@@ -98,7 +98,7 @@ namespace Source.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(this.GetUser),new []{id},user);
         }
 
         // POST: api/Users

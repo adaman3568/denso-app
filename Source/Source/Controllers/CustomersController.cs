@@ -122,7 +122,7 @@ namespace Source.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(this.GetCustomer),new []{id},customer) ;
         }
 
         // POST: api/Customers
