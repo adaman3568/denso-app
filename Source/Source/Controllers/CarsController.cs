@@ -100,7 +100,7 @@ namespace Source.Controllers
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction("GetCar", new { id }, car);
         }
 
         // POST: api/Cars

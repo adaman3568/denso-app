@@ -11,16 +11,21 @@ import {CarDataContext} from "../../Context/CarDataContext";
 
 const CarIndex : FC = () => {
     const carEditModal = useEditModal<CarInfo>(CarEdit);
-    const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar)
-    const {Data,isLoading} = useContext(CarDataContext)
+    const carDeleteModal = useDeleteModal<CarInfo>(DeleteCar);
+    const {Data,isLoading} = useContext(CarDataContext);
+    const [carList ,setCarList] = useState<CarInfo[]>([]);
+
+    useEffect(() => {
+        setCarList(Data)
+    },[Data]);
 
     if(isLoading)
-        return <Loading/>
+        return <Loading/>;
 
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            {Data.map(car => <CarItem key={car.id} Data={car} DeleteModalOpen={carDeleteModal.OpenModal} EditModalOpen={carEditModal.OpenModal}/>)}
+            {carList.map(car => <CarItem key={car.id} Data={car} DeleteModalOpen={carDeleteModal.OpenModal} EditModalOpen={carEditModal.OpenModal}/>)}
             {carEditModal.Modal()}
             {carDeleteModal.Modal()}
         </div>
