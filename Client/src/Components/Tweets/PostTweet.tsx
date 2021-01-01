@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
 import {CommentDataContext} from "../../Context/CommentDataContext";
+import {CarDataContext} from "../../Context/CarDataContext";
+import {CustomerDataContext} from "../../Context/CustomerDataContext";
 
 const useStyle = makeStyles((theme) => ({
     textBox : {
@@ -37,6 +39,8 @@ const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
     const [commentBody , setCommentBody] = useState<string>('')
 
     const context = useContext(CommentDataContext);
+    const carContext = useContext(CarDataContext);
+    const customerContext = useContext(CustomerDataContext);
 
     const postTweet = () => {
         const tweet = {detail : commentBody} as CommentInfo
@@ -49,51 +53,22 @@ const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
     };
 
     const setCarList = (cus : CustomerInfo | null | undefined) => {
-        let carGetPath = '';
         if(cus){
-            carGetPath = `${apiEndPointBase}customers/${cus.id}/cars`
+            customerContext.Func.GetChildCars(cus.id).then(res => setCars(res)).catch(err => console.log(err));
         }else{
-            carGetPath = `${apiEndPointBase}cars`
+            setCars(carContext.Data);
         }
-
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(carGetPath,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CarInfo[];
-                setCars(d)
-                setSelectedCar(null)
-            }
-        );
     };
 
     useEffect(() => {
-        const token = Cookies.get("denso-app-jwt-token");
-        axios.get(`${apiEndPointBase}cars`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CarInfo[];
-                setCars(d)
-            }
-        );
-
-        axios.get(`${apiEndPointBase}customers`,{headers :
-                {'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                }}).then(res => {
-                const d = res.data as CustomerInfo[];
-                setCustomer(d)
-            }
-        );
+        setCars(carContext.Data);
+        setCustomer(customerContext.Data);
     },[])
 
     return (
         <div>
             <Grid container spacing={2}>
                 <Grid item xs={12}>
-                    {/*Todo この辺で何故か顧客が閉じない*/}
                     <Autocomplete
                         id="tweet-customer-selector"
                         value={selectedCustomer}
@@ -112,8 +87,6 @@ const PostTweetInner : FC<Props> = ({successOpenEvent,failedOpenEvent}) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    {/*Todo この辺で何故か車両が閉じない*/}
-                    {/*Todo 顧客が変更されたら車両も変更されるようにする。*/}
                     <Autocomplete
                         id="tweet-car-selector"
                         options={cars}

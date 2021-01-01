@@ -8,8 +8,9 @@ import AvatarWithName from "./ChildComponents/AvatarWithName";
 import CommentBody from "./ChildComponents/CommentBody";
 import CustomerAndCar from "./ChildComponents/CompanyAndCar";
 import PostDateTime from "./ChildComponents/PostDateTime";
-import CommentIcon from '@material-ui/icons/Comment';
 import RepCommentCnt from "./RepCommentCnt";
+import useInsertRepModal from "../../CustomHooks/useRepInsertModal";
+import PostRepTweet from "./PostRepTweet";
 
 type props = {
     tweet : CommentInfo,
@@ -37,36 +38,35 @@ const useStyles = makeStyles((theme) => ({
         verticalAlign : 'middle',
     },
     NonDecorationLink : {
-        textDecoration : 'none'
+        textDecoration : 'none',
+        color : 'black'
     }})
 );
 
 const Tweet : FC<props> = ({tweet,showAction = true}) => {
     const classes = useStyles();
-
-    console.log(tweet)
+    const modal = useInsertRepModal(PostRepTweet,tweet.id);
 
     return (
-        <Link to={`${PathList.tweetsDetail}/${tweet?.id}`} className={classes.NonDecorationLink}>
+
             <Card className={classes.tweetItem}>
-                <CardActionArea>
-                    <Grid container spacing={3}>
-                        <Grid item xs={1}>
-                            <AvatarWithName name={tweet.parentUserName}/>
-                        </Grid>
-                        <Grid item xs={11}>
-                            <Grid item xs={12}>
-                                <PostDateTime postDate={tweet.created}/>
+                <Link to={`${PathList.tweetsDetail}/${tweet?.id}`} className={classes.NonDecorationLink}>
+                    <CardActionArea>
+                        <Grid container spacing={3}>
+                            <Grid item xs={1}>
+                                <AvatarWithName name={tweet.parentUserName}/>
                             </Grid>
-                            <Grid item xs={12}>
-                                <CommentBody body={tweet?.detail}/>
+                            <Grid item xs={11}>
+                                <Grid item xs={12}>
+                                    <PostDateTime postDate={tweet.created}/>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <CommentBody body={tweet?.detail}/>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </CardActionArea>
-
-
-
+                    </CardActionArea>
+                </Link>
                 <CardActions>
                     <Grid container>
                         <Grid item xs={3}>
@@ -79,15 +79,13 @@ const Tweet : FC<props> = ({tweet,showAction = true}) => {
                                 CarName={tweet.parentCarName}/>
                             }
                         </Grid>
-                        <Grid item xs={9}>
-                            <RepCommentCnt CommentCnt={tweet.repCommentCnt}/>
+                        <Grid item xs={9} onClick={modal.OpenModal}>
+                            <RepCommentCnt CommentCnt={tweet.repCommentCnt} />
                         </Grid>
                     </Grid>
                 </CardActions>
-
+                {modal.Modal()}
             </Card>
-        </Link>
-
     );
 };
 

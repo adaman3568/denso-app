@@ -2,7 +2,7 @@ import {CarInfo, CommentInfo, CustomerInfo, EmployeeInfo} from "./DataTypeList";
 import {createContext, useEffect, useReducer, useState} from "react";
 import CommentReducer, {
     CommentDeleteActionCreator,
-    CommentInsertActionCreator,
+    CommentInsertActionCreator, CommentPostRepActionCreator,
     CommentsReadActionCreator,
     CommentUpdateActionCreator
 } from "../Reducers/CommentReducer";
@@ -16,7 +16,9 @@ type DataContextState = {
             GetData : () => void,
             PostData : (parentCarId : number, data : CommentInfo) => void,
             PutData : (id : number, data:CommentInfo) => void,
-            DeleteData : (id : number) => void}
+            DeleteData : (id : number) => void,
+            PostRep : (id : number,comment : CommentInfo) => void
+    },
 }
 
 export const CommentDataContext = createContext<DataContextState>({} as DataContextState);
@@ -55,6 +57,13 @@ export const CommentDataContextProvider : React.FC = ({children}) => {
             .then(res => dispatch(CommentDeleteActionCreator(id)))
             .catch(err => console.log(err));
     }
+
+    const postRepComment = (parentCommentID : number,comment : CommentInfo) => {
+        new CommentApiDataManager()
+            .PostRepComment(parentCommentID,comment)
+            .then(res => dispatch(CommentPostRepActionCreator(parentCommentID)))
+            .catch(err => console.log(err))
+    }
     // endregion
 
     return (
@@ -65,7 +74,8 @@ export const CommentDataContextProvider : React.FC = ({children}) => {
                 GetData : getData,
                 PostData : insertData,
                 PutData : updateData,
-                DeleteData : deleteData
+                DeleteData : deleteData,
+                PostRep : postRepComment
             }
         }}>
             {children}

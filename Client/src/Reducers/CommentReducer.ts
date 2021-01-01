@@ -7,6 +7,8 @@ const CommentReadAllAction = 'CommentReadAllAction' as const;
 const CommentUpdate = 'CommentUpdateAction' as const;
 const CommentInsert = 'CommentInsertAction' as const;
 const CommentDelete = 'CommentDeleteAction' as const;
+const PostRepComment = 'PostRepComment' as const;
+
 export const CommentsReadActionCreator = (data : CommentInfo[]) => ({
     type : CommentReadAllAction,
     payload : {Data : data},
@@ -27,11 +29,17 @@ export const CommentDeleteActionCreator = (deleteId : number) => ({
     payload : {id : deleteId},
 });
 
+export const CommentPostRepActionCreator = (parentCommentID : number) => ({
+    type : PostRepComment,
+    payload : {parentCommentID : parentCommentID}
+});
+
 export type CommentActions =
     ReturnType<typeof CommentsReadActionCreator> |
     ReturnType<typeof CommentInsertActionCreator> |
     ReturnType<typeof CommentUpdateActionCreator> |
-    ReturnType<typeof CommentDeleteActionCreator>
+    ReturnType<typeof CommentDeleteActionCreator> |
+    ReturnType<typeof CommentPostRepActionCreator>
 
 const CommentReducer : React.Reducer<CommentInfo[],CommentActions> = (status = CommentsInitialState , action : CommentActions) : CommentInfo[] => {
     switch (action.type) {
@@ -44,6 +52,16 @@ const CommentReducer : React.Reducer<CommentInfo[],CommentActions> = (status = C
         case CommentUpdate:
             const filterdItems = status.filter(item => item.id !== action.payload.id);
             return [action.payload.Data,...filterdItems];
+        case PostRepComment:
+            const parentCom = status.find(item => item.id === action.payload.parentCommentID);
+            if(parentCom){
+                const newCom : CommentInfo = {...parentCom, repCommentCnt : parentCom.repCommentCnt + 1}
+                const res = status.filter(item => item.id !== action.payload.parentCommentID);
+                return [newCom,...res]
+            }
+
+            return status;
+
         default:
             return status;
     }

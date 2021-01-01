@@ -3,6 +3,7 @@ import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import {IApiDataManager} from "./IApiDataManager";
 import {ApiRequestHelper} from "./ApiRequestHelper";
+import {dark} from "@material-ui/core/styles/createPalette";
 
 export class CommentApiDataManager implements IApiDataManager<CommentInfo>{
 
@@ -27,5 +28,9 @@ export class CommentApiDataManager implements IApiDataManager<CommentInfo>{
     PutData = async (id: number, data: CommentInfo): Promise<CommentInfo> => {
         const res = await axios.put(`${this.path}/${id}`,data ,this.requestHelper.getHeader());
         return res.data as CommentInfo
+    }
+
+    PostRepComment = async (parentCommentID: number, comment: CommentInfo) : Promise<void> => {
+        await axios.post(`${this.path}/rep/${parentCommentID}`,comment,this.requestHelper.getHeader());
     }
 }
