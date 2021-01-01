@@ -4,6 +4,7 @@ import {Button, Checkbox, Grid, TextField} from "@material-ui/core";
 import {CarInfo} from "../../Context/DataTypeList";
 import NumberInput from "../Common/Control/NumberInput";
 import {CarDataContext} from "../../Context/CarDataContext";
+import {useCarUpsert} from "./useCarUpsert";
 
 const useStyle = makeStyles((theme) => ({
     carCreateModalWrapper : {
@@ -36,14 +37,7 @@ type carUpsertProps = {
 
 const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}) => {
     const classes = useStyle();
-    const isEdit = car !== undefined;
-    const [carData,setCarData] = useState<carUpsertProps>(
-                    {carNo : car?.carNo ?? ''
-                    ,releaseYear : parseInt(car?.releaseYear.toString() ?? '0')
-                    ,carType : car?.carType ?? ''
-                    ,maker : car?.maker ?? ''
-                    ,detail : car?.detail ?? ''})
-
+    const {props,Data,isEdit} = useCarUpsert(car);
     const {Func} = useContext(CarDataContext);
 
     const btnEvent = () => {
@@ -56,9 +50,8 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PostCar = () => {
-        const newCar : CarInfo = carData as CarInfo;
         try {
-            Func.PostData(newCar,parentCustomerId ?? 0)
+            Func.PostData(Data,parentCustomerId ?? 0)
             successOpen()
         }catch (e){
             failedOpen();
@@ -67,9 +60,8 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
     };
 
     const PutCar = () => {
-        const newCar : CarInfo = {...car,...carData} as CarInfo;
         try {
-            Func.PutData(car?.id ?? 0,newCar);
+            Func.PutData(car?.id ?? 0,Data);
             successOpen();
         }catch (e){
             failedOpen();
@@ -82,19 +74,19 @@ const CarCreateEdit : FC<props> = ({successOpen,car,parentCustomerId,failedOpen}
             {!isEdit && <Grid item xs={12} className={classes.addElementWrapper}>
             </Grid>}
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'車両番号'} className={classes.addElement} value={carData.carNo} onChange={e => setCarData({...carData,carNo: e.target.value})}/>
+                <TextField label={'車両番号'} className={classes.addElement} {...props.carName}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'型式'} className={classes.addElement} value={carData.carType} onChange={e => setCarData({...carData,carType: e.target.value})}/>
+                <TextField label={'型式'} className={classes.addElement} {...props.carType}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <NumberInput label={'年式'} className={classes.addElement} value={carData.releaseYear.toString()} handleChange={e => setCarData({...carData,releaseYear: parseInt(e.toString())})}/>
+                <NumberInput label={'年式'} className={classes.addElement} {...props.carReleaseYear}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField label={'メーカー'} className={classes.addElement} value={carData.maker} onChange={e => setCarData({...carData,maker: e.target.value})}/>
+                <TextField label={'メーカー'} className={classes.addElement} {...props.carMaker}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
-                <TextField multiline rows={3} label={'備考'} className={classes.addElement} value={carData.detail} onChange={e => setCarData({...carData, detail: e.target.value})}/>
+                <TextField multiline rows={3} label={'備考'} className={classes.addElement} {...props.carDetail}/>
             </Grid>
             <Grid item xs={12} className={classes.addElementWrapper}>
                 <Button variant={'contained'} color={'primary'} className={classes.addElement} onClick={btnEvent}>登録</Button>
