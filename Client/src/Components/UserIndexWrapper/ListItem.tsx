@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, {FC, ReactNode} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -11,16 +11,20 @@ import {PathList} from "../../Routing/path";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import BusinessIcon from '@material-ui/icons/Business';
 
+type ListItemProps = {
+    isAdmin : boolean
+}
 
-const mainListItems = () => {
+export const MainListItems : FC<ListItemProps> = ({isAdmin}) => {
 
     const classes = myStyles();
 
     return (
         <div>
             <LinkListItem path={PathList.home} name={'ホーム'} Icon={<HomeIcon/>}/>
-            <LinkListItem path={PathList.employee} name={'ユーザー管理'} Icon={<PeopleIcon/>}/>
-            <LinkListItem path={PathList.employee} name={'ユーザー登録'} Icon={<PersonAddIcon/>}/>
+            {/*adminの場合の表示する。*/}
+            {isAdmin && <LinkListItem path={PathList.employeeManage} name={'ユーザー登録'} Icon={<PersonAddIcon/>}/>}
+            <LinkListItem path={PathList.employee} name={'ユーザー一覧'} Icon={<PeopleIcon/>}/>
             <LinkListItem path={PathList.customers} name={'得意先管理・閲覧'} Icon={<BusinessIcon/>}/>
             <LinkListItem path={PathList.cars} name={'車両管理'} Icon={<DirectionsCar/>}/>
         </div>);
@@ -51,5 +55,3 @@ const LinkListItem : React.FC<Props> = (prop: Props) => {
             </ListItem>
         </Link>)
 };
-
-export {mainListItems}

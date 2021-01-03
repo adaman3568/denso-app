@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20201110132446_add-seed3.Designer.cs" />
     <Compile Remove="Migrations\20201211125323_型式、年式、メーカー追加.cs" />
     <Compile Remove="Migrations\20201211125323_型式、年式、メーカー追加.Designer.cs" />
+    <Compile Remove="Migrations\20210103035023_add-role.cs" />
+    <Compile Remove="Migrations\20210103035023_add-role.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

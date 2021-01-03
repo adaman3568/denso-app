@@ -24,6 +24,8 @@ namespace Source.Models
         [JsonIgnore]
         public virtual Company ParentCompany { get; set; }
 
+        public virtual AppRole Role { get; set; }
+
         [JsonIgnore]
         public virtual ICollection<Comment> Comments { get; set; }
 

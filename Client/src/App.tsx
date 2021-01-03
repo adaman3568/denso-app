@@ -21,6 +21,8 @@ import {CommentDataContextProvider} from "./Context/CommentDataContext";
 import {CustomerDataContextProvider} from "./Context/CustomerDataContext";
 import {CarDataContextProvider} from "./Context/CarDataContext";
 import {EmpDataContextProvider} from "./Context/EmpDataContext";
+import AdminRoute from "./Components/Common/Router/AdminRoute";
+import EmployeeManage from "./Components/Employee/EmployeeManage";
 
 const theme = createMuiTheme({
     palette :{
@@ -35,7 +37,7 @@ const theme = createMuiTheme({
 
 const App : React.FC = () => {
 
-    const {initializing,isLogined} = useContext(AuthContext);
+    const {initializing,isLogined,isAdmin} = useContext(AuthContext);
     if(initializing){
         return <Loading/>
     }
@@ -54,7 +56,11 @@ const App : React.FC = () => {
                 </EmpDataContextProvider>
             </MuiThemeProvider>
         )
-    }
+    };
+
+    const EmployeeManageWrapper = () => {
+        return <AdminRoute exact path={PathList.employeeManage} component={EmployeeManage} isAdmin={isAdmin}/>
+    };
 
     return (
         <BrowserRouter>
@@ -65,6 +71,7 @@ const App : React.FC = () => {
                             <PrivateRoute exact path={PathList.profile} component={ProfileIndex} isLogin={isLogined}/>
 
                             <PrivateRoute exact path={PathList.employee} component={EmployeeIndex} isLogin={isLogined}/>
+                            <PrivateRoute exact path={PathList.employeeManage} component={EmployeeManageWrapper} isLogin={isLogined}/>
                             <PrivateRoute exact path={`${PathList.employeeDetail}/:id`} component={EmployeeDetail} isLogin={isLogined}/>
 
                             <PrivateRoute exact path={PathList.cars} component={CarIndex} isLogin={isLogined}/>
@@ -82,6 +89,9 @@ const App : React.FC = () => {
         </BrowserRouter>
     );
 };
+
+
+
 
 export default App;
 

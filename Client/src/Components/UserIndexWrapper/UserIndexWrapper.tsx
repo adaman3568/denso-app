@@ -14,7 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { mainListItems } from './ListItem';
+import {MainListItems} from './ListItem';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {AuthContext} from "../../Context/AuthContextProvider";
 import {Container} from "@material-ui/core";
@@ -123,7 +123,7 @@ const UserIndexWrapper : React.FC = ({children}) => {
         setOpen(false);
     };
 
-    const {isLogined,func} = useContext(AuthContext);
+    const {isLogined,func,isAdmin} = useContext(AuthContext);
 
     // サイドメニュー
     const DrawerMenu = () => {
@@ -141,7 +141,9 @@ const UserIndexWrapper : React.FC = ({children}) => {
                 </IconButton>
             </div>
             <Divider />
-            <List>{mainListItems()}</List>
+            <List>
+                <MainListItems isAdmin={isAdmin}/>
+            </List>
         </Drawer>)
     };
     const HamburgerMenu = () => {

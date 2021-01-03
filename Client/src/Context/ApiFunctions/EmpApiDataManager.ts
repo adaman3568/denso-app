@@ -28,4 +28,9 @@ export class EmpApiDataManager implements IApiDataManager<EmployeeInfo>{
         const res = await axios.put(`${this.path}/${id}`,data ,this.requestHelper.getHeader());
         return res.data as EmployeeInfo
     };
+
+    IsAdminCheck = async () : Promise<boolean> => {
+        const res = await axios.get(`${this.path}/isAdmin`,this.requestHelper.getHeader());
+        return res.data as boolean
+    }
 }

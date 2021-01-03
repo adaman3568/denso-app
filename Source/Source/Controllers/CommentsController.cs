@@ -162,6 +162,7 @@ namespace Source.Controllers
         [HttpPost("rep/{parentComId:int}")]
         public async Task<ActionResult<Comment>> PostRepComment(int parentComId, Comment comment)
         {
+            var loginUser = User.GetUser(_context);
             var parentComment = await _context.Comments.Include(com => com.ParentCar).FirstOrDefaultAsync(com => com.ID == parentComId);
             if (parentComment == null)
             {
@@ -171,6 +172,7 @@ namespace Source.Controllers
             comment.ParentComment = parentComment;
             comment.ParentCar = parentComment.ParentCar;
             comment.Created = DateTime.Now;
+            comment.UserId = loginUser.ID;
 
             await _context.Comments.AddAsync(comment);
             await _context.SaveChangesAsync();

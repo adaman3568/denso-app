@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Source.Extentions;
 using Source.Models;
+using Source.Attribute;
 
 namespace Source.Controllers
 {
@@ -105,6 +106,7 @@ namespace Source.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
+        [Permission(RoleType.Admin)]
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.Users.Add(user);
@@ -127,6 +129,19 @@ namespace Source.Controllers
             await _context.SaveChangesAsync();
 
             return user;
+        }
+
+        [HttpGet("isAdmin")]
+        public async Task<ActionResult<bool>> CheckAdmin()
+        {
+            var loginUser = User.GetUser(_context);
+            var user = await _context.Users.Include(u => u.Role).FirstOrDefaultAsync(u => u.ID == loginUser.ID);
+            if (user != null)
+            {
+                return user.Role.IsAdmin;
+            }
+
+            return false;
         }
 
         private bool UserExists(int id)

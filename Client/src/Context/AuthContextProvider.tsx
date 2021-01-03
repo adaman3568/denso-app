@@ -2,10 +2,12 @@ import React, {createContext, FC, useEffect, useState} from 'react';
 import firebase, {apiEndPointBase, firebaseAuthPath, firebaseRefreshAuthPath} from "../Firebase";
 import axios from 'axios'
 import Cookies from "js-cookie";
+import {EmpApiDataManager} from "./ApiFunctions/EmpApiDataManager";
 
 type AuthContextState = {
     initializing : boolean,
     isLogined : boolean,
+    isAdmin : boolean,
     func : {SignIn : SignInFuncType,SignOut : SignOutFuncType}
 }
 
@@ -20,6 +22,7 @@ const AuthContextProvider : FC = ({children}) => {
         return {
             initializing: true,
             isLogined : false,
+            isAdmin : false
         }
     });
 
@@ -30,8 +33,6 @@ const AuthContextProvider : FC = ({children}) => {
                 "returnSecureToken": "true"},{headers: {
                     'Content-Type': 'application/json'
                 }});
-
-        console.log(res)
         type getDataType = {
             idToken : string
             refreshToken : string
@@ -41,15 +42,17 @@ const AuthContextProvider : FC = ({children}) => {
             const d = res.data as getDataType;
             Cookies.set("denso-app-jwt-token",d.idToken);
             Cookies.set("denso-app-refresh-token",d.refreshToken);
-            setState({initializing: false,isLogined: true});
+            new EmpApiDataManager().IsAdminCheck().then(res => {
+                setState({initializing: false,isLogined: true ,isAdmin: res});
+            });
         }else{
-            setState({initializing: false,isLogined: false});
+            setState({...state,initializing: false,isLogined: false});
         }
     };
 
     const SignOut : SignOutFuncType = async () => {
-        await firebase.auth().signOut()
-        setState({initializing: false,isLogined : false})
+        await firebase.auth().signOut();
+        setState({...state,initializing: false,isLogined : false})
     };
 
     // CookieにAccessTokenを持ってたら有効なトークンか否かを返す。
@@ -64,18 +67,18 @@ const AuthContextProvider : FC = ({children}) => {
                     {'Content-Type' : 'application/json',
                         'Authorization' : `Bearer ${jwtToken}`
                     }}).then(res => {
-                    setState({initializing: false,isLogined: true})
-                    console.log(res)
+                    new EmpApiDataManager().IsAdminCheck().then(res => {
+                        setState({initializing: false,isLogined: true ,isAdmin: res})
+                    });
                     return true;
             }).catch(res => {
-                    setState({initializing: false,isLogined: false})
-                    console.log(res)
+                    setState({...state,initializing: false,isLogined: false});
                     // サーバー側でエラーが返ってきた場合CookieのrefreshTokenを見に行く。
                     return checkRefreshToken();
             })
         }else{
             // 無ければrefreshTokenを取得する。
-            setState({initializing: false,isLogined: false})
+            setState({...state,initializing: false,isLogined: false});
             return false
         }
         return false;
@@ -113,7 +116,7 @@ const AuthContextProvider : FC = ({children}) => {
     },[]);
 
     return (
-        <AuthContext.Provider value={{initializing : state.initializing, isLogined : state.isLogined,func : {SignIn,SignOut}}}>
+        <AuthContext.Provider value={{initializing : state.initializing, isLogined : state.isLogined,isAdmin : state.isAdmin,func : {SignIn,SignOut}}}>
             {children}
         </AuthContext.Provider>
     );
