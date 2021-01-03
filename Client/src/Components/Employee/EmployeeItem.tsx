@@ -5,8 +5,6 @@ import CardTitle from "../Common/CardTitle";
 import LinkCardContent from "../Common/LinkCardContent";
 import {PathList} from "../../Routing/path";
 import {EmployeeInfo} from "../../Context/DataTypeList";
-import DeleteUpdateButton from "../Common/DeleteUpdateButton";
-import {DataItemProps} from "../../PropsList";
 
 const myStyle = makeStyles((theme) => ({
     card : {
@@ -20,8 +18,11 @@ const myStyle = makeStyles((theme) => ({
         padding : theme.spacing(2)
     }
 }));
+type EmployeeItemProps = {
+    Data : EmployeeInfo
+}
 
-const EmployeeItem : FC<DataItemProps<EmployeeInfo>> = ({Data,EditModalOpen,DeleteModalOpen}) => {
+const EmployeeItem : FC<EmployeeItemProps> = ({Data}) => {
 
     const classes = myStyle();
 
@@ -44,7 +45,8 @@ const EmployeeItem : FC<DataItemProps<EmployeeInfo>> = ({Data,EditModalOpen,Dele
                 </Grid>
             </LinkCardContent>
             <CardActions>
-                <DeleteUpdateButton EditAction={() => EditModalOpen(Data)} DeleteAction={() => DeleteModalOpen(Data)}/>
+
+                {/*<DeleteUpdateButton EditAction={() => EditModalOpen(Data)} DeleteAction={() => DeleteModalOpen(Data)}/>*/}
             </CardActions>
         </Card>
 
