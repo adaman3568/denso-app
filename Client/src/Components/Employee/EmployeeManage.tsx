@@ -10,14 +10,9 @@ import useInsertModal from "../../CustomHooks/useInsertModal";
 import Loading from "../Common/Loading";
 import {EmpDataContext} from "../../Context/EmpDataContext";
 import {makeStyles} from "@material-ui/core/styles";
+import CustomTable from "../Common/CustomTable";
 
 const useStyles = makeStyles((theme) => ({
-    tableContainer : {
-        marginTop : theme.spacing(2),
-    },
-    table : {
-        minWidth : 650,
-    },
     button : {
         margin : theme.spacing(1)
     }
@@ -44,8 +39,7 @@ const EmployeeManage : FC = () => {
         <div>
             <Title>This is Emp page.</Title>
             <Button size={'small'} color={"primary"} variant="contained" onClick={insertModal.OpenModal}>従業員登録</Button>
-            <TableContainer className={classes.tableContainer} component={Paper}>
-                <Table className={classes.table} size="small">
+                <CustomTable>
                     <TableHead>
                         <TableRow>
                             <TableCell align="center">登録名</TableCell>
@@ -68,8 +62,7 @@ const EmployeeManage : FC = () => {
                                 </TableCell>
                             </TableRow>)}
                     </TableBody>
-                </Table>
-            </TableContainer>
+                </CustomTable>
             {editModal.Modal()}
             {deleteModal.Modal()}
             {insertModal.Modal()}
