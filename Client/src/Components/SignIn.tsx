@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Redirect, RouteComponentProps} from "react-router";
 import {AuthContext} from "../Context/AuthContextProvider";
+import Loading from "./Common/Loading";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -90,6 +91,7 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
                             control={<Checkbox value="remember" color="primary" />}
                             label="パスワードを保存する"
                         />
+                        {authContext.isError && <Typography component={"p"} variant="body1" >ユーザー名もしくはパスワードが違います。</Typography>}
                         <Button
                             type="button"
                             fullWidth
@@ -114,6 +116,9 @@ const SignIn : React.FC<RouteComponentProps> = ({history}) => {
             </Container>)
         }
     }
+
+    {if(authContext.initializing)
+        return <Loading/>}
 
     return renderItem();
 };
