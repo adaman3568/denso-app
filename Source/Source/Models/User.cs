@@ -15,6 +15,8 @@ namespace Source.Models
         public string uid { get; set; }
         public string Name { get; set; }
 
+        public string ImgSourcePath { get; set; } = "";
+
         public DateTime Created { get; set; }
         public DateTime? Updated { get; set; }
 

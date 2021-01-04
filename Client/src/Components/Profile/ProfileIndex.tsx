@@ -7,14 +7,10 @@ import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
+import noImage from '../../img/noimage.png';
+import ProfileImage from "../Common/ProfileImage";
 
 const myStyle = makeStyles((theme) => ({
-    dummyImg :{
-        height : '150px',
-        width : '150px',
-        borderRadius : '50%',
-        backgroundColor : 'gray'
-    },
     card : {
         padding : theme.spacing(3),
         marginBottom : theme.spacing(5)
@@ -73,7 +69,7 @@ const ProfileIndex : FC = () => {
                       alignItems="center"
                 >
                     <Grid item xs={12} className={classes.flexCenter}>
-                        <div className={classes.dummyImg}>img</div>
+                        <ProfileImage imageSource={profile.imgSourcePath}/>
                     </Grid>
                     <Grid item xs={12}
                           direction="row"

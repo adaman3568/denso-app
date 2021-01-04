@@ -9,7 +9,8 @@ export type EmployeeInfo = {
     parentCompanyId : number
     commentCnt : number,
     lastCommentDate : Date,
-    mail : string
+    mail : string,
+    imgSourcePath : string
 }
 
 export type CommentInfo = {
