@@ -40,10 +40,9 @@ const CarIndex : FC = () => {
                 <TableHead>
                     <TableRow>
                         <TableCell>車両名</TableCell>
-                        <TableCell>初度登録年月</TableCell>
+                        <TableCell>年式</TableCell>
                         <TableCell>型式</TableCell>
                         <TableCell>メーカー</TableCell>
-                        <TableCell>詳細</TableCell>
                         <TableCell>コメント数</TableCell>
                         <TableCell>管理</TableCell>
                     </TableRow>
@@ -55,7 +54,6 @@ const CarIndex : FC = () => {
                             <TableCell>{car.releaseYear}</TableCell>
                             <TableCell>{car.carType}</TableCell>
                             <TableCell>{car.maker}</TableCell>
-                            <TableCell>{car.detail}</TableCell>
                             <TableCell>{car.commentCnt}</TableCell>
                             <TableCell>
                                 <Button className={classes.button} size={'small'} color={"primary"} variant="contained"  onClick={() => carDeleteModal.OpenModal(car)}>削除</Button>
