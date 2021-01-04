@@ -1,5 +1,6 @@
 // EmployeeがTweetsの実態を持っていて、CustomerInfoとCarInfoはリファレンスを持っているイメージ
 export type EmployeeInfo = {
+    [key : string] : string | number | Date
     id : number,
     uid : string,
     name : string,
@@ -12,6 +13,7 @@ export type EmployeeInfo = {
 }
 
 export type CommentInfo = {
+    [key : string] : string | number | Date | undefined
     id: number,
     detail: string,
     created: Date,
@@ -28,6 +30,7 @@ export type CommentInfo = {
 }
 
 export type CustomerInfo = {
+    [key : string] : string | number | Date | undefined
     id : number
     name : string
     detail : string
@@ -40,6 +43,7 @@ export type CustomerInfo = {
 }
 
 export type CarInfo = {
+    [key : string] : string | number | Date | undefined
     id : number
     carNo : string
     detail : string

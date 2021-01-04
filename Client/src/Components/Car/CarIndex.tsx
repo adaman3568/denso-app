@@ -1,6 +1,5 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import Title from "../Common/Title";
-import CarItem from "./CarItem";
 import {CarInfo} from "../../Context/DataTypeList";
 import useEditModal from "../../CustomHooks/useEditModal";
 import {CarEdit} from "./CarCreateEdit";
@@ -8,15 +7,11 @@ import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {DeleteCar} from "./CarDelete";
 import Loading from "../Common/Loading";
 import {CarDataContext} from "../../Context/CarDataContext";
-import CustomTable from "../Common/CustomTable";
-import {Button, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
-
-const useStyle = makeStyles((theme) => ({
-    button : {
-        margin : theme.spacing(1)
-    }
-}));
+import MasterBaseTable, {
+    createColumnInfo,
+    DeleteModalOpenFunctionType,
+    EditModalOpenFunctionType
+} from "../Common/MasterBaseTable";
 
 const CarIndex : FC = () => {
     const carEditModal = useEditModal<CarInfo>(CarEdit);
@@ -24,11 +19,17 @@ const CarIndex : FC = () => {
     const {Data,isLoading} = useContext(CarDataContext);
     const [carList ,setCarList] = useState<CarInfo[]>([]);
 
-    const classes = useStyle();
-
     useEffect(() => {
         setCarList(Data)
     },[Data]);
+
+    const displayColumn = [
+        createColumnInfo('carNo',"車両名"),
+        createColumnInfo('releaseYear',"年式"),
+        createColumnInfo('carType',"型式"),
+        createColumnInfo('maker',"メーカー"),
+        createColumnInfo('commentCnt',"コメント数"),
+    ]
 
     if(isLoading)
         return <Loading/>;
@@ -36,33 +37,11 @@ const CarIndex : FC = () => {
     return (
         <div>
             <Title>This is CarIndex page.</Title>
-            <CustomTable>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>車両名</TableCell>
-                        <TableCell>年式</TableCell>
-                        <TableCell>型式</TableCell>
-                        <TableCell>メーカー</TableCell>
-                        <TableCell>コメント数</TableCell>
-                        <TableCell>管理</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {carList.map((car,index) => (
-                        <TableRow>
-                            <TableCell>{car.carNo}</TableCell>
-                            <TableCell>{car.releaseYear}</TableCell>
-                            <TableCell>{car.carType}</TableCell>
-                            <TableCell>{car.maker}</TableCell>
-                            <TableCell>{car.commentCnt}</TableCell>
-                            <TableCell>
-                                <Button className={classes.button} size={'small'} color={"primary"} variant="contained"  onClick={() => carDeleteModal.OpenModal(car)}>削除</Button>
-                                <Button className={classes.button} size={'small'} color={"primary"} variant="contained"  onClick={() => carEditModal.OpenModal(car)}>編集</Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </CustomTable>
+            <MasterBaseTable
+                ColumnInfoList={displayColumn}
+                Data={carList}
+                OpenModal={carEditModal.OpenModal as EditModalOpenFunctionType}
+                DeleteModal={carDeleteModal.OpenModal as DeleteModalOpenFunctionType}/>
             {carEditModal.Modal()}
             {carDeleteModal.Modal()}
         </div>

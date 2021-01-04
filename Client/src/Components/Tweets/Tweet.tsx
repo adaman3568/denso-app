@@ -3,7 +3,7 @@ import {Card, CardActionArea, CardActions, Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import {PathList} from "../../Routing/path";
-import {CarInfo, CommentInfo, CustomerInfo} from "../../Context/DataTypeList";
+import {CommentInfo} from "../../Context/DataTypeList";
 import AvatarWithName from "./ChildComponents/AvatarWithName";
 import CommentBody from "./ChildComponents/CommentBody";
 import CustomerAndCar from "./ChildComponents/CompanyAndCar";

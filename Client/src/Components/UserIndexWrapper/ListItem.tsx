@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PeopleIcon from '@material-ui/icons/People';
 import HomeIcon from '@material-ui/icons/Home';
-import {DirectionsCar,PermIdentity} from "@material-ui/icons";
+import {DirectionsCar} from "@material-ui/icons";
 import {Link} from "react-router-dom";
 import {makeStyles} from "@material-ui/core/styles";
 import {PathList} from "../../Routing/path";
@@ -16,8 +16,6 @@ type ListItemProps = {
 }
 
 export const MainListItems : FC<ListItemProps> = ({isAdmin}) => {
-
-    const classes = myStyles();
 
     return (
         <div>
