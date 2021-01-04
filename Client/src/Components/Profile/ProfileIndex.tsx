@@ -1,9 +1,9 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {Button, Card, Container, Grid, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Title from "../Common/Title";
 import Cookies from "js-cookie";
-import {apiEndPointBase} from "../../Firebase";
+import firebase, {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
 import Tweet from "../Tweets/Tweet";
@@ -32,6 +32,10 @@ const ProfileIndex : FC = () => {
 
     const [profile,setProfile] = useState<EmployeeInfo>({} as EmployeeInfo);
     const [comments,setComments] = useState<CommentInfo[]>([]);
+    const [isEdit,setIsEdit] = useState<boolean>(false)
+
+    const [imgSrc, setImgSrc] = useState<string>('https://firebasestorage.googleapis.com/v0/b/rst-denso-app.appspot.com/o/9cJIecEfqTUdFdNo0brlUO5x7NF3_profile.jpg?alt=media&token=3b76603a-d69b-4dbb-8372-d1bb6614bc03'); // firebaseの写真のソース
+    const [uploadFile , setUploadFile] = useState<any>(); // firebaseクラウドに入れるデータ
 
     useEffect(() => {
         const jwtToken = Cookies.get("denso-app-jwt-token");
@@ -56,7 +60,36 @@ const ProfileIndex : FC = () => {
             setComments(com);
         });
     },[]);
-    const [isEdit,setIsEdit] = useState<boolean>(false)
+
+    useEffect(() => {
+        // setImgSrc(profile.imgSourcePath)
+    },[])
+
+    const handleChangeFile = (e : ChangeEvent<HTMLInputElement>) => {
+        const target = e.target as HTMLInputElement;
+        const file : File = (target.files as FileList)[0];
+        const item = URL.createObjectURL(file); // 画像の一時的なパス
+        setImgSrc(item); // 画像の一時的なパスを指定して、imgタグで表示する。
+        setUploadFile(file); // uploadするファイルに入れる
+    };
+
+    const sendItem = () => {
+        const ref = firebase.storage().ref();
+        const fileName = GetFileName();
+        const uploadRef = ref.child(fileName);
+        uploadRef.put(uploadFile).then((snapshot) => {
+            snapshot.ref.getDownloadURL()
+                .then((url) => {
+                    setImgSrc(url);
+                    console.log(url)
+                })
+                .catch((err)=>{console.log(err)})
+        })
+    };
+
+    const GetFileName = () => {
+        return `${profile.uid}_profile.jpg`
+    };
 
     return (
         <Container>
@@ -69,7 +102,9 @@ const ProfileIndex : FC = () => {
                       alignItems="center"
                 >
                     <Grid item xs={12} className={classes.flexCenter}>
-                        <ProfileImage imageSource={profile.imgSourcePath}/>
+                        <ProfileImage imageSource={imgSrc}/>
+                        <input type={'file'} accept={'image/*'} onChange={(e) => handleChangeFile(e)}/>
+                        <button type="button" onClick={() => sendItem()}>投稿する</button>
                     </Grid>
                     <Grid item xs={12}
                           direction="row"

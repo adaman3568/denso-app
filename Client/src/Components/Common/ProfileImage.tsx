@@ -18,10 +18,9 @@ const useStyle = makeStyles((theme) => ({
 
 const ProfileImage : FC<ProfileImageProps> = ({imageSource}) => {
     const classes = useStyle();
+    const imgSource = imageSource === "" ? noImage : imageSource;
     return (
-        <>
-            {(imageSource === "" ? <img className={classes.img} src={noImage} alt={"プロフィール画像"}/> : <div className={classes.img}>画像はあります！</div>)}
-        </>
+            <img className={classes.img} src={imgSource} alt={"プロフィール画像"}/>
     );
 };
 
