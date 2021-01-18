@@ -23,6 +23,7 @@ import {CarDataContextProvider} from "./Context/CarDataContext";
 import {EmpDataContextProvider} from "./Context/EmpDataContext";
 import AdminRoute from "./Components/Common/Router/AdminRoute";
 import EmployeeManage from "./Components/Employee/EmployeeManage";
+import DevelopmentPage from "./Components/DevelopmentPage";
 
 const theme = createMuiTheme({
     palette :{
@@ -82,6 +83,7 @@ const App : React.FC = () => {
 
                             <PrivateRoute exact path={`${PathList.tweetsDetail}/:id`} component={TweetsDetail} isLogin={isLogined}/>
 
+                            <Route exact path={PathList.devPage} component={DevelopmentPage}/>
                             <Route exact path={PathList.loginPage} component={SignIn} isLogin={isLogined}/>
                         </UserIndexWrapper>
                     </Switch>

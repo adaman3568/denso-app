@@ -17,6 +17,10 @@ const useStyle = makeStyles((theme) => ({
     },
     addElement : {
         width : '80%'
+    },
+    el : {
+        width : '90%',
+        display : 'flex'
     }
 }));
 

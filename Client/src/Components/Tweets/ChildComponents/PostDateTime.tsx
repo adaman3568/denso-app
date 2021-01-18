@@ -1,12 +1,20 @@
 import React, {FC} from 'react';
 import {Typography} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
 
 type Props = {
     postDate : Date
 }
 
+const useStyle = makeStyles((theme) => ({
+    postDate : {
+            color : '#808080'
+        }
+}))
+
 const PostDateTime : FC<Props> = ({postDate}) => {
 
+    const classes = useStyle();
 
     const renderValue = () : string => {
         if(postDate){
@@ -23,17 +31,14 @@ const PostDateTime : FC<Props> = ({postDate}) => {
             if(res < lowerOneDay) return `${parseInt((res/3600).toString())}時間前`;
             if(res < lowerTwoDays) return `${parseInt((res/86400).toString())}日前`;
 
-            return `投稿日時 : ${date.toLocaleString("ja")}`;
+            return `${date.toLocaleString("ja")}`;
         }else{
-            return `投稿日時　：　Null`
+            return `Null`
         }
     };
 
-
-
-
     return (
-            <Typography>{renderValue()}</Typography>
+            <Typography className={classes.postDate}>{renderValue()}</Typography>
     );
 };
 

@@ -25,7 +25,6 @@ const AvatarWithName : FC<props> = ({name}) => {
     return (
         <div>
             <Avatar className={classes.avatarImg}>{name.slice(0,1)}</Avatar>
-            <Typography className={classes.userName}>{name}</Typography>
         </div>
     );
 };

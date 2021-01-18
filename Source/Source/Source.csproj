@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20201211125323_型式、年式、メーカー追加.Designer.cs" />
     <Compile Remove="Migrations\20210103035023_add-role.cs" />
     <Compile Remove="Migrations\20210103035023_add-role.Designer.cs" />
+    <Compile Remove="Views\**" />
+    <Compile Remove="Models\ScaTest.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +38,26 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Sca\Create.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Sca\Delete.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Sca\Details.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Sca\Edit.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Sca\Index.cshtml" />
   </ItemGroup>
 
 

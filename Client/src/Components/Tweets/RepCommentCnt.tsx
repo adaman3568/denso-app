@@ -25,7 +25,7 @@ const RepCommentCnt : FC<Props> = ({CommentCnt}) => {
 
     return (
         <div className={classes.repCommentCnt}>
-            <CommentIcon color={'primary'} fontSize={'large'}/>
+            <CommentIcon color={'primary'} fontSize={'default'}/>
             <Typography>{CommentCnt}</Typography>
         </div>
     )
