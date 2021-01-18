@@ -1,12 +1,11 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from "react-router-dom";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
-import Tweet from "../Tweets/Tweet";
-import {Grid} from "@material-ui/core";
 import EmpProfile from "./EmpProfile";
 import Cookies from "js-cookie";
 import axios from "axios";
 import {apiEndPointBase} from "../../Firebase";
+import CommentItem from "../Tweets/V2/Comments";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -40,7 +39,7 @@ const EmployeeDetail : FC<pageProps> = ({match}) => {
     return (
         <div>
             <EmpProfile data={emp}/>
-            {comments.map((d,index) => <Tweet key={index} tweet={d}/>)}
+            {comments.map((d,index) => <CommentItem key={index} Comment={d}/>)}
         </div>
     );
 };

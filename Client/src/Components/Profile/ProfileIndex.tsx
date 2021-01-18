@@ -6,9 +6,9 @@ import Cookies from "js-cookie";
 import firebase, {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
 import {CommentInfo, EmployeeInfo} from "../../Context/DataTypeList";
-import Tweet from "../Tweets/Tweet";
 import noImage from '../../img/noimage.png';
 import ProfileImage from "../Common/ProfileImage";
+import CommentItem from "../Tweets/V2/Comments";
 
 const myStyle = makeStyles((theme) => ({
     card : {
@@ -136,7 +136,7 @@ const ProfileIndex : FC = () => {
                     </Grid>
                 </Grid>
             </Card>
-            {comments.map(com => <Tweet tweet={com}/>)}
+            {comments.map((com,index) => <CommentItem key={index} Comment={com}/>)}
         </Container>
     );
 };

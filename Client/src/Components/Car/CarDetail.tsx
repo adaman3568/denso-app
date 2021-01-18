@@ -1,9 +1,9 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {RouteComponentProps} from 'react-router-dom'
 import {CarInfo, CommentInfo} from "../../Context/DataTypeList";
-import Tweet from "../Tweets/Tweet";
 import CarProfile from "./CarProfile";
 import {CarDataContext} from "../../Context/CarDataContext";
+import CommentItem from "../Tweets/V2/Comments";
 
 type CarPageProps = {} & RouteComponentProps<{id : string}>
 
@@ -23,7 +23,7 @@ const CarDetail : FC<CarPageProps> = (props : CarPageProps) => {
     return (
         <div>
             <CarProfile data={carData}/>
-            {comments.map((item,index) => <Tweet key={index} tweet={item}/>)}
+            {comments.map((item,index) => <CommentItem key={index} Comment={item}/>)}
         </div>
     );
 };

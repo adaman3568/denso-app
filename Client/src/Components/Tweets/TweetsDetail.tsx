@@ -6,9 +6,8 @@ import {useComment} from "../../CustomHooks/useComment";
 import Cookies from "js-cookie";
 import {apiEndPointBase} from "../../Firebase";
 import axios from "axios";
-import Tweet from "./Tweet";
 import {makeStyles} from "@material-ui/core/styles";
-import {CommentDataContext} from "../../Context/CommentDataContext";
+import CommentItem from "./V2/Comments";
 
 type pageProps = {} & RouteComponentProps<{id : string}>
 
@@ -18,8 +17,8 @@ const TweetsDetail : FC<pageProps> = ({match}) => {
     if (comment){
         return (
             <>
-            <Tweet tweet={comment}/>
-            <RepComment Comment={comment}/>
+                <CommentItem Comment={comment}/>
+                <RepComment Comment={comment}/>
             </>
         )
     }else{
@@ -57,7 +56,7 @@ const RepComment : FC<Props> = ({Comment}) => {
 
     return (
             <div className={classes.repCommentWrapper}>
-                {repComments.map((item,index) => <Tweet key={index} tweet={item} showAction={false}/>)}
+                {repComments.map((item,index) => <CommentItem key={index} Comment={item}/>)}
             </div>
     )};
 

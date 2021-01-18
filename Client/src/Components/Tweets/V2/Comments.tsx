@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const Comments : React.FC<CommentsProps> = ({Comment,className}) => {
+const CommentItem : React.FC<CommentsProps> = ({Comment,className}) => {
     const classes = useStyles();
 
     return (
@@ -160,4 +160,4 @@ const Comments : React.FC<CommentsProps> = ({Comment,className}) => {
     );
 };
 
-export default Comments;
+export default CommentItem;

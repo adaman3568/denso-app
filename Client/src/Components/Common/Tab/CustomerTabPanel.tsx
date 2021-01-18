@@ -1,9 +1,9 @@
 import React, {FC, useContext, useEffect, useState} from 'react';
 import {CommentInfo, CustomerInfo} from "../../../Context/DataTypeList";
 import TabPanel from "./TabPanel";
-import Tweet from "../../Tweets/Tweet";
 import {Grid, TextField, Typography} from "@material-ui/core";
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import CommentItem from "../../Tweets/V2/Comments";
 
 type Props = {
     customer : CustomerInfo,
@@ -35,7 +35,7 @@ const CustomerTabPanel : FC<Props> = ({customer,index}) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    {tweets.map((item,index) => <Tweet key={index} tweet={item}/>)}
+                    {tweets.map((item,index) => <CommentItem key={index} Comment={item}/>)}
                 </Grid>
             </Grid>
         </TabPanel>

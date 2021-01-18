@@ -10,13 +10,13 @@ import {
     Typography
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
-import Tweet from "../Tweets/Tweet";
 import {CarCreate, CarEdit} from "../Car/CarCreateEdit";
 import useEditModal from "../../CustomHooks/useEditModal";
 import useDeleteModal from "../../CustomHooks/useDeleteModal";
 import {DeleteCar} from "../Car/CarDelete";
 import useCarInsertModal from "../../CustomHooks/useCarInsertModal";
 import {CustomerDataContext} from "../../Context/CustomerDataContext";
+import CommentItem from "../Tweets/V2/Comments";
 
 
 type pageProps = {} & RouteComponentProps<
@@ -170,7 +170,7 @@ const NavTabs : FC<Props> = ({displayCars,displayComments}) => {
                 {carDeleteModal.Modal()}
             </TabPanel1>
             <TabPanel1 value={value} index={1}>
-                {displayComments.map((item,index) => <Tweet key={index} tweet={item}/>)}
+                {displayComments.map((item,index) => <CommentItem key={index} Comment={item}/>)}
             </TabPanel1>
         </div>
     );
