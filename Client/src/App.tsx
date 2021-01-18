@@ -24,6 +24,7 @@ import {EmpDataContextProvider} from "./Context/EmpDataContext";
 import AdminRoute from "./Components/Common/Router/AdminRoute";
 import EmployeeManage from "./Components/Employee/EmployeeManage";
 import DevelopmentPage from "./Components/DevelopmentPage";
+import {ProfileContextProvider} from "./Context/ProfileDataContext";
 
 const theme = createMuiTheme({
     palette :{
@@ -50,7 +51,9 @@ const App : React.FC = () => {
                     <CustomerDataContextProvider>
                         <CommentDataContextProvider>
                             <CarDataContextProvider>
-                                {children}
+                                <ProfileContextProvider>
+                                    {children}
+                                </ProfileContextProvider>
                             </CarDataContextProvider>
                         </CommentDataContextProvider>
                     </CustomerDataContextProvider>
