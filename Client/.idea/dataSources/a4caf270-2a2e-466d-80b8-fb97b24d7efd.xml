@@ -1,0 +1,783 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Microsoft SQL Server - denso-system@localhost">
+  <database-model serializer="dbm" dbms="MSSQL" family-id="MSSQL" format-version="4.20">
+    <root id="1">
+      <ServerVersion>14.0.1000</ServerVersion>
+      <PermissionsCheckSum>45586761308</PermissionsCheckSum>
+      <Grants>0|root||1|connect sql|G
+0|root||2|view any database|G
+0|root||101|view any definition|G
+0|root||102|authenticate server|G
+0|root||102|view any definition|G
+0|root||102|view server state|G
+0|root||103|authenticate server|G
+0|root||105|control server|G
+0|root||105|view any definition|G
+0|root||106|view any definition|G
+0|root||256|connect sql|G
+0|root||257|connect sql|G
+0|root||257|view any definition|G
+0|root||257|view server state|G
+0|root||258|connect sql|G
+0|root||259|connect sql|G
+0|root||260|connect sql|G
+0|root||261|connect sql|G
+0|root||262|connect sql|G
+0|root||263|connect sql|G
+0|root||264|alter any availability group|G
+0|root||264|connect sql|G
+0|root||264|view server state|G
+0|root||265|alter any event session|G
+0|root||265|connect any database|G
+0|root||265|connect sql|G
+0|root||265|view any definition|G
+0|root||265|view server state|G
+0|root||266|connect sql|G
+2|||2|connect|G
+3|||2|connect|G
+4|||2|connect|G
+5|||2|connect|G
+</Grants>
+    </root>
+    <database id="2" parent="1" name="denso-system">
+      <ObjectId>6</ObjectId>
+      <PermissionsCheckSum>4255254626</PermissionsCheckSum>
+      <Grants>6|database||0|view any column encryption key definition|G
+6|database||0|view any column master key definition|G
+6|database||1|connect|G
+6|database||5|connect|G
+</Grants>
+      <Current>1</Current>
+      <Collation>Japanese_CI_AS</Collation>
+      <Fingerprint>6.44141/4B2F9647-1493-49B0-B64C-4C0FAB5AE0C6@DESKTOP-B9V2BO1\SQLEXPRESS</Fingerprint>
+    </database>
+    <database id="3" parent="1" name="master">
+      <ObjectId>1</ObjectId>
+      <Collation>Japanese_CI_AS</Collation>
+    </database>
+    <database id="4" parent="1" name="model">
+      <ObjectId>3</ObjectId>
+      <Collation>Japanese_CI_AS</Collation>
+    </database>
+    <database id="5" parent="1" name="msdb">
+      <ObjectId>4</ObjectId>
+      <Collation>Japanese_CI_AS</Collation>
+    </database>
+    <database id="6" parent="1" name="tempdb">
+      <ObjectId>2</ObjectId>
+      <Collation>Japanese_CI_AS</Collation>
+    </database>
+    <login id="7" parent="1" name="sa">
+      <ObjectId>1</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="8" parent="1" name="public">
+      <ObjectId>2</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="9" parent="1" name="sysadmin">
+      <ObjectId>3</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="10" parent="1" name="securityadmin">
+      <ObjectId>4</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="11" parent="1" name="serveradmin">
+      <ObjectId>5</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="12" parent="1" name="setupadmin">
+      <ObjectId>6</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="13" parent="1" name="processadmin">
+      <ObjectId>7</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="14" parent="1" name="diskadmin">
+      <ObjectId>8</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="15" parent="1" name="dbcreator">
+      <ObjectId>9</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="16" parent="1" name="bulkadmin">
+      <ObjectId>10</ObjectId>
+      <Type>server-role</Type>
+      <Enabled>1</Enabled>
+    </login>
+    <login id="17" parent="1" name="##MS_SQLResourceSigningCertificate##">
+      <ObjectId>101</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="18" parent="1" name="##MS_SQLReplicationSigningCertificate##">
+      <ObjectId>102</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="19" parent="1" name="##MS_SQLAuthenticatorCertificate##">
+      <ObjectId>103</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="20" parent="1" name="##MS_PolicySigningCertificate##">
+      <ObjectId>105</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="21" parent="1" name="##MS_SmoExtendedSigningCertificate##">
+      <ObjectId>106</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="22" parent="1" name="##MS_PolicyEventProcessingLogin##">
+      <ObjectId>256</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="23" parent="1" name="##MS_PolicyTsqlExecutionLogin##">
+      <ObjectId>257</ObjectId>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="24" parent="1" name="##MS_AgentSigningCertificate##">
+      <ObjectId>258</ObjectId>
+      <Type>certificate-mapped-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="25" parent="1" name="DESKTOP-B9V2BO1\Hiroshi">
+      <ObjectId>259</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="26" parent="1" name="NT SERVICE\SQLWriter">
+      <ObjectId>260</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="27" parent="1" name="NT SERVICE\Winmgmt">
+      <ObjectId>261</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="28" parent="1" name="NT Service\MSSQL$SQLEXPRESS">
+      <ObjectId>262</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="29" parent="1" name="BUILTIN\Users">
+      <ObjectId>263</ObjectId>
+      <Type>windows-group</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="30" parent="1" name="NT AUTHORITY\SYSTEM">
+      <ObjectId>264</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="31" parent="1" name="NT SERVICE\SQLTELEMETRY$SQLEXPRESS">
+      <ObjectId>265</ObjectId>
+      <Type>windows-login</Type>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <login id="32" parent="1" name="admin">
+      <ObjectId>266</ObjectId>
+      <Enabled>1</Enabled>
+      <DefaultDatabase>master</DefaultDatabase>
+    </login>
+    <schema id="33" parent="2" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+    </schema>
+    <schema id="34" parent="2" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+    </schema>
+    <schema id="35" parent="2" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+    </schema>
+    <schema id="36" parent="2" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+    </schema>
+    <schema id="37" parent="2" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+    </schema>
+    <schema id="38" parent="2" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+    </schema>
+    <schema id="39" parent="2" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+    </schema>
+    <schema id="40" parent="2" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+    </schema>
+    <schema id="41" parent="2" name="db_owner">
+      <ObjectId>16384</ObjectId>
+    </schema>
+    <schema id="42" parent="2" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+    </schema>
+    <schema id="43" parent="2" name="dbo">
+      <ObjectId>1</ObjectId>
+      <IntrospectionTimestamp>2021-01-06.06:59:33.533</IntrospectionTimestamp>
+      <Current>1</Current>
+    </schema>
+    <schema id="44" parent="2" name="guest">
+      <ObjectId>2</ObjectId>
+    </schema>
+    <schema id="45" parent="2" name="sys">
+      <ObjectId>4</ObjectId>
+    </schema>
+    <role id="46" parent="2" name="public">
+      <ObjectId>0</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="47" parent="2" name="dbo">
+      <ObjectId>1</ObjectId>
+      <DefaultSchema>dbo</DefaultSchema>
+      <AuthType>instance</AuthType>
+    </role>
+    <role id="48" parent="2" name="guest">
+      <ObjectId>2</ObjectId>
+      <DefaultSchema>guest</DefaultSchema>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="49" parent="2" name="INFORMATION_SCHEMA">
+      <ObjectId>3</ObjectId>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="50" parent="2" name="sys">
+      <ObjectId>4</ObjectId>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="51" parent="2" name="admin">
+      <ObjectId>5</ObjectId>
+      <DefaultSchema>dbo</DefaultSchema>
+      <AuthType>instance</AuthType>
+    </role>
+    <role id="52" parent="2" name="db_owner">
+      <ObjectId>16384</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="53" parent="2" name="db_accessadmin">
+      <ObjectId>16385</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="54" parent="2" name="db_securityadmin">
+      <ObjectId>16386</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="55" parent="2" name="db_ddladmin">
+      <ObjectId>16387</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="56" parent="2" name="db_backupoperator">
+      <ObjectId>16389</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="57" parent="2" name="db_datareader">
+      <ObjectId>16390</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="58" parent="2" name="db_datawriter">
+      <ObjectId>16391</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="59" parent="2" name="db_denydatareader">
+      <ObjectId>16392</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <role id="60" parent="2" name="db_denydatawriter">
+      <ObjectId>16393</ObjectId>
+      <OwnerId>1</OwnerId>
+      <Type>database-role</Type>
+      <AuthType>none</AuthType>
+    </role>
+    <table id="61" parent="43" name="Cars">
+      <ObjectId>933578364</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:46:11.720</CreatedTimestamp>
+      <ModifiedTimestamp>2020-12-12.06:54:32.630</ModifiedTimestamp>
+    </table>
+    <table id="62" parent="43" name="Comments">
+      <ObjectId>997578592</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.527</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-15.04:17:19.167</ModifiedTimestamp>
+    </table>
+    <table id="63" parent="43" name="Companies">
+      <ObjectId>1061578820</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.530</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-15.04:17:19.153</ModifiedTimestamp>
+    </table>
+    <table id="64" parent="43" name="Customers">
+      <ObjectId>1093578934</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.530</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-15.04:17:19.113</ModifiedTimestamp>
+    </table>
+    <table id="65" parent="43" name="Roles">
+      <ObjectId>66099276</ObjectId>
+      <CreatedTimestamp>2021-01-03.21:52:29.587</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-03.22:19:15.823</ModifiedTimestamp>
+    </table>
+    <table id="66" parent="43" name="Users">
+      <ObjectId>1141579105</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.533</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-05.07:43:58.510</ModifiedTimestamp>
+    </table>
+    <table id="67" parent="43" name="__EFMigrationsHistory">
+      <ObjectId>901578250</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:46:11.687</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:46:11.687</ModifiedTimestamp>
+    </table>
+    <column id="68" parent="61" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="69" parent="61" name="CarNo">
+      <Position>2</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="70" parent="61" name="Detail">
+      <Position>3</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="71" parent="61" name="Created">
+      <Position>4</Position>
+      <DefaultConstraintName>DF__Cars__Created__398D8EEE</DefaultConstraintName>
+      <DefaultExpression>&apos;0001-01-01T00:00:00.0000000&apos;</DefaultExpression>
+      <DataType>datetime2|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="72" parent="61" name="ParentCustomerId">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="73" parent="61" name="Updated">
+      <Position>6</Position>
+      <DataType>datetime2|0s</DataType>
+    </column>
+    <column id="74" parent="61" name="CarType">
+      <Position>7</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="75" parent="61" name="Maker">
+      <Position>8</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="76" parent="61" name="ReleaseYear">
+      <Position>9</Position>
+      <DefaultConstraintName>DF__Cars__ReleaseYea__6E01572D</DefaultConstraintName>
+      <DefaultExpression>0</DefaultExpression>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="77" parent="61" name="PK_Cars">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <index id="78" parent="61" name="IX_Cars_ParentCustomerId">
+      <Position>2</Position>
+      <ColNames>ParentCustomerId</ColNames>
+    </index>
+    <key id="79" parent="61" name="PK_Cars">
+      <ObjectId>949578421</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:46:11.723</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:46:11.723</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Cars</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="80" parent="61" name="FK_Cars_Customers_ParentCustomerId">
+      <ObjectId>1253579504</ObjectId>
+      <CreatedTimestamp>2020-11-11.06:52:59.297</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.06:52:59.297</ModifiedTimestamp>
+      <ColNames>ParentCustomerId</ColNames>
+      <RefTableId>1093578934</RefTableId>
+      <RefTableName>Customers</RefTableName>
+      <RefKeyName>PK_Customers</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <default id="81" parent="61" name="DF__Cars__Created__398D8EEE">
+      <ObjectId>965578478</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2020-11-08.08:55:05.520</ModifiedTimestamp>
+      <ColNames>Created</ColNames>
+      <DefaultExpression>&apos;0001-01-01T00:00:00.0000000&apos;</DefaultExpression>
+    </default>
+    <default id="82" parent="61" name="DF__Cars__ReleaseYea__6E01572D">
+      <ObjectId>1845581613</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2020-12-12.06:54:32.630</ModifiedTimestamp>
+      <ColNames>ReleaseYear</ColNames>
+      <DefaultExpression>0</DefaultExpression>
+    </default>
+    <column id="83" parent="62" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="84" parent="62" name="Detail">
+      <Position>2</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="85" parent="62" name="Created">
+      <Position>3</Position>
+      <DataType>datetime2|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="86" parent="62" name="Updated">
+      <Position>4</Position>
+      <DataType>datetime2|0s</DataType>
+    </column>
+    <column id="87" parent="62" name="ParentCarId">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="88" parent="62" name="ParentCommentId">
+      <Position>6</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="89" parent="62" name="UserId">
+      <Position>7</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <index id="90" parent="62" name="PK_Comments">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <index id="91" parent="62" name="IX_Comments_ParentCarId">
+      <Position>2</Position>
+      <ColNames>ParentCarId</ColNames>
+    </index>
+    <index id="92" parent="62" name="IX_Comments_ParentCommentId">
+      <Position>3</Position>
+      <ColNames>ParentCommentId</ColNames>
+    </index>
+    <index id="93" parent="62" name="IX_Comments_UserId">
+      <Position>4</Position>
+      <ColNames>UserId</ColNames>
+    </index>
+    <key id="94" parent="62" name="PK_Comments">
+      <ObjectId>1013578649</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.527</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:55:05.527</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Comments</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="95" parent="62" name="FK_Comments_Cars_ParentCarId">
+      <ObjectId>1349579846</ObjectId>
+      <CreatedTimestamp>2020-11-11.07:26:40.290</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.07:26:40.290</ModifiedTimestamp>
+      <ColNames>ParentCarId</ColNames>
+      <RefTableId>933578364</RefTableId>
+      <RefTableName>Cars</RefTableName>
+      <RefKeyName>PK_Cars</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="96" parent="62" name="FK_Comments_Comments_ParentCommentId">
+      <ObjectId>1365579903</ObjectId>
+      <CreatedTimestamp>2020-11-11.07:26:40.293</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.07:26:40.293</ModifiedTimestamp>
+      <ColNames>ParentCommentId</ColNames>
+      <RefTableId>997578592</RefTableId>
+      <RefTableName>Comments</RefTableName>
+      <RefKeyName>PK_Comments</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <foreign-key id="97" parent="62" name="FK_Comments_Users_UserId">
+      <ObjectId>1381579960</ObjectId>
+      <CreatedTimestamp>2020-11-11.07:26:40.297</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.07:26:40.297</ModifiedTimestamp>
+      <ColNames>UserId</ColNames>
+      <RefTableId>1141579105</RefTableId>
+      <RefTableName>Users</RefTableName>
+      <RefKeyName>PK_Users</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <column id="98" parent="63" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="99" parent="63" name="AccountCode">
+      <Position>2</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="100" parent="63" name="Name">
+      <Position>3</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="101" parent="63" name="Created">
+      <Position>4</Position>
+      <DataType>datetime2|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="102" parent="63" name="Updated">
+      <Position>5</Position>
+      <DataType>datetime2|0s</DataType>
+    </column>
+    <index id="103" parent="63" name="PK_Companies">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="104" parent="63" name="PK_Companies">
+      <ObjectId>1077578877</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.530</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:55:05.530</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Companies</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="105" parent="64" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="64" name="Name">
+      <Position>2</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="107" parent="64" name="Detail">
+      <Position>3</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="108" parent="64" name="Created">
+      <Position>4</Position>
+      <DataType>datetime2|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="109" parent="64" name="ParentCompanyId">
+      <Position>5</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="110" parent="64" name="Address">
+      <Position>6</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="111" parent="64" name="Updated">
+      <Position>7</Position>
+      <DataType>datetime2|0s</DataType>
+    </column>
+    <index id="112" parent="64" name="PK_Customers">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <index id="113" parent="64" name="IX_Customers_ParentCompanyId">
+      <Position>2</Position>
+      <ColNames>ParentCompanyId</ColNames>
+    </index>
+    <key id="114" parent="64" name="PK_Customers">
+      <ObjectId>1109578991</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.530</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:55:05.530</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Customers</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="115" parent="64" name="FK_Customers_Companies_ParentCompanyId">
+      <ObjectId>1285579618</ObjectId>
+      <CreatedTimestamp>2020-11-11.06:52:59.297</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.06:52:59.297</ModifiedTimestamp>
+      <ColNames>ParentCompanyId</ColNames>
+      <RefTableId>1061578820</RefTableId>
+      <RefTableName>Companies</RefTableName>
+      <RefKeyName>PK_Companies</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="116" parent="65" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="117" parent="65" name="RoleType">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="118" parent="65" name="PK_Roles">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="119" parent="65" name="PK_Roles">
+      <ObjectId>114099447</ObjectId>
+      <CreatedTimestamp>2021-01-03.22:19:15.817</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-03.22:19:15.817</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Roles</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <column id="120" parent="66" name="ID">
+      <Position>1</Position>
+      <SequenceIdentity>1</SequenceIdentity>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="66" name="Name">
+      <Position>3</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="122" parent="66" name="ParentCompanyId">
+      <Position>4</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="123" parent="66" name="Created">
+      <Position>5</Position>
+      <DefaultConstraintName>DF__Users__Created__5AEE82B9</DefaultConstraintName>
+      <DefaultExpression>&apos;0001-01-01T00:00:00.0000000&apos;</DefaultExpression>
+      <DataType>datetime2|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="124" parent="66" name="Updated">
+      <Position>6</Position>
+      <DataType>datetime2|0s</DataType>
+    </column>
+    <column id="125" parent="66" name="uid">
+      <Position>7</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <column id="126" parent="66" name="RoleID">
+      <Position>8</Position>
+      <DataType>int|0s</DataType>
+    </column>
+    <column id="127" parent="66" name="ImgSourcePath">
+      <Position>9</Position>
+      <DataType>nvarchar(max)|0s</DataType>
+    </column>
+    <index id="128" parent="66" name="PK_Users">
+      <Position>1</Position>
+      <ColNames>ID</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <index id="129" parent="66" name="IX_Users_ParentCompanyId">
+      <Position>2</Position>
+      <ColNames>ParentCompanyId</ColNames>
+    </index>
+    <index id="130" parent="66" name="IX_Users_RoleID">
+      <Position>4</Position>
+      <ColNames>RoleID</ColNames>
+    </index>
+    <key id="131" parent="66" name="PK_Users">
+      <ObjectId>1157579162</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:55:05.533</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:55:05.533</ModifiedTimestamp>
+      <ColNames>ID</ColNames>
+      <UnderlyingIndexName>PK_Users</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="132" parent="66" name="FK_Users_Companies_ParentCompanyId">
+      <ObjectId>1301579675</ObjectId>
+      <CreatedTimestamp>2020-11-11.06:52:59.297</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-11.06:52:59.297</ModifiedTimestamp>
+      <ColNames>ParentCompanyId</ColNames>
+      <RefTableId>1061578820</RefTableId>
+      <RefTableName>Companies</RefTableName>
+      <RefKeyName>PK_Companies</RefKeyName>
+      <RefColNames>ID</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="133" parent="66" name="FK_Users_Roles_RoleID">
+      <ObjectId>130099504</ObjectId>
+      <CreatedTimestamp>2021-01-03.22:19:15.820</CreatedTimestamp>
+      <ModifiedTimestamp>2021-01-03.22:19:15.820</ModifiedTimestamp>
+      <ColNames>RoleID</ColNames>
+      <RefTableId>66099276</RefTableId>
+      <RefTableName>Roles</RefTableName>
+      <RefKeyName>PK_Roles</RefKeyName>
+      <RefColNames>ID</RefColNames>
+    </foreign-key>
+    <default id="134" parent="66" name="DF__Users__Created__5AEE82B9">
+      <ObjectId>1525580473</ObjectId>
+      <NameSurrogate>1</NameSurrogate>
+      <ModifiedTimestamp>2020-11-15.04:17:19.083</ModifiedTimestamp>
+      <ColNames>Created</ColNames>
+      <DefaultExpression>&apos;0001-01-01T00:00:00.0000000&apos;</DefaultExpression>
+    </default>
+    <column id="135" parent="67" name="MigrationId">
+      <Position>1</Position>
+      <DataType>nvarchar(150 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="136" parent="67" name="ProductVersion">
+      <Position>2</Position>
+      <DataType>nvarchar(32 char)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="137" parent="67" name="PK___EFMigrationsHistory">
+      <Position>1</Position>
+      <ColNames>MigrationId</ColNames>
+      <Clustering>1</Clustering>
+      <Unique>1</Unique>
+    </index>
+    <key id="138" parent="67" name="PK___EFMigrationsHistory">
+      <ObjectId>917578307</ObjectId>
+      <CreatedTimestamp>2020-11-08.08:46:11.690</CreatedTimestamp>
+      <ModifiedTimestamp>2020-11-08.08:46:11.690</ModifiedTimestamp>
+      <ColNames>MigrationId</ColNames>
+      <UnderlyingIndexName>PK___EFMigrationsHistory</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
